@@ -54,6 +54,10 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.equal(response.status, 200, route);
     const html = await response.text();
     assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
+    assert.match(html, /<link rel="stylesheet" href="styles\.css">/);
+    const stylesheet = await fetch(new URL('styles.css', response.url));
+    assert.equal(stylesheet.status, 200);
+    assert.match(stylesheet.headers.get('content-type'), /text\/css/);
     assert.match(html, /MY VOICE \+ YOUR VOICE = OUR VOICE/);
     assert.ok(html.includes(`href="${route}" aria-current="page"`));
     assert.doesNotMatch(html, /<img\b|<script\b|<form\b|<iframe\b/);
@@ -69,5 +73,22 @@ test('all pages share working navigation and preserve the approved purposes', as
       for (const option of ['Credit and debit card donations', 'PayPal', 'Zelle', 'Bank transfers', 'Checks', 'In-kind contributions']) assert.ok(html.includes(option));
       assert.doesNotMatch(html, /<input\b|<button\b|href="https?:/);
     }
+  }
+});
+
+test('trailing-slash pages resolve the relative stylesheet', async (t) => {
+  const server = createPreviewServer();
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  for (const page of ['about', 'mission', 'purposes', 'projects', 'get-involved', 'donate', 'contact']) {
+    const redirect = await fetch(`${base}/${page}/?review=1`, { redirect: 'manual' });
+    assert.equal(redirect.status, 308);
+    assert.equal(redirect.headers.get('location'), `/${page}?review=1`);
+    const response = await fetch(`${base}/${page}/`);
+    assert.equal(response.status, 200);
+    const css = await fetch(new URL('styles.css', response.url));
+    assert.equal(css.status, 200);
+    assert.match(css.headers.get('content-type'), /text\/css/);
   }
 });

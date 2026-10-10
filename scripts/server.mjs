@@ -38,6 +38,13 @@ export function createPreviewServer() {
       response.end();
       return;
     }
+    // Keep relative assets at the site root for existing trailing-slash aliases.
+    if (pathname !== '/' && pathname.endsWith('/') && routes.has(pathname)) {
+      const query = new URL(request.url, 'http://localhost').search;
+      response.writeHead(308, { Location: pathname.slice(0, -1) + query });
+      response.end();
+      return;
+    }
     const route = routes.get(pathname);
     if (!route) {
       response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
