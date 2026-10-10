@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { readFile, access } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { createPreviewServer } from '../scripts/server.mjs';
 
@@ -67,9 +68,9 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.equal(stylesheet.status, 200);
     assert.match(stylesheet.headers.get('content-type'), /text\/css/);
     assert.match(html, /MY VOICE \+ YOUR VOICE = OUR VOICE/);
-    assert.ok(html.includes(`href="${route}" aria-current="page"`));
+    assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
     assert.doesNotMatch(html, /<script\b|<form\b|<iframe\b/);
-    for (const destination of routes) assert.ok(html.includes(`href="${destination}"`));
+    for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html"`));
     if (['/', '/mission', '/purposes'].includes(route)) {
       for (const [title, text] of expected) {
         assert.ok(html.includes(`<h3>${title}</h3>`), title);
@@ -121,6 +122,24 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
       for (const text of ['Checks', 'Clothing', 'Goods and essential supplies', 'International support', 'customs', 'Tax treatment', 'No payments or goods are being collected']) assert.ok(html.includes(text), text);
       assert.equal((html.match(/<details>/g) ?? []).length, 3);
       assert.doesNotMatch(html, /mailto:|tel:|<form\b|<input\b|<iframe\b/);
+    }
+  }
+});
+
+test('every generated page link resolves to an existing sibling file', async () => {
+  const files = ['index', 'about', 'mission', 'purposes', 'projects', 'get-involved', 'donate', 'contact'];
+  for (const name of files) {
+    const page = new URL(`../public/${name}.html`, import.meta.url);
+    const html = await readFile(page, 'utf8');
+    for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
+      if (href.startsWith('#')) continue;
+      assert.ok(!href.startsWith('/'), `${name}: root-relative link ${href}`);
+      const target = new URL(href, page);
+      assert.equal(new URL('.', target).href, new URL('.', page).href);
+      await access(target);
+    }
+    for (const destination of files) {
+      assert.ok(html.includes(`href="${destination}.html"`));
     }
   }
 });
