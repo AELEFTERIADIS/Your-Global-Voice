@@ -143,3 +143,22 @@ test('every generated page link resolves to an existing sibling file', async () 
     }
   }
 });
+
+
+test('every page declares an existing PNG favicon for local and server previews', async (t) => {
+  const server = createPreviewServer();
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  for (const name of ['index', 'about', 'mission', 'purposes', 'projects', 'get-involved', 'donate', 'contact']) {
+    const local = new URL(`../public/${name}.html`, import.meta.url);
+    const html = await readFile(local, 'utf8');
+    const icon = html.match(/<link rel="icon" type="image\/png" href="([^"]+)">/);
+    assert.ok(icon, name);
+    await access(new URL(icon[1], local));
+    const response = await fetch(new URL(icon[1], `${base}/${name}.html`));
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('content-type'), 'image/png');
+    assert.deepEqual(new Uint8Array((await response.arrayBuffer()).slice(0, 8)), new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]));
+  }
+});
