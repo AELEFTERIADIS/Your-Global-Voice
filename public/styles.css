@@ -19,6 +19,15 @@ a:focus-visible { outline: 3px solid var(--green); outline-offset: 5px; }
 .site-header { border-top: 4px solid var(--gold); border-bottom: 1px solid var(--line); }
 .header-inner, main, .footer-inner { width: min(100% - 3rem, 78rem); margin-inline: auto; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-block: 1.5rem; }
+/* Non-destructive mask follows the original seal's outer edge; artwork is unchanged. */
+.header-brand { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+.header-logo {
+  display: block;
+  width: 5.5rem;
+  height: auto;
+  flex-shrink: 0;
+  clip-path: ellipse(49.3% 48.1% at 49.8% 49.2%);
+}
 .wordmark { color: var(--navy); font-family: Georgia, serif; font-size: 1.5rem; line-height: 1.2; text-decoration: none; padding-block: .5rem; }
 .wordmark span { display: block; font-family: Arial, sans-serif; font-size: .75rem; letter-spacing: .15em; margin-top: .35rem; text-transform: uppercase; }
 nav { display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
@@ -64,6 +73,8 @@ p { margin: 0 0 1rem; }
   .header-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
 @media (max-width: 42rem) {
+  .header-brand { gap: .75rem; }
+  .header-logo { width: 4.5rem; }
   .header-inner, main, .footer-inner { width: calc(100% - 2rem); }
   .purpose-grid, .footer-inner { grid-template-columns: 1fr; }
   .purpose-grid { gap: 1rem; }

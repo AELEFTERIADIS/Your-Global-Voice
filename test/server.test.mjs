@@ -17,7 +17,7 @@ test('homepage, assets, and preview security boundaries', async (t) => {
   assert.match(html, /<title>Your Global Voice, Inc\.<\/title>/);
   assert.match(html, /<main id="main"/);
   assert.match(html, /href="#main"/);
-  assert.doesNotMatch(html, /<img\b|<script\b|<form\b/);
+  assert.doesNotMatch(html, /<script\b|<form\b/);
 
   const css = await fetch(`${base}/styles.css`);
   assert.equal(css.status, 200);
@@ -53,6 +53,14 @@ test('all pages share working navigation and preserve the approved purposes', as
     const response = await fetch(base + route);
     assert.equal(response.status, 200, route);
     const html = await response.text();
+    assert.equal((html.match(/<img\b/g) ?? []).length, 1);
+    assert.match(html, /class="header-logo"[^>]*alt="Your Global Voice official logo"/);
+    const logoPath = html.match(/class="header-logo" src="([^"]+)"/)[1];
+    const logo = await fetch(new URL(logoPath, response.url));
+    assert.equal(logo.status, 200);
+    assert.equal(logo.headers.get('content-type'), 'image/png');
+    assert.match(response.headers.get('content-security-policy'), /img-src 'self'/);
+    assert.deepEqual(new Uint8Array((await logo.arrayBuffer()).slice(0, 8)), new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]));
     assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1);
     assert.match(html, /<link rel="stylesheet" href="styles\.css">/);
     const stylesheet = await fetch(new URL('styles.css', response.url));
@@ -60,7 +68,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.match(stylesheet.headers.get('content-type'), /text\/css/);
     assert.match(html, /MY VOICE \+ YOUR VOICE = OUR VOICE/);
     assert.ok(html.includes(`href="${route}" aria-current="page"`));
-    assert.doesNotMatch(html, /<img\b|<script\b|<form\b|<iframe\b/);
+    assert.doesNotMatch(html, /<script\b|<form\b|<iframe\b/);
     for (const destination of routes) assert.ok(html.includes(`href="${destination}"`));
     if (['/', '/mission', '/purposes'].includes(route)) {
       for (const [title, text] of expected) {

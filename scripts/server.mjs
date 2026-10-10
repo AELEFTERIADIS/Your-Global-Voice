@@ -12,12 +12,13 @@ const routes = new Map([
     [`/${page}/`, [`../public/${page}.html`, 'text/html; charset=utf-8']],
     [`/${page}.html`, [`../public/${page}.html`, 'text/html; charset=utf-8']],
   ]),
+  ['/603250A8-B1C4-4533-848C-4028A6E0AD49.png', ['../public/603250A8-B1C4-4533-848C-4028A6E0AD49.png', 'image/png']],
   ['/styles.css', ['../public/styles.css', 'text/css; charset=utf-8']],
 ]);
 
 export function createPreviewServer() {
   return createServer(async (request, response) => {
-    response.setHeader('Content-Security-Policy', "default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'");
+    response.setHeader('Content-Security-Policy', "default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'");
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Referrer-Policy', 'no-referrer');
