@@ -7,7 +7,7 @@ Website: https://ygvoice.org
 ## Development
 
 This custom-coded foundation uses semantic HTML, responsive CSS, and a small
-Node.js preview server. There are no external dependencies, images, trackers,
+Node.js preview server. There are no external dependencies or trackers,
 or website builders. All eight pages share navigation and a footer. The homepage
 displays the organization's name, official motto, and four exact official purposes.
 
@@ -65,8 +65,8 @@ organizational purposes. The titles and text supplied by the organization are
 stored verbatim in `content/purposes.json`. Do not rewrite, rename, shorten, or
 substitute them without explicit approval. The official motto is
 **MY VOICE + YOUR VOICE = OUR VOICE**. The design uses deep navy, restrained gold,
-white, and green accents. The header is text only; it is not a replacement logo.
-Add the official logo and other imagery only when provided and approved.
+white, and green accents. The supplied official circular logo appears in every header. Its original image
+is preserved, with a non-destructive circular CSS mask.
 
 Donation options are informational placeholders only: online financial donations,
 credit/debit cards, PayPal, Zelle, bank transfers, checks, and in-kind contributions.
@@ -74,6 +74,20 @@ No payment SDK, payment instructions, collection forms, or active donation links
 are included. Never activate payments, publish, connect domains, change DNS or
 email services, or purchase services without explicit approval.
 
-The current review preview runs on local port 3001 (`PORT=3001 npm run dev`), since
-port 3000 was occupied by the earlier homepage preview. Cloud review requires
+The development preview can use port 3001 (`PORT=3001 npm run dev`). Cloud review requires
 supported port forwarding; no public deployment has been made.
+
+## Complete development draft
+
+All eight pages include shared branding, desktop navigation, an accessible native
+mobile disclosure menu, keyboard focus states, the official logo, and footer.
+The donation page covers financial options, checks, goods, supplies, clothing,
+animal/environment support, and international contributions, with expandable FAQs.
+No donations or personal information are collected.
+
+Before public release, the organization must approve the new explanatory copy,
+project and participation details, verified contact channels, donation acceptance
+policies, payment arrangements, mailing/collection locations, international
+logistics, and receipt/tax guidance. The four original official purpose statements
+and supplied logo have not been changed. No active projects or partnerships are
+claimed. No deployment or infrastructure changes are included.

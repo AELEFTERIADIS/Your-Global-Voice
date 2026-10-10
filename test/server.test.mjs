@@ -100,3 +100,27 @@ test('trailing-slash pages resolve the relative stylesheet', async (t) => {
     assert.match(css.headers.get('content-type'), /text\/css/);
   }
 });
+
+test('complete draft links, mobile navigation, and donation guidance', async (t) => {
+  const server = createPreviewServer();
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  for (const route of ['/', '/about', '/mission', '/purposes', '/projects', '/get-involved', '/donate', '/contact']) {
+    const html = await (await fetch(base + route)).text();
+    assert.match(html, /<details class="mobile-menu"><summary>Menu/);
+    assert.match(html, /<meta name="description"/);
+    for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
+      if (href.startsWith('#')) {
+        assert.ok(html.includes(`id="${href.slice(1)}"`));
+      } else {
+        assert.equal((await fetch(new URL(href, base + route))).status, 200, `${route}: ${href}`);
+      }
+    }
+    if (route === '/donate') {
+      for (const text of ['Checks', 'Clothing', 'Goods and essential supplies', 'International support', 'customs', 'Tax treatment', 'No payments or goods are being collected']) assert.ok(html.includes(text), text);
+      assert.equal((html.match(/<details>/g) ?? []).length, 3);
+      assert.doesNotMatch(html, /mailto:|tel:|<form\b|<input\b|<iframe\b/);
+    }
+  }
+});
