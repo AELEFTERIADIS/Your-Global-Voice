@@ -69,7 +69,8 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.match(stylesheet.headers.get('content-type'), /text\/css/);
     assert.match(html, /MY VOICE \+ YOUR VOICE = OUR VOICE/);
     assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
-    assert.doesNotMatch(html, /<script\b|<form\b|<iframe\b/);
+    assert.doesNotMatch(html, /<script\b|<iframe\b/);
+    if (route !== '/contact') assert.doesNotMatch(html, /<form\b/);
     for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html"`));
     if (['/', '/mission', '/purposes'].includes(route)) {
       for (const [title, text] of expected) {
@@ -112,6 +113,10 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
     assert.match(html, /<details class="mobile-menu"><summary>Menu/);
     assert.match(html, /<meta name="description"/);
     for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
+      if (/^(mailto:|https:)/.test(href)) {
+        assert.equal(route, '/contact');
+        continue;
+      }
       if (href.startsWith('#')) {
         assert.ok(html.includes(`id="${href.slice(1)}"`));
       } else {
@@ -132,7 +137,7 @@ test('every generated page link resolves to an existing sibling file', async () 
     const page = new URL(`../public/${name}.html`, import.meta.url);
     const html = await readFile(page, 'utf8');
     for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
-      if (href.startsWith('#')) continue;
+      if (/^(#|mailto:|https:)/.test(href)) continue;
       assert.ok(!href.startsWith('/'), `${name}: root-relative link ${href}`);
       const target = new URL(href, page);
       assert.equal(new URL('.', target).href, new URL('.', page).href);

@@ -1,0 +1,20 @@
+{
+  "emails": [
+    {
+      "label": "General Email",
+      "address": "info@ygvoice.org"
+    },
+    {
+      "label": "Donations & Support",
+      "address": "support@ygvoice.org"
+    }
+  ],
+  "whatsappNumber": "+16316379508",
+  "mailingAddress": [
+    "Your Global Voice, Inc.",
+    "957 Broadway Avenue",
+    "Holbrook, NY 11741",
+    "USA"
+  ],
+  "formEndpoint": null
+}

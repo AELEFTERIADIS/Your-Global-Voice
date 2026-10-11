@@ -1,4 +1,6 @@
 import { createServer } from 'node:http';
+import { readFileSync } from 'node:fs';
+import { contactEndpoint } from './contact.mjs';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
@@ -13,12 +15,15 @@ const routes = new Map([
     [`/${page}.html`, [`../public/${page}.html`, 'text/html; charset=utf-8']],
   ]),
   ['/603250A8-B1C4-4533-848C-4028A6E0AD49.png', ['../public/603250A8-B1C4-4533-848C-4028A6E0AD49.png', 'image/png']],
+  ['/contact.css', ['../public/contact.css', 'text/css; charset=utf-8']],
   ['/styles.css', ['../public/styles.css', 'text/css; charset=utf-8']],
 ]);
 
 export function createPreviewServer() {
+  const endpoint = contactEndpoint(JSON.parse(readFileSync(new URL('../content/contact.json', import.meta.url), 'utf8')));
   return createServer(async (request, response) => {
-    response.setHeader('Content-Security-Policy', "default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'");
+    const contactRoute = /^\/contact(?:\.html|\/)?(?:\?|$)/.test(request.url);
+    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; form-action ${contactRoute && endpoint ? endpoint.origin : "'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Referrer-Policy', 'no-referrer');

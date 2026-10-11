@@ -1,0 +1,18 @@
+.contact-message { max-width: 52rem; }
+.contact-form { margin-top: 1.5rem; }
+.contact-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.contact-form label { display: block; font-weight: 700; margin: 1.25rem 0 .5rem; }
+.contact-form label span, .contact-note { font-size: .875rem; font-weight: 400; }
+.contact-form input:not([type="checkbox"]), .contact-form select, .contact-form textarea { width: 100%; min-height: 48px; padding: .75rem; border: 1px solid var(--muted); border-radius: 0; background: white; color: var(--ink); font: inherit; }
+.contact-form textarea { resize: vertical; line-height: 1.6; }
+.contact-form :is(input, select, textarea, button):focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+.contact-form .contact-consent { display: flex; gap: .75rem; align-items: flex-start; line-height: 1.6; margin-block: 1.5rem; }
+.contact-consent input { width: 1.25rem; height: 1.25rem; flex-shrink: 0; margin-top: .15rem; }
+.contact-note { margin-top: .75rem; line-height: 1.6; }
+.contact-send { border: 0; padding: 0; margin: 0; }
+.contact-send legend { padding: 0; margin-bottom: .75rem; }
+button.button { font: inherit; border: 0; cursor: pointer; }
+button.button:disabled { background: #53636d; cursor: not-allowed; }
+.card address { font-style: normal; line-height: 1.75; overflow-wrap: anywhere; margin-bottom: 1rem; }
+.card a[href^="mailto:"] { overflow-wrap: anywhere; max-width: 100%; }
+@media (max-width: 42rem) { .contact-fields { grid-template-columns: 1fr; gap: 0; } }
