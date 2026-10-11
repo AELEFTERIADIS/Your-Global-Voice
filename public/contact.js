@@ -22,6 +22,10 @@ async function prepare() {
     status.textContent = 'Sending requires the configured website server. Please use our email or WhatsApp contact when viewing this page locally.';
     return false;
   }
+  if (document.querySelector('meta[name="ygv-hosting"][content="static"]')) {
+    status.textContent = 'Message delivery is unavailable. Please use our email or WhatsApp contact.';
+    return false;
+  }
   try {
     const response = await fetch('api/contact/status', { cache: 'no-store', signal: AbortSignal.timeout(15000) });
     const result = await response.json();
