@@ -1,4 +1,4 @@
-name = "your-global-voice-contact"
+name = "ygvoice-contact"
 main = "index.mjs"
 compatibility_date = "2025-10-01"
 compatibility_flags = ["nodejs_compat"]
