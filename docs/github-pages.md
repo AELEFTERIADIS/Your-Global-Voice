@@ -1,38 +1,35 @@
 # GitHub Pages publication
 
 The repository contains a prepared workflow at `.github/workflows/pages.yml`.
-The initial publication remains blocked until the owner explicitly sets the
-repository Actions variable `YGV_PAGES_PUBLICATION_APPROVED` to `true`.
+Every push to `main` automatically validates and publishes the `/public` content
+through the prepared static artifact. No approval variable is required.
+Publication is restricted to the default GitHub Pages project URL; a configured
+custom domain causes the publication guard to stop without deploying.
 No custom domain or CNAME is configured by this workflow.
 
-## Final owner activation (no Terminal required)
+## GitHub setup (no Terminal required)
 
-After approving public publication of the existing content and contact details:
+In this repository, open **Settings → Pages → Build and deployment** and set
+**Source** to **GitHub Actions**. Enable repository Actions if GitHub prompts you.
+No API key or `YGV_PAGES_PUBLICATION_APPROVED` variable is needed.
 
-1. In this repository, open **Settings → Pages → Build and deployment** and set
-   **Source** to **GitHub Actions**. Preserve any existing custom-domain settings;
-   do not add ygvoice.org, alter DNS, or change Namecheap/email settings.
-2. Open **Settings → Secrets and variables → Actions → Variables**, create the
-   non-secret repository variable `YGV_PAGES_PUBLICATION_APPROVED`, and set it to
-   `true`. Never add a Resend key to this static publishing workflow.
-3. Open **Actions → Validate and publish website → Run workflow**, select `main`,
-   and run it. If GitHub prompts you to enable Actions, do so for this workflow.
-   The first successful publish job supplies the actual Pages URL.
+If Pages was not enabled when this commit was pushed, open **Actions → Validate
+and publish website → Run workflow** and select `main` after setting the source.
+Subsequent pushes to `main` will publish automatically.
 
-Expected default project URL, only after successful publication:
-`https://aelefteriadis.github.io/Your-Global-Voice/`.
-This is an expected URL, not proof of publication. GitHub may show an alternative
-if the repository already has domain settings; do not change those settings.
+The intended URL is `https://aelefteriadis.github.io/Your-Global-Voice/`.
+Do not add a custom domain or change Namecheap/DNS/email settings. If GitHub
+already has a custom domain configured, the guard deliberately fails. No domain
+settings are changed automatically; that conflict requires separate resolution
+before publishing under the default URL.
 
-Subsequent pushes to `main` automatically scan credentials, build and test,
-regenerate the pages, prepare the public artifact, and update Pages. No Terminal or preview server
-restart is needed. You can edit the source content through GitHub’s web editor;
-the workflow regenerates HTML, so you do not need to run the generator locally.
-Edit `scripts/contact.mjs` / `content/contact.json` for Contact content and
-`scripts/build.mjs` for other page content rather than the generated HTML.
-A failed validation prevents publication. Pull requests run
-validation without publishing. To pause future publishing, set the approval
-variable to `false`. This does not remove the existing published website.
+Future pushes scan credentials, regenerate and test all eight pages, and upload
+only the public website artifact. No manual server restart is needed. Edit source
+content using GitHub’s web editor (`scripts/contact.mjs`, `content/contact.json`,
+or `scripts/build.mjs`) rather than generated HTML. Failed checks block deployment;
+pull requests validate without publishing. The successful deploy job reports the
+actual website URL. GitHub Actions execution and live publication must be verified
+in GitHub; this environment cannot currently read its API.
 
 ## Scope and security
 
@@ -64,4 +61,4 @@ Run `npm test`, `git diff --exit-code -- public`, and
 The final report distinguishes local validation from GitHub Actions execution and
 public publication. GitHub settings could not be read through this environment's
 API connection; an HTTP Forbidden response is not proof that Pages is enabled or
-disabled. Owner activation above is required before claiming a public site.
+disabled. GitHub Pages source configuration above is required before claiming a public site.

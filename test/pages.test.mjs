@@ -35,3 +35,9 @@ test('Pages preparation refuses to overwrite existing work', async (t) => {
   await assert.rejects(() => preparePages(temp), { code: 'EEXIST' });
   assert.deepEqual(await readdir(temp), []);
 });
+
+test('publication guard accepts the project URL and blocks custom domains or other targets', async () => {
+  const { validatePagesUrl } = await import('../scripts/validate-pages-url.mjs');
+  for (const value of ['https://aelefteriadis.github.io/Your-Global-Voice', 'https://aelefteriadis.github.io/Your-Global-Voice/']) assert.ok(validatePagesUrl(value));
+  for (const value of ['https://ygvoice.org/', 'https://www.ygvoice.org/', 'http://aelefteriadis.github.io/Your-Global-Voice/', 'https://aelefteriadis.github.io/another-site/', 'https://aelefteriadis.github.io.evil.example/Your-Global-Voice/', 'https://user:password@aelefteriadis.github.io/Your-Global-Voice/']) assert.throws(() => validatePagesUrl(value));
+});

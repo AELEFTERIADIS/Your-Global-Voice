@@ -24,8 +24,9 @@ requests, and preserves the original page content, logo, and design.
 
 The publishing workflow repeats redacted credential scans before every build and
 blocks deployment on failures. All third-party Actions are pinned to complete
-commit identifiers. Deploy permissions are restricted to the publish job, which
-is additionally blocked until owner activation of the approval variable.
+commit identifiers. Deploy permissions are restricted to the publish job. Following explicit owner
+authorization for automatic publishing, its earlier approval-variable gate was
+replaced with a default-GitHub-domain check that blocks custom-domain deployment.
 
 This records results for available repository history; it is not a guarantee
 about unknown credentials, deleted remote refs, or external hosting accounts.
