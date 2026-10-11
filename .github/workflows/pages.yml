@@ -62,11 +62,6 @@ jobs:
         env:
           PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: node scripts/validate-pages-url.mjs
-      - name: Configure the website artifact as the publishing source
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/configure-pages-source.mjs
       - name: Publish website
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

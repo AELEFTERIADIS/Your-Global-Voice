@@ -9,12 +9,11 @@ No custom domain or CNAME is configured by this workflow.
 
 ## GitHub setup (no Terminal required)
 
-The workflow first tries to switch an existing default-domain Pages site from
-branch publishing to GitHub Actions, using only the built-in job token. It checks
-the domain before writing and updates only `build_type`, never CNAME or DNS.
-If GitHub refuses the automatic source update, in this repository open
-**Settings → Pages → Build and deployment** and set
-**Source** to **GitHub Actions**. Enable repository Actions if GitHub prompts you.
+The owner has confirmed **Settings → Pages → Build and deployment → Source**
+is saved as **GitHub Actions**. The workflow uses that configuration directly;
+it does not attempt to switch the publishing source or require permission to
+update repository settings. For a newly configured repository, set that source
+manually before the first workflow run. Enable repository Actions if GitHub prompts you.
 No personal API key or `YGV_PAGES_PUBLICATION_APPROVED` variable is needed.
 A root `index.html` also opens the existing `public/index.html` website when an
 older branch-root publishing configuration is still active; it prevents README
