@@ -66,3 +66,20 @@ test('Worker rejects honeypots, missing consent, oversized bodies and expired to
   data.get('window').tokens[token] -= 900000;
   assert.equal((await post({ ...base, token })).status, 400);
 });
+
+test('Pages workflow connects the confirmed production Worker and isolates its permission to Contact', async () => {
+  const workflow = await readFile(new URL('../.github/workflows/pages.yml', import.meta.url), 'utf8');
+  const origin = workflow.match(/^\s+CONTACT_API_ORIGIN: (https:\/\/\S+)$/m)?.[1];
+  assert.equal(origin, 'https://ygvoice-contact.andyelft.workers.dev');
+  const temp = await mkdtemp(join(tmpdir(), 'ygv-production-contact-'));
+  try {
+    await preparePages(join(temp, 'pages'), origin);
+    const contact = await readFile(join(temp, 'pages/contact.html'), 'utf8');
+    assert.ok(contact.includes(`name="ygv-contact-api" content="${origin}"`));
+    assert.ok(contact.includes(`connect-src 'self' ${origin}`));
+    const { pagesFiles } = await import('../scripts/prepare-pages.mjs');
+    for (const file of pagesFiles.filter(file => file !== 'contact.html')) {
+      assert.ok(!(await readFile(join(temp, 'pages', file), 'utf8')).includes(origin));
+    }
+  } finally { await rm(temp, { recursive: true, force: true }); }
+});

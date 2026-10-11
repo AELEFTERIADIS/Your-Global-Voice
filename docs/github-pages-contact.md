@@ -1,6 +1,6 @@
 # GitHub Pages contact email activation
 
-## Prepared, not enabled
+## Frontend connected; live delivery unverified
 
 GitHub Pages hosts static files and cannot send email or store an API secret.
 The prepared integration uses a separate Cloudflare Worker on its default HTTPS
@@ -10,7 +10,8 @@ Worker domain, or website builder is involved. No paid service is required by
 this configuration. Account availability and free-tier limits must be confirmed
 before activation; do not authorize a paid plan automatically.
 
-The live form stays disabled until an endpoint is configured. API acceptance is
+The frontend endpoint is configured in the Pages workflow; the form enables
+only after the deployed Worker returns an availability response and one-time token. API acceptance is
 not proof of inbox receipt. No real delivery has been tested here.
 
 ## Exact external steps
@@ -40,16 +41,17 @@ not proof of inbox receipt. No real delivery has been tested here.
    labeled real test inquiries for both general and donation categories. Check
    Resend delivery events and actual receipt in both Namecheap inboxes, including
    spam folders. Confirm Reply-To works. Acceptance alone is insufficient.
-5. After both inbox tests succeed, in GitHub repository **Settings → Secrets and
-   variables → Actions → Variables**, add `CONTACT_API_ORIGIN` containing only
-   the exact public endpoint, for example `https://your-global-voice-contact.YOUR-SUBDOMAIN.workers.dev`.
-   This URL is public, not a secret. Run **Actions → Validate and publish website →
-   Run workflow** on main. The artifact builder adds the endpoint and narrowly
-   scoped connection permission; no HTML content or visual design changes.
+5. The Pages workflow now supplies the confirmed public endpoint
+   `https://ygvoice-contact.andyelft.workers.dev` directly as `CONTACT_API_ORIGIN`.
+   No GitHub variable or API key is needed for the frontend connection. Pushes to
+   main rebuild and publish it automatically; alternatively run **Actions →
+   Validate and publish website → Run workflow** on main. The artifact builder
+   adds the endpoint and narrowly scoped connection permission without changing
+   HTML content or visual design.
 6. Verify the published Contact page from a browser: required-field validation,
    privacy consent, general and donation routing, both inbox receipts, replay
-   rejection, rate limiting, and provider-error messaging. Remove the GitHub
-   variable and rerun Pages publishing to disable submission if a problem occurs.
+   rejection, rate limiting, and provider-error messaging. Clear `CONTACT_API_ORIGIN` in the Pages
+   workflow and rerun publishing to disable submission if a problem occurs.
 
 Do not supply a Namecheap password or a Resend key to GitHub Pages. Resend's
 verified domain does not make a static form send emails without this endpoint.
