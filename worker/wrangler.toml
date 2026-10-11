@@ -1,0 +1,17 @@
+name = "your-global-voice-contact"
+main = "index.mjs"
+compatibility_date = "2025-10-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[vars]
+CONTACT_SITE_ORIGIN = "https://aelefteriadis.github.io"
+CONTACT_MAIL_FROM = "info@ygvoice.org"
+
+[[durable_objects.bindings]]
+name = "CONTACT_LIMITS"
+class_name = "ContactLimits"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ContactLimits"]

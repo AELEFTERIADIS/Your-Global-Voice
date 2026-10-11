@@ -32,6 +32,8 @@ jobs:
       - name: Validate generated pages and server behavior
         run: npm test
       - name: Prepare public-only website artifact
+        env:
+          CONTACT_API_ORIGIN: ${{ vars.CONTACT_API_ORIGIN }}
         run: node scripts/prepare-pages.mjs "$RUNNER_TEMP/ygv-pages"
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'

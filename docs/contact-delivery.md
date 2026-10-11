@@ -6,6 +6,14 @@ communication, address copying, and the eight requested inquiry categories.
 Contact content, and `public/contact.css` and `public/contact.js` apply only there.
 The other seven HTML pages, shared CSS, and circular logo are unchanged.
 
+## GitHub Pages production integration
+
+The published site uses static GitHub Pages. A separate Resend-backed Cloudflare
+Worker and persistent spam limiter are now prepared in `worker/`. Follow
+[the exact activation instructions](github-pages-contact.md). This is the
+production integration path; the local Node server below remains for development.
+No external endpoint or real delivery is enabled yet.
+
 ## Actual delivery status
 
 Email delivery is **not configured or verified**. No provider request was sent.

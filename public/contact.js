@@ -17,17 +17,19 @@ const form = document.querySelector('.contact-form');
 const status = document.querySelector('#contact-status');
 const submit = form.querySelector('[type="submit"]');
 let token;
+const apiOrigin = document.querySelector('meta[name="ygv-contact-api"]')?.content || '';
+const apiUrl = (path) => apiOrigin ? apiOrigin + '/' + path : path;
 async function prepare() {
   if (location.protocol === 'file:') {
     status.textContent = 'Sending requires the configured website server. Please use our email or WhatsApp contact when viewing this page locally.';
     return false;
   }
-  if (document.querySelector('meta[name="ygv-hosting"][content="static"]') || location.hostname === 'aelefteriadis.github.io') {
+  if (!apiOrigin && (document.querySelector('meta[name="ygv-hosting"][content="static"]') || location.hostname === 'aelefteriadis.github.io')) {
     status.textContent = 'Message delivery is unavailable. Please use our email or WhatsApp contact.';
     return false;
   }
   try {
-    const response = await fetch('api/contact/status', { cache: 'no-store', signal: AbortSignal.timeout(15000) });
+    const response = await fetch(apiUrl('api/contact/status'), { cache: 'no-store', signal: AbortSignal.timeout(15000) });
     const result = await response.json();
     if (!response.ok || !result.available || !result.token) throw new Error();
     token = result.token; submit.disabled = false;
@@ -46,7 +48,7 @@ form.addEventListener('submit', async (event) => {
   status.textContent = 'Sending your message…';
   let failureMessage = 'Your message could not be confirmed as received. Please retry or contact us by email.';
   try {
-    const response = await fetch('api/contact', { method: 'POST', signal: AbortSignal.timeout(15000), headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), token }) });
+    const response = await fetch(apiUrl('api/contact'), { method: 'POST', signal: AbortSignal.timeout(15000), headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), token }) });
     const result = await response.json();
     if (!response.ok || result.accepted !== true) {
       if (typeof result.message === 'string') failureMessage = result.message;
