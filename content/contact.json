@@ -1,12 +1,14 @@
 {
   "emails": [
     {
-      "label": "General Email",
-      "address": "info@ygvoice.org"
+      "label": "General Inquiries",
+      "address": "info@ygvoice.org",
+      "description": "For general questions, organizational information, partnerships, volunteering, and international correspondence."
     },
     {
       "label": "Donations & Support",
-      "address": "support@ygvoice.org"
+      "address": "support@ygvoice.org",
+      "description": "For financial contributions, fundraising inquiries, in-kind donations, donor assistance, and other support-related matters."
     }
   ],
   "whatsappNumber": "+16316379508",
@@ -14,7 +16,6 @@
     "Your Global Voice, Inc.",
     "957 Broadway Avenue",
     "Holbrook, NY 11741",
-    "USA"
-  ],
-  "formEndpoint": null
+    "United States of America"
+  ]
 }

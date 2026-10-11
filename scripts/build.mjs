@@ -45,7 +45,7 @@ for (const [path, title, file] of pages) {
   <title>${path === '/' ? 'Your Global Voice, Inc.' : `${title} | Your Global Voice, Inc.`}</title>
   <meta name="description" content="Your Global Voice, Inc. — human dignity, humanitarian assistance, animal welfare, and environmental protection. Explore our purposes and future ways to participate.">
   <link rel="icon" type="image/png" href="603250A8-B1C4-4533-848C-4028A6E0AD49.png">
-  <link rel="stylesheet" href="styles.css">${path === "/contact" ? '\n  <link rel="stylesheet" href="contact.css">' : ""}
+  <link rel="stylesheet" href="styles.css">${path === "/contact" ? '\n  <link rel="stylesheet" href="contact.css">\n  <script src="contact.js" defer></script>' : ""}
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>

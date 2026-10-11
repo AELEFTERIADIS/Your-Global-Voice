@@ -1,36 +1,31 @@
+import { categories } from './contact-delivery.mjs';
 const escape = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 
-export function contactEndpoint(config) {
-  if (!config.formEndpoint) return null;
-  const url = new URL(config.formEndpoint);
-  if (url.protocol !== 'https:' || url.username || url.password || url.hash) throw new Error('Contact form endpoint must be an HTTPS URL without credentials or a fragment.');
-  return url;
-}
-
 export function renderContact(config) {
-  const endpoint = contactEndpoint(config);
-  const emails = config.emails.map(({ label, address }) => {
+  const emails = config.emails.map(({ label, address, description }) => {
     if (!/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/.test(address)) throw new Error('Invalid contact email address.');
-    return `<p><strong>${escape(label)}</strong><br><a class="text-link" href="mailto:${escape(address)}">${escape(address)}</a></p>`;
+    return `<p><strong>${escape(label)}</strong><br><a class="text-link" href="mailto:${escape(address)}">${escape(address)}</a></p>${description ? `<p>${escape(description)}</p>` : ""}`;
   }).join('');
   let whatsapp = '<button class="button" type="button" disabled aria-describedby="whatsapp-status">Chat on WhatsApp</button><p id="whatsapp-status" class="contact-note">WhatsApp contact details are awaiting verification.</p>';
   if (config.whatsappNumber) {
     if (!/^\+[1-9]\d{6,14}$/.test(config.whatsappNumber)) throw new Error('WhatsApp number must include a + and international country code.');
-    whatsapp = `<p>${escape(config.whatsappNumber)}</p><a class="button" href="https://wa.me/${config.whatsappNumber.slice(1)}" target="_blank" rel="noopener noreferrer">Chat on WhatsApp <span class="contact-note">(opens a new tab)</span></a>`;
+    const displayNumber = /^\+1\d{10}$/.test(config.whatsappNumber) ? config.whatsappNumber.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, '+1 ($1) $2-$3') : config.whatsappNumber;
+    whatsapp = `<p>${escape(displayNumber)}</p><a class="button" href="https://wa.me/${config.whatsappNumber.slice(1)}" target="_blank" rel="noopener noreferrer">Contact Us on WhatsApp <span class="contact-note">(opens a new tab)</span></a>`;
   }
-  const address = config.mailingAddress.length ? `<address>${config.mailingAddress.map(escape).join('<br>')}</address>` : '<p>Our verified mailing address will be published here when available.</p>';
+  const address = config.mailingAddress.length ? `<address id="mailing-address">${config.mailingAddress.map(escape).join('<br>')}</address>` : '<p>Our verified mailing address will be published here when available.</p>';
   return `<section class="page-intro"><p class="eyebrow">Your Global Voice, Inc.</p><h1>Contact Us</h1><p class="lead">A place to connect around our shared purposes.</p></section>
   <div class="card-grid"><section class="card"><p class="eyebrow">Email</p><h2>Write to us</h2>${emails || '<p>Contact email addresses are awaiting verification.</p>'}<p>Please use verified organizational contact channels for general inquiries, participation, and donation questions.</p></section>
-  <section class="card"><p class="eyebrow">Stay connected</p><h2>WhatsApp</h2><p>Use our approved WhatsApp contact for general inquiries once it is available.</p>${whatsapp}</section>
-  <section class="card"><p class="eyebrow">Correspondence</p><h2>Mailing address</h2>${address}<p>Please confirm acceptance arrangements before sending checks, goods, clothing, or supplies. A mailing address alone does not confirm that donations can be received.</p></section>
+  <section class="card"><p class="eyebrow">Stay connected</p><h2><svg class="contact-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M27 15a11 11 0 0 1-16 10L4 28l2-7A11 11 0 1 1 27 15Z"/><path d="M11 10c-2 2 3 9 7 10 2 0 3-2 2-3l-3-1-1 1-3-3 1-1-1-3Z"/></svg>Connect With Us Worldwide</h2><p>Wherever you are in the world, Your Global Voice is here to connect. Contact us through WhatsApp for international inquiries, assistance, and support.</p>${whatsapp}</section>
+  <section class="card"><p class="eyebrow">Correspondence</p><h2><svg class="contact-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 29S6 19 6 12a10 10 0 0 1 20 0c0 7-10 17-10 17Z"/><circle cx="16" cy="12" r="3"/></svg>Mailing Address</h2>${address}<button id="copy-address" class="button" type="button">Copy mailing address</button><p id="copy-status" role="status" class="contact-note"></p><p>This address is for organizational correspondence and inquiries regarding donations by check.</p><p>Please confirm acceptance arrangements before sending checks, goods, clothing, or supplies. A mailing address alone does not confirm that donations can be received.</p></section>
   <section class="card"><p class="eyebrow">Before you contact us</p><h2>How we can help</h2><p>You may wish to ask about our purposes, future participation opportunities, or contribution arrangements. No active project services or emergency response are announced.</p><a class="text-link" href="donate.html">Read donation guidance &rarr;</a></section></div>
-  <section class="content-panel contact-message" aria-labelledby="message-heading"><h2 id="message-heading">Send a message</h2><p id="contact-status" role="status">${endpoint ? 'Your message will be submitted securely to our contact service. Please do not include sensitive personal or financial information.' : 'Message delivery is not yet configured. You can prepare a message here, but sending is unavailable and nothing is transmitted.'}</p>
-  <form class="contact-form" method="post"${endpoint ? ` action="${escape(endpoint.href)}"` : ''} aria-describedby="contact-status contact-privacy">
-  <div class="contact-fields"><div><label for="contact-name">Name <span>(required)</span></label><input id="contact-name" name="name" autocomplete="name" required maxlength="120"></div><div><label for="contact-email">Email <span>(required)</span></label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></div></div>
-  <label for="contact-topic">Subject <span>(required)</span></label><select id="contact-topic" name="subject" required><option value="">Choose a subject</option><option>General inquiry</option><option>Volunteering and participation</option><option>Collaboration</option><option>Donation question</option><option>Other</option></select>
+  <section class="content-panel contact-message" aria-labelledby="message-heading"><h2 id="message-heading">Send a message</h2><p id="contact-status" role="status">Message delivery requires a configured secure email service. You can prepare a message here; sending becomes available when the service is connected.</p>
+  <form class="contact-form" method="post" action="api/contact" aria-describedby="contact-status contact-privacy">
+  <div class="contact-fields"><div><label for="contact-name">Full Name <span>(required)</span></label><input id="contact-name" name="name" autocomplete="name" required maxlength="120"></div><div><label for="contact-email">Email Address <span>(required)</span></label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></div></div>
+  <label for="contact-topic">Subject / Inquiry Category <span>(required)</span></label><select id="contact-topic" name="subject" required><option value="">Choose an inquiry category</option>${categories.map(category => `<option>${escape(category)}</option>`).join('')}</select>
   <label for="contact-message">Message <span>(required; up to 5,000 characters)</span></label><textarea id="contact-message" name="message" rows="7" required minlength="10" maxlength="5000" aria-describedby="contact-privacy"></textarea>
   <p id="contact-privacy" class="contact-note">Share only the information needed for your inquiry. Do not include identity documents, payment details, medical records, or other sensitive information.</p>
   <label class="contact-consent"><input type="checkbox" name="consent" value="yes" required> <span>I agree that my name, email, and message may be used to respond to this inquiry.</span></label>
-  ${endpoint ? '' : '<fieldset disabled class="contact-send"><legend class="contact-note">Sending unavailable until secure delivery is configured</legend>'}<button class="button" type="submit"${endpoint ? '' : ' disabled'}>Send message</button>${endpoint ? '' : '</fieldset>'}
+  <div class="contact-trap" aria-hidden="true"><label for="contact-website">Leave this field empty</label><input id="contact-website" name="website" tabindex="-1" autocomplete="off"></div>
+  <button class="button" type="submit" disabled>Send Message</button><noscript><p>JavaScript is required for secure form submission. Please contact us using the email links or WhatsApp.</p></noscript>
   </form></section><section class="content-panel"><h2>Care with personal information</h2><p>Please do not send identity documents, financial details, or sensitive information to an unverified contact. This site does not provide an emergency response channel.</p></section>`;
 }

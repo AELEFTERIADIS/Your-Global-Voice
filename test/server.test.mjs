@@ -69,7 +69,8 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.match(stylesheet.headers.get('content-type'), /text\/css/);
     assert.match(html, /MY VOICE \+ YOUR VOICE = OUR VOICE/);
     assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
-    assert.doesNotMatch(html, /<script\b|<iframe\b/);
+    assert.doesNotMatch(html, /<iframe\b/);
+    if (route !== '/contact') assert.doesNotMatch(html, /<script\b/);
     if (route !== '/contact') assert.doesNotMatch(html, /<form\b/);
     for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html"`));
     if (['/', '/mission', '/purposes'].includes(route)) {

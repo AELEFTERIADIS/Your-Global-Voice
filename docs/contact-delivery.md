@@ -1,56 +1,80 @@
-# Contact page delivery configuration
+# Contact page setup and delivery
 
-The approved contact information is in `content/contact.json`. The generator
-renders the Contact page from `scripts/contact.mjs`; its additional stylesheet
-is `public/contact.css`. Other page content and shared styling are unchanged.
+The Contact page implements all approved public details, mailto links, WhatsApp
+communication, address copying, and the eight requested inquiry categories.
+`content/contact.json` holds public details only. `scripts/contact.mjs` renders
+Contact content, and `public/contact.css` and `public/contact.js` apply only there.
+The other seven HTML pages, shared CSS, and circular logo are unchanged.
 
-## Current hosting evidence
+## Actual delivery status
 
-This repository is a static HTML/CSS site with a local Node.js development server.
-There is no production deployment configuration, cPanel access, hosting-plan
-metadata, SMTP binding, or mail-provider credentials available in this workspace.
-Namecheap being the registrar does not establish which hosting runtime is enabled.
-A read-only HTTPS header check of ygvoice.org was blocked by the cloud egress
-proxy (CONNECT returned HTTP 403), so it provides no evidence about the live
-hosting provider or runtime. No hosting, DNS, mailbox, or Namecheap settings have
-been changed.
+Email delivery is **not configured or verified**. No provider request was sent.
+The browser probes `/api/contact/status`; the server returns unavailable without
+mail configuration, and Send stays disabled. Local `file://` viewing displays the
+contact information and copy fallback, but cannot submit to a server. No delivery
+success is displayed in either case. Tests use an explicitly simulated provider.
 
-## Recommended compatible delivery
+## Server implementation
 
-Use a hosted HTTPS form receiver, such as Formspree, with a verified organizational
-recipient. Native HTML POST works with the existing static site and does not require
-Node.js hosting, browser SMTP credentials, or DNS changes. No account was created,
-service purchased, or provider endpoint activated. Evaluate the provider's current
-limits, spam controls, retention, and privacy terms before selecting it.
+The existing Node preview server now includes `/api/contact/status` and
+`POST /api/contact`. It validates name, email, category, message length, and
+consent on the server. Categories are allowlisted. Donations & Financial Support
+is routed to support@ygvoice.org; all others go to info@ygvoice.org. Recipients
+cannot be supplied or overridden by the browser. Mail contains the full name,
+email, category, and message in plain text. Visitor email is Reply-To, never From.
 
-External steps still required:
+Spam controls include a honeypot, same-origin JSON submissions, cryptographically
+random single-use tokens bound to the connection address, a one-second minimum
+submission time, token expiry after 15 minutes, a five-attempt/15-minute address
+limit, limited token issuance, and a 32-KiB request limit. Provider requests time
+out after ten seconds. Errors do not expose provider details or credentials.
+Success uses the requested exact wording only after the delivery API returns a
+successful response with an acceptance identifier. Acceptance does not prove
+final inbox delivery; provider logs and inbox receipt must also be checked.
 
-1. Confirm which mailbox should receive form messages and that both advertised
-   email accounts and the WhatsApp account are operational. Public approval of
-   an address does not establish mailbox provisioning or delivery.
-2. Supply an approved provider's HTTPS submission URL after verifying the recipient
-   and configuring server-side validation, spam filtering/rate limits, sender
-   handling, and success/error responses. These must run at the receiver; HTML
-   validation alone is not a security control. Never include SMTP/API secrets in
-   the page or `content/contact.json`.
-3. Approve inquiry privacy/retention practices, including use of an external
-   processor. The form provides a consent checkbox and sensitive-data guidance.
-4. Set `formEndpoint` to the public submission URL, generate the Contact page,
-   and test a real approved message end to end before enabling public submissions.
-   Match the production Contact response's `form-action` CSP to the endpoint's
-   HTTPS origin. The development server derives this permission from the same
-   configuration, exclusively for the Contact routes. Other pages continue to
-   prohibit submissions. Test receiver validation, spam controls, success/error
-   handling, and delivery to the actual recipient before release.
+## Compatible delivery option and required external configuration
 
-Until then, the form explicitly states that nothing is transmitted, has no action,
-and its send control is disabled. Email links open the visitor's mail application;
-the WhatsApp link opens the approved account in a new tab. Neither proves delivery.
-The form can be composed locally; hosted form delivery later requires Internet access.
+A server-side HTTPS Resend adapter is implemented. No SMTP/API credentials are in
+public files or Git. Provide these variables privately in the server environment:
 
-If the existing plan is confirmed to support PHP, an alternative is a same-origin
-PHP handler using authenticated SMTP through the existing mailbox service. That
-requires private hosting credentials and server-side implementation after the
-actual plan is identified. Do not assume that this development Node server is a
-production email service. No Namecheap settings changes are required by the
-recommended hosted-form approach.
+- `CONTACT_MAIL_API_KEY`: Resend key authorized to send emails, used only in HTTPS
+  requests to api.resend.com. Do not supply its value in chat or public code.
+- `CONTACT_MAIL_FROM`: an existing verified sender email authorized by that
+  provider. Verification must already cover that sender/domain. If no verified
+  sender exists, delivery cannot be enabled under the current restriction against
+  DNS changes. Any future verification that requires DNS needs separate approval.
+- `CONTACT_SITE_ORIGIN`: exact HTTPS website origin for a future production
+  handler. Local preview automatically permits its own localhost origin.
+
+The repository contains a static website and local Node development server,
+not a known production Node hosting configuration. No cPanel access, hosting-plan
+metadata, SMTP bindings, or mail credentials were available. A prior read-only
+HTTPS probe of ygvoice.org was blocked by the cloud egress proxy (CONNECT 403);
+it did not identify the live hosting runtime. Namecheap as registrar does not
+establish Node/PHP hosting capability.
+
+Before making the form public, confirm that the existing host can run the Node
+handler, or host an approved equivalent handler using an available server runtime.
+A static-file host alone cannot process this API. Do not deploy the development
+server unchanged: it intentionally binds loopback. A future production integration
+must supply HTTPS, private process variables, the exact allowed origin, and route
+the Contact API to the server. Keep the Contact-only CSP script/connect/form
+permissions and prohibit forms/scripts on other pages. Configure a production
+request timeout and durable/shared rate limits for multiple server instances.
+The current limiter uses the actual socket address, ignores untrusted forwarded
+headers, and resets on restart. Behind a proxy it may limit all users together;
+trusted proxy handling must be decided for the actual hosting architecture.
+
+No purchase, account creation, DNS/email/hosting setting change, or deployment
+has been performed. Confirm both published mailboxes and the WhatsApp account
+are operational, approve inquiry retention/privacy practices, then run a real
+end-to-end acceptance and inbox-delivery test before release. Verify provider
+rejections/timeouts, spam controls, and the success/error messages as well.
+
+## Development verification
+
+Run `node --test` to test the committed pages and server without regeneration.
+Run `node scripts/build.mjs` when changing Contact source; other page output
+should remain byte-identical. `node scripts/server.mjs` starts local preview.
+No dependency installation is required. Mailing-address copying uses Clipboard
+API when supported and selects the address for Command+C/Ctrl+C otherwise.
