@@ -4,3 +4,8 @@ node_modules/
 !.env.example
 *.log
 .DS_Store
+
+# Cloudflare local runtime state and private development bindings
+.wrangler/
+.dev.vars
+.dev.vars.*
