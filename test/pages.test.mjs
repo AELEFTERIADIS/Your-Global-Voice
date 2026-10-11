@@ -41,3 +41,32 @@ test('publication guard accepts the project URL and blocks custom domains or oth
   for (const value of ['https://aelefteriadis.github.io/Your-Global-Voice', 'https://aelefteriadis.github.io/Your-Global-Voice/']) assert.ok(validatePagesUrl(value));
   for (const value of ['https://ygvoice.org/', 'https://www.ygvoice.org/', 'http://aelefteriadis.github.io/Your-Global-Voice/', 'https://aelefteriadis.github.io/another-site/', 'https://aelefteriadis.github.io.evil.example/Your-Global-Voice/', 'https://user:password@aelefteriadis.github.io/Your-Global-Voice/']) assert.throws(() => validatePagesUrl(value));
 });
+
+test('repository root opens the real public homepage rather than README', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  assert.match(html, /http-equiv="refresh" content="0; url=public\/index.html"/);
+  assert.match(html, /href="public\/index.html"/);
+  await access(new URL('../public/index.html', import.meta.url));
+});
+
+test('Pages source switch updates only build_type and refuses custom domains', async () => {
+  const { configurePagesSource } = await import('../scripts/configure-pages-source.mjs');
+  const original = { html_url: 'https://aelefteriadis.github.io/Your-Global-Voice/', cname: null, build_type: 'legacy' };
+  const calls = [];
+  let reads = 0;
+  const request = async (url, options) => {
+    calls.push({ url, options });
+    if (options.method === 'PUT') return { ok: true };
+    reads++;
+    return { ok: true, json: async () => ({ ...original, build_type: reads === 1 ? 'legacy' : 'workflow' }) };
+  };
+  await configurePagesSource({ repository: 'AELEFTERIADIS/Your-Global-Voice', token: 'test-only', request });
+  const update = calls.find(c => c.options.method === 'PUT');
+  assert.deepEqual(JSON.parse(update.options.body), { build_type: 'workflow' });
+  for (const settings of [{ ...original, html_url: 'https://ygvoice.org/', cname: 'ygvoice.org' }, { ...original, cname: 'ygvoice.org' }]) {
+    let writes = 0;
+    await assert.rejects(() => configurePagesSource({ repository: 'AELEFTERIADIS/Your-Global-Voice', token: 'test-only', request: async (url, options) => { if (options.method === 'PUT') writes++; return { ok: true, json: async () => settings }; } }));
+    assert.equal(writes, 0);
+  }
+  await assert.rejects(() => configurePagesSource({ repository: 'AELEFTERIADIS/Your-Global-Voice', token: 'test-only', request: async (url, options) => options.method === 'PUT' ? { ok: false, status: 403 } : { ok: true, json: async () => original } }), /Source to GitHub Actions/);
+});

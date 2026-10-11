@@ -22,7 +22,7 @@ async function prepare() {
     status.textContent = 'Sending requires the configured website server. Please use our email or WhatsApp contact when viewing this page locally.';
     return false;
   }
-  if (document.querySelector('meta[name="ygv-hosting"][content="static"]')) {
+  if (document.querySelector('meta[name="ygv-hosting"][content="static"]') || location.hostname === 'aelefteriadis.github.io') {
     status.textContent = 'Message delivery is unavailable. Please use our email or WhatsApp contact.';
     return false;
   }
