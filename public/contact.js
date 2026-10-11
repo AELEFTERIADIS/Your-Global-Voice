@@ -17,9 +17,14 @@ const form = document.querySelector('.contact-form');
 const status = document.querySelector('#contact-status');
 const submit = form.querySelector('[type="submit"]');
 let token;
-const apiOrigin = document.querySelector('meta[name="ygv-contact-api"]')?.content || '';
+// The source page also works when served without Pages artifact metadata.
+const pagesApiOrigin = location.hostname === 'aelefteriadis.github.io'
+  ? 'https://ygvoice-contact.andyelft.workers.dev' : '';
+const apiOrigin = document.querySelector('meta[name="ygv-contact-api"]')?.content || pagesApiOrigin;
 const apiUrl = (path) => apiOrigin ? apiOrigin + '/' + path : path;
 async function prepare() {
+  token = null;
+  submit.disabled = true;
   if (location.protocol === 'file:') {
     status.textContent = 'Sending requires the configured website server. Please use our email or WhatsApp contact when viewing this page locally.';
     return false;
@@ -28,16 +33,24 @@ async function prepare() {
     status.textContent = 'Message delivery is unavailable. Please use our email or WhatsApp contact.';
     return false;
   }
+  let unavailableMessage = 'Unable to connect to the message service. Please use our email or WhatsApp contact.';
   try {
     const response = await fetch(apiUrl('api/contact/status'), { cache: 'no-store', signal: AbortSignal.timeout(15000) });
+    const errors = {
+      403: 'The message service could not authorize this website. Please use our email or WhatsApp contact.',
+      429: 'Too many attempts. Please wait 15 minutes before trying again, or contact us by email.',
+      503: 'The message service is not configured. Please use our email or WhatsApp contact.',
+      502: 'The message service could not initialize. Please use our email or WhatsApp contact.'
+    };
+    unavailableMessage = errors[response.status] || unavailableMessage;
     const result = await response.json();
-    if (!response.ok || !result.available || !result.token) throw new Error();
+    if (!response.ok || result.available !== true || typeof result.token !== 'string' || !result.token) throw new Error();
     token = result.token; submit.disabled = false;
     status.textContent = result.message;
     return true;
   } catch {
     submit.disabled = true;
-    status.textContent = 'Message delivery is unavailable. Please use our email or WhatsApp contact.';
+    status.textContent = unavailableMessage;
     return false;
   }
 }
