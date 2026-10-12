@@ -20,3 +20,7 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 .contact-icon { width: 1.5rem; height: 1.5rem; fill: none; stroke: var(--green); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; margin-right: .5rem; }
 .contact-trap { display: none; }
 #copy-address { margin-block: .75rem; }
+
+#contact-result:not(:empty) { margin-top: 1.25rem; font-weight: 700; line-height: 1.6; }
+#contact-result.contact-success { color: var(--green); }
+#contact-result.contact-error { color: #a32626; }

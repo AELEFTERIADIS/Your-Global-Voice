@@ -15,6 +15,7 @@ copyButton?.addEventListener('click', async () => {
 });
 const form = document.querySelector('.contact-form');
 const status = document.querySelector('#contact-status');
+const resultStatus = document.querySelector('#contact-result');
 const submit = form.querySelector('[type="submit"]');
 let token;
 // The source page also works when served without Pages artifact metadata.
@@ -58,7 +59,8 @@ form.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (!token || submit.disabled || !form.reportValidity()) return;
   submit.disabled = true; form.setAttribute('aria-busy', 'true');
-  status.textContent = 'Sending your message…';
+  resultStatus.className = '';
+  resultStatus.textContent = 'Sending your message…';
   let failureMessage = 'Your message could not be confirmed as received. Please retry or contact us by email.';
   try {
     const response = await fetch(apiUrl('api/contact'), { method: 'POST', signal: AbortSignal.timeout(15000), headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), token }) });
@@ -67,12 +69,14 @@ form.addEventListener('submit', async (event) => {
       if (typeof result.message === 'string') failureMessage = result.message;
       throw new Error();
     }
-    status.textContent = result.message;
+    resultStatus.className = 'contact-success';
+    resultStatus.textContent = 'Thank you for contacting Your Global Voice. Your message has been sent successfully. We will respond as soon as possible.';
     form.reset(); token = null;
-    const message = status.textContent;
-    await prepare(); status.textContent = message;
+    await prepare();
   } catch {
-    await prepare(); status.textContent = failureMessage;
+    await prepare();
+    resultStatus.className = 'contact-error';
+    resultStatus.textContent = failureMessage;
   } finally { form.removeAttribute('aria-busy'); }
 });
 prepare();

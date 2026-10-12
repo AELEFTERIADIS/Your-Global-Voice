@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto';
 
 export const categories = ['General Inquiries', 'Donations & Financial Support', 'Volunteering', 'Partnerships & Collaboration', 'Humanitarian Assistance', 'Animal Welfare', 'Environmental Protection', 'Other Inquiries'];
-export const successMessage = 'Thank you for contacting Your Global Voice. Your message has been received, and our team will respond as soon as possible.';
+export const successMessage = 'Thank you for contacting Your Global Voice. Your message has been sent successfully. We will respond as soon as possible.';
 export const recipientFor = (category) => category === 'Donations & Financial Support' ? 'support@ygvoice.org' : 'info@ygvoice.org';
 
 export function validateInquiry(data) {

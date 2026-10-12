@@ -27,5 +27,5 @@ export function renderContact(config) {
   <label class="contact-consent"><input type="checkbox" name="consent" value="yes" required> <span>I agree that my name, email, and message may be used to respond to this inquiry.</span></label>
   <div class="contact-trap" aria-hidden="true"><label for="contact-website">Leave this field empty</label><input id="contact-website" name="website" tabindex="-1" autocomplete="off"></div>
   <button class="button" type="submit" disabled>Send Message</button><noscript><p>JavaScript is required for secure form submission. Please contact us using the email links or WhatsApp.</p></noscript>
-  </form></section><section class="content-panel"><h2>Care with personal information</h2><p>Please do not send identity documents, financial details, or sensitive information to an unverified contact. This site does not provide an emergency response channel.</p></section>`;
+  </form><p id="contact-result" role="status" aria-live="polite" aria-atomic="true"></p></section><section class="content-panel"><h2>Care with personal information</h2><p>Please do not send identity documents, financial details, or sensitive information to an unverified contact. This site does not provide an emergency response channel.</p></section>`;
 }
