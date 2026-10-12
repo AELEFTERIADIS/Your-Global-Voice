@@ -5,7 +5,12 @@ Every push to `main` automatically validates and publishes the `/public` content
 through the prepared static artifact. No approval variable is required.
 Publication accepts the existing GitHub Pages project URL and the approved
 HTTPS root URLs `https://ygvoice.org/` and `https://www.ygvoice.org/`. Other
-hostnames, paths, credentials, ports, and insecure URLs remain blocked.
+hostnames, paths, credentials, nonstandard ports, queries, and fragments remain
+blocked. GitHub may report HTTP metadata for an approved custom-domain root
+while HTTPS setup is pending. The guard accepts that metadata with a warning
+so publication can proceed; it does not enable HTTP contact origins, change
+HTTPS enforcement, or establish that the site is ready for public use. The
+existing github.io project URL still requires HTTPS.
 The workflow reads GitHub’s saved Pages domain; it does not change that setting,
 DNS, or a CNAME. Domain setup and HTTPS availability require live verification.
 
