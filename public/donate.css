@@ -57,5 +57,5 @@
 .payment-choice-action { margin-top: auto; padding-top: .25rem; font-size: .875rem; font-weight: 700; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: .25em; text-decoration-thickness: 1px; }
 @media (max-width: 28rem) { .donation-payment-actions { grid-template-columns: 1fr; } .donation-method-choice { min-height: 0; } }
 
-.payment-brand-logos { display: flex; flex-wrap: wrap; align-items: center; gap: .375rem; margin: 0 0 .875rem; }
+.payment-brand-logos { display: flex; flex-wrap: wrap; align-items: center; gap: .375rem; margin: .875rem 0 .5rem; }
 .payment-brand-logo { display: block; width: auto; max-width: 100%; height: 22px; object-fit: contain; }
