@@ -34,3 +34,18 @@ test('donation renderer preserves the original site wrapper and emits approved g
   assert.equal((html.match(/href="purposes.html"/g) || []).length, 4);
   assert.doesNotMatch(html, /<header\b|<footer\b/);
 });
+
+test('donation hero image is locally served with correct media type and descriptive alternative text', async t => {
+  const server = createPreviewServer();
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const response = await fetch(base + '/donation-globe.webp');
+  assert.equal(response.status, 200); assert.equal(response.headers.get('content-type'), 'image/webp');
+  const bytes = Buffer.from(await response.arrayBuffer());
+  assert.equal(bytes.toString('ascii', 0, 4), 'RIFF'); assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+  const html = renderDonate();
+  assert.match(html, /class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe"/);
+  assert.equal((html.match(/<img\b/g) || []).length, 1);
+  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
+});

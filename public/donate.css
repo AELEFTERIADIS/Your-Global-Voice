@@ -1,9 +1,9 @@
 .donation-page { padding-bottom: 1rem; }
-.donation-intro { max-width: 65rem; }
+.donation-intro { max-width: none; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
 .donation-intro h1 { max-width: 60rem; font-size: clamp(2.5rem, 5.5vw, 5rem); }
-.donation-intro > p:not(.eyebrow) { max-width: 48rem; }
-.donation-intro > .lead { margin-bottom: 1.125rem; }
-.donation-intro > .lead + p { margin-top: 0; margin-bottom: 1.5rem; }
+.donation-intro-copy > p:not(.eyebrow) { max-width: 48rem; }
+.donation-intro-copy > .lead { margin-bottom: 1.125rem; }
+.donation-intro-copy > .lead + p { margin-top: 0; margin-bottom: 1.5rem; }
 .donation-motto { color: var(--navy); font-family: Georgia, serif; font-size: 1.5rem; }
 .donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
 .donation-invitation { padding-top: 1.5rem; }
@@ -35,3 +35,6 @@ button.donation-secure { background: var(--navy); color: white; border: 1px soli
 .donation-trust > p { max-width: 55rem; }
 @media (max-width: 56rem) { .donation-support, .donation-partnerships { grid-template-columns: 1fr; gap: 1.5rem; } }
 @media (max-width: 28rem) { .donation-amounts, .donation-frequency { grid-template-columns: repeat(2, minmax(0, 1fr)); } .donation-frequency { grid-template-columns: 1fr; } }
+
+.donation-hero-image { display: block; width: 100%; max-width: 32rem; height: auto; border-radius: .75rem; justify-self: end; }
+@media (max-width: 56rem) { .donation-intro { grid-template-columns: 1fr; gap: 2rem; } .donation-hero-image { justify-self: center; } }
