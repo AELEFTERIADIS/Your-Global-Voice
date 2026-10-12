@@ -23,7 +23,7 @@ test('donation page delegates payment to the authorized hosted checkout without 
   assert.match(html, /No tax-deductibility claim is made/);
   assert.doesNotMatch(html, /IRS|501\(c\)/);
   assert.equal((await fetch(base + '/donate.html', { method: 'POST', body: 'simulated' })).status, 405);
-  for (const asset of ['donate.css', 'donate.js', 'paypal-logo.svg']) assert.equal((await fetch(base + '/' + asset)).status, 200);
+  for (const asset of ['donate.css', 'donate.js', 'paypal-logo.svg', 'amex-logo.svg']) assert.equal((await fetch(base + '/' + asset)).status, 200);
   const script = await readFile(new URL('../public/donate.js', import.meta.url), 'utf8');
   assert.doesNotMatch(script, /\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage/);
 });

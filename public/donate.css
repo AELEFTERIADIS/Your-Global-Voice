@@ -47,16 +47,15 @@
 
 
 .donation-payment-methods { margin-top: 1.5rem; }
-.donation-payment-methods > h3 { margin: 0 0 1rem; font-size: clamp(1.625rem, 2.5vw, 1.875rem); font-weight: 700; color: var(--navy); line-height: 1.3; }
+.donation-payment-methods > h3 { margin: 0 0 1rem; font-size: 1.25rem; font-weight: 400; color: var(--navy); line-height: 1.35; }
 .donation-payment-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .875rem; }
-.donation-method-choice { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; padding: 1.25rem; min-width: 0; min-height: 11.5rem; border: 1px solid var(--muted); border-top: 3px solid var(--gold); border-radius: .375rem; background: white; color: var(--navy); text-decoration: none; }
+.donation-method-choice { display: flex; flex-direction: column; align-items: flex-start; gap: .375rem; padding: 1rem; min-width: 0; min-height: 8rem; border: 1px solid var(--muted); border-top: 3px solid var(--gold); border-radius: .375rem; background: white; color: var(--navy); text-decoration: none; }
 .donation-method-choice:hover { border-color: var(--gold); box-shadow: 0 3px 10px rgba(16, 45, 69, .08); }
 .donation-method-choice:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
-.payment-choice-label { font-size: 1.25rem; font-weight: 700; line-height: 1.4; }
-.payment-paypal-logo { display: block; width: 126px; max-width: 100%; height: auto; }
-.payment-choice-detail { color: var(--ink); font-size: 1rem; line-height: 1.55; }
-.payment-choice-action { margin-top: auto; padding-top: .375rem; font-size: 1rem; font-weight: 700; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: .25em; text-decoration-thickness: 2px; }
-@media (max-width: 28rem) { .donation-payment-actions { grid-template-columns: 1fr; } .donation-method-choice { min-height: 10rem; } }
+.payment-choice-label { font-size: 1rem; font-weight: 700; line-height: 1.5; }
+.payment-choice-detail { color: var(--ink); font-size: .875rem; line-height: 1.5; }
+.payment-choice-action { margin-top: auto; padding-top: .25rem; font-size: .875rem; font-weight: 700; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: .25em; text-decoration-thickness: 1px; }
+@media (max-width: 28rem) { .donation-payment-actions { grid-template-columns: 1fr; } .donation-method-choice { min-height: 0; } }
 
-.payment-brand-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin: 0 0 1.25rem; }
-.payment-brand-logo { display: block; width: 120px; max-width: 100%; height: auto; }
+.payment-brand-logos { display: flex; flex-wrap: wrap; align-items: center; gap: .375rem; margin: 0 0 .875rem; }
+.payment-brand-logo { display: block; width: auto; max-width: 100%; height: 22px; object-fit: contain; }
