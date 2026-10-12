@@ -70,3 +70,9 @@
 .payment-brand-logo { display: block; width: auto; max-width: 100%; height: 22px; object-fit: contain; }
 
 @media (max-width: 28rem) { .payment-brand-logos { gap: .25rem; } .payment-brand-logo { height: clamp(16px, 4.8vw, 22px); } }
+
+.donation-mission-icon-link { display: block; align-self: start; line-height: 0; }
+.donation-mission-heading-link { color: inherit; text-decoration: none; }
+.donation-mission-heading-link:hover { text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+.donation-mission-icon-link:hover .donation-mission-icon { color: var(--navy); }
+.donation-mission-icon-link:focus-visible, .donation-mission-heading-link:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }

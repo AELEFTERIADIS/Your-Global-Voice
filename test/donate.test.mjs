@@ -79,3 +79,19 @@ test('mission invitation contains only the approved causes and involvement link'
   assert.ok(invitation.includes('href="get-involved.html">Take Action &amp; Get Involved &rarr;'));
   assert.doesNotMatch(invitation, /Make a difference today|Your generosity can bring hope|Contact Us for Giving Arrangements/);
 });
+
+test('mission headings and icons link to the matching purpose section', async () => {
+  const html = renderDonate();
+  const purposes = await readFile(new URL('../public/purposes.html', import.meta.url), 'utf8');
+  const targets = [
+    ['persecution-discrimination', 'Religious, Racial, and Ethnic Persecution and Discrimination'],
+    ['humanitarian-assistance', 'Humanitarian Assistance and Relief'],
+    ['animal-welfare', 'Animal Welfare Assistance'],
+    ['environmental-protection', 'Environmental Conservation and Sustainability']
+  ];
+  for (const [id, heading] of targets) {
+    assert.equal((html.match(new RegExp(`href="purposes.html#${id}"`, 'g')) || []).length, 2);
+    assert.ok(purposes.includes(`<li id="${id}">`));
+    assert.ok(purposes.slice(purposes.indexOf(`<li id="${id}">`)).split('</li>')[0].includes(`<h3>${heading}</h3>`));
+  }
+});
