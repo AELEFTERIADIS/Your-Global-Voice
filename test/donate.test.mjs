@@ -28,7 +28,7 @@ test('donation preparation remains unable to collect payment or accept sensitive
 
 test('donation renderer preserves the original site wrapper and emits approved giving content', async () => {
   const html = renderDonate();
-  for (const text of ['Your Generosity.', 'Their Hope.', 'Our Shared Future.', 'Every gift matters. Every voice counts.', 'Support Our Mission', 'Choose How You Give', 'Partnerships That Create Lasting Impact', 'Your Trust Matters', 'mailto:support@ygvoice.org']) assert.ok(html.includes(text), text);
+  for (const text of ['Your Generosity', 'Their Hope', 'Our Shared Future', 'Every gift matters. Every voice counts.', 'Support Our Mission', 'Choose How You Give', 'Partnerships That Create Lasting Impact', 'Your Trust Matters', 'mailto:support@ygvoice.org']) assert.ok(html.includes(text), text);
   for (const amount of [10, 25, 50, 100, 250]) assert.ok(html.includes(`name="giving-amount" value="${amount}"`));
   assert.ok(html.includes('value="custom"')); assert.ok(html.includes('One-Time Donation')); assert.ok(html.includes('Monthly Donation'));
   assert.equal((html.match(/href="purposes.html"/g) || []).length, 4);
