@@ -60,7 +60,7 @@ jobs:
       - name: Check Pages configuration
         id: pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
-      - name: Require the default GitHub Pages domain
+      - name: Require an approved website domain
         env:
           PAGES_BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: node scripts/validate-pages-url.mjs

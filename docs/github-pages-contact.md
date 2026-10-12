@@ -28,9 +28,12 @@ not proof of inbox receipt. No real delivery has been tested here.
    there. Do not send it through chat. Wrangler's interactive secret-entry flow
    is another option for an authorized developer. Do not put the key in a build
    command, TOML, HTML, JavaScript, or GitHub Pages settings.
-3. Keep the public Worker settings `CONTACT_SITE_ORIGIN` equal to
-   `https://aelefteriadis.github.io` (browser origins do not include the repository
-   path) and `CONTACT_MAIL_FROM` equal to `info@ygvoice.org`, provided Resend
+3. Keep the public Worker setting `CONTACT_SITE_ORIGINS` equal to
+   `https://aelefteriadis.github.io,https://ygvoice.org,https://www.ygvoice.org`.
+   Browser origins do not include paths or trailing slashes. The legacy singular
+   `CONTACT_SITE_ORIGIN` is retained for backwards compatibility; the plural
+   allowlist takes precedence. Keep `CONTACT_MAIL_FROM` equal to
+   `info@ygvoice.org`, provided Resend
    authorizes this sender under the verified ygvoice.org domain. The visitor's
    address is Reply-To. The Worker controls recipients: Donations & Financial
    Support goes to support@ygvoice.org; all other categories go to info@ygvoice.org.

@@ -8,8 +8,10 @@ export default {
     const path = new URL(request.url).pathname;
     if (!['/api/contact', '/api/contact/status'].includes(path)) return json(404, 'Not found.');
     // The browser never receives credentials; deny every other website origin.
-    if (request.headers.get('Origin') !== env.CONTACT_SITE_ORIGIN) return json(403, 'This submission origin is not permitted.');
-    const cors = { 'Access-Control-Allow-Origin': env.CONTACT_SITE_ORIGIN, 'Vary': 'Origin', 'Cache-Control': 'no-store' };
+    const origin = request.headers.get('Origin');
+    const allowedOrigins = new Set((env.CONTACT_SITE_ORIGINS || env.CONTACT_SITE_ORIGIN || '').split(',').map(value => value.trim()).filter(Boolean));
+    if (!origin || !allowedOrigins.has(origin)) return json(403, 'This submission origin is not permitted.');
+    const cors = { 'Access-Control-Allow-Origin': origin, 'Vary': 'Origin', 'Cache-Control': 'no-store' };
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: { ...cors, 'Access-Control-Allow-Methods': 'GET, POST', 'Access-Control-Allow-Headers': 'Content-Type' } });
     let response;
     try {

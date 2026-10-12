@@ -83,3 +83,28 @@ test('Pages workflow connects the confirmed production Worker and isolates its p
     }
   } finally { await rm(temp, { recursive: true, force: true }); }
 });
+
+test('all three configured website origins receive exact CORS headers for initialization, preflight and submission', async () => {
+  const config = await readFile(new URL('../worker/wrangler.toml', import.meta.url), 'utf8');
+  const origins = config.match(/^CONTACT_SITE_ORIGINS = "([^"]+)"$/m)[1];
+  const expected = ['https://aelefteriadis.github.io', 'https://ygvoice.org', 'https://www.ygvoice.org'];
+  assert.deepEqual(origins.split(','), expected);
+  let forwarded = 0;
+  const env = { CONTACT_SITE_ORIGINS: origins, RESEND_API_KEY: 'simulated-only', CONTACT_MAIL_FROM: 'info@ygvoice.org', CONTACT_LIMITS: { idFromName: name => name, get: () => ({ fetch: async request => { forwarded++; return Response.json(request.method === 'POST' ? { accepted: true } : { available: true, token: 'simulated-only' }); } }) } };
+  for (const origin of expected) {
+    for (const method of ['GET', 'OPTIONS', 'POST']) {
+      const path = method === 'GET' ? '/api/contact/status' : '/api/contact';
+      const response = await worker.fetch(new Request('https://test.workers.dev' + path, { method, headers: { Origin: origin, 'CF-Connecting-IP': '192.0.2.1', 'Content-Type': 'application/json' }, ...(method === 'POST' ? { body: '{}' } : {}) }), env);
+      assert.equal(response.status, method === 'OPTIONS' ? 204 : 200);
+      assert.equal(response.headers.get('Access-Control-Allow-Origin'), origin);
+      assert.equal(response.headers.get('Vary'), 'Origin');
+      if (method === 'OPTIONS') assert.equal(response.headers.get('Access-Control-Allow-Headers'), 'Content-Type');
+    }
+  }
+  assert.equal(forwarded, 6);
+  for (const origin of ['https://other.example', 'http://ygvoice.org', 'https://ygvoice.org.evil.example', 'null', 'https://ygvoice.org:8443']) {
+    const response = await worker.fetch(new Request('https://test.workers.dev/api/contact/status', { headers: { Origin: origin } }), env);
+    assert.equal(response.status, 403); assert.equal(response.headers.get('Access-Control-Allow-Origin'), null);
+  }
+  assert.equal((await worker.fetch(new Request('https://test.workers.dev/api/contact/status'), env)).status, 403);
+});

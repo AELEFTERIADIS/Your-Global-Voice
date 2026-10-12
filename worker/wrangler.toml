@@ -6,6 +6,7 @@ workers_dev = true
 
 [vars]
 CONTACT_SITE_ORIGIN = "https://aelefteriadis.github.io"
+CONTACT_SITE_ORIGINS = "https://aelefteriadis.github.io,https://ygvoice.org,https://www.ygvoice.org"
 CONTACT_MAIL_FROM = "info@ygvoice.org"
 
 [[durable_objects.bindings]]

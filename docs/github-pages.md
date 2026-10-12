@@ -3,9 +3,11 @@
 The repository contains a prepared workflow at `.github/workflows/pages.yml`.
 Every push to `main` automatically validates and publishes the `/public` content
 through the prepared static artifact. No approval variable is required.
-Publication is restricted to the default GitHub Pages project URL; a configured
-custom domain causes the publication guard to stop without deploying.
-No custom domain or CNAME is configured by this workflow.
+Publication accepts the existing GitHub Pages project URL and the approved
+HTTPS root URLs `https://ygvoice.org/` and `https://www.ygvoice.org/`. Other
+hostnames, paths, credentials, ports, and insecure URLs remain blocked.
+The workflow reads GitHub’s saved Pages domain; it does not change that setting,
+DNS, or a CNAME. Domain setup and HTTPS availability require live verification.
 
 ## GitHub setup (no Terminal required)
 
@@ -24,11 +26,12 @@ If Pages was not enabled when this commit was pushed, open **Actions → Validat
 and publish website → Run workflow** and select `main` after setting the source.
 Subsequent pushes to `main` will publish automatically.
 
-The intended URL is `https://aelefteriadis.github.io/Your-Global-Voice/`.
-Do not add a custom domain or change Namecheap/DNS/email settings. If GitHub
-already has a custom domain configured, the guard deliberately fails. No domain
-settings are changed automatically; that conflict requires separate resolution
-before publishing under the default URL.
+Approved URLs are `https://aelefteriadis.github.io/Your-Global-Voice/`,
+`https://ygvoice.org/`, and `https://www.ygvoice.org/`. GitHub determines the
+published canonical URL from its saved Pages configuration. This update does not
+select or change the canonical domain, add DNS records, or change email settings.
+The legacy `configure-pages-source.mjs` helper is not used by the workflow; the
+workflow does not automatically switch Pages sources or domain settings.
 
 Future pushes scan credentials, regenerate and test all eight pages, and upload
 only the public website artifact. No manual server restart is needed. Edit source
@@ -53,13 +56,15 @@ Git metadata, and environment files are excluded. Build-only CSP metadata
 restricts resources and form submission without changing the approved design,
 text, navigation, footer, or logo. Relative HTML paths support the project URL.
 
-GitHub Pages is static hosting. The Contact form's Node.js/Resend API cannot run
-there. The Pages artifact explicitly marks the form unavailable and does not
-probe a nonexistent API. Email links, WhatsApp, address copying, navigation,
-form fields, responsive layout, and donation information remain functional.
-Actual form email delivery requires a separately approved backend integration.
-No key belongs in HTML, JavaScript, the Pages artifact, or its build environment.
-The existing local server retains its secure backend support and behavior.
+GitHub Pages is static hosting. Contact submission uses the separate Cloudflare
+Worker and server-side Resend adapter, not the local Node preview server. The
+Pages artifact includes the configured Worker endpoint. The Worker allowlist
+includes `https://aelefteriadis.github.io`, `https://ygvoice.org`, and
+`https://www.ygvoice.org`; responses echo only the matched allowed origin and
+include `Vary: Origin`. Unknown origins remain rejected. No mail key belongs in
+HTML, JavaScript, the Pages artifact, or its build environment. Production
+Worker deployment, browser CORS, provider acceptance, and actual inbox delivery
+must be verified live after configuration changes.
 
 ## Validation before activation
 

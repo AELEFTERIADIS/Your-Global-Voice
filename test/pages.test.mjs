@@ -36,10 +36,10 @@ test('Pages preparation refuses to overwrite existing work', async (t) => {
   assert.deepEqual(await readdir(temp), []);
 });
 
-test('publication guard accepts the project URL and blocks custom domains or other targets', async () => {
+test('publication guard accepts only the project URL and approved custom domain roots', async () => {
   const { validatePagesUrl } = await import('../scripts/validate-pages-url.mjs');
-  for (const value of ['https://aelefteriadis.github.io/Your-Global-Voice', 'https://aelefteriadis.github.io/Your-Global-Voice/']) assert.ok(validatePagesUrl(value));
-  for (const value of ['https://ygvoice.org/', 'https://www.ygvoice.org/', 'http://aelefteriadis.github.io/Your-Global-Voice/', 'https://aelefteriadis.github.io/another-site/', 'https://aelefteriadis.github.io.evil.example/Your-Global-Voice/', 'https://user:password@aelefteriadis.github.io/Your-Global-Voice/']) assert.throws(() => validatePagesUrl(value));
+  for (const value of ['https://aelefteriadis.github.io/Your-Global-Voice', 'https://aelefteriadis.github.io/Your-Global-Voice/', 'https://ygvoice.org', 'https://ygvoice.org/', 'https://www.ygvoice.org', 'https://www.ygvoice.org/']) assert.ok(validatePagesUrl(value));
+  for (const value of ['http://ygvoice.org/', 'https://ygvoice.org/unapproved/', 'https://ygvoice.org.evil.example/', 'https://ygvoice.org/?redirect=evil', 'https://ygvoice.org/#anchor', 'https://ygvoice.org:8443/', 'https://user:password@www.ygvoice.org/', 'http://aelefteriadis.github.io/Your-Global-Voice/', 'https://aelefteriadis.github.io/another-site/', 'https://aelefteriadis.github.io.evil.example/Your-Global-Voice/', 'https://user:password@aelefteriadis.github.io/Your-Global-Voice/']) assert.throws(() => validatePagesUrl(value));
 });
 
 test('repository root opens the real public homepage rather than README', async () => {
