@@ -53,7 +53,7 @@ test('donation hero image is locally served with correct media type and descript
   assert.ok(html.includes('Compassion knows no borders. Through your generosity, we can advance human dignity, provide humanitarian assistance, protect animals, and safeguard our environment.'));
   assert.ok(html.includes('Together, we can transform kindness into meaningful action and build a future where every voice matters.'));
   assert.ok(html.includes('href="#support-mission"'));
-  assert.ok(html.includes('<h1>Your Generosity.<br>Their Hope.<br>Our Shared Future.</h1>'));
+  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
 });
 
 // Frozen from the approved component at commit 1f11f06, including the left column.
