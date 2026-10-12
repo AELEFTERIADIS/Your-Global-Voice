@@ -70,7 +70,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.match(html, /MY VOICE \+ YOUR VOICE = OUR VOICE/);
     assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
     assert.doesNotMatch(html, /<iframe\b/);
-    if (route !== '/contact') assert.doesNotMatch(html, /<script\b/);
+    if (!['/contact', '/donate'].includes(route)) assert.doesNotMatch(html, /<script\b/);
     if (route !== '/contact') assert.doesNotMatch(html, /<form\b/);
     for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html"`));
     if (['/', '/mission', '/purposes'].includes(route)) {
@@ -80,9 +80,10 @@ test('all pages share working navigation and preserve the approved purposes', as
       }
     }
     if (route === '/donate') {
-      assert.match(html, /Donations are not yet available/);
-      for (const option of ['Credit and debit card donations', 'PayPal', 'Zelle', 'Bank transfers', 'Checks', 'In-kind contributions']) assert.ok(html.includes(option));
-      assert.doesNotMatch(html, /<input\b|<button\b|href="https?:/);
+      assert.match(html, /Online payments are not connected yet/);
+      for (const option of ['Credit &amp; Debit Cards', 'PayPal', 'Zelle', 'Bank Transfers', 'Checks', 'In-Kind Contributions']) assert.ok(html.includes(option));
+      assert.match(html, /type="button" disabled/);
+      assert.doesNotMatch(html, /<form\b|href="https?:/);
     }
   }
 });
@@ -115,7 +116,7 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
     assert.match(html, /<meta name="description"/);
     for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
       if (/^(mailto:|https:)/.test(href)) {
-        assert.equal(route, '/contact');
+        assert.ok(['/contact', '/donate'].includes(route));
         continue;
       }
       if (href.startsWith('#')) {
@@ -125,9 +126,10 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
       }
     }
     if (route === '/donate') {
-      for (const text of ['Checks', 'Clothing', 'Goods and essential supplies', 'International support', 'customs', 'Tax treatment', 'No payments or goods are being collected']) assert.ok(html.includes(text), text);
-      assert.equal((html.match(/<details>/g) ?? []).length, 3);
-      assert.doesNotMatch(html, /mailto:|tel:|<form\b|<input\b|<iframe\b/);
+      for (const text of ['Checks', 'clothing', 'medical supplies', 'international', 'customs', 'Tax treatment', 'No payment will be taken']) assert.ok(html.includes(text), text);
+      assert.match(html, /Choose How You Give/);
+      assert.doesNotMatch(html, /tel:|<form\b|<iframe\b/);
+      assert.match(html, /mailto:support@ygvoice.org/);
     }
   }
 });

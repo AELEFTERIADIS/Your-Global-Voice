@@ -14,6 +14,8 @@ const routes = new Map([
     [`/${page}.html`, [`../public/${page}.html`, 'text/html; charset=utf-8']],
   ]),
   ['/603250A8-B1C4-4533-848C-4028A6E0AD49.png', ['../public/603250A8-B1C4-4533-848C-4028A6E0AD49.png', 'image/png']],
+  ['/donate.js', ['../public/donate.js', 'text/javascript; charset=utf-8']],
+  ['/donate.css', ['../public/donate.css', 'text/css; charset=utf-8']],
   ['/contact.js', ['../public/contact.js', 'text/javascript; charset=utf-8']],
   ['/contact.css', ['../public/contact.css', 'text/css; charset=utf-8']],
   ['/styles.css', ['../public/styles.css', 'text/css; charset=utf-8']],
@@ -23,7 +25,8 @@ export function createPreviewServer(contactOptions) {
   const handleContact = createContactHandler(contactOptions);
   return createServer(async (request, response) => {
     const contactRoute = /^\/contact(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : "form-action 'none'"}; frame-ancestors 'none'`);
+    const donateRoute = /^\/donate(?:\.html|\/)?(?:\?|$)/.test(request.url);
+    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : donateRoute ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Referrer-Policy', 'no-referrer');
