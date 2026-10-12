@@ -81,7 +81,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     }
     if (route === '/donate') {
       assert.match(html, /Choose Your Payment Method/);
-      for (const option of ['Credit &amp; Debit Cards', 'PayPal', 'Zelle', 'Bank Transfers', 'Checks', 'In-Kind Contributions']) assert.ok(html.includes(option));
+      for (const option of ['Credit or Debit Card', 'PayPal', 'Bank Transfers', 'Donations by Check', 'In-Kind Contributions', 'Corporate &amp; Institutional Giving']) assert.ok(html.includes(option));
       assert.match(html, /href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00"/);
       assert.doesNotMatch(html, /<form\b/);
     }
@@ -126,8 +126,8 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
       }
     }
     if (route === '/donate') {
-      for (const text of ['Checks', 'clothing', 'medical supplies', 'international', 'customs', 'Tax treatment', 'Your choices here are not carried over']) assert.ok(html.includes(text), text);
-      assert.match(html, /Choose How You Give/);
+      for (const text of ['Checks', 'clothing', 'essential supplies', 'international', 'customs', 'Tax treatment', 'Your choices here are not carried over']) assert.ok(html.includes(text), text);
+      assert.match(html, /Other Ways to Support Our Mission/);
       assert.doesNotMatch(html, /tel:|<form\b|<iframe\b/);
       assert.match(html, /mailto:support@ygvoice.org/);
     }

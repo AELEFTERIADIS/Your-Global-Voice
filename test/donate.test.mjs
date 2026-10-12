@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { createPreviewServer } from '../scripts/server.mjs';
 import { renderDonate } from '../scripts/donate.mjs';
@@ -30,7 +31,7 @@ test('donation page delegates payment to the authorized hosted checkout without 
 
 test('donation renderer preserves the original site wrapper and emits approved giving content', async () => {
   const html = renderDonate();
-  for (const text of ['Your Generosity', 'Their Hope', 'Our Shared Future', 'Every gift matters. Every voice counts.', 'Support Our Mission', 'Choose How You Give', 'Partnerships That Create Lasting Impact', 'Your Trust Matters', 'mailto:support@ygvoice.org']) assert.ok(html.includes(text), text);
+  for (const text of ['Your Generosity', 'Their Hope', 'Our Shared Future', 'Every gift matters. Every voice counts.', 'Support Our Mission', 'Other Ways to Support Our Mission', 'Corporate &amp; Institutional Giving', 'Your Trust Matters', 'mailto:support@ygvoice.org']) assert.ok(html.includes(text), text);
   for (const amount of [10, 25, 50, 100, 250]) assert.ok(html.includes(`name="giving-amount" value="${amount}"`));
   assert.ok(html.includes('value="custom"')); assert.ok(html.includes('One-Time Donation')); assert.ok(html.includes('Monthly Donation'));
   assert.equal((html.match(/href="purposes.html"/g) || []).length, 4);
@@ -50,4 +51,19 @@ test('donation hero image is locally served with correct media type and descript
   assert.match(html, /class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe"/);
   assert.equal((html.match(/<img\b/g) || []).length, 7);
   assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
+});
+
+// Frozen from the approved component at commit 1f11f06, including the left column.
+test('approved donation component remains byte-for-byte unchanged', () => {
+  const html = renderDonate();
+  const start = html.indexOf('<section class="donation-support"');
+  const end = html.indexOf('</div></div></section>', start) + 22;
+  assert.equal(createHash('sha256').update(html.slice(start, end)).digest('hex'),
+    '5b23046c1f5e663a14db56e60046a9393d6152ee6492e0cf4ac95dc2ff87289e');
+  assert.equal((html.match(/class="donation-method-choice(?: donation-paypal)?"/g) || []).length, 2);
+  assert.equal((html.match(/class="payment-brand-logo/g) || []).length, 7); // row + six images
+  assert.doesNotMatch(html, /Choose How You Give|Zelle|Card processing is not connected|Partnerships That Create Lasting Impact/);
+  const closing = html.slice(html.indexOf('<section class="donation-trust'));
+  assert.ok(closing.includes('Together, we can turn compassion into meaningful action.'));
+  assert.doesNotMatch(closing, /<a\b|<button\b|<form\b/);
 });
