@@ -23,7 +23,7 @@ test('donation page delegates payment to the authorized hosted checkout without 
   assert.match(html, /No tax-deductibility claim is made/);
   assert.doesNotMatch(html, /IRS|501\(c\)/);
   assert.equal((await fetch(base + '/donate.html', { method: 'POST', body: 'simulated' })).status, 405);
-  for (const asset of ['donate.css', 'donate.js', 'paypal-logo.svg', 'amex-logo.svg']) assert.equal((await fetch(base + '/' + asset)).status, 200);
+  for (const asset of ['donate.css', 'donate.js', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg']) assert.equal((await fetch(base + '/' + asset)).status, 200);
   const script = await readFile(new URL('../public/donate.js', import.meta.url), 'utf8');
   assert.doesNotMatch(script, /\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage/);
 });
@@ -48,6 +48,6 @@ test('donation hero image is locally served with correct media type and descript
   assert.equal(bytes.toString('ascii', 0, 4), 'RIFF'); assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
   const html = renderDonate();
   assert.match(html, /class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe"/);
-  assert.equal((html.match(/<img\b/g) || []).length, 3);
+  assert.equal((html.match(/<img\b/g) || []).length, 4);
   assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
 });

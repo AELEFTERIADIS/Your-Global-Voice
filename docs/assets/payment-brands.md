@@ -4,6 +4,8 @@
   displays American Express. `public/amex-logo.svg` is copied unchanged from
   PayPal's official SDK logos repository, `cdn/2.3.7/amex.svg`, at commit
   `4c39c1ec50b15dde3af99b524fb24ec8aa9fa11b`.
+- Link by Stripe: the organization reports seeing Link in the connected Stripe
+  checkout. Official asset provenance is recorded in `link-logo.md`.
 - PayPal: the organization confirms that its existing PayPal checkout works.
   Its unchanged official wordmark and provenance are in `paypal-logo.md`.
 
