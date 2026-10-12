@@ -74,7 +74,7 @@ test('approved donation component remains byte-for-byte unchanged', () => {
 test('mission invitation contains only the approved causes and involvement link', () => {
   const html = renderDonate();
   const invitation = html.slice(html.indexOf('<div class="donation-invitation">'), html.indexOf('<div class="donation-payment">'));
-  for (const text of ['Join us in the fight against:', 'Persecution &amp; Discrimination', 'Religious intolerance, violations of fundamental freedoms, and injustice.', 'Humanitarian Crises', 'Hunger, poverty, displacement, and lack of essential care.', 'Animal Cruelty &amp; Neglect', 'Abuse, abandonment, exploitation, and suffering.', 'Environmental Destruction', 'Deforestation, pollution, habitat loss, and threats to biodiversity.']) assert.ok(invitation.includes(text), text);
+  for (const text of ['Join us in the fight against:', 'Persecution &amp; Discrimination', 'Religious intolerance, violations of fundamental freedoms, and injustice…', 'Humanitarian Crises', 'Hunger, poverty, displacement, and lack of essential care…', 'Animal Cruelty &amp; Neglect', 'Abuse, abandonment, exploitation, and suffering…', 'Environmental Destruction', 'Deforestation, pollution, habitat loss, and threats to biodiversity…']) assert.ok(invitation.includes(text), text);
   assert.equal((invitation.match(/<svg\b/g) || []).length, 4);
   assert.ok(invitation.includes('href="get-involved.html">Take Action &amp; Get Involved &rarr;'));
   assert.doesNotMatch(invitation, /Make a difference today|Your generosity can bring hope|Contact Us for Giving Arrangements/);

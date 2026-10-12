@@ -1,9 +1,9 @@
 export function renderDonate() {
   const missionItems = [
-    ['Persecution &amp; Discrimination', 'Religious intolerance, violations of fundamental freedoms, and injustice.', '<path d="M12 3v17M7 21h10M4 7h16M5 7l-3 7h6L5 7zm14 0l-3 7h6l-3-7z"/>'],
-    ['Humanitarian Crises', 'Hunger, poverty, displacement, and lack of essential care.', '<path d="M2 13l4-4 4 1 2 2 2-2 4-1 4 4M2 13l5 6h3l2-2 2 2h3l5-6M8 14l4 3 4-3M2 10v8m20-8v8"/>'],
-    ['Animal Cruelty &amp; Neglect', 'Abuse, abandonment, exploitation, and suffering.', '<ellipse cx="5" cy="8" rx="2" ry="3"/><ellipse cx="10" cy="5" rx="2" ry="3"/><ellipse cx="15" cy="5" rx="2" ry="3"/><ellipse cx="20" cy="8" rx="2" ry="3"/><path d="M12 11c-3 0-3 3-5 5s-1 5 2 4l3-1 3 1c3 1 4-2 2-4s-2-5-5-5z"/>'],
-    ['Environmental Destruction', 'Deforestation, pollution, habitat loss, and threats to biodiversity.', '<path d="M8 2L3 9h3l-4 6h12l-4-6h3L8 2zm0 13v7M17 5l-4 6h2l-3 6h10l-3-6h2l-4-6zm0 12v5"/>']
+    ['Persecution &amp; Discrimination', 'Religious intolerance, violations of fundamental freedoms, and injustice…', '<path d="M12 3v17M7 21h10M4 7h16M5 7l-3 7h6L5 7zm14 0l-3 7h6l-3-7z"/>'],
+    ['Humanitarian Crises', 'Hunger, poverty, displacement, and lack of essential care…', '<path d="M2 13l4-4 4 1 2 2 2-2 4-1 4 4M2 13l5 6h3l2-2 2 2h3l5-6M8 14l4 3 4-3M2 10v8m20-8v8"/>'],
+    ['Animal Cruelty &amp; Neglect', 'Abuse, abandonment, exploitation, and suffering…', '<ellipse cx="5" cy="8" rx="2" ry="3"/><ellipse cx="10" cy="5" rx="2" ry="3"/><ellipse cx="15" cy="5" rx="2" ry="3"/><ellipse cx="20" cy="8" rx="2" ry="3"/><path d="M12 11c-3 0-3 3-5 5s-1 5 2 4l3-1 3 1c3 1 4-2 2-4s-2-5-5-5z"/>'],
+    ['Environmental Destruction', 'Deforestation, pollution, habitat loss, and threats to biodiversity…', '<path d="M8 2L3 9h3l-4 6h12l-4-6h3L8 2zm0 13v7M17 5l-4 6h2l-3 6h10l-3-6h2l-4-6zm0 12v5"/>']
   ];
   const methods = [
     ['Bank Transfers', 'Domestic and international contributions, with verified transfer instructions available upon request.'],
