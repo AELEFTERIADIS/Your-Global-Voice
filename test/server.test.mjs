@@ -54,7 +54,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     const response = await fetch(base + route);
     assert.equal(response.status, 200, route);
     const html = await response.text();
-    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 2 : 1);
+    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 3 : 1);
     assert.match(html, /class="header-logo"[^>]*alt="Your Global Voice official logo"/);
     const logoPath = html.match(/class="header-logo" src="([^"]+)"/)[1];
     const logo = await fetch(new URL(logoPath, response.url));
@@ -80,7 +80,7 @@ test('all pages share working navigation and preserve the approved purposes', as
       }
     }
     if (route === '/donate') {
-      assert.match(html, /Checkout opens in Stripe or PayPal/);
+      assert.match(html, /Choose Your Payment Method/);
       for (const option of ['Credit &amp; Debit Cards', 'PayPal', 'Zelle', 'Bank Transfers', 'Checks', 'In-Kind Contributions']) assert.ok(html.includes(option));
       assert.match(html, /href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00"/);
       assert.doesNotMatch(html, /<form\b/);
@@ -126,7 +126,7 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
       }
     }
     if (route === '/donate') {
-      for (const text of ['Checks', 'clothing', 'medical supplies', 'international', 'customs', 'Tax treatment', 'No payment will be taken']) assert.ok(html.includes(text), text);
+      for (const text of ['Checks', 'clothing', 'medical supplies', 'international', 'customs', 'Tax treatment', 'Your choices here are not carried over']) assert.ok(html.includes(text), text);
       assert.match(html, /Choose How You Give/);
       assert.doesNotMatch(html, /tel:|<form\b|<iframe\b/);
       assert.match(html, /mailto:support@ygvoice.org/);

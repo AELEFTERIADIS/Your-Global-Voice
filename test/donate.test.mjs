@@ -14,16 +14,16 @@ test('donation page delegates payment to the authorized hosted checkout without 
   const csp = response.headers.get('content-security-policy');
   assert.match(csp, /default-src 'none'/); assert.match(csp, /script-src 'self'/); assert.match(csp, /form-action 'none'/); assert.doesNotMatch(csp, /connect-src/);
   const html = await response.text();
-  assert.match(html, /class="button donation-secure" href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00" target="_blank" rel="noopener noreferrer"/);
+  assert.match(html, /class="donation-method-choice" href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00" target="_blank" rel="noopener noreferrer"/);
   assert.doesNotMatch(html, /<form\b|<iframe\b|type="(?:email|password)"/);
-  assert.match(html, /Page selections are not transferred/);
+  assert.match(html, /Your choices here are not carried over/);
   assert.deepEqual([...new Set([...html.matchAll(/href="(https:[^"]+)"/g)].map(match => match[1]))], ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00', 'https://www.paypal.com/ncp/payment/PVJ5JKDKZW8VQ']);
-  assert.match(html, /class="button donation-secure donation-paypal" href="https:\/\/www.paypal.com\/ncp\/payment\/PVJ5JKDKZW8VQ" target="_blank" rel="noopener noreferrer"/);
+  assert.match(html, /class="donation-method-choice donation-paypal" href="https:\/\/www.paypal.com\/ncp\/payment\/PVJ5JKDKZW8VQ" target="_blank" rel="noopener noreferrer"/);
   assert.match(html, /preference does not create a restricted donation/);
   assert.match(html, /No tax-deductibility claim is made/);
   assert.doesNotMatch(html, /IRS|501\(c\)/);
   assert.equal((await fetch(base + '/donate.html', { method: 'POST', body: 'simulated' })).status, 405);
-  for (const asset of ['donate.css', 'donate.js']) assert.equal((await fetch(base + '/' + asset)).status, 200);
+  for (const asset of ['donate.css', 'donate.js', 'paypal-logo.svg']) assert.equal((await fetch(base + '/' + asset)).status, 200);
   const script = await readFile(new URL('../public/donate.js', import.meta.url), 'utf8');
   assert.doesNotMatch(script, /\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage/);
 });
@@ -48,6 +48,6 @@ test('donation hero image is locally served with correct media type and descript
   assert.equal(bytes.toString('ascii', 0, 4), 'RIFF'); assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
   const html = renderDonate();
   assert.match(html, /class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe"/);
-  assert.equal((html.match(/<img\b/g) || []).length, 1);
+  assert.equal((html.match(/<img\b/g) || []).length, 2);
   assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
 });
