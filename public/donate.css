@@ -7,7 +7,15 @@
 .donation-motto { color: var(--navy); font-family: Georgia, serif; font-size: 1.25rem; }
 .donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
 .donation-invitation { padding-top: 0; }
-.donation-invitation > .eyebrow { margin: 0 0 1rem; }
+.donation-invitation > .mission-introduction { margin: 0 0 .5rem; }
+.donation-mission-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+.donation-mission-list > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 1rem; padding: 1.5rem 0; }
+.donation-mission-list > li + li { border-top: 1px solid var(--line); }
+.donation-mission-icon { color: var(--gold); margin-top: .125rem; }
+.donation-mission-list h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.3; margin: 0 0 .5rem; }
+.donation-mission-list p { margin: 0; line-height: 1.7; }
+.donation-involvement { display: inline-block; }
+@media (min-width: 56.0625rem) { .donation-invitation { padding-top: 2.2rem; } }
 .donation-payment { min-width: 0; }
 .donation-payment > h2 { margin-bottom: 1.25rem; }
 .donation-selector { background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: clamp(1.25rem, 3vw, 2.5rem); }

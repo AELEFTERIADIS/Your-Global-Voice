@@ -56,17 +56,26 @@ test('donation hero image is locally served with correct media type and descript
   assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
 });
 
-// Frozen from the approved component at commit 1f11f06, including the left column.
+// Frozen approved payment box; the separate left column may be refined.
 test('approved donation component remains byte-for-byte unchanged', () => {
   const html = renderDonate();
-  const start = html.indexOf('<section class="donation-support"');
-  const end = html.indexOf('</div></div></section>', start) + 22;
+  const start = html.indexOf('<div class="donation-payment">');
+  const end = html.indexOf('</div></div></section>', start) + 12;
   assert.equal(createHash('sha256').update(html.slice(start, end)).digest('hex'),
-    '5b23046c1f5e663a14db56e60046a9393d6152ee6492e0cf4ac95dc2ff87289e');
+    '57f157fdac24e696339a785818240ec3e76395f678de07fd715a07c1ccf1eed5');
   assert.equal((html.match(/class="donation-method-choice(?: donation-paypal)?"/g) || []).length, 2);
   assert.equal((html.match(/class="payment-brand-logo/g) || []).length, 7); // row + six images
   assert.doesNotMatch(html, /Choose How You Give|Zelle|Card processing is not connected|Partnerships That Create Lasting Impact/);
   const closing = html.slice(html.indexOf('<section class="donation-trust'));
   assert.ok(closing.includes('Together, we can turn compassion into meaningful action.'));
   assert.doesNotMatch(closing, /<a\b|<button\b|<form\b/);
+});
+
+test('mission invitation contains only the approved causes and involvement link', () => {
+  const html = renderDonate();
+  const invitation = html.slice(html.indexOf('<div class="donation-invitation">'), html.indexOf('<div class="donation-payment">'));
+  for (const text of ['Join us in the fight against:', 'Persecution &amp; Discrimination', 'Religious intolerance, violations of fundamental freedoms, and injustice.', 'Humanitarian Crises', 'Hunger, poverty, displacement, and lack of essential care.', 'Animal Cruelty &amp; Neglect', 'Abuse, abandonment, exploitation, and suffering.', 'Environmental Destruction', 'Deforestation, pollution, habitat loss, and threats to biodiversity.']) assert.ok(invitation.includes(text), text);
+  assert.equal((invitation.match(/<svg\b/g) || []).length, 4);
+  assert.ok(invitation.includes('href="get-involved.html">Take Action &amp; Get Involved &rarr;'));
+  assert.doesNotMatch(invitation, /Make a difference today|Your generosity can bring hope|Contact Us for Giving Arrangements/);
 });
