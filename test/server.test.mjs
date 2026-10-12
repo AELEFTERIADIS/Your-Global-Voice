@@ -80,7 +80,7 @@ test('all pages share working navigation and preserve the approved purposes', as
       }
     }
     if (route === '/donate') {
-      assert.match(html, /Secure checkout opens in Stripe/);
+      assert.match(html, /Checkout opens in Stripe or PayPal/);
       for (const option of ['Credit &amp; Debit Cards', 'PayPal', 'Zelle', 'Bank Transfers', 'Checks', 'In-Kind Contributions']) assert.ok(html.includes(option));
       assert.match(html, /href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00"/);
       assert.doesNotMatch(html, /<form\b/);

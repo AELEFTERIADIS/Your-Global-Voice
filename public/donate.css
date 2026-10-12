@@ -45,3 +45,6 @@
 @media (min-width: 56.0625rem) {
   .donation-payment { padding-top: 2.2rem; } /* Match the eyebrow’s 1.2rem line plus 1rem spacing. */
 }
+
+.donation-payment-actions { display: grid; gap: .75rem; }
+.donation-secure.donation-paypal { background: white; color: var(--navy); }

@@ -16,8 +16,9 @@ test('donation page delegates payment to the authorized hosted checkout without 
   const html = await response.text();
   assert.match(html, /class="button donation-secure" href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00" target="_blank" rel="noopener noreferrer"/);
   assert.doesNotMatch(html, /<form\b|<iframe\b|type="(?:email|password)"/);
-  assert.match(html, /selections on this page are not transferred/);
-  assert.deepEqual([...html.matchAll(/href="(https:[^"]+)"/g)].map(match => match[1]), ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00']);
+  assert.match(html, /Page selections are not transferred/);
+  assert.deepEqual([...new Set([...html.matchAll(/href="(https:[^"]+)"/g)].map(match => match[1]))], ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00', 'https://www.paypal.com/ncp/payment/PVJ5JKDKZW8VQ']);
+  assert.match(html, /class="button donation-secure donation-paypal" href="https:\/\/www.paypal.com\/ncp\/payment\/PVJ5JKDKZW8VQ" target="_blank" rel="noopener noreferrer"/);
   assert.match(html, /preference does not create a restricted donation/);
   assert.match(html, /No tax-deductibility claim is made/);
   assert.doesNotMatch(html, /IRS|501\(c\)/);
