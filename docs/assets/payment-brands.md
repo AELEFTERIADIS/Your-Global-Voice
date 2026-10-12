@@ -1,24 +1,25 @@
-# Confirmed payment-brand row
+# Payment-brand row provenance and verification limits
 
-- American Express: the organization reports that its live Stripe checkout
-  displays American Express. `public/amex-logo.svg` is copied unchanged from
-  PayPal's official SDK logos repository, `cdn/2.3.7/amex.svg`, at commit
-  `4c39c1ec50b15dde3af99b524fb24ec8aa9fa11b`.
-- Link by Stripe: the organization reports seeing Link in the connected Stripe
-  checkout. Official asset provenance is recorded in `link-logo.md`.
-- PayPal: the organization confirms that its existing PayPal checkout works.
-  Its unchanged official wordmark and provenance are in `paypal-logo.md`.
+Displayed: Visa, Mastercard, American Express, Discover, Link by Stripe, PayPal.
 
-American Express source:
-https://github.com/paypal/paypal-sdk-logos/blob/4c39c1ec50b15dde3af99b524fb24ec8aa9fa11b/cdn/2.3.7/amex.svg
-The SDK's Apache 2.0 license is included in `paypal-logo-LICENSE.txt`.
-These marks identify available payment methods and do not imply sponsorship.
+Visa, Mastercard and Discover assets are copied unchanged from PayPal's official
+SDK logo repository, `cdn/2.3.7/{visa,mastercard,discover}.svg`, commit
+`4c39c1ec50b15dde3af99b524fb24ec8aa9fa11b`. American Express comes from the
+same source/version. Its Apache 2.0 license is in `paypal-logo-LICENSE.txt`.
+PayPal and Stripe Link provenance/licenses are in their adjacent asset documents.
+All original colors and aspect ratios are retained.
 
-Visa, Mastercard, and Discover acceptance remains unconfirmed for the particular
-merchant account and checkout links. Provider websites and documentation were
-blocked by this environment. These three marks are intentionally not advertised
-as accepted. To add each, obtain a screenshot/list explicitly showing that brand
-as accepted on one of the existing live checkout links, or account-specific
-confirmation from Stripe/PayPal settings or provider support. Generic credit/debit
-card availability alone does not establish every card brand's acceptance.
-No real payments, card-number tests, credentials, or account changes are needed.
+Stripe's official SDK documentation identifies Visa, Mastercard, American Express
+and Discover as card-network types:
+https://github.com/stripe/stripe-ios/blob/5861c96e6954c3fe3f76ee4ec67e278c91df3a9f/StripePayments/StripePayments/Source/API%20Bindings/Models/STPCardBrand.swift
+This confirms SDK compatibility, not account-specific eligibility or settlement.
+
+The organization reports a working Stripe card checkout, American Express and
+Link appearing there, and a working separate PayPal checkout. It explicitly
+requested the three additional standard card-network logos. The live Payment
+Link and Stripe documentation website remain inaccessible through this
+execution environment's proxy. No independent audit of enabled account methods,
+country/currency restrictions, or brand-blocking rules has been performed.
+Final account-specific acceptance should be checked in the Stripe account or
+confirmed by Stripe support. No payments or card-number tests were performed.
+Apple Pay and Google Pay are not displayed without confirmation.

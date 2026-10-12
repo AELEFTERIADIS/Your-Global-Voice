@@ -59,3 +59,5 @@
 
 .payment-brand-logos { display: flex; flex-wrap: wrap; align-items: center; gap: .375rem; margin: .875rem 0 .5rem; }
 .payment-brand-logo { display: block; width: auto; max-width: 100%; height: 22px; object-fit: contain; }
+
+@media (max-width: 28rem) { .payment-brand-logos { gap: .25rem; } .payment-brand-logo { height: clamp(16px, 4.8vw, 22px); } }

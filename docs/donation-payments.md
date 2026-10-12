@@ -20,9 +20,11 @@ integration must establish a documented provider-supported mechanism for the
 actual account configuration before sending amount or recurring selections.
 
 The Credit or Debit Card choice uses the existing Stripe link without displaying
-Stripe as the donor-facing method label. Visa, Mastercard, and Discover logos remain omitted until account-specific
-acceptance is confirmed. American Express is now displayed following the
-organization’s confirmation that it appears in the live Stripe checkout. The
+Stripe as the donor-facing method label. Visa, Mastercard and Discover are now displayed at the organization's explicit
+request, using unchanged official SDK logo assets. Stripe's SDK documents those
+card-brand types; live account acceptance could not be independently inspected.
+American Express and Link were reported visible in the actual Stripe checkout.
+The
 PayPal choice uses the genuine local PayPal wordmark; source and license are in
 `docs/assets/paypal-logo.md` and `paypal-logo-LICENSE.txt`.
 

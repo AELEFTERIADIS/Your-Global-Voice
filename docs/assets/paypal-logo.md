@@ -10,5 +10,5 @@ Repository copyright: PayPal, Inc. The Apache 2.0 license is reproduced in
 The mark identifies the existing organization-authorized PayPal checkout link,
 not an endorsement of Your Global Voice by PayPal.
 
-No third-party image request is needed at runtime. Unconfirmed card-brand logos are omitted
-because supported brands could not be verified on the live checkout.
+No third-party image request is needed at runtime. The standard card-network logo row and its verification limits are documented
+in `payment-brands.md`.

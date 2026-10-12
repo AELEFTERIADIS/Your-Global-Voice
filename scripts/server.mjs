@@ -14,6 +14,7 @@ const routes = new Map([
     [`/${page}.html`, [`../public/${page}.html`, 'text/html; charset=utf-8']],
   ]),
   ['/603250A8-B1C4-4533-848C-4028A6E0AD49.png', ['../public/603250A8-B1C4-4533-848C-4028A6E0AD49.png', 'image/png']],
+  ...['visa', 'mastercard', 'discover'].map(brand => [`/${brand}-logo.svg`, [`../public/${brand}-logo.svg`, 'image/svg+xml']]),
   ['/link-logo.svg', ['../public/link-logo.svg', 'image/svg+xml']],
   ['/amex-logo.svg', ['../public/amex-logo.svg', 'image/svg+xml']],
   ['/paypal-logo.svg', ['../public/paypal-logo.svg', 'image/svg+xml']],
