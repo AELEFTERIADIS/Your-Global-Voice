@@ -5,8 +5,9 @@
 .donation-intro-copy > .lead { margin-bottom: 1.125rem; }
 .donation-intro-copy > .lead + p { margin-top: 0; margin-bottom: 1.5rem; }
 .donation-motto { color: var(--navy); font-family: Georgia, serif; font-size: 1.5rem; }
-.donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+.donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
 .donation-invitation { padding-top: 0; }
+.donation-invitation > .eyebrow { margin: 0 0 1rem; }
 .donation-payment { min-width: 0; }
 .donation-payment > h2 { margin-bottom: 1.25rem; }
 .donation-selector { background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: clamp(1.25rem, 3vw, 2.5rem); }
@@ -40,3 +41,7 @@ button.donation-secure { background: var(--navy); color: white; border: 1px soli
 
 .donation-hero-image { display: block; width: 100%; max-width: 32rem; height: auto; border-radius: .75rem; justify-self: end; }
 @media (max-width: 56rem) { .donation-intro { grid-template-columns: 1fr; gap: 2rem; } .donation-hero-image { justify-self: center; } }
+
+@media (min-width: 56.0625rem) {
+  .donation-payment { padding-top: 2.2rem; } /* Match the eyebrow’s 1.2rem line plus 1rem spacing. */
+}
