@@ -26,7 +26,7 @@
 #giving-custom:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
 .donation-note { font-size: .875rem; line-height: 1.65; }
 .donation-summary { color: var(--navy); font-weight: 700; line-height: 1.65; }
-button.donation-secure { background: var(--navy); color: white; border: 1px solid var(--gold); width: 100%; justify-content: space-between; cursor: not-allowed; font: inherit; font-weight: 700; }
+.donation-secure { background: var(--navy); color: white; border: 1px solid var(--gold); width: 100%; justify-content: space-between; cursor: pointer; font: inherit; font-weight: 700; }
 .donation-methods h3, .donation-causes h3 { font-size: 1.75rem; margin-top: 0; }
 .donation-methods .card, .donation-causes .card { display: flex; flex-direction: column; }
 .donation-methods .text-link, .donation-causes .text-link { align-self: flex-start; margin-top: auto; padding-top: .5rem; }

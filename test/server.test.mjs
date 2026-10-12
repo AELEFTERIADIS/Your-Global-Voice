@@ -80,10 +80,10 @@ test('all pages share working navigation and preserve the approved purposes', as
       }
     }
     if (route === '/donate') {
-      assert.match(html, /Secure checkout will become available only after/);
+      assert.match(html, /Secure checkout opens in Stripe/);
       for (const option of ['Credit &amp; Debit Cards', 'PayPal', 'Zelle', 'Bank Transfers', 'Checks', 'In-Kind Contributions']) assert.ok(html.includes(option));
-      assert.match(html, /type="button" disabled/);
-      assert.doesNotMatch(html, /<form\b|href="https?:/);
+      assert.match(html, /href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00"/);
+      assert.doesNotMatch(html, /<form\b/);
     }
   }
 });

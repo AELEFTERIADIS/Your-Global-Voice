@@ -4,7 +4,7 @@ import { createPreviewServer } from '../scripts/server.mjs';
 import { renderDonate } from '../scripts/donate.mjs';
 import { readFile } from 'node:fs/promises';
 
-test('donation preparation remains unable to collect payment or accept sensitive donor data', async t => {
+test('donation page delegates payment to the authorized hosted checkout without collecting sensitive data', async t => {
   const server = createPreviewServer();
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   t.after(() => new Promise(resolve => server.close(resolve)));
@@ -14,9 +14,10 @@ test('donation preparation remains unable to collect payment or accept sensitive
   const csp = response.headers.get('content-security-policy');
   assert.match(csp, /default-src 'none'/); assert.match(csp, /script-src 'self'/); assert.match(csp, /form-action 'none'/); assert.doesNotMatch(csp, /connect-src/);
   const html = await response.text();
-  assert.match(html, /class="button donation-secure" type="button" disabled/);
-  assert.doesNotMatch(html, /<form\b|<iframe\b|type="(?:email|password)"|href="https?:/);
-  assert.match(html, /Secure checkout will become available only after an authorized payment account is connected and tested/);
+  assert.match(html, /class="button donation-secure" href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00" target="_blank" rel="noopener noreferrer"/);
+  assert.doesNotMatch(html, /<form\b|<iframe\b|type="(?:email|password)"/);
+  assert.match(html, /selections on this page are not transferred/);
+  assert.deepEqual([...html.matchAll(/href="(https:[^"]+)"/g)].map(match => match[1]), ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00']);
   assert.match(html, /preference does not create a restricted donation/);
   assert.match(html, /No tax-deductibility claim is made/);
   assert.doesNotMatch(html, /IRS|501\(c\)/);
