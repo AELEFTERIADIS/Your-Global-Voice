@@ -16,7 +16,7 @@ test('donation preparation remains unable to collect payment or accept sensitive
   const html = await response.text();
   assert.match(html, /class="button donation-secure" type="button" disabled/);
   assert.doesNotMatch(html, /<form\b|<iframe\b|type="(?:email|password)"|href="https?:/);
-  assert.match(html, /Selections below are for preparation only/);
+  assert.match(html, /Secure checkout will become available only after an authorized payment account is connected and tested/);
   assert.match(html, /preference does not create a restricted donation/);
   assert.match(html, /No tax-deductibility claim is made/);
   assert.doesNotMatch(html, /IRS|501\(c\)/);

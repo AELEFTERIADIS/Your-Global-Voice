@@ -80,7 +80,7 @@ test('all pages share working navigation and preserve the approved purposes', as
       }
     }
     if (route === '/donate') {
-      assert.match(html, /Online payments are not connected yet/);
+      assert.match(html, /Secure checkout will become available only after/);
       for (const option of ['Credit &amp; Debit Cards', 'PayPal', 'Zelle', 'Bank Transfers', 'Checks', 'In-Kind Contributions']) assert.ok(html.includes(option));
       assert.match(html, /type="button" disabled/);
       assert.doesNotMatch(html, /<form\b|href="https?:/);

@@ -5,8 +5,10 @@
 .donation-intro-copy > .lead { margin-bottom: 1.125rem; }
 .donation-intro-copy > .lead + p { margin-top: 0; margin-bottom: 1.5rem; }
 .donation-motto { color: var(--navy); font-family: Georgia, serif; font-size: 1.5rem; }
-.donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
-.donation-invitation { padding-top: 1.5rem; }
+.donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+.donation-invitation { padding-top: 0; }
+.donation-payment { min-width: 0; }
+.donation-payment > h2 { margin-bottom: 1.25rem; }
 .donation-selector { background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: clamp(1.25rem, 3vw, 2.5rem); }
 .donation-selector fieldset { border: 0; padding: 0; margin: 0 0 1.5rem; min-width: 0; }
 .donation-selector legend { color: var(--navy); font-weight: 700; padding: 0; margin-bottom: .875rem; }
