@@ -10,7 +10,7 @@ export function renderContact(config) {
   if (config.whatsappNumber) {
     if (!/^\+[1-9]\d{6,14}$/.test(config.whatsappNumber)) throw new Error('WhatsApp number must include a + and international country code.');
     const displayNumber = /^\+1\d{10}$/.test(config.whatsappNumber) ? config.whatsappNumber.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, '+1 ($1) $2-$3') : config.whatsappNumber;
-    whatsapp = `<p>${escape(displayNumber)}</p><a class="button" href="https://wa.me/${config.whatsappNumber.slice(1)}" target="_blank" rel="noopener noreferrer">Contact Us on WhatsApp <span class="contact-note">(opens a new tab)</span></a>`;
+    whatsapp = `<p class="contact-whatsapp-number">${escape(displayNumber)}</p><a class="button" href="https://wa.me/${config.whatsappNumber.slice(1)}" target="_blank" rel="noopener noreferrer">Contact Us on WhatsApp <span class="contact-note">(opens a new tab)</span></a>`;
   }
   const address = config.mailingAddress.length ? `<address id="mailing-address">${config.mailingAddress.map(escape).join('<br>')}</address>` : '<p>Our verified mailing address will be published here when available.</p>';
   return `<section class="page-intro"><p class="eyebrow">Your Global Voice, Inc.</p><h1>Contact Us</h1><p class="lead">A place to connect around our shared purposes.</p></section>
