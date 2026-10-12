@@ -29,3 +29,8 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 
 .contact-help { align-self: start; }
 .contact-help > p:not(.eyebrow) { margin-block: .875rem; line-height: 1.65; }
+
+@media (min-width: 42.0625rem) {
+  .contact-help { align-self: stretch; display: flex; flex-direction: column; }
+  .contact-help > .text-link { align-self: flex-start; margin-top: auto; padding-top: .5rem; }
+}
