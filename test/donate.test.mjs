@@ -48,6 +48,6 @@ test('donation hero image is locally served with correct media type and descript
   assert.equal(bytes.toString('ascii', 0, 4), 'RIFF'); assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
   const html = renderDonate();
   assert.match(html, /class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe"/);
-  assert.equal((html.match(/<img\b/g) || []).length, 2);
+  assert.equal((html.match(/<img\b/g) || []).length, 3);
   assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
 });
