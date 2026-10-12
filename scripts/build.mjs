@@ -54,7 +54,7 @@ for (const [path, title, file] of pages) {
     <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">${navigation}</nav></details><nav class="desktop-nav" aria-label="Main navigation">${navigation}</nav>
   </div></header>
   <main id="main" tabindex="-1">${bodies[path]}</main>
-  <footer class="site-footer"><div class="footer-inner"><div><p class="footer-name">Your Global Voice, Inc.</p><p class="footer-motto">${motto}</p><p class="footer-description">Human dignity · Humanitarian assistance<br>Animal welfare · Environmental protection</p><p class="footer-status">${path === "/contact" ? "Donation arrangements await approval." : "Donation and contact arrangements await approval."}</p></div><nav aria-label="Footer navigation">${navigation}</nav></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><div><p class="footer-name">Your Global Voice, Inc.</p><p class="footer-motto">${motto}</p><p class="footer-description">Human dignity · Humanitarian assistance<br>Animal welfare · Environmental protection</p></div><nav aria-label="Footer navigation">${navigation}</nav></div></footer>
 </body>
 </html>
 `;
