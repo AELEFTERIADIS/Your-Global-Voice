@@ -26,3 +26,6 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 #contact-result.contact-error { color: #a32626; }
 
 .contact-whatsapp-number { color: var(--navy); font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 700; line-height: 1.4; margin-block: 1.25rem 1rem; }
+
+.contact-help { align-self: start; }
+.contact-help > p:not(.eyebrow) { margin-block: .875rem; line-height: 1.65; }
