@@ -107,3 +107,14 @@ test('oversized, malformed, expired, and unacknowledged submissions fail safely'
   token = await f.token(); f.advance(15 * 60 * 1000 + 1);
   assert.equal((await f.post({ ...valid, token })).status, 400);
 });
+
+
+test('Contact source preserves the approved Google Maps address link through generation', async () => {
+  const html = renderContact(config);
+  const committed = await readFile(new URL('../public/contact.html', import.meta.url), 'utf8');
+  const address = html.match(/<address id="mailing-address">[\s\S]*?<\/address>/)?.[0];
+  assert.equal(committed.match(/<address id="mailing-address">[\s\S]*?<\/address>/)?.[0], address);
+  assert.ok(address.includes('href="https://www.google.com/maps/search/?api=1&amp;query=957%20Broadway%20Avenue%2C%20Holbrook%2C%20NY%2011741"'));
+  assert.match(address, /target="_blank" rel="noopener noreferrer"/);
+  assert.ok(html.includes('id="copy-address"'));
+});
