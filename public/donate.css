@@ -3,7 +3,7 @@
 .donation-intro h1 { max-width: 60rem; font-size: clamp(2.625rem, 4.725vw, 4.2rem); line-height: calc(1.1 * clamp(2.5rem, 4.5vw, 4rem)); }
 .donation-intro-copy > p:not(.eyebrow) { max-width: 40rem; line-height: 1.7; }
 .donation-intro-copy > .lead { margin-bottom: 1.5rem; }
-.donation-motto { color: var(--green); font-family: Georgia, serif; font-size: 1.16875rem; line-height: 1.7; margin: 0 0 1rem; min-height: var(--donation-motto-space, 149.78125px); width: 0; min-width: 100%; text-align: left; transform: translateY(-12px); }
+.donation-motto { color: var(--green); font-family: Georgia, serif; font-size: 1.16875rem; line-height: 1.7; margin: 0 0 1rem; min-height: calc(var(--donation-motto-space, 149.78125px) - 32px); width: 0; min-width: 100%; text-align: left; transform: translateY(-12px); }
 .donation-intro-copy > p.donation-motto { max-width: none; }
 .donation-support { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; margin-inline: auto; gap: 2rem; align-items: start; }
 .donation-message { max-width: none; align-self: stretch; display: flex; flex-direction: column; }
@@ -71,7 +71,7 @@
 .donation-message-paragraph { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: .875rem; align-items: start; }
 .donation-message-icon { display: block; width: 24px; height: 24px; color: var(--gold); margin-top: calc((1.75em - 24px) / 2); }
 
-/* Reserve the former introduction footprint so the headline, image, and hero retain their geometry. */
+/* Retain responsive hero breathing room, with excess space reduced below the motto. */
 @media (max-width: 327px) { .donation-intro { --donation-motto-space: 306.15625px; } }
 @media (min-width: 328px) and (max-width: 381px) { .donation-intro { --donation-motto-space: 275.5625px; } }
 @media (min-width: 382px) and (max-width: 401px) { .donation-intro { --donation-motto-space: 244.96875px; } }
