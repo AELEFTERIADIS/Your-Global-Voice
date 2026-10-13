@@ -49,7 +49,8 @@ test('donation hero image is locally served with correct media type and descript
   const html = renderDonate();
   assert.match(html, /class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe"/);
   assert.equal((html.match(/<img\b/g) || []).length, 7);
-  assert.ok(html.includes('Compassion knows no borders. Your generosity can help advance human dignity, provide humanitarian assistance, protect animals, and safeguard our environment—building a future where every voice matters.'));
+  assert.doesNotMatch(html, /Compassion knows no borders|<p class="lead">/);
+  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1><p class="donation-motto">MY VOICE + YOUR VOICE = OUR VOICE</p>'));
   assert.doesNotMatch(html, /Explore ways to give|href="#giving-hope"/);
   assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
 });
