@@ -37,7 +37,7 @@ const bodies = {
 // Sibling HTML paths work both from file:// and from the preview server.
 const pageFiles = new Map(pages.map(([path, , file]) => [path, file]));
 for (const [path, title, file] of pages) {
-  const navigation = pages.map(([url, label]) => `<a href="${url}"${url === path ? ' aria-current="page"' : ''}>${label}</a>`).join('');
+  const navigation = pages.map(([url, label]) => `<a href="${url}"${url === path ? ' aria-current="page"' : ''}>${url === "/purposes" ? "Our Causes" : label}</a>`).join('');
   const html = `<!doctype html>
 <html lang="en">
 <head>
