@@ -85,3 +85,8 @@
 
 /* Optical correction for the rounded O; preserve the heading’s layout footprint. */
 .donation-headline-last { position: relative; left: -.025em; }
+
+/* Keep the support address in the sentence’s normal inline text flow. */
+.donation-arrangements { max-width: none; }
+.donation-arrangements > p:not(:first-child) { max-width: 60rem; }
+.donation-arrangements > p:first-child .text-link { display: inline; min-height: 0; }
