@@ -27,8 +27,9 @@ a:focus-visible { outline: 3px solid var(--green); outline-offset: 5px; }
   height: auto;
   flex-shrink: 0;
   clip-path: circle(50% at 50% 50%);
+  transform: scale(1.06);
 }
-.wordmark { color: var(--navy); font-family: Georgia, serif; font-size: 1.5rem; line-height: 1.2; text-decoration: none; padding-block: .5rem; }
+.wordmark { display: inline-flex; align-items: center; min-height: 44px; color: var(--navy); font-family: Georgia, serif; font-size: 1.5rem; line-height: 1.2; text-decoration: none; padding-block: .5rem; }
 .wordmark span { display: block; font-family: Arial, sans-serif; font-size: .75rem; letter-spacing: .15em; margin-top: .35rem; text-transform: uppercase; }
 nav { display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
 nav a { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; }

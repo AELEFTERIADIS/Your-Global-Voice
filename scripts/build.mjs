@@ -52,7 +52,7 @@ for (const [path, title, file] of pages) {
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header"><div class="header-inner">
-    <div class="header-brand"><img class="header-logo" src="603250A8-B1C4-4533-848C-4028A6E0AD49.png" alt="Your Global Voice official logo" width="1254" height="1254"><a class="wordmark" href="/">Your Global Voice<span>Inc.</span></a></div>
+    <div class="header-brand"><img class="header-logo" src="603250A8-B1C4-4533-848C-4028A6E0AD49.png" alt="Your Global Voice official logo" width="1254" height="1254"><a class="wordmark" href="/">Your Global Voice</a></div>
     <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">${navigation}</nav></details><nav class="desktop-nav" aria-label="Main navigation">${navigation}</nav>
   </div></header>
   <main id="main" tabindex="-1">${bodies[path]}</main>
