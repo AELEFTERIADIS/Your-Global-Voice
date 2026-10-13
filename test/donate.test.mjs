@@ -67,7 +67,8 @@ test('approved donation component remains byte-for-byte unchanged', () => {
   assert.doesNotMatch(html, /Choose How You Give|Zelle|Card processing is not connected|Partnerships That Create Lasting Impact/);
   const closing = html.slice(html.indexOf('<section class="donation-trust'));
   assert.ok(closing.includes('Together, we can turn compassion into meaningful action.'));
-  assert.doesNotMatch(closing, /<a\b|<button\b|<form\b/);
+  assert.ok(closing.includes('<p>For more information or general inquiries, please contact us at <a href="mailto:info@ygvoice.org">info@ygvoice.org</a>.</p>'));
+  assert.doesNotMatch(closing, /<button\b|<form\b/);
 });
 
 test('Donate contains only the four requested sections in order', () => {
