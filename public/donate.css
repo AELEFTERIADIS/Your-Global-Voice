@@ -5,7 +5,7 @@
 .donation-intro-copy > .lead { margin-bottom: 1.5rem; }
 .donation-motto { color: var(--navy); font-family: Georgia, serif; font-size: 1.25rem; }
 .donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 36rem); max-width: 70rem; margin-inline: auto; gap: clamp(2rem, 3vw, 3rem); align-items: start; }
-.donation-message { max-width: 27rem; align-self: center; }
+.donation-message { max-width: 27rem; align-self: start; }
 .donation-message > h2 { font-size: clamp(2rem, 3vw, 2.75rem); line-height: 1.2; margin-bottom: 1.25rem; }
 .donation-message > p { font-size: 1.25rem; line-height: 1.7; }
 .donation-message > .donation-message-closing { color: var(--navy); font-size: 1.125rem; margin: 1.25rem 0 0; }
