@@ -118,7 +118,6 @@
  .donation-trust > h2 { font-size: 1.5rem; line-height: 1.25; }
  .donation-trust > p { font-size: 1rem; line-height: 1.65; margin-bottom: 1rem; text-align: justify; text-wrap: pretty; }
  .donation-trust > p:last-child { margin-bottom: 0; text-wrap: balance; }
- .donation-trust a[href="mailto:info@ygvoice.org"] { white-space: nowrap; }
 }
 @media (max-width: 28rem) {
  .donation-trust { padding: .75rem; }
@@ -155,3 +154,9 @@
 @media (max-width: 22.5rem) {
  .donation-frequency, .donation-payment-actions { grid-template-columns: 1fr; }
 }
+
+/* Inline contact link; preserve the former paragraph height on narrow screens. */
+.donation-trust-contact { color: var(--navy); font-weight: 700; white-space: nowrap; }
+.donation-trust-contact:hover { color: var(--gold); }
+@media (max-width: 636px) { .donation-trust > p:last-child { min-height: 2lh; } }
+@media (max-width: 331px) { .donation-trust > p:last-child { min-height: 3lh; } }
