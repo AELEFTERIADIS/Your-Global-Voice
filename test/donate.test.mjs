@@ -50,9 +50,9 @@ test('donation hero image is locally served with correct media type and descript
   assert.match(html, /class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe"/);
   assert.equal((html.match(/<img\b/g) || []).length, 7);
   assert.doesNotMatch(html, /Compassion knows no borders|<p class="lead">/);
-  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1><p class="donation-motto">My Voice + Your Voice = Our Voice</p>'));
+  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br><span class="donation-headline-last">Our Shared Future</span></h1><p class="donation-motto">My Voice + Your Voice = Our Voice</p>'));
   assert.doesNotMatch(html, /Explore ways to give|href="#giving-hope"|donation-hero-divider|✦/);
-  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
+  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br><span class="donation-headline-last">Our Shared Future</span></h1>'));
 });
 
 // Frozen approved payment box; the separate left column may be refined.

@@ -82,3 +82,6 @@
 
 .donation-intro-copy { container-type: inline-size; }
 .donation-headline-group { position: relative; width: max-content; max-width: 100%; }
+
+/* Optical correction for the rounded O; preserve the heading’s layout footprint. */
+.donation-headline-last { position: relative; left: -.025em; }
