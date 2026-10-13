@@ -37,7 +37,8 @@
 .donation-other .section-heading { margin-bottom: 1.5rem; }
 .donation-trust { border-top: 3px solid var(--gold); padding: clamp(1.5rem, 3vw, 2.5rem); background: var(--cream); }
 .donation-trust > p { max-width: 55rem; }
-.donation-trust-closing { color: var(--navy); font-family: Georgia, serif; font-size: 1.125rem; margin-bottom: 0; }
+.donation-trust-closing { color: var(--navy); font-family: Georgia, serif; font-size: 1.125rem; margin-bottom: 1rem; }
+.donation-trust > p:last-child { margin-bottom: 0; }
 @media (max-width: 28rem) { .donation-amounts, .donation-frequency { grid-template-columns: repeat(2, minmax(0, 1fr)); } .donation-frequency { grid-template-columns: 1fr; } }
 
 .donation-hero-image { display: block; width: 100%; max-width: 30rem; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 30%; border-radius: .75rem; justify-self: start; align-self: center; }
