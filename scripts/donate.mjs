@@ -12,7 +12,7 @@ export function renderDonate() {
     ['Corporate &amp; Institutional Giving', 'Businesses, foundations, institutions, and philanthropic partners are welcome to inquire about financial and in-kind contributions supporting our initiatives.']
   ];
   return `<div class="donation-page">
-  <section class="page-intro donation-intro"><div class="donation-intro-copy"><p class="eyebrow">Make a difference</p><h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1><p class="donation-motto">MY VOICE + YOUR VOICE = OUR VOICE</p></div><img class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe" fetchpriority="high" decoding="async"></section>
+  <section class="page-intro donation-intro"><div class="donation-intro-copy"><p class="eyebrow">Make a difference</p><h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1><div class="donation-hero-divider" aria-hidden="true"><span>✦</span></div><p class="donation-motto">MY VOICE + YOUR VOICE = OUR VOICE</p></div><img class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe" fetchpriority="high" decoding="async"></section>
   <section class="donation-support" aria-labelledby="giving-hope">
   <div class="donation-message"><h2>Be a Voice for Change</h2><div class="donation-message-body">${messageParagraphs.map(([icon,text]) => `<p class="donation-message-paragraph">${icon}<span>${text}</span></p>`).join('')}</div></div>
   <div class="donation-payment"><h2 id="giving-hope">Every Gift Brings Hope</h2><div class="donation-selector" role="group" aria-label="Prepare a donation" aria-describedby="payment-status">
