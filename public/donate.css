@@ -96,3 +96,18 @@
 @media (max-width: 56rem) {
  .donation-motto { min-height: 0; }
 }
+
+/* Unified hero panel, matching the existing trust panel treatment. */
+.donation-intro {
+ background: var(--cream);
+ border-top: 3px solid var(--gold);
+ border-bottom: 0;
+ padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+@media (min-width: 56.0625rem) {
+ /* Retain the approved desktop image width while adding panel padding. */
+ .donation-intro { grid-template-columns: minmax(0, 1fr) min(30rem, calc((min(100vw - 3rem, 78rem) - clamp(1.5rem, 4vw, 3rem)) / 2.25)); }
+}
+@media (max-width: 24rem) {
+ .donation-intro { padding-inline: clamp(0px, calc((100vw - 20rem) / 2), 1.5rem); }
+}
