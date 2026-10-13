@@ -5,10 +5,12 @@
 .donation-intro-copy > .lead { margin-bottom: 1.5rem; }
 .donation-motto { color: var(--navy); font-family: Georgia, serif; font-size: 1.25rem; }
 .donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 36rem); max-width: 70rem; margin-inline: auto; gap: clamp(2rem, 3vw, 3rem); align-items: start; }
-.donation-message { max-width: 27rem; align-self: start; }
-.donation-message > h2 { font-size: clamp(2rem, 3vw, 2.75rem); line-height: 1.2; margin-bottom: 1.25rem; }
-.donation-message > p { font-size: 1.25rem; line-height: 1.7; }
-.donation-message > .donation-message-closing { color: var(--navy); font-size: 1.125rem; margin: 1.25rem 0 0; }
+.donation-message { max-width: none; align-self: start; display: flex; flex-direction: column; }
+.donation-message > h2 { font-size: clamp(2rem, 3vw, 2.75rem); line-height: 1.2; margin: 0 0 1.25rem; }
+.donation-message-body { display: flex; flex-direction: column; padding: clamp(1.25rem, 2.5vw, 2rem); background: var(--cream); border-top: 2px solid var(--gold); border-radius: 0 0 .75rem .75rem; }
+.donation-message-body > p { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.375rem, 2.1vw, 1.875rem); line-height: 1.75; margin: 0 0 1.75rem; }
+.donation-message-body > .donation-message-closing { margin: 0; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--navy); font-family: Georgia, serif; font-size: 1.375rem; font-weight: 400; line-height: 1.6; }
+.donation-message-closing strong { font-weight: inherit; }
 @media (max-width: 56rem) { .donation-support { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; } .donation-message { width: 100%; max-width: 34rem; justify-self: center; } .donation-payment { width: 100%; max-width: 34rem; justify-self: center; } }
 .donation-payment { min-width: 0; }
 .donation-payment > h2 { margin-bottom: 1rem; }
@@ -60,3 +62,5 @@
 
 .donation-selector .donation-note { margin-block: .5rem; }
 .donation-summary { margin-block: .75rem; }
+
+@media (max-width: 56rem) { .donation-message-body > p { font-size: 1.375rem; line-height: 1.75; } }
