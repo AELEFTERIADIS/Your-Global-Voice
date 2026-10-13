@@ -111,3 +111,20 @@
 @media (max-width: 24rem) {
  .donation-intro { padding-inline: clamp(0px, calc((100vw - 20rem) / 2), 1.5rem); }
 }
+
+/* Phone/tablet formatting only; preserve the approved desktop components. */
+@media (max-width: 56rem) {
+ .donation-payment, .donation-trust { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+ .donation-payment > h2, .donation-trust > h2 { font-size: 1.5rem; line-height: 1.25; }
+ .donation-selector { padding: .875rem; }
+ .donation-selector legend, .donation-custom-label, .donation-summary { font-size: .9375rem; }
+ .donation-choice { font-size: .9375rem; padding: .5rem; }
+ .donation-payment-methods > h3 { font-size: 1.125rem; margin-bottom: .75rem; }
+ .donation-method-choice { padding: .625rem; gap: .25rem; }
+ .payment-choice-label { font-size: .9375rem; }
+ .donation-trust { padding: 1rem; }
+ .donation-trust > p { font-size: 1rem; line-height: 1.65; margin-bottom: 1rem; text-align: left; }
+ .donation-trust > p:last-child { margin-bottom: 0; text-wrap: balance; }
+ .donation-summary, .donation-trust > p { text-wrap: pretty; }
+ .donation-trust a[href="mailto:info@ygvoice.org"] { white-space: nowrap; }
+}
