@@ -88,8 +88,13 @@ test('donation section includes the exact approved message beside the original c
   assert.ok(html.indexOf('class="donation-message"') < html.indexOf('class="donation-payment"'));
 });
 
-test('left message preserves the approved paragraphs and bold emphasis', () => {
+test('left message preserves four exact paragraphs and the sole approved bold emphasis', () => {
   const html = renderDonate();
-  assert.ok(html.includes('<p class="donation-message-mission">Join our organization, <strong>Your Global Voice</strong>, to fight against persecution and discrimination in all forms, respond to humanitarian crises, protect animals from cruelty, abuse, and neglect, and defend our environment from destruction across the globe.</p><p class="donation-message-mission">Around the world, countless individuals, communities, animals, and our environment need compassion, protection, and support. Your generosity can bring hope and make a meaningful difference.</p><p class="donation-message-closing">Take action today and help us build a better world for all.</p>'));
-  assert.doesNotMatch(html, /donation-message-cause|donation-message-lead/);
+  const body = html.slice(html.indexOf('<div class="donation-message-body">'), html.indexOf('<div class="donation-payment">'));
+  const paragraphs = [...body.matchAll(/<p class="donation-message-paragraph">([\s\S]*?)<\/p>/g)].map(match => match[1].replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<[^>]*>/g, ''));
+  assert.deepEqual(paragraphs, ["Join our organization, Your Global Voice, to fight against persecution and discrimination in all forms, respond to humanitarian crises, protect animals from cruelty, abuse, and neglect, and defend our environment from destruction across the globe.", "Around the world, countless individuals, communities, animals, and our environment need compassion, protection, and support.", "Your generosity can bring hope and make a meaningful difference.", "Take action today and help us build a better world for all."]);
+  assert.deepEqual([...body.matchAll(/data-icon="([^"]+)"/g)].map(match => match[1]), ['globe-2', 'heart-handshake', 'hand-heart', 'sprout']);
+  assert.equal((body.match(/<strong>/g) || []).length, 1);
+  assert.ok(body.includes('<strong>Your Global Voice</strong>'));
+  assert.equal((body.match(/aria-hidden="true" focusable="false"/g) || []).length, 4);
 });
