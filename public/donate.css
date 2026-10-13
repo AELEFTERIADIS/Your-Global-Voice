@@ -7,7 +7,7 @@
 .donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 36rem); max-width: 70rem; margin-inline: auto; gap: clamp(2rem, 3vw, 3rem); align-items: start; }
 .donation-message { max-width: none; align-self: stretch; display: flex; flex-direction: column; }
 .donation-message > h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; margin: 0 0 1rem; }
-.donation-message-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: clamp(1rem, 2vw, 1.25rem); background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); }
+.donation-message-body { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding: clamp(1rem, 2vw, 1.25rem); background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); }
 .donation-message-body > p { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.375rem, 2.1vw, 1.875rem); line-height: 1.75; margin: 0 0 1.75rem; }
 .donation-message-body > .donation-message-closing { margin: 0; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--navy); font-family: Georgia, serif; font-size: 1.375rem; font-weight: 400; line-height: 1.6; }
 .donation-message-closing strong { font-weight: inherit; }
