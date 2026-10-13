@@ -4,21 +4,25 @@
 .donation-intro-copy > p:not(.eyebrow) { max-width: 40rem; line-height: 1.7; }
 .donation-intro-copy > .lead { margin-bottom: 1.5rem; }
 .donation-motto { color: var(--navy); font-family: Georgia, serif; font-size: 1.25rem; }
-.donation-support { max-width: 39rem; margin-inline: auto; }
+.donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 34rem); gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+.donation-message { max-width: 32rem; }
+.donation-message > p { line-height: 1.7; }
+.donation-message-closing { color: var(--navy); margin-top: 1.5rem; }
+@media (max-width: 56rem) { .donation-support { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; } .donation-message { max-width: 40rem; } .donation-payment { width: 100%; max-width: 34rem; justify-self: center; } }
 .donation-payment { min-width: 0; }
-.donation-payment > h2 { margin-bottom: 1.25rem; }
-.donation-selector { background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: clamp(1.25rem, 3vw, 2.5rem); }
-.donation-selector fieldset { border: 0; padding: 0; margin: 0 0 1.5rem; min-width: 0; }
-.donation-selector legend { color: var(--navy); font-weight: 700; padding: 0; margin-bottom: .875rem; }
+.donation-payment > h2 { margin-bottom: 1rem; }
+.donation-selector { background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: clamp(1rem, 2vw, 1.5rem); }
+.donation-selector fieldset { border: 0; padding: 0; margin: 0 0 1rem; min-width: 0; }
+.donation-selector legend { color: var(--navy); font-weight: 700; padding: 0; margin-bottom: .625rem; }
 .donation-selector legend span { font-weight: 400; }
-.donation-amounts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .625rem; }
-.donation-frequency { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .625rem; }
-.donation-choice { display: flex; align-items: center; gap: .5rem; padding: .75rem; min-height: 48px; border: 1px solid var(--muted); background: white; cursor: pointer; color: var(--navy); font-weight: 700; line-height: 1.5; }
+.donation-amounts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; }
+.donation-frequency { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+.donation-choice { display: flex; align-items: center; gap: .5rem; padding: .5rem .625rem; min-height: 44px; border: 1px solid var(--muted); background: white; cursor: pointer; color: var(--navy); font-weight: 700; line-height: 1.5; }
 .donation-choice:has(input:checked) { background: var(--navy); color: white; border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
 .donation-choice input { accent-color: var(--gold); margin: 0; flex-shrink: 0; }
 .donation-choice:focus-within { outline: 3px solid var(--green); outline-offset: 3px; }
-.donation-custom-label { display: block; font-weight: 700; margin: 1rem 0 .5rem; }
-#giving-custom { width: 100%; min-height: 48px; border: 1px solid var(--muted); background: white; color: var(--ink); padding: .75rem; font: inherit; }
+.donation-custom-label { display: block; font-weight: 700; margin: .75rem 0 .375rem; }
+#giving-custom { width: 100%; min-height: 44px; border: 1px solid var(--muted); background: white; color: var(--ink); padding: .5rem .625rem; font: inherit; }
 #giving-custom:disabled { background: #edf0f1; }
 #giving-custom:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
 .donation-note { font-size: .875rem; line-height: 1.65; }
@@ -37,10 +41,10 @@
 .donation-hero-image { display: block; width: 100%; max-width: 28rem; height: auto; border-radius: .75rem; justify-self: end; }
 @media (max-width: 56rem) { .donation-intro { grid-template-columns: 1fr; gap: 2rem; } .donation-hero-image { justify-self: center; } }
 
-.donation-payment-methods { margin-top: 1.5rem; }
+.donation-payment-methods { margin-top: 1rem; }
 .donation-payment-methods > h3 { margin: 0 0 1rem; font-size: 1.25rem; font-weight: 400; color: var(--navy); line-height: 1.35; }
-.donation-payment-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .875rem; }
-.donation-method-choice { display: flex; flex-direction: column; align-items: flex-start; gap: .375rem; padding: 1rem; min-width: 0; min-height: 8rem; border: 1px solid var(--muted); border-top: 3px solid var(--gold); border-radius: .375rem; background: white; color: var(--navy); text-decoration: none; }
+.donation-payment-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .625rem; }
+.donation-method-choice { display: flex; flex-direction: column; align-items: flex-start; gap: .375rem; padding: .75rem; min-width: 0; min-height: 7rem; border: 1px solid var(--muted); border-top: 3px solid var(--gold); border-radius: .375rem; background: white; color: var(--navy); text-decoration: none; }
 .donation-method-choice:hover { border-color: var(--gold); box-shadow: 0 3px 10px rgba(16, 45, 69, .08); }
 .donation-method-choice:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
 .payment-choice-label { font-size: 1rem; font-weight: 700; line-height: 1.5; }
@@ -52,3 +56,6 @@
 .payment-brand-logo { display: block; width: auto; max-width: 100%; height: 22px; object-fit: contain; }
 
 @media (max-width: 28rem) { .payment-brand-logos { gap: .25rem; } .payment-brand-logo { height: clamp(16px, 4.8vw, 22px); } }
+
+.donation-selector .donation-note { margin-block: .5rem; }
+.donation-summary { margin-block: .75rem; }
