@@ -30,7 +30,7 @@ test('donation page delegates payment to the authorized hosted checkout without 
 
 test('donation renderer preserves the original site wrapper and emits approved giving content', async () => {
   const html = renderDonate();
-  for (const text of ['Your Generosity', 'Their Hope', 'Our Shared Future', 'MY VOICE + YOUR VOICE = OUR VOICE', 'Every Gift Brings Hope', 'Other Ways to Support Our Mission', 'Corporate &amp; Institutional Giving', 'Your Trust Matters', 'mailto:support@ygvoice.org']) assert.ok(html.includes(text), text);
+  for (const text of ['Your Generosity', 'Their Hope', 'Our Shared Future', 'My Voice + Your Voice = Our Voice', 'Every Gift Brings Hope', 'Other Ways to Support Our Mission', 'Corporate &amp; Institutional Giving', 'Your Trust Matters', 'mailto:support@ygvoice.org']) assert.ok(html.includes(text), text);
   for (const amount of [10, 25, 50, 100, 250]) assert.ok(html.includes(`name="giving-amount" value="${amount}"`));
   assert.ok(html.includes('value="custom"')); assert.ok(html.includes('One-Time Donation')); assert.ok(html.includes('Monthly Donation'));
   assert.equal((html.match(/href="purposes.html"/g) || []).length, 0);
@@ -50,7 +50,7 @@ test('donation hero image is locally served with correct media type and descript
   assert.match(html, /class="donation-hero-image" src="donation-globe.webp" width="1122" height="1402" alt="Hands with diverse skin tones gently holding a globe"/);
   assert.equal((html.match(/<img\b/g) || []).length, 7);
   assert.doesNotMatch(html, /Compassion knows no borders|<p class="lead">/);
-  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1><p class="donation-motto">MY VOICE + YOUR VOICE = OUR VOICE</p>'));
+  assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1><p class="donation-motto">My Voice + Your Voice = Our Voice</p>'));
   assert.doesNotMatch(html, /Explore ways to give|href="#giving-hope"|donation-hero-divider|✦/);
   assert.ok(html.includes('<h1>Your Generosity<br>Their Hope<br>Our Shared Future</h1>'));
 });
