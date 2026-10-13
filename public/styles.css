@@ -144,3 +144,12 @@ summary:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
 @media (prefers-reduced-motion: no-preference) {
  a { transition: background-color .15s ease, border-color .15s ease; }
 }
+
+/* Use the existing accessible menu on portrait tablets as well as phones. */
+@media (min-width: 42.0625rem) and (max-width: 56rem) {
+ .desktop-nav { display: none; }
+ .mobile-menu { display: block; width: 100%; border-top: 1px solid var(--line); }
+ .mobile-menu summary { display: flex; justify-content: space-between; align-items: center; }
+ .mobile-menu nav { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1rem; padding-bottom: 1rem; }
+ .mobile-menu nav a { padding: .25rem 0; }
+}

@@ -91,3 +91,8 @@
 .donation-arrangements { max-width: none; }
 .donation-arrangements > p:not(:first-child) { max-width: 60rem; }
 .donation-arrangements > p:first-child .text-link { display: inline; min-height: 0; }
+
+/* Stacked layouts need no blank footprint from the former introduction. */
+@media (max-width: 56rem) {
+ .donation-motto { min-height: 0; }
+}
