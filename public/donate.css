@@ -1,9 +1,9 @@
 .donation-page { padding-bottom: 1rem; }
 .donation-intro { padding-bottom: clamp(1.5rem, 2vw, 2rem); margin-bottom: 2rem; max-width: none; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
-.donation-intro h1 { max-width: 60rem; font-size: clamp(2.5rem, 4.5vw, 4rem); }
+.donation-intro h1 { max-width: 60rem; font-size: clamp(2.625rem, 4.725vw, 4.2rem); line-height: calc(1.1 * clamp(2.5rem, 4.5vw, 4rem)); }
 .donation-intro-copy > p:not(.eyebrow) { max-width: 40rem; line-height: 1.7; }
 .donation-intro-copy > .lead { margin-bottom: 1.5rem; }
-.donation-motto { color: #8a6525; font-family: Georgia, serif; font-size: 1.375rem; margin: 0 0 1rem; min-height: var(--donation-motto-space, 149.78125px); }
+.donation-motto { color: #8a6525; font-family: Georgia, serif; font-size: 1.375rem; margin: 0 0 1rem; min-height: var(--donation-motto-space, 149.78125px); transform: translateY(12px); }
 .donation-support { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; margin-inline: auto; gap: 2rem; align-items: start; }
 .donation-message { max-width: none; align-self: stretch; display: flex; flex-direction: column; }
 .donation-message > h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; margin: 0 0 1rem; }
@@ -78,6 +78,6 @@
 @media (min-width: 897px) and (max-width: 906px) { .donation-intro { --donation-motto-space: 210.96875px; } }
 @media (min-width: 907px) and (max-width: 1139px) { .donation-intro { --donation-motto-space: 180.375px; } }
 
-.donation-hero-divider { display: flex; align-items: center; gap: .5rem; width: clamp(8rem, 20vw, 12rem); height: 0; margin: 0; color: var(--gold); transform: translateY(-.75rem); }
+.donation-hero-divider { display: flex; align-items: center; gap: .5rem; width: 90%; height: 0; margin: 0; color: var(--gold); transform: translateY(-.75rem); }
 .donation-hero-divider::before, .donation-hero-divider::after { content: ""; flex: 1; height: 1px; background: currentColor; }
 .donation-hero-divider > span { flex: none; font-size: .75rem; line-height: 1; }
