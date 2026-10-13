@@ -2,20 +2,9 @@
 .donation-intro { max-width: none; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
 .donation-intro h1 { max-width: 60rem; font-size: clamp(2.5rem, 4.5vw, 4rem); }
 .donation-intro-copy > p:not(.eyebrow) { max-width: 40rem; line-height: 1.7; }
-.donation-intro-copy > .lead { margin-bottom: 1.125rem; }
-.donation-intro-copy > .lead + p { margin-top: 0; margin-bottom: 1.5rem; }
+.donation-intro-copy > .lead { margin-bottom: 1.5rem; }
 .donation-motto { color: var(--navy); font-family: Georgia, serif; font-size: 1.25rem; }
-.donation-support { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
-.donation-invitation { padding-top: 0; }
-.donation-invitation > .mission-introduction { margin: 0 0 .5rem; }
-.donation-mission-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
-.donation-mission-list > li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 1rem; padding: 1.5rem 0; }
-.donation-mission-list > li + li { border-top: 1px solid var(--line); }
-.donation-mission-icon { color: var(--gold); margin-top: .125rem; }
-.donation-mission-list h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.3; margin: 0 0 .5rem; }
-.donation-mission-list p { margin: 0; line-height: 1.7; }
-.donation-involvement { display: inline-block; }
-@media (min-width: 56.0625rem) { .donation-invitation { padding-top: 2.2rem; } }
+.donation-support { max-width: 39rem; margin-inline: auto; }
 .donation-payment { min-width: 0; }
 .donation-payment > h2 { margin-bottom: 1.25rem; }
 .donation-selector { background: var(--cream); border: 1px solid var(--line); border-top: 3px solid var(--gold); padding: clamp(1.25rem, 3vw, 2.5rem); }
@@ -34,26 +23,19 @@
 #giving-custom:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
 .donation-note { font-size: .875rem; line-height: 1.65; }
 .donation-summary { color: var(--navy); font-weight: 700; line-height: 1.65; }
-.donation-methods h3, .donation-causes h3 { font-size: 1.375rem; margin: 0 0 .75rem; line-height: 1.3; }
-.donation-methods .card, .donation-causes .card { display: flex; flex-direction: column; padding: 1.5rem; }
+.donation-methods h3 { font-size: 1.375rem; margin: 0 0 .75rem; line-height: 1.3; }
+.donation-methods .card { display: flex; flex-direction: column; padding: 1.5rem; }
 .donation-methods .card > p { margin: 0; }
-.donation-causes .text-link { align-self: flex-start; margin-top: auto; padding-top: .5rem; }
 .donation-arrangements { max-width: 60rem; margin-top: 1.5rem; }
 .donation-page > .section-space { margin-top: 3rem; }
-.donation-other .section-heading, .donation-page [aria-labelledby="causes-heading"] .section-heading { margin-bottom: 1.5rem; }
+.donation-other .section-heading { margin-bottom: 1.5rem; }
 .donation-trust { border-top: 3px solid var(--gold); padding: clamp(1.5rem, 3vw, 2.5rem); background: var(--cream); }
 .donation-trust > p { max-width: 55rem; }
 .donation-trust-closing { color: var(--navy); font-family: Georgia, serif; font-size: 1.125rem; margin-bottom: 0; }
-@media (max-width: 56rem) { .donation-support { grid-template-columns: 1fr; gap: 1.5rem; } }
 @media (max-width: 28rem) { .donation-amounts, .donation-frequency { grid-template-columns: repeat(2, minmax(0, 1fr)); } .donation-frequency { grid-template-columns: 1fr; } }
 
 .donation-hero-image { display: block; width: 100%; max-width: 28rem; height: auto; border-radius: .75rem; justify-self: end; }
 @media (max-width: 56rem) { .donation-intro { grid-template-columns: 1fr; gap: 2rem; } .donation-hero-image { justify-self: center; } }
-
-@media (min-width: 56.0625rem) {
-  .donation-payment { padding-top: 2.2rem; } /* Match the eyebrow’s 1.2rem line plus 1rem spacing. */
-}
-
 
 .donation-payment-methods { margin-top: 1.5rem; }
 .donation-payment-methods > h3 { margin: 0 0 1rem; font-size: 1.25rem; font-weight: 400; color: var(--navy); line-height: 1.35; }
@@ -70,9 +52,3 @@
 .payment-brand-logo { display: block; width: auto; max-width: 100%; height: 22px; object-fit: contain; }
 
 @media (max-width: 28rem) { .payment-brand-logos { gap: .25rem; } .payment-brand-logo { height: clamp(16px, 4.8vw, 22px); } }
-
-.donation-mission-icon-link { display: block; align-self: start; line-height: 0; }
-.donation-mission-heading-link { color: inherit; text-decoration: none; }
-.donation-mission-heading-link:hover { text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: .2em; }
-.donation-mission-icon-link:hover .donation-mission-icon { color: var(--navy); }
-.donation-mission-icon-link:focus-visible, .donation-mission-heading-link:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
