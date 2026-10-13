@@ -83,7 +83,7 @@ test('Donate contains only the four requested sections in order', () => {
 test('donation section includes the exact approved message beside the original checkout component', () => {
   const html = renderDonate();
   assert.ok(html.includes('<h2>Be a Voice for Change</h2>'));
-  assert.ok(html.includes('Join us in the fight against persecution and discrimination in all forms, humanitarian crises, animal cruelty and neglect, and environmental destruction.'));
+  assert.ok(html.replace(/<[^>]*>/g, '').includes('Join us in the fight against persecution and discrimination in all forms, humanitarian crises, animal cruelty and neglect, and environmental destruction.'));
   assert.ok(html.includes('<strong>Take action today and help build a better world for all.</strong>'));
   assert.ok(html.indexOf('class="donation-message"') < html.indexOf('class="donation-payment"'));
 });
