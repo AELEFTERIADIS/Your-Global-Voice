@@ -3,7 +3,7 @@
 .donation-intro h1 { max-width: 60rem; font-size: clamp(2.625rem, 4.725vw, 4.2rem); line-height: calc(1.1 * clamp(2.5rem, 4.5vw, 4rem)); }
 .donation-intro-copy > p:not(.eyebrow) { max-width: 40rem; line-height: 1.7; }
 .donation-intro-copy > .lead { margin-bottom: 1.5rem; }
-.donation-motto { color: var(--green); font-family: Georgia, serif; font-size: 1.375rem; line-height: 1.7; margin: 0 0 1rem; min-height: var(--donation-motto-space, 149.78125px); width: 0; min-width: 100%; text-align: right; transform: translateY(-9px); }
+.donation-motto { color: var(--green); font-family: Georgia, serif; font-size: 1.16875rem; line-height: 1.7; margin: 0 0 1rem; min-height: var(--donation-motto-space, 149.78125px); width: 0; min-width: 100%; text-align: right; transform: translateY(-12px); }
 .donation-intro-copy > p.donation-motto { max-width: none; }
 .donation-support { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; margin-inline: auto; gap: 2rem; align-items: start; }
 .donation-message { max-width: none; align-self: stretch; display: flex; flex-direction: column; }
