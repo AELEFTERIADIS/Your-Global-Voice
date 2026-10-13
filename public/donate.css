@@ -36,7 +36,7 @@
 .donation-page > .section-space { margin-top: 3rem; }
 .donation-other .section-heading { margin-bottom: 1.5rem; }
 .donation-trust { border-top: 3px solid var(--gold); padding: clamp(1.5rem, 3vw, 2.5rem); background: var(--cream); }
-.donation-trust > p { max-width: 55rem; }
+.donation-trust > p { max-width: 55rem; text-align: justify; }
 .donation-trust-closing { color: var(--navy); font-family: Georgia, serif; font-size: 1.125rem; margin-bottom: 1rem; }
 .donation-trust > p:last-child { margin-bottom: 0; }
 @media (max-width: 22.5rem) { .donation-amounts, .donation-frequency { grid-template-columns: repeat(2, minmax(0, 1fr)); } .donation-frequency { grid-template-columns: 1fr; } }
@@ -116,7 +116,7 @@
 @media (max-width: 56rem) {
  .donation-trust { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; padding: 1rem; }
  .donation-trust > h2 { font-size: 1.5rem; line-height: 1.25; }
- .donation-trust > p { font-size: 1rem; line-height: 1.65; margin-bottom: 1rem; text-align: left; text-wrap: pretty; }
+ .donation-trust > p { font-size: 1rem; line-height: 1.65; margin-bottom: 1rem; text-align: justify; text-wrap: pretty; }
  .donation-trust > p:last-child { margin-bottom: 0; text-wrap: balance; }
  .donation-trust a[href="mailto:info@ygvoice.org"] { white-space: nowrap; }
 }
