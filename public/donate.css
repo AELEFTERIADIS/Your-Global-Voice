@@ -39,7 +39,7 @@
 .donation-trust-closing { color: var(--navy); font-family: Georgia, serif; font-size: 1.125rem; margin-bottom: 0; }
 @media (max-width: 28rem) { .donation-amounts, .donation-frequency { grid-template-columns: repeat(2, minmax(0, 1fr)); } .donation-frequency { grid-template-columns: 1fr; } }
 
-.donation-hero-image { display: block; width: calc(100% - 1rem); max-width: 26rem; height: auto; border-radius: .75rem; justify-self: end; align-self: center; }
+.donation-hero-image { display: block; width: 100%; max-width: 30rem; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 30%; border-radius: .75rem; justify-self: end; align-self: center; }
 @media (max-width: 56rem) { .donation-intro { grid-template-columns: 1fr; gap: 2rem; } .donation-hero-image { justify-self: center; } }
 
 .donation-payment-methods { margin-top: 1rem; }
