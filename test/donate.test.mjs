@@ -87,3 +87,9 @@ test('donation section includes the exact approved message beside the original c
   assert.ok(html.includes('<strong>Take action today and help build a better world for all.</strong>'));
   assert.ok(html.indexOf('class="donation-message"') < html.indexOf('class="donation-payment"'));
 });
+
+test('left message preserves a continuous paragraph and a naturally following closing sentence', () => {
+  const html = renderDonate();
+  assert.ok(html.includes('<p class="donation-message-mission">Join us in the fight against persecution and discrimination in all forms, humanitarian crises, animal cruelty and neglect, and environmental destruction.</p><p class="donation-message-closing"><strong>Take action today and help build a better world for all.</strong></p>'));
+  assert.doesNotMatch(html, /donation-message-cause|donation-message-lead/);
+});
