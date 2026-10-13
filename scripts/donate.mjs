@@ -6,8 +6,8 @@ export function renderDonate() {
     ["<svg class=\"donation-message-icon\" data-icon=\"sprout\" aria-hidden=\"true\" focusable=\"false\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" > <path d=\"M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3\" /> <path d=\"M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4\" /> <path d=\"M5 21h14\" /> </svg>", "Take action today and help us build a better world for all."]
   ];
   const methods = [
-    ['Bank Transfers', 'Domestic and international financial contributions. Verified transfer instructions are available upon request.'],
     ['Donations by Check', 'Checks payable to Your Global Voice, Inc. Mailing instructions are available upon request.'],
+    ['Bank Transfers', 'Domestic and international financial contributions. Verified transfer instructions are available upon request.'],
     ['In-Kind Contributions', 'We welcome inquiries regarding food, clothing, essential supplies, equipment, and other useful goods supporting our humanitarian, animal welfare, and environmental initiatives.'],
     ['Corporate &amp; Institutional Giving', 'Businesses, foundations, institutions, and philanthropic partners are welcome to inquire about financial and in-kind contributions supporting our initiatives.']
   ];
