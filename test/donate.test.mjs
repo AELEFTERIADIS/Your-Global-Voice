@@ -83,13 +83,13 @@ test('Donate contains only the four requested sections in order', () => {
 test('donation section includes the exact approved message beside the original checkout component', () => {
   const html = renderDonate();
   assert.ok(html.includes('<h2>Be a Voice for Change</h2>'));
-  assert.ok(html.replace(/<[^>]*>/g, '').includes('Join us in the fight against persecution and discrimination in all forms, humanitarian crises, animal cruelty and neglect, and environmental destruction.'));
-  assert.ok(html.includes('<strong>Take action today and help build a better world for all.</strong>'));
+  assert.ok(html.replace(/<[^>]*>/g, '').includes('Join our organization, Your Global Voice, to fight against persecution and discrimination in all forms, respond to humanitarian crises, protect animals from cruelty, abuse, and neglect, and defend our environment from destruction across the globe.'));
+  assert.ok(html.includes('<strong>Take action today and help us build a better world for all.</strong>'));
   assert.ok(html.indexOf('class="donation-message"') < html.indexOf('class="donation-payment"'));
 });
 
-test('left message preserves a continuous paragraph and a naturally following closing sentence', () => {
+test('left message preserves the approved paragraphs and bold emphasis', () => {
   const html = renderDonate();
-  assert.ok(html.includes('<p class="donation-message-mission">Join us in the fight against persecution and discrimination in all forms, humanitarian crises, animal cruelty and neglect, and environmental destruction.</p><p class="donation-message-closing"><strong>Take action today and help build a better world for all.</strong></p>'));
+  assert.ok(html.includes('<p class="donation-message-mission">Join our organization, <strong>Your Global Voice</strong>, to fight against persecution and discrimination in all forms, respond to humanitarian crises, protect animals from cruelty, abuse, and neglect, and defend our environment from destruction across the globe.</p><p class="donation-message-mission">Around the world, countless individuals, communities, animals, and our environment need compassion, protection, and support. <strong>Your generosity can bring hope and make a meaningful difference.</strong></p><p class="donation-message-closing"><strong>Take action today and help us build a better world for all.</strong></p>'));
   assert.doesNotMatch(html, /donation-message-cause|donation-message-lead/);
 });
