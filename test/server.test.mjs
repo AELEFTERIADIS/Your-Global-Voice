@@ -67,7 +67,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     const stylesheet = await fetch(new URL('styles.css', response.url));
     assert.equal(stylesheet.status, 200);
     assert.match(stylesheet.headers.get('content-type'), /text\/css/);
-    assert.match(html, /MY VOICE \+ YOUR VOICE = OUR VOICE/);
+    assert.match(html, /Where Every Voice Matters/);
     assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
     assert.doesNotMatch(html, /<iframe\b/);
     if (!['/contact', '/donate'].includes(route)) assert.doesNotMatch(html, /<script\b/);

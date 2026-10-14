@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const pagesFiles = ['index.html', 'about.html', 'mission.html', 'purposes.html', 'projects.html', 'get-involved.html', 'donate.html', 'contact.html'];
-export const assets = ['styles.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
+export const assets = ['cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
 
 export async function preparePages(destination, apiOrigin = process.env.CONTACT_API_ORIGIN || '') {
   if (apiOrigin) {
@@ -18,7 +18,7 @@ export async function preparePages(destination, apiOrigin = process.env.CONTACT_
       let html = await readFile(source, 'utf8');
       const contact = file === 'contact.html';
       const donate = file === 'donate.html';
-      const csp = `default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'${contact ? `; script-src 'self'; connect-src 'self'${apiOrigin ? " " + apiOrigin : ""}` : donate ? "; script-src 'self'" : ''}`;
+      const csp = `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'${contact ? `; script-src 'self'; connect-src 'self'${apiOrigin ? " " + apiOrigin : ""}` : donate ? "; script-src 'self'" : ''}`;
       html = html.replace('<head>', `<head>\n  <meta http-equiv="Content-Security-Policy" content="${csp}">${contact ? `\n  <meta name="ygv-hosting" content="static">${apiOrigin ? '\n  <meta name="ygv-contact-api" content="' + apiOrigin + '">' : ''}` : ''}`);
       await writeFile(resolve(destination, file), html);
     } else {

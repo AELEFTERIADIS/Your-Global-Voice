@@ -154,3 +154,26 @@ summary:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
  .mobile-menu nav { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1rem; padding-bottom: 1rem; }
  .mobile-menu nav a { padding: .25rem 0; }
 }
+
+/* Approved shared footer; these font families are used only in the footer. */
+@font-face { font-family: 'Cinzel'; src: url('cinzel-regular.woff') format('woff'); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'EB Garamond'; src: url('garamond-regular.woff2') format('woff2'); font-style: normal; font-weight: 400; font-display: swap; }
+.site-footer { background: #102B49; border-top: 0; }
+.footer-inner { display: flex; flex-direction: column; align-items: center; gap: 0; padding-block: 2rem; text-align: center; }
+.footer-name { margin: 0; color: #D7B56D; font-family: 'Cinzel', serif; font-size: 17px; font-weight: 400; font-style: normal; letter-spacing: 2.4px; line-height: 1.5; }
+.footer-slogan { margin: .25rem 0 0; color: #fff; font-family: 'EB Garamond', serif; font-size: 16px; font-weight: 400; font-style: normal; line-height: 1.5; }
+.footer-navigation { width: 100%; justify-content: center; gap: .25rem 1.5rem; border-top: 1px solid rgba(215, 181, 109, .65); margin-top: 1.25rem; padding-top: .75rem; }
+.footer-navigation a { justify-self: center; color: #fff; font-size: 14px; font-weight: 400; }
+.footer-navigation a:hover, .footer-navigation a[aria-current='page'] { border-bottom-color: #D7B56D; }
+.footer-copyright { width: 100%; border-top: 1px solid rgba(255, 255, 255, .18); margin: 1rem 0 0; padding-top: 1rem; color: #dce3eb; font-size: 12px; line-height: 1.6; }
+@media (max-width: 42rem) {
+ .footer-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem 1rem; }
+ .footer-navigation a { justify-content: center; }
+}
+.footer-navigation a { position: relative; }
+.footer-navigation a:not(:first-child)::before { content: ''; position: absolute; left: -.75rem; width: 1px; height: 12px; background: rgba(255, 255, 255, .45); }
+@media (min-width: 42.0625rem) and (max-width: 56rem) {
+ .footer-navigation { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .25rem 1rem; }
+ .footer-navigation a { justify-content: center; }
+}
+@media (max-width: 56rem) { .footer-navigation a::before { display: none; } }

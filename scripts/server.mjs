@@ -23,6 +23,9 @@ const routes = new Map([
   ['/donate.css', ['../public/donate.css', 'text/css; charset=utf-8']],
   ['/contact.js', ['../public/contact.js', 'text/javascript; charset=utf-8']],
   ['/contact.css', ['../public/contact.css', 'text/css; charset=utf-8']],
+  ['/cinzel-regular.woff', ['../public/cinzel-regular.woff', 'font/woff']],
+  ['/garamond-regular.woff2', ['../public/garamond-regular.woff2', 'font/woff2']],
+  ['/footer-font-licenses.txt', ['../public/footer-font-licenses.txt', 'text/plain; charset=utf-8']],
   ['/styles.css', ['../public/styles.css', 'text/css; charset=utf-8']],
 ]);
 
@@ -31,7 +34,7 @@ export function createPreviewServer(contactOptions) {
   return createServer(async (request, response) => {
     const contactRoute = /^\/contact(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const donateRoute = /^\/donate(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : donateRoute ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
+    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : donateRoute ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Referrer-Policy', 'no-referrer');

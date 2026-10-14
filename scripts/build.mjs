@@ -56,7 +56,7 @@ for (const [path, title, file] of pages) {
     <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">${navigation}</nav></details><nav class="desktop-nav" aria-label="Main navigation">${navigation}</nav>
   </div></header>
   <main id="main" tabindex="-1">${bodies[path]}</main>
-  <footer class="site-footer"><div class="footer-inner"><div><p class="footer-name">Your Global Voice, Inc.</p><p class="footer-motto">${motto}</p><p class="footer-description">Human dignity · Humanitarian assistance<br>Animal welfare · Environmental protection</p></div><nav aria-label="Footer navigation">${navigation}</nav></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-name">YOUR GLOBAL VOICE</p><p class="footer-slogan">Where Every Voice Matters</p><nav class="footer-navigation" aria-label="Footer navigation">${navigation}</nav><p class="footer-copyright">© 2026 Your Global Voice, Inc. All rights reserved.</p></div></footer>
 </body>
 </html>
 `;
