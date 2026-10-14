@@ -119,8 +119,8 @@
 @media (max-width: 28rem) {
  .donation-trust { padding: .75rem; }
  .donation-trust > h2 { font-size: 1.375rem; margin-bottom: .75rem; }
- .donation-trust > p { font-size: .9375rem; line-height: 1.6; margin-bottom: .75rem; }
- .donation-trust > p:last-child { margin-bottom: 0; }
+ .donation-trust > p { font-size: .9375rem; line-height: 1.6; margin-bottom: .75rem; text-align: left; text-wrap: wrap; }
+ .donation-trust > p:last-child { margin-bottom: 0; text-wrap: wrap; }
 }
 
 /* One responsive payment layout: compact flow, no transforms or reduced hit areas. */
