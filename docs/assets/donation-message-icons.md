@@ -6,7 +6,8 @@ Official Lucide SVGs, sourced from https://github.com/lucide-icons/lucide at com
 - `heart-handshake`: `icons/heart-handshake.svg`.
 - `hand-heart`: `icons/hand-heart.svg`.
 - `sprout`: `icons/sprout.svg`.
+- `hand-coins`: `icons/hand-coins.svg`.
 
-Original paths are preserved and embedded in `scripts/donate.mjs`; presentation and accessibility attributes were added. All four are decorative, 24-pixel gold outline icons. No remote requests or JavaScript dependency are required.
+Original paths are preserved and embedded in `scripts/donate.mjs`; presentation and accessibility attributes were added. All five are decorative, 24-pixel gold outline icons. No remote requests or JavaScript dependency are required.
 
 License: ISC, with the upstream notices retained in [lucide-LICENSE.txt](lucide-LICENSE.txt).
