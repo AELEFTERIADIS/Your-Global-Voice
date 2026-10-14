@@ -16,9 +16,11 @@ async function initialize({ hostname = 'aelefteriadis.github.io', api, code = 20
 }
 
 test('Pages source Contact initializes the confirmed endpoint without build metadata', async () => {
-  const result = await initialize();
-  assert.deepEqual(result.calls, ['https://ygvoice-contact.andyelft.workers.dev/api/contact/status']);
-  assert.equal(result.submit.disabled, false);
+  for (const hostname of ['aelefteriadis.github.io', 'ygvoice.org', 'www.ygvoice.org']) {
+    const result = await initialize({ hostname });
+    assert.deepEqual(result.calls, ['https://ygvoice-contact.andyelft.workers.dev/api/contact/status']);
+    assert.equal(result.submit.disabled, false);
+  }
 });
 test('artifact metadata takes precedence while local preview retains its existing endpoint', async () => {
   assert.deepEqual((await initialize({ api: 'https://configured.example.workers.dev' })).calls, ['https://configured.example.workers.dev/api/contact/status']);

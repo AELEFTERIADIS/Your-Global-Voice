@@ -19,7 +19,7 @@ const resultStatus = document.querySelector('#contact-result');
 const submit = form.querySelector('[type="submit"]');
 let token;
 // The source page also works when served without Pages artifact metadata.
-const pagesApiOrigin = location.hostname === 'aelefteriadis.github.io'
+const pagesApiOrigin = ['aelefteriadis.github.io', 'ygvoice.org', 'www.ygvoice.org'].includes(location.hostname)
   ? 'https://ygvoice-contact.andyelft.workers.dev' : '';
 const apiOrigin = document.querySelector('meta[name="ygv-contact-api"]')?.content || pagesApiOrigin;
 const apiUrl = (path) => apiOrigin ? apiOrigin + '/' + path : path;
