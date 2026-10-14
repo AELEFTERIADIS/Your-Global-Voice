@@ -44,3 +44,5 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 @media (max-width: 56rem) {
  .contact-form .contact-consent { min-height: 44px; }
 }
+
+.contact-subtitle { font-style: normal; font-weight: 400; }
