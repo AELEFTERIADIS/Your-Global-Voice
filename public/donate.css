@@ -64,8 +64,6 @@
 .donation-summary { margin-block: .75rem; }
 
 
-/* Preserve the approved box height when the section expands beyond its former width. */
-@media (min-width: 73rem) { .donation-selector { min-height: 46.2412109375rem; } }
 
 .donation-message-paragraph { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: .875rem; align-items: start; }
 .donation-message-icon { display: block; width: 24px; height: 24px; color: var(--gold); margin-top: calc((1.75em - 24px) / 2); }
@@ -163,4 +161,10 @@
 /* Align the desktop eyebrow’s visible capitals with the fixed image top. */
 @media (min-width: 56.0625rem) {
  .donation-intro-copy { transform: translateY(calc((100% - min(30rem, calc((min(100vw - 3rem, 78rem) - clamp(1.5rem, 4vw, 3rem)) / 2.25)) * .75) / 2 - 5px)); }
+}
+
+/* Match desktop panels to the content-sized donation form; stacked cards stay natural. */
+@media (min-width: 56.0625rem) {
+ .donation-message { align-self: stretch; }
+ .donation-message-body { justify-content: space-between; }
 }
