@@ -168,3 +168,7 @@
  .donation-message { align-self: stretch; }
  .donation-message-body { justify-content: space-between; }
 }
+
+/* Short dividers sit within existing paragraph gaps without changing panel geometry. */
+.donation-message-paragraph { position: relative; }
+.donation-message-paragraph + .donation-message-paragraph::before { content: ""; position: absolute; top: -.75rem; left: 38px; width: 60%; height: 1px; background: rgba(155, 116, 40, .35); }

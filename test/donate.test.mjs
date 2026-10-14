@@ -85,8 +85,8 @@ test('Donate contains only the four requested sections in order', () => {
 test('donation section includes the exact approved message beside the original checkout component', () => {
   const html = renderDonate();
   assert.ok(html.includes('<h2>Be a Voice for Change</h2>'));
-  assert.ok(html.includes("Every voice has the power to inspire change. We believe that compassion, courage, and solidarity can make a meaningful difference in the world."));
-  assert.ok(html.includes("Be part of something greater. Donate today and help us build a better world for all."));
+  assert.ok(html.includes("Every voice has the power to inspire change. We believe that compassion, courage, and solidarity can make a meaningful difference in the world. When we unite around a common purpose, even the smallest act of kindness can become the beginning of lasting change."));
+  assert.ok(html.includes("Be the reason change begins. Donate today and help us build a better world for all."));
   assert.ok(html.indexOf('class="donation-message"') < html.indexOf('class="donation-payment"'));
 });
 
@@ -94,7 +94,7 @@ test('left message preserves five exact regular paragraphs and the original icon
   const html = renderDonate();
   const body = html.slice(html.indexOf('<div class="donation-message-body">'), html.indexOf('<div class="donation-payment">'));
   const paragraphs = [...body.matchAll(/<p class="donation-message-paragraph">([\s\S]*?)<\/p>/g)].map(match => match[1].replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<[^>]*>/g, ''));
-  assert.deepEqual(paragraphs, ["Every voice has the power to inspire change. We believe that compassion, courage, and solidarity can make a meaningful difference in the world.", "From defending human dignity to helping communities in crisis, every act of kindness brings us closer to a world where no one is forgotten.", "Our compassion extends to vulnerable animals and the natural world we share, because every life deserves care and protection.", "Your generosity gives purpose to our mission and helps turn shared hopes into meaningful action.", "Be part of something greater. Donate today and help us build a better world for all."]);
+  assert.deepEqual(paragraphs, ["Every voice has the power to inspire change. We believe that compassion, courage, and solidarity can make a meaningful difference in the world. When we unite around a common purpose, even the smallest act of kindness can become the beginning of lasting change.", "From defending human dignity to helping communities in crisis, every act of kindness brings us closer to a world where no one is forgotten. Your support helps bring hope where it is needed most.", "Our compassion extends to vulnerable animals and the natural world we share, because every life deserves care and protection. Through kindness and collective action, we can help create a safer world for all living beings.", "Your generosity gives purpose to our mission and helps turn shared hopes into meaningful action. Every contribution brings us closer to making a lasting difference.", "Be the reason change begins. Donate today and help us build a better world for all."]);
   assert.deepEqual([...body.matchAll(/data-icon="([^"]+)"/g)].map(match => match[1]), ['globe-2', 'heart-handshake', 'hand-heart', 'sprout', 'hand-coins']);
   assert.doesNotMatch(body, /<(?:strong|b|em|i)\b/);
   assert.equal((body.match(/aria-hidden="true" focusable="false"/g) || []).length, 5);
