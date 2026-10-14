@@ -37,7 +37,9 @@ const bodies = {
 // Sibling HTML paths work both from file:// and from the preview server.
 const pageFiles = new Map(pages.map(([path, , file]) => [path, file]));
 for (const [path, title, file] of pages) {
-  const navigation = pages.map(([url, label]) => `<a href="${url}"${url === path ? ' aria-current="page"' : ''}>${url === "/purposes" ? "Our Causes" : label}</a>`).join('');
+  const navigationLinks = pages.map(([url, label]) => `<a href="${url}"${url === path ? ' aria-current="page"' : ''}>${url === "/purposes" ? "Our Causes" : label}</a>`);
+  const navigation = navigationLinks.join('');
+  const footerNavigation = navigationLinks.slice(0, 5).join('') + '<span class="footer-navigation-break" aria-hidden="true"></span>' + navigationLinks.slice(5).join('');
   const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -56,7 +58,7 @@ for (const [path, title, file] of pages) {
     <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">${navigation}</nav></details><nav class="desktop-nav" aria-label="Main navigation">${navigation}</nav>
   </div></header>
   <main id="main" tabindex="-1">${bodies[path]}</main>
-  <footer class="site-footer"><div class="footer-inner"><p class="footer-name">YOUR GLOBAL VOICE</p><p class="footer-slogan">Where Every Voice Matters</p><nav class="footer-navigation" aria-label="Footer navigation">${navigation}</nav><p class="footer-copyright">© 2026 Your Global Voice, Inc. All rights reserved.</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner"><p class="footer-name">YOUR GLOBAL VOICE</p><p class="footer-slogan">Where Every Voice Matters</p><nav class="footer-navigation" aria-label="Footer navigation">${footerNavigation}</nav><p class="footer-copyright">© 2026 Your Global Voice, Inc. All rights reserved.</p></div></footer>
 </body>
 </html>
 `;
