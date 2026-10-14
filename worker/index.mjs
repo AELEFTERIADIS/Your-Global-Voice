@@ -19,11 +19,13 @@ export default {
       else {
         // Hash Cloudflare's trusted client address. Never trust user-supplied forwarded headers.
         const ip = request.headers.get('CF-Connecting-IP');
-        if (!ip) return json(403, 'Unable to verify this submission.');
-        const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.RESEND_API_KEY), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-        const hash = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(ip));
-        const id = env.CONTACT_LIMITS.idFromName(Array.from(new Uint8Array(hash), b => b.toString(16).padStart(2, '0')).join(''));
-        response = await env.CONTACT_LIMITS.get(id).fetch(request);
+        if (!ip) response = json(403, 'Unable to verify this submission.');
+        else {
+          const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.RESEND_API_KEY), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+          const hash = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(ip));
+          const id = env.CONTACT_LIMITS.idFromName(Array.from(new Uint8Array(hash), b => b.toString(16).padStart(2, '0')).join(''));
+          response = await env.CONTACT_LIMITS.get(id).fetch(request);
+        }
       }
     } catch { response = json(502, 'Your message could not be confirmed as received. Please retry or contact us by email.'); }
     const result = new Response(response.body, response);

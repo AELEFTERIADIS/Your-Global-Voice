@@ -108,3 +108,27 @@ test('all three configured website origins receive exact CORS headers for initia
   }
   assert.equal((await worker.fetch(new Request('https://test.workers.dev/api/contact/status'), env)).status, 403);
 });
+
+test('approved origins can read initialization errors without bypassing verification', async () => {
+  const origins = ['https://aelefteriadis.github.io', 'https://ygvoice.org', 'https://www.ygvoice.org'];
+  for (const origin of origins) {
+    const base = { CONTACT_SITE_ORIGINS: origins.join(','), RESEND_API_KEY: 'simulated-only', CONTACT_MAIL_FROM: 'info@ygvoice.org' };
+    let forwarded = false;
+    const cases = [
+      { status: 403, ip: false, env: { ...base, CONTACT_LIMITS: { idFromName: () => { forwarded = true; throw new Error('Must not forward without trusted IP'); } } } },
+      { status: 503, ip: true, env: { ...base, RESEND_API_KEY: '' } },
+      { status: 502, ip: true, env: { ...base, CONTACT_LIMITS: { idFromName: () => { throw new Error('Simulated unavailable binding'); } } } },
+      { status: 429, ip: true, env: { ...base, CONTACT_LIMITS: { idFromName: name => name, get: () => ({ fetch: async () => Response.json({ message: 'Please wait.' }, { status: 429 }) }) } } }
+    ];
+    for (const scenario of cases) {
+      const response = await worker.fetch(new Request('https://test.workers.dev/api/contact/status', { headers: { Origin: origin, ...(scenario.ip ? { 'CF-Connecting-IP': '192.0.2.1' } : {}) } }), scenario.env);
+      assert.equal(response.status, scenario.status);
+      assert.equal(response.headers.get('Access-Control-Allow-Origin'), origin);
+      assert.equal(response.headers.get('Vary'), 'Origin');
+      assert.equal(response.headers.get('Cache-Control'), 'no-store');
+      const body = await response.json();
+      assert.notEqual(body.available, true); assert.equal(body.token, undefined);
+    }
+    assert.equal(forwarded, false);
+  }
+});
