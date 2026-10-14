@@ -172,3 +172,8 @@
 /* Short dividers sit within existing paragraph gaps without changing panel geometry. */
 .donation-message-paragraph { position: relative; }
 .donation-message-paragraph + .donation-message-paragraph::before { content: ""; position: absolute; top: -.75rem; left: 38px; width: 60%; height: 1px; background: rgba(155, 116, 40, .35); }
+
+/* Keep every Trust paragraph naturally aligned on phones and tablets. */
+@media (max-width: 1024px) {
+ .donation-trust p, .donation-trust p:last-child { text-align: left; word-spacing: normal; text-wrap: wrap; }
+}
