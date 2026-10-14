@@ -160,3 +160,8 @@
 .donation-trust-contact:hover { color: var(--gold); }
 @media (max-width: 636px) { .donation-trust > p:last-child { min-height: 2lh; } }
 @media (max-width: 331px) { .donation-trust > p:last-child { min-height: 3lh; } }
+
+/* Align the desktop eyebrow’s visible capitals with the fixed image top. */
+@media (min-width: 56.0625rem) {
+ .donation-intro-copy { transform: translateY(calc((100% - min(30rem, calc((min(100vw - 3rem, 78rem) - clamp(1.5rem, 4vw, 3rem)) / 2.25)) * .75) / 2 - 5px)); }
+}
