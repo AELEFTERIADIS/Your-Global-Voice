@@ -177,3 +177,12 @@ summary:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
  .footer-navigation a { justify-content: center; }
 }
 @media (max-width: 56rem) { .footer-navigation a::before { display: none; } }
+
+/* Approved shared navy header colors. */
+.site-header { background: #102B49; color: #fff; border-top-color: #D7B56D; border-bottom-color: #D7B56D; }
+.site-header .wordmark { color: #D7B56D; }
+.site-header nav a { color: #fff; }
+.site-header nav a:hover, .site-header nav a[aria-current="page"] { border-bottom-color: #D7B56D; }
+.site-header .mobile-menu { border-top-color: #D7B56D; }
+.site-header .mobile-menu summary { color: #fff; }
+.site-header a:focus-visible, .site-header summary:focus-visible { outline-color: #D7B56D; }
