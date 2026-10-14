@@ -20,7 +20,7 @@ test('donation page delegates payment to the authorized hosted checkout without 
   assert.match(html, /Your choices here are not carried over/);
   assert.deepEqual([...new Set([...html.matchAll(/href="(https:[^"]+)"/g)].map(match => match[1]))], ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00', 'https://www.paypal.com/ncp/payment/PVJ5JKDKZW8VQ']);
   assert.match(html, /class="donation-method-choice donation-paypal" href="https:\/\/www.paypal.com\/ncp\/payment\/PVJ5JKDKZW8VQ" target="_blank" rel="noopener noreferrer"/);
-  assert.match(html, /No tax-deductibility claim is made/);
+  assert.doesNotMatch(html, /Please confirm accepted goods and delivery arrangements|No tax-deductibility claim is made/);
   assert.doesNotMatch(html, /IRS|501\(c\)/);
   assert.equal((await fetch(base + '/donate.html', { method: 'POST', body: 'simulated' })).status, 405);
   for (const asset of ['donate.css', 'donate.js', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg']) assert.equal((await fetch(base + '/' + asset)).status, 200);

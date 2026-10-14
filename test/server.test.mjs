@@ -126,7 +126,7 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
       }
     }
     if (route === '/donate') {
-      for (const text of ['Make checks payable', 'clothing', 'essential goods', 'international', 'customs', 'Tax treatment', 'Your choices here are not carried over']) assert.ok(html.includes(text), text);
+      for (const text of ['Make checks payable', 'clothing', 'essential goods', 'international', 'Your choices here are not carried over']) assert.ok(html.includes(text), text);
       assert.match(html, /Other Ways to Support Our Mission/);
       assert.doesNotMatch(html, /tel:|<form\b|<iframe\b/);
       assert.match(html, /mailto:support@ygvoice.org/);
