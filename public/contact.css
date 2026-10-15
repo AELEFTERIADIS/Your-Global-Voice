@@ -50,3 +50,11 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 .contact-email-section > p { margin-block: .75rem; }
 .contact-email-section > p:last-child { margin-bottom: 0; }
 .contact-email-divider { border: 0; border-top: 1px solid var(--line); margin-block: 1.5rem; }
+
+.contact-whatsapp-brand { display: flex; align-items: center; gap: .5rem; text-transform: none; letter-spacing: normal; }
+.contact-whatsapp-logo { width: 1.2rem; height: 1.2rem; fill: #25d366; flex-shrink: 0; }
+.contact-whatsapp-button { gap: .75rem; width: min(100%, 22.75rem); min-height: 4.15rem; justify-content: center; }
+.contact-whatsapp-phone { width: 1.25rem; height: 1.25rem; fill: none; stroke: #25d366; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+/* Preserve the original badge line and button footprint when replacing their contents. */
+.contact-whatsapp-button:hover { background: var(--navy); }
+@media (max-width: 26rem) { .contact-whatsapp-button { min-height: 5.55rem; } }
