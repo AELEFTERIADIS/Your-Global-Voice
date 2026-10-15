@@ -46,3 +46,7 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 }
 
 .contact-subtitle { font-style: normal; font-weight: 400; }
+
+.contact-email-section > p { margin-block: .75rem; }
+.contact-email-section > p:last-child { margin-bottom: 0; }
+.contact-email-divider { border: 0; border-top: 1px solid var(--line); margin-block: 1.5rem; }
