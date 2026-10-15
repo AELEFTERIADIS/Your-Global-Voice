@@ -49,16 +49,14 @@ test('accepted provider result alone produces exact success; tokens cannot be re
   const sent = [];
   const f = await fixture(t, { send: async data => { sent.push(data); return 'provider-id'; } });
   for (const subject of categories) {
-    const token = await f.token(); f.advance();
-    // Advance the anti-spam rate window halfway through this exhaustive routing test.
-    if (sent.length === 4) f.advance(15 * 60 * 1000 + 1);
-    const activeToken = sent.length === 4 ? await f.token() : token;
-    if (sent.length === 4) f.advance();
+    // Exercise every category without exceeding the unchanged anti-spam window.
+    if (sent.length && sent.length % 4 === 0) f.advance(15 * 60 * 1000 + 1);
+    const activeToken = await f.token(); f.advance();
     const response = await f.post({ ...valid, subject, token: activeToken });
     assert.equal(response.status, 200);
     assert.deepEqual(await response.json(), { message: successMessage, accepted: true });
   }
-  assert.equal(sent.length, 8);
+  assert.equal(sent.length, categories.length);
   assert.equal((await f.post({ ...valid, token: sent.at(-1).token })).status, 400);
 });
 

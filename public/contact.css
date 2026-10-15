@@ -1,4 +1,4 @@
-.contact-message { max-width: 52rem; }
+.contact-message { max-width: none; }
 .contact-form { margin-top: 1.5rem; }
 .contact-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
 .contact-form label { display: block; font-weight: 700; margin: 1.25rem 0 .5rem; }

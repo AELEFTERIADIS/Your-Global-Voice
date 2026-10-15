@@ -1,6 +1,24 @@
 import { randomBytes } from 'node:crypto';
 
-export const categories = ['General Inquiries', 'Donations & Financial Support', 'Volunteering', 'Partnerships & Collaboration', 'Humanitarian Assistance', 'Animal Welfare', 'Environmental Protection', 'Other Inquiries'];
+export const categories = [
+  'General Inquiries',
+  'Human Rights & Discrimination',
+  'Humanitarian Assistance',
+  'Animal Welfare',
+  'Environmental Protection',
+  'Our Projects & Initiatives',
+  'Project Proposals & New Ideas',
+  'Donations & Financial Support',
+  'In-Kind Donations',
+  'Volunteering Opportunities',
+  'Partnerships & Collaboration',
+  'Grants & Funding Opportunities',
+  'Sponsorship Opportunities',
+  'Media & Press Inquiries',
+  'International Cooperation',
+  'Requests for Assistance',
+  'Other Inquiries',
+];
 export const successMessage = 'Thank you for contacting Your Global Voice. Your message has been sent successfully. We will respond as soon as possible.';
 export const recipientFor = (category) => category === 'Donations & Financial Support' ? 'support@ygvoice.org' : 'info@ygvoice.org';
 
