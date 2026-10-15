@@ -54,3 +54,6 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 @media (max-width: 26rem) { .contact-whatsapp-button { min-height: 5.55rem; } }
 
 .contact-mailing { grid-column: 1 / -1; }
+
+.contact-intro { padding-bottom: 1.25rem; margin-bottom: 1.5rem; }
+.contact-intro > .lead { margin-bottom: 0; }
