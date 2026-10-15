@@ -20,6 +20,7 @@ test('Pages source Contact initializes the confirmed endpoint without build meta
     const result = await initialize({ hostname });
     assert.deepEqual(result.calls, ['https://ygvoice-contact.andyelft.workers.dev/api/contact/status']);
     assert.equal(result.submit.disabled, false);
+    assert.equal(result.status.textContent, '');
   }
 });
 test('artifact metadata takes precedence while local preview retains its existing endpoint', async () => {
@@ -39,16 +40,18 @@ test('initialization distinguishes service failures and never enables sending wi
 test('exact green confirmation appears only after server acceptance; errors retain the form', async () => {
   const confirmation = 'Thank you for contacting Your Global Voice. Your message has been sent successfully. We will respond as soon as possible.';
   for (const scenario of ['accepted', 'rejected', 'unacknowledged', 'network-error']) {
-    let callback; let resets = 0;
+    let callback; let resets = 0; let issued = 0;
     const submit = { disabled: true }; const status = { textContent: '' }; const result = { textContent: '', className: '' };
     const form = { querySelector: () => submit, addEventListener: (event, fn) => { callback = fn; }, reportValidity: () => true, setAttribute: () => {}, removeAttribute: () => {}, reset: () => { resets++; } };
     runInNewContext(source, {
       document: { querySelector: selector => selector === '.contact-form' ? form : selector === '#contact-status' ? status : selector === '#contact-result' ? result : null },
-      location: { hostname: 'aelefteriadis.github.io', protocol: 'https:' }, AbortSignal,
+      location: { hostname: 'aelefteriadis.github.io', protocol: 'https:' }, AbortSignal, setTimeout,
       FormData: class { *[Symbol.iterator]() { yield ['message', 'Simulated only']; } },
       fetch: async (url, options) => {
-        if (!options.method) return { ok: true, status: 200, json: async () => ({ available: true, token: 'simulated-token', message: 'Ready' }) };
+        if (!options.method) return { ok: true, status: 200, json: async () => ({ available: true, token: 'simulated-token-' + (++issued), message: 'Ready' }) };
         assert.equal(result.className, ''); assert.notEqual(result.textContent, confirmation);
+        assert.equal(submit.disabled, true);
+        assert.equal(JSON.parse(options.body).token, 'simulated-token-2');
         if (scenario === 'network-error') throw new Error('private details');
         return { ok: scenario !== 'rejected', json: async () => ({ accepted: scenario === 'accepted', message: scenario === 'accepted' ? confirmation : 'Your message could not be confirmed as received.' }) };
       }

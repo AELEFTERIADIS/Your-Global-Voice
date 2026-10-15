@@ -42,18 +42,21 @@ export class ContactLimits {
       const now = Date.now();
       const storage = this.state.storage;
       let record = await storage.get('window');
-      if (!record || now - record.start >= 900000) record = { start: now, attempts: 0, issued: 0, tokens: {} };
+      if (!record || now - record.start >= 900000) {
+        const tokens = Object.fromEntries(Object.entries(record?.tokens || {}).filter(([, issued]) => typeof issued === 'number' && now - issued < 900000));
+        record = { start: now, attempts: 0, issued: 0, tokens };
+      }
       const path = new URL(request.url).pathname;
       if (path === '/api/contact/status' && request.method === 'GET') {
         if (record.issued >= 20 || record.attempts >= 5) return json(429, 'Please wait 15 minutes before trying again.');
         const token = crypto.randomUUID(); record.tokens[token] = now; record.issued++;
-        await storage.put('window', record); await storage.setAlarm(record.start + 900000);
+        await storage.put('window', record); await storage.setAlarm(Math.max(record.start, ...Object.values(record.tokens)) + 900000);
         return json(200, 'You can send your message securely.', { available: true, token });
       }
       if (path !== '/api/contact' || request.method !== 'POST') return json(405, 'Method not allowed.');
       if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('Content-Type') || '')) return json(415, 'Unsupported submission format.');
       if (record.attempts >= 5) return json(429, 'Too many attempts. Please wait 15 minutes before trying again.');
-      record.attempts++; await storage.put('window', record); await storage.setAlarm(record.start + 900000);
+      record.attempts++; await storage.put('window', record); await storage.setAlarm(Math.max(record.start, ...Object.values(record.tokens)) + 900000);
       const reader = request.body?.getReader(); const chunks = []; let size = 0;
       if (!reader) return json(400, 'Invalid submission.');
       while (true) { const { done, value } = await reader.read(); if (done) break; size += value.length; if (size > 32768) { await reader.cancel(); return json(413, 'Your message is too large.'); } chunks.push(value); }
@@ -69,5 +72,13 @@ export class ContactLimits {
       catch { return json(502, 'Your message could not be confirmed as received. Please retry or contact us by email.'); }
     });
   }
-  async alarm() { await this.state.storage.deleteAll(); }
+  async alarm() {
+    return this.state.blockConcurrencyWhile(async () => {
+      const record = await this.state.storage.get('window');
+      if (!record) return;
+      const expires = Math.max(record.start, ...Object.values(record.tokens)) + 900000;
+      if (Date.now() < expires) { await this.state.storage.setAlarm(expires); return; }
+      await this.state.storage.deleteAll();
+    });
+  }
 }

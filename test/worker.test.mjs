@@ -35,6 +35,8 @@ test('persistent Worker limiter validates, routes both inboxes, rejects replay a
       assert.equal((await post({ ...payload, token })).status, 400);
     }
     assert.equal((await post(payload)).status, 429);
+    data.get('window').start -= 900001;
+    for (const token of Object.keys(data.get('window').tokens)) data.get('window').tokens[token] -= 900001;
     await handler.alarm(); assert.equal(data.size, 0);
     const { token } = await (await handler.fetch(new Request('https://test.workers.dev/api/contact/status'))).json(); data.get('window').tokens[token] -= 1100;
     globalThis.fetch = async () => Response.json({ error: 'private details' }, { status: 403 });
@@ -131,4 +133,45 @@ test('approved origins can read initialization errors without bypassing verifica
     }
     assert.equal(forwarded, false);
   }
+});
+
+test('fresh Worker tokens survive rate-window rollover and obsolete alarms, but retain minimum age, expiry and replay checks', async () => {
+  const data = new Map(); let alarmAt;
+  const state = { blockConcurrencyWhile: fn => fn(), storage: { get: async key => structuredClone(data.get(key)), put: async (key, value) => data.set(key, structuredClone(value)), setAlarm: async at => { alarmAt = at; }, deleteAll: async () => data.clear() } };
+  const handler = new ContactLimits(state, { RESEND_API_KEY: 'simulated-test-key', CONTACT_MAIL_FROM: 'info@ygvoice.org' });
+  const originalNow = Date.now; const originalFetch = globalThis.fetch; let now = 1000000; let deliveries = 0;
+  Date.now = () => now;
+  globalThis.fetch = async () => { deliveries++; return Response.json({ id: 'simulated-accepted' }); };
+  const issue = async () => (await (await handler.fetch(new Request('https://test.workers.dev/api/contact/status'))).json()).token;
+  const post = token => handler.fetch(new Request('https://test.workers.dev/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Test', email: 'test@example.org', subject: 'General Inquiries', message: 'Simulated message only.', consent: 'yes', website: '', token }) }));
+  try {
+    await issue(); now += 899000;
+    const token = await issue(); assert.equal(alarmAt, now + 900000);
+    assert.equal((await post(token)).status, 400); assert.equal(deliveries, 0);
+    now += 2000;
+    await handler.alarm(); assert.equal(data.size, 1);
+    assert.equal((await post(token)).status, 200); assert.equal(deliveries, 1);
+    assert.equal((await post(token)).status, 400); assert.equal(deliveries, 1);
+    const expiring = await issue(); now += 900001;
+    assert.equal((await post(expiring)).status, 400); assert.equal(deliveries, 1);
+  } finally { Date.now = originalNow; globalThis.fetch = originalFetch; }
+});
+
+test('production Worker accepts all 17 categories through its provider path with unchanged inbox routing', async () => {
+  const { categories } = await import('../scripts/contact-delivery.mjs');
+  assert.equal(categories.length, 17);
+  const originalFetch = globalThis.fetch; const sent = [];
+  globalThis.fetch = async (url, options) => { assert.equal(url, 'https://api.resend.com/emails'); sent.push(JSON.parse(options.body)); return Response.json({ id: 'simulated-accepted' }); };
+  try {
+    for (const subject of categories) {
+      const data = new Map();
+      const state = { blockConcurrencyWhile: fn => fn(), storage: { get: async key => structuredClone(data.get(key)), put: async (key, value) => data.set(key, structuredClone(value)), setAlarm: async () => {} } };
+      const handler = new ContactLimits(state, { RESEND_API_KEY: 'simulated-test-key', CONTACT_MAIL_FROM: 'info@ygvoice.org' });
+      const { token } = await (await handler.fetch(new Request('https://test.workers.dev/api/contact/status'))).json(); data.get('window').tokens[token] -= 1100;
+      const response = await handler.fetch(new Request('https://test.workers.dev/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Test', email: 'test@example.org', subject, message: 'Simulated message only.', consent: 'yes', website: '', token }) }));
+      assert.equal(response.status, 200, subject); assert.equal((await response.json()).accepted, true);
+      assert.deepEqual(sent.at(-1).to, [subject === 'Donations & Financial Support' ? 'support@ygvoice.org' : 'info@ygvoice.org']);
+    }
+    assert.equal(sent.length, 17);
+  } finally { globalThis.fetch = originalFetch; }
 });

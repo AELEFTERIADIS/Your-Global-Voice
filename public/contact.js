@@ -23,7 +23,7 @@ const pagesApiOrigin = ['aelefteriadis.github.io', 'ygvoice.org', 'www.ygvoice.o
   ? 'https://ygvoice-contact.andyelft.workers.dev' : '';
 const apiOrigin = document.querySelector('meta[name="ygv-contact-api"]')?.content || pagesApiOrigin;
 const apiUrl = (path) => apiOrigin ? apiOrigin + '/' + path : path;
-async function prepare() {
+async function prepare(enableSubmit = true) {
   token = null;
   submit.disabled = true;
   if (location.protocol === 'file:') {
@@ -46,8 +46,8 @@ async function prepare() {
     unavailableMessage = errors[response.status] || unavailableMessage;
     const result = await response.json();
     if (!response.ok || result.available !== true || typeof result.token !== 'string' || !result.token) throw new Error();
-    token = result.token; submit.disabled = false;
-    status.textContent = result.message;
+    token = result.token; submit.disabled = !enableSubmit;
+    status.textContent = '';
     return true;
   } catch {
     submit.disabled = true;
@@ -63,6 +63,10 @@ form.addEventListener('submit', async (event) => {
   resultStatus.textContent = 'Sending your message…';
   let failureMessage = 'Your message could not be confirmed as received. Please retry or contact us by email.';
   try {
+    // Refresh expired/IP-bound tokens without retrying an ambiguous mail submission.
+    if (!await prepare(false)) throw new Error('Verification unavailable.');
+    // Preserve the backend minimum completion time for the freshly issued token.
+    await new Promise(resolve => setTimeout(resolve, 1100));
     const response = await fetch(apiUrl('api/contact'), { method: 'POST', signal: AbortSignal.timeout(15000), headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), token }) });
     const result = await response.json();
     if (!response.ok || result.accepted !== true) {

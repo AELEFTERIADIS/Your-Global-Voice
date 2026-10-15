@@ -14,6 +14,29 @@ The frontend endpoint is configured in the Pages workflow; the form enables
 only after the deployed Worker returns an availability response and one-time token. API acceptance is
 not proof of inbox receipt. No real delivery has been tested here.
 
+## Existing production deployment
+
+The existing Worker is `ygvoice-contact`, published at
+`https://ygvoice-contact.andyelft.workers.dev`. Cloudflare Workers Builds is
+connected separately from GitHub Actions: commit `9b33ed5` has a successful
+`Workers Builds: ygvoice-contact` check from the Cloudflare Workers and Pages app.
+The GitHub Actions workflow publishes only Pages. After a backend change, verify
+both the Pages run and the Cloudflare check; confirm the production version in
+Cloudflare before claiming live behavior. The historical name
+`your-global-voice-contact` below must not be used to create another Worker.
+
+Submission verification uses a per-client token. The browser refreshes it before
+submission and waits for the existing minimum age. The Worker preserves valid
+tokens across rate-window rollover and does not let an obsolete cleanup alarm
+delete them. It still rejects reused, expired, too-young, or missing tokens and
+honeypot submissions. No automatic POST retry is made after an ambiguous delivery.
+
+If live access is blocked, an authorized operator should inspect the existing
+Worker's Builds and Deployments in Cloudflare, verify the production commit, and
+inspect redacted status/error metadata without logging request bodies, tokens,
+IP addresses, or credentials. A live email test requires explicit approval and
+confirmation of provider delivery and mailbox receipt, not just API acceptance.
+
 ## Exact external steps
 
 1. Create or use a Cloudflare account with Workers and SQLite-backed Durable
@@ -22,7 +45,7 @@ not proof of inbox receipt. No real delivery has been tested here.
    no website migration is necessary. An authorized developer can deploy it
    using Wrangler, or connect this repository to Workers Builds with root
    directory `worker` and deploy command `npx wrangler deploy`.
-2. In Cloudflare **Workers & Pages → your-global-voice-contact → Settings →
+2. In Cloudflare **Workers & Pages → ygvoice-contact → Settings →
    Variables and Secrets**, add **RESEND_API_KEY as a Secret**, never as plaintext
    or a GitHub repository variable. Enter the existing sending-only key directly
    there. Do not send it through chat. Wrangler's interactive secret-entry flow
