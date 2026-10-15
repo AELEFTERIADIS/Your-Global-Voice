@@ -52,3 +52,5 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 /* Preserve the original badge line and button footprint when replacing their contents. */
 .contact-whatsapp-button:hover { background: var(--navy); }
 @media (max-width: 26rem) { .contact-whatsapp-button { min-height: 5.55rem; } }
+
+.contact-mailing { grid-column: 1 / -1; }
