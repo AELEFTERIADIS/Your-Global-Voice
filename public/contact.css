@@ -27,19 +27,13 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 
 .contact-whatsapp-number { color: var(--navy); font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 700; line-height: 1.4; margin-block: 1.25rem 1rem; }
 
-.contact-help { align-self: start; }
+.contact-help { margin-bottom: 1.5rem; }
 .contact-help > p:not(.eyebrow) { margin-block: .875rem; line-height: 1.65; }
-
-@media (min-width: 42.0625rem) {
-  .contact-help { align-self: stretch; display: flex; flex-direction: column; }
-  .contact-help > .text-link { align-self: flex-start; margin-top: auto; padding-top: .5rem; }
-}
 
 /* Give tablet contact cards and fields enough room for their full labels. */
 @media (min-width: 42.0625rem) and (max-width: 56rem) {
  .card-grid, .contact-fields { grid-template-columns: 1fr; }
  .contact-fields { gap: 0; }
- .contact-help > .text-link { margin-top: 0; }
 }
 @media (max-width: 56rem) {
  .contact-form .contact-consent { min-height: 44px; }
