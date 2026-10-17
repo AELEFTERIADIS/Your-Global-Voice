@@ -17,3 +17,6 @@
 .mission-hero > .lead { margin-bottom: 0; }
 .mission-commitment { gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
 .mission-commitment .mission-body > .motto { margin-bottom: 0; }
+
+.mission-commitment-line { display: flex; align-items: baseline; gap: .4em; }
+.mission-commitment-icon { width: .65em; height: .65em; color: var(--gold); flex-shrink: 0; }
