@@ -1,9 +1,24 @@
 [
   "Our mission is to give a voice to the voiceless, bring hope and assistance to those in need, protect vulnerable lives, and inspire collective action toward a more compassionate and just world.",
-  "Your Global Voice, Inc. is a nonprofit charitable organization based in New York, United States, with a commitment to serving both nationally and internationally. We believe that compassion knows no boundaries and that every act of kindness can make a difference. Guided by these principles, we seek to help individuals and communities, protect animals, and preserve the environment through meaningful action and charitable initiatives.",
-  "Humanitarian assistance is at the heart of our mission. We strive to help individuals and families facing poverty, hardship, illness, displacement, and other difficult circumstances. Through charitable projects, emergency assistance, and partnerships, we aim to provide essential support, relieve suffering, and bring hope to those who need it most. We believe that assistance should be guided by human need, without discrimination based on religion, race, nationality, gender, or personal background.",
-  "We are equally committed to assisting individuals who face persecution, discrimination, and injustice because of their religion, race, ethnicity, nationality, beliefs, or identity. We seek to defend human dignity, promote fundamental rights, and support those whose voices have been silenced. Through advocacy, awareness, and practical assistance, we aim to stand beside vulnerable individuals and help them live with dignity, safety, and freedom.",
-  "The protection of animals is a vital part of our mission. We are determined to help animals suffering from abuse, abandonment, neglect, and cruelty. Through rescue initiatives, veterinary assistance, shelter projects, and responsible adoption programs, we seek to save lives and provide animals with the care and protection they deserve. We also aim to promote humane treatment and encourage greater responsibility toward all living creatures.",
-  "Protecting our planet is a responsibility we share with present and future generations. We are committed to preserving forests, protecting natural habitats, and supporting efforts to prevent environmental destruction. Through conservation projects, education, and community participation, we seek to protect our natural resources and contribute to a healthier, safer, and more sustainable world.",
-  "Our mission extends beyond words and promises. We aspire to turn compassion into action through meaningful projects, dedicated volunteers, generous supporters, and partnerships built on shared values. We believe that lasting change is possible when individuals unite to help those in need, protect the vulnerable, and care for the world we share. Together, we can save lives, restore hope, and build a better future for all."
+  "Your Global Voice is a nonprofit organization based in New York, United States, committed to providing humanitarian assistance, defending human dignity, and protecting animals and the environment to help build a more compassionate, just, and sustainable world. We believe that compassion knows no boundaries and that every act of kindness has the power to change lives.",
+  {
+    "heading": "Humanitarian Assistance",
+    "text": "Our humanitarian efforts are dedicated to assisting individuals, families, and communities facing poverty, illness, displacement, emergencies, and other hardships. Through our programs and projects, we seek to provide essential support, relieve suffering, save lives, and restore hope. We believe that assistance should be guided by human need, without discrimination based on religion, race, ethnicity, nationality, gender, or background."
+  },
+  {
+    "heading": "Human Rights and Advocacy",
+    "text": "We are equally committed to assisting individuals facing persecution, discrimination, and injustice because of their religion, race, ethnicity, nationality, beliefs, or identity. Through advocacy, awareness, and practical assistance, we seek to defend fundamental rights, uphold human dignity, and support those whose safety, freedom, and equal treatment are threatened. No one should face persecution or injustice simply for being who they are."
+  },
+  {
+    "heading": "Animal Welfare and Protection",
+    "text": "One of our fundamental purposes is the protection and welfare of animals, guided by compassion and respect for all living creatures. We strive to rescue and protect animals suffering from cruelty, abuse, neglect, and abandonment. Through rescue initiatives, veterinary assistance, shelter projects, and responsible adoption programs, we aim to provide essential care to animals in need. By promoting kindness and responsible care, we seek to save lives and build a world where animals are treated with compassion and respect."
+  },
+  {
+    "heading": "Environmental Protection",
+    "text": "Equally important to our mission is protecting the environment and preserving our planet for future generations. We seek to protect forests, conserve natural habitats, prevent environmental destruction, and promote responsible care of our natural resources. Through environmental projects, education, and community participation, we aim to inspire collective responsibility and contribute to a healthier, greener, and more sustainable world."
+  },
+  {
+    "heading": "Our Shared Commitment",
+    "text": "United by these four purposes, we believe that compassion, cooperation, and collective action can create meaningful and lasting change. Together, we can bring hope, protect lives, and build a better future for all."
+  }
 ]

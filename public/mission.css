@@ -5,3 +5,9 @@
 .mission-details[open] .mission-read-less { display: inline; }
 .mission-expanded { padding-top: 1.5rem; }
 .mission-expanded > p:last-child { margin-bottom: 0; }
+
+.mission-body { max-width: 68ch; min-width: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; }
+.mission-body p { margin-block: 0 1.5rem; }
+.mission-body .mission-purpose + .mission-purpose { margin-top: 2rem; }
+.mission-body .mission-purpose h3 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 400; line-height: 1.35; color: var(--navy); border-left: 2px solid var(--gold); padding-left: .875rem; margin-block: 0 1rem; }
+.mission-body .motto { font-family: Arial, Helvetica, sans-serif; font-size: .9375rem; line-height: 1.6; }
