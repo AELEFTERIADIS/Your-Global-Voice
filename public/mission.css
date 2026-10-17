@@ -11,3 +11,9 @@
 .mission-body .mission-purpose + .mission-purpose { margin-top: 2rem; border-top: 1px solid rgba(183, 148, 78, .3); padding-top: 2rem; }
 .mission-body .mission-purpose h3 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 400; line-height: 1.35; color: var(--navy); border-left: 2px solid var(--gold); padding-left: .875rem; margin-block: 0 1rem; }
 .mission-body .motto { font-family: Arial, Helvetica, sans-serif; font-size: .9375rem; line-height: 1.6; }
+
+.mission-box { width: 100%; max-width: none; border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); background: var(--cream); padding: clamp(1.5rem, 4vw, 3rem); }
+.mission-hero { margin-top: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
+.mission-hero > .lead { margin-bottom: 0; }
+.mission-commitment { gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
+.mission-commitment .mission-body > .motto { margin-bottom: 0; }
