@@ -1,0 +1,7 @@
+.mission-details { margin-block: 1.5rem; }
+.mission-details > summary { width: fit-content; list-style: none; font: inherit; }
+.mission-details > summary::-webkit-details-marker { display: none; }
+.mission-read-less, .mission-details[open] .mission-read-more { display: none; }
+.mission-details[open] .mission-read-less { display: inline; }
+.mission-expanded { padding-top: 1.5rem; }
+.mission-expanded > p:last-child { margin-bottom: 0; }

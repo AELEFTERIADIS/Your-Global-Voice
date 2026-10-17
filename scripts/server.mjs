@@ -22,6 +22,7 @@ const routes = new Map([
   ['/donate.js', ['../public/donate.js', 'text/javascript; charset=utf-8']],
   ['/donate.css', ['../public/donate.css', 'text/css; charset=utf-8']],
   ['/contact.js', ['../public/contact.js', 'text/javascript; charset=utf-8']],
+  ['/mission.css', ['../public/mission.css', 'text/css; charset=utf-8']],
   ['/contact.css', ['../public/contact.css', 'text/css; charset=utf-8']],
   ['/cinzel-regular.woff', ['../public/cinzel-regular.woff', 'font/woff']],
   ['/garamond-regular.woff2', ['../public/garamond-regular.woff2', 'font/woff2']],

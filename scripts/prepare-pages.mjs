@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const pagesFiles = ['index.html', 'about.html', 'mission.html', 'purposes.html', 'projects.html', 'get-involved.html', 'donate.html', 'contact.html'];
-export const assets = ['cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
+export const assets = ['cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'mission.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
 
 export async function preparePages(destination, apiOrigin = process.env.CONTACT_API_ORIGIN || '') {
   if (apiOrigin) {
