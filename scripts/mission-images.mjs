@@ -1,26 +1,26 @@
 export const missionImages = [
   {
-    "src": "5C161716-DADB-4DFE-A40B-CE2AD64D93B7.png",
+    "src": "5008A87A-3C8C-4B00-A61F-FECAB730B2A7.PNG",
     "alt": "Man giving a box of essential supplies to a child",
-    "width": 766,
-    "height": 501
+    "width": 1672,
+    "height": 940
   },
   {
-    "src": "97D2EC41-9E5F-4D72-A794-D547E5B77ED6.png",
+    "src": "3309CF70-8AC6-49E4-9E70-A3FDEB44C925.PNG",
     "alt": "Scales of justice in front of a globe",
-    "width": 765,
-    "height": 501
+    "width": 1672,
+    "height": 941
   },
   {
-    "src": "E99304F0-D3DA-4773-9D8F-961599093C54.png",
+    "src": "9BE174A6-FB93-432D-910A-9E3C03F3284C.PNG",
     "alt": "Veterinarian caring for a dog with cats and other dogs at an animal shelter",
-    "width": 1536,
-    "height": 1024
+    "width": 1672,
+    "height": 941
   },
   {
-    "src": "D791115C-7C20-4C6E-84D4-B0BDC6055030.png",
+    "src": "C05BF7C1-B49B-41F0-ABC0-618A61CA9986.PNG",
     "alt": "Hands holding a sapling in soil",
-    "width": 765,
-    "height": 517
+    "width": 1672,
+    "height": 941
   }
 ];
