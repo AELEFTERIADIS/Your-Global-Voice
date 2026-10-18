@@ -66,3 +66,9 @@
  .mission-purpose:first-child::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(183, 148, 78, .3); pointer-events: none; }
  .mission-purpose:first-child > .mission-purpose-copy { position: relative; top: .75rem; }
 }
+
+/* Frame the commitment statements without changing the column's vertical footprint. */
+.mission-commitment-lines { position: relative; padding-inline: 1rem; }
+.mission-commitment-lines::before { content: ''; position: absolute; inset: -.5rem 0; border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); border-radius: 0; background: var(--cream); pointer-events: none; }
+.mission-commitment-lines > .mission-commitment-line { position: relative; }
+@media (max-width: 24rem) { .mission-commitment-lines { padding-inline: .5rem; } }
