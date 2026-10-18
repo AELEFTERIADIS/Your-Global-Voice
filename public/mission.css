@@ -51,3 +51,10 @@
 
 .mission-commitment-intro { width: min(100%, 340px); min-width: 0; }
 @media (min-width: 64.0625rem) { .mission-commitment-intro { width: var(--mission-image-width); } }
+
+@media (min-width: 64.0625rem) {
+ /* Keep the existing border space so images stay fixed; draw each rule at its image's top edge. */
+ .mission-body .mission-purpose + .mission-purpose { border-top-color: transparent; }
+ .mission-purpose + .mission-purpose::before { content: ''; position: absolute; top: 2rem; left: 0; right: 0; height: 1px; background: rgba(183, 148, 78, .3); pointer-events: none; }
+ .mission-purpose + .mission-purpose > .mission-purpose-copy { position: relative; top: .75rem; }
+}
