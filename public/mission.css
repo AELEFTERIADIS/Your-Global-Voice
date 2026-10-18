@@ -91,3 +91,10 @@
  .mission-commitment-lines > .mission-commitment-line { gap: calc(.4em / 1.08); }
  .mission-commitment-lines .mission-commitment-icon { width: calc(.65em / 1.08); height: calc(.65em / 1.08); }
 }
+
+/* Keep the label outside the content-sized commitment box on smaller screens. */
+@media (max-width: 64rem) {
+ .mission-commitment-intro { border: 0; border-radius: 0; background: transparent; padding: 0; }
+ .mission-commitment-intro > .eyebrow { margin-bottom: 1rem; }
+ .mission-commitment-lines { display: flex; flex-direction: column; gap: .5rem; width: 100%; height: auto; padding: .6875rem; border: 1px solid rgba(164, 124, 50, .28); border-radius: .25rem; background: var(--cream); }
+}
