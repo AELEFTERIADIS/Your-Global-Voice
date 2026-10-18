@@ -58,3 +58,11 @@
  .mission-purpose + .mission-purpose::before { content: ''; position: absolute; top: 2rem; left: 0; right: 0; height: 1px; background: rgba(183, 148, 78, .3); pointer-events: none; }
  .mission-purpose + .mission-purpose > .mission-purpose-copy { position: relative; top: .75rem; }
 }
+
+/* Match only the closing photograph to the existing landscape image frame. */
+.mission-purpose:last-child > .mission-image-area > img { aspect-ratio: 1672 / 941; object-fit: cover; object-position: center; }
+@media (min-width: 64.0625rem) {
+ .mission-sections { border-top-color: transparent; }
+ .mission-purpose:first-child::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(183, 148, 78, .3); pointer-events: none; }
+ .mission-purpose:first-child > .mission-purpose-copy { position: relative; top: .75rem; }
+}
