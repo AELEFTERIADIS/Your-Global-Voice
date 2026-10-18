@@ -1,10 +1,10 @@
 .mission-sections { margin-top: 1.5rem; border-top: 1px solid rgba(183, 148, 78, .3); padding-top: 1.5rem; }
-.mission-body > p:first-child { margin-bottom: 0; }
+.mission-body > .mission-intro-heading + p { margin-bottom: 0; }
 
 .mission-body { max-width: 68ch; min-width: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; }
 .mission-body p { margin-block: 0 1.5rem; }
 .mission-body .mission-purpose + .mission-purpose { margin-top: 2rem; border-top: 1px solid rgba(183, 148, 78, .3); padding-top: 2rem; }
-.mission-body .mission-purpose h3 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 400; line-height: 1.35; color: var(--navy); border-left: 2px solid var(--gold); padding-left: .875rem; margin-block: 0 1rem; }
+.mission-body .mission-purpose h3, .mission-body > .mission-intro-heading { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 400; line-height: 1.35; color: var(--navy); border-left: 2px solid var(--gold); padding-left: .875rem; margin-block: 0 1rem; }
 .mission-body .motto { font-family: Arial, Helvetica, sans-serif; font-size: .9375rem; line-height: 1.6; }
 
 .mission-box { width: 100%; max-width: none; border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); background: var(--cream); padding: clamp(1.5rem, 4vw, 3rem); }
@@ -23,6 +23,7 @@
 @media (min-width: 64.0625rem) {
  .mission-commitment {
   container-type: inline-size;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
   --mission-column-gap: clamp(1.5rem, 4vw, 4rem);
   --mission-image-width: calc((100cqw - var(--mission-column-gap)) / 2.3 + var(--mission-column-gap) - 1.5rem);
  }
@@ -47,3 +48,6 @@
 .mission-support { margin-top: 1.5rem; }
 
 @media (min-width: 42.0625rem) and (max-width: 64rem) { .mission-commitment { grid-template-columns: minmax(0, 1fr); } }
+
+.mission-commitment-intro { width: min(100%, 340px); min-width: 0; }
+@media (min-width: 64.0625rem) { .mission-commitment-intro { width: var(--mission-image-width); } }
