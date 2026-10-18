@@ -177,3 +177,7 @@
 @media (max-width: 1024px) {
  .donation-trust p, .donation-trust p:last-child { text-align: left; word-spacing: normal; text-wrap: wrap; }
 }
+
+/* Anchor navigation keeps the existing header visible above the payment controls. */
+body:has(#donation-payment:target) .site-header { position: sticky; top: 0; z-index: 10; }
+#donation-payment { scroll-margin-top: var(--donation-header-offset, 12rem); }

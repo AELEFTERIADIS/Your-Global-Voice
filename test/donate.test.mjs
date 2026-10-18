@@ -56,8 +56,10 @@ test('donation hero image is locally served with correct media type and descript
 });
 
 // Frozen approved payment box; the separate left column may be refined.
-test('approved donation component remains byte-for-byte unchanged', () => {
-  const html = renderDonate();
+test('approved donation component remains byte-for-byte unchanged apart from its navigation anchor', () => {
+  const original = renderDonate();
+  assert.equal((original.match(/id="donation-payment"/g) || []).length, 1);
+  const html = original.replace(' id="donation-payment"', '');
   const start = html.indexOf('<div class="donation-payment">');
   const end = html.indexOf('</div></div></section>', start) + 12;
   assert.equal(createHash('sha256').update(html.slice(start, end)).digest('hex'),

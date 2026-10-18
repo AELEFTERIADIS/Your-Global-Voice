@@ -68,11 +68,11 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.equal(stylesheet.status, 200);
     assert.match(stylesheet.headers.get('content-type'), /text\/css/);
     assert.match(html, /Where Every Voice Matters/);
-    assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
+    assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html${route === "/donate" ? "#donation-payment" : ""}" aria-current="page"`));
     assert.doesNotMatch(html, /<iframe\b/);
     if (!['/contact', '/donate'].includes(route)) assert.doesNotMatch(html, /<script\b/);
     if (route !== '/contact') assert.doesNotMatch(html, /<form\b/);
-    for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html"`));
+    for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html${destination === "/donate" ? "#donation-payment" : ""}"`));
     if (route === '/mission') {
       assert.match(html, /Be Part of Our Mission/);
       assert.doesNotMatch(html, /mission-details|mission-read-more|mission-read-less|Read More|Read Less/);
@@ -155,7 +155,7 @@ test('every generated page link resolves to an existing sibling file', async () 
       await access(target);
     }
     for (const destination of files) {
-      assert.ok(html.includes(`href="${destination}.html"`));
+      assert.ok(html.includes(`href="${destination}.html${destination === "donate" ? "#donation-payment" : ""}"`));
     }
   }
 });

@@ -65,7 +65,7 @@ for (const [path, title, file] of pages) {
 </html>
 `;
   const portableHtml = html.replace(/href="([^"#]+)"/g, (match, href) => {
-    const target = pageFiles.get(href);
+    const target = href === '/donate' || href === 'donate.html' ? 'donate.html#donation-payment' : pageFiles.get(href);
     return target ? `href="${target}"` : match;
   });
   await writeFile(new URL(`../public/${file}`, import.meta.url), portableHtml);

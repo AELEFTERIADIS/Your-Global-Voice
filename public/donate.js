@@ -16,3 +16,28 @@ function updateSelection() {
 selector.addEventListener('change', updateSelection);
 custom.addEventListener('input', updateSelection);
 updateSelection();
+
+// Keep anchored payment navigation clear of the responsive header.
+const paymentSection = document.querySelector('#donation-payment');
+const siteHeader = document.querySelector('.site-header');
+const paymentHash = '#donation-payment';
+function updateHeaderOffset() {
+  document.documentElement.style.setProperty('--donation-header-offset', `${siteHeader.getBoundingClientRect().height + 8}px`);
+}
+function landOnPayment() {
+  if (location.hash !== paymentHash) return;
+  updateHeaderOffset();
+  requestAnimationFrame(() => paymentSection.scrollIntoView({ block: 'start' }));
+}
+new ResizeObserver(updateHeaderOffset).observe(siteHeader);
+window.addEventListener('load', landOnPayment);
+window.addEventListener('pageshow', landOnPayment);
+window.addEventListener('hashchange', landOnPayment);
+document.querySelectorAll('a[href="donate.html#donation-payment"]').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.mobile-menu')?.removeAttribute('open');
+    requestAnimationFrame(landOnPayment);
+  });
+});
+updateHeaderOffset();
+landOnPayment();
