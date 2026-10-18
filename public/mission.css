@@ -41,4 +41,4 @@
 
 /* Decorative accents occupy the existing paragraph margin without changing layout. */
 .mission-purpose-copy > p { position: relative; }
-.mission-purpose-copy > p::after { content: ''; position: absolute; top: calc(100% + 30px); left: 50%; transform: translateX(-50%); width: min(220px, 100%); height: 2px; background: #B89550; pointer-events: none; }
+.mission-purpose-copy > p::after { content: ''; position: absolute; top: calc(100% + 30px); left: 50%; transform: translateX(-50%); width: min(280px, 100%); height: 2px; background: #B89550; pointer-events: none; }
