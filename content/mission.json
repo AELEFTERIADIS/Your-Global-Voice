@@ -3,22 +3,27 @@
   "Your Global Voice is a nonprofit organization based in New York, United States, committed to providing humanitarian assistance, defending human dignity, and protecting animals and the environment to help build a more compassionate, just, and sustainable world. We believe that compassion knows no boundaries and that every act of kindness has the power to change lives.",
   {
     "heading": "Humanitarian Assistance",
+    "slogan": "Hope for Every Life",
     "text": "Our humanitarian efforts are dedicated to assisting individuals, families, and communities facing poverty, illness, displacement, emergencies, and other hardships. Through our programs and projects, we seek to provide essential support, relieve suffering, save lives, and restore hope. We believe that assistance should be guided by human need, without discrimination based on religion, race, ethnicity, nationality, gender, or background."
   },
   {
     "heading": "Human Rights and Advocacy",
+    "slogan": "Dignity for All",
     "text": "We are equally committed to assisting individuals facing persecution, discrimination, and injustice because of their religion, race, ethnicity, nationality, beliefs, or identity. Through advocacy, awareness, and practical assistance, we seek to defend fundamental rights, uphold human dignity, and support those whose safety, freedom, and equal treatment are threatened. No one should face persecution or injustice simply for being who they are."
   },
   {
     "heading": "Animal Welfare and Protection",
+    "slogan": "Every Life Matters",
     "text": "One of our fundamental purposes is the protection and welfare of animals, guided by compassion and respect for all living creatures. We strive to rescue and protect animals suffering from cruelty, abuse, neglect, and abandonment. Through rescue initiatives, veterinary assistance, shelter projects, and responsible adoption programs, we aim to provide essential care to animals in need. By promoting kindness and responsible care, we seek to save lives and build a world where animals are treated with compassion and respect."
   },
   {
     "heading": "Environmental Protection",
+    "slogan": "A Greener Tomorrow",
     "text": "Equally important to our mission is protecting the environment and preserving our planet for future generations. We seek to protect forests, conserve natural habitats, prevent environmental destruction, and promote responsible care of our natural resources. Through environmental projects, education, and community participation, we aim to inspire collective responsibility and contribute to a healthier, greener, and more sustainable world."
   },
   {
     "heading": "Our Shared Commitment",
+    "slogan": "Together, We Make a Difference",
     "text": "United by these four purposes, we believe that compassion, cooperation, and collective action can create meaningful and lasting change. Together, we can bring hope, protect lives, and build a better future for all."
   }
 ]
