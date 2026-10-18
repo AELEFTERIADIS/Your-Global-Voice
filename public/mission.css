@@ -47,3 +47,5 @@
 .mission-invitation-actions > .mission-projects-button { background: transparent; color: var(--navy); border-color: var(--gold); }
 .mission-invitation-actions > .mission-projects-button:hover { background: var(--cream); }
 @media (max-width: 42rem) { .mission-invitation-actions > .button { width: 100%; } }
+
+.mission-support { margin-top: 1.5rem; background: var(--cream); }
