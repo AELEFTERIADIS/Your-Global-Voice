@@ -12,10 +12,10 @@ export const missionImages = [
     "height": 501
   },
   {
-    "src": "4300D378-9C7E-4721-84A3-0DD30784ADDF.png",
-    "alt": "Dog, kitten, and lamb receiving compassionate care",
-    "width": 766,
-    "height": 517
+    "src": "E99304F0-D3DA-4773-9D8F-961599093C54.png",
+    "alt": "Veterinarian caring for a dog with cats and other dogs at an animal shelter",
+    "width": 1536,
+    "height": 1024
   },
   {
     "src": "D791115C-7C20-4C6E-84D4-B0BDC6055030.png",
