@@ -1,10 +1,4 @@
-.mission-details { margin-block: 1.5rem; }
-.mission-details > summary { width: fit-content; list-style: none; font: inherit; }
-.mission-details > summary::-webkit-details-marker { display: none; }
-.mission-read-less, .mission-details[open] .mission-read-more { display: none; }
-.mission-details[open] .mission-read-less { display: inline; }
-.mission-expanded { padding-top: 1.5rem; }
-.mission-expanded > p:last-child { margin-bottom: 0; }
+.mission-sections { padding-top: 1.5rem; }
 
 .mission-body { max-width: 68ch; min-width: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; }
 .mission-body p { margin-block: 0 1.5rem; }
@@ -39,7 +33,7 @@
  .mission-purpose + .mission-purpose > .mission-image-area { top: 2rem; }
 }
 
-.mission-invitation { background: #fff; }
+.mission-invitation { background: var(--cream); }
 .mission-invitation h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
 .mission-invitation > p { max-width: 68ch; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; margin-bottom: 1.75rem; }
 .mission-invitation-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; }
@@ -48,4 +42,4 @@
 .mission-invitation-actions > .mission-projects-button:hover { background: var(--cream); }
 @media (max-width: 42rem) { .mission-invitation-actions > .button { width: 100%; } }
 
-.mission-support { margin-top: 1.5rem; background: var(--cream); }
+.mission-support { margin-top: 1.5rem; }

@@ -75,6 +75,8 @@ test('all pages share working navigation and preserve the approved purposes', as
     for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html"`));
     if (route === '/mission') {
       assert.match(html, /Be Part of Our Mission/);
+      assert.doesNotMatch(html, /mission-details|mission-read-more|mission-read-less|Read More|Read Less/);
+      assert.match(html, /class="mission-sections"/);
       assert.match(html, /href="purposes\.html">Explore Our Causes/);
       assert.match(html, /href="projects\.html">See Our Projects/);
       assert.doesNotMatch(html, /class="purpose-grid"|Explore our areas of focus\./);
