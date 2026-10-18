@@ -21,12 +21,14 @@
 .mission-commitment-line { display: flex; align-items: baseline; gap: .4em; }
 .mission-commitment-icon { width: .65em; height: .65em; color: var(--gold); flex-shrink: 0; }
 
-/* Display the approved originals without cropping their embedded logos. */
-.mission-image-area { width: 200px; max-width: 100%; margin: 0; border-radius: .5rem; overflow: hidden; }
-.mission-image-area[hidden] { display: none; }
+/* Keep images with their section in reading order; on desktop they occupy the main left column. */
+.mission-image-area { width: min(100%, 340px); margin: 0 0 1.25rem; border-radius: .5rem; overflow: hidden; }
 .mission-image-area > img { display: block; width: 100%; height: auto; }
 .mission-purpose-copy { min-width: 0; }
-.mission-purpose:has(> .mission-image-area:not([hidden])) { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 1.25rem; }
 @media (min-width: 64.0625rem) {
- .mission-purpose:has(> .mission-image-area:not([hidden])) { grid-template-columns: 200px minmax(0, 1fr); gap: 1.5rem; }
+ .mission-purpose { position: relative; }
+ .mission-purpose:has(> .mission-image-area) { min-height: 240px; }
+ .mission-purpose + .mission-purpose:has(> .mission-image-area) { min-height: calc(240px + 2rem); }
+ .mission-image-area { position: absolute; top: 0; left: calc(-100% / 1.3 - clamp(1.5rem, 4vw, 4rem)); width: min(340px, calc(100% / 1.3)); margin: 0; }
+ .mission-purpose + .mission-purpose > .mission-image-area { top: 2rem; }
 }
