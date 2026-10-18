@@ -20,3 +20,13 @@
 
 .mission-commitment-line { display: flex; align-items: baseline; gap: .4em; }
 .mission-commitment-icon { width: .65em; height: .65em; color: var(--gold); flex-shrink: 0; }
+
+/* Display the approved originals without cropping their embedded logos. */
+.mission-image-area { width: 200px; max-width: 100%; margin: 0; border-radius: .5rem; overflow: hidden; }
+.mission-image-area[hidden] { display: none; }
+.mission-image-area > img { display: block; width: 100%; height: auto; }
+.mission-purpose-copy { min-width: 0; }
+.mission-purpose:has(> .mission-image-area:not([hidden])) { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 1.25rem; }
+@media (min-width: 64.0625rem) {
+ .mission-purpose:has(> .mission-image-area:not([hidden])) { grid-template-columns: 200px minmax(0, 1fr); gap: 1.5rem; }
+}

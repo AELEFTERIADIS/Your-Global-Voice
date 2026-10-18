@@ -1,3 +1,4 @@
+import { missionImages } from './mission-images.mjs';
 import { createServer } from 'node:http';
 import { createContactHandler } from './contact-delivery.mjs';
 import { readFile } from 'node:fs/promises';
@@ -6,6 +7,7 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+  ...missionImages.map(image => [`/${image.src}`, [`../public/${image.src}`, 'image/png']]),
   ['/', ['../public/index.html', 'text/html; charset=utf-8']],
   ['/index.html', ['../public/index.html', 'text/html; charset=utf-8']],
   ...['about', 'mission', 'purposes', 'projects', 'get-involved', 'donate', 'contact'].flatMap((page) => [
