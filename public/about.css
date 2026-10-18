@@ -1,0 +1,5 @@
+.about-who { align-items: start; }
+.about-who-image { display: block; width: 100%; height: auto; border-radius: .5rem; }
+@media (max-width: 64rem) {
+ .about-who { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+}
