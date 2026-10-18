@@ -73,7 +73,13 @@ test('all pages share working navigation and preserve the approved purposes', as
     if (!['/contact', '/donate'].includes(route)) assert.doesNotMatch(html, /<script\b/);
     if (route !== '/contact') assert.doesNotMatch(html, /<form\b/);
     for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html"`));
-    if (['/', '/mission', '/purposes'].includes(route)) {
+    if (route === '/mission') {
+      assert.match(html, /Be Part of Our Mission/);
+      assert.match(html, /href="purposes\.html">Explore Our Causes/);
+      assert.match(html, /href="projects\.html">See Our Projects/);
+      assert.doesNotMatch(html, /class="purpose-grid"|Explore our areas of focus\./);
+    }
+    if (['/', '/purposes'].includes(route)) {
       for (const [title, text] of expected) {
         assert.ok(html.includes(`<h3>${title}</h3>`), title);
         assert.ok(html.includes(`<p>${text}</p>`), title);

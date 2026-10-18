@@ -38,3 +38,12 @@
  .mission-image-area { position: absolute; top: 0; right: calc(100% + 1.5rem); width: var(--mission-image-width); margin: 0; }
  .mission-purpose + .mission-purpose > .mission-image-area { top: 2rem; }
 }
+
+.mission-invitation { background: #fff; }
+.mission-invitation h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+.mission-invitation > p { max-width: 68ch; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; margin-bottom: 1.75rem; }
+.mission-invitation-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; }
+.mission-invitation-actions > .button { border: 1px solid var(--navy); justify-content: center; }
+.mission-invitation-actions > .mission-projects-button { background: transparent; color: var(--navy); border-color: var(--gold); }
+.mission-invitation-actions > .mission-projects-button:hover { background: var(--cream); }
+@media (max-width: 42rem) { .mission-invitation-actions > .button { width: 100%; } }
