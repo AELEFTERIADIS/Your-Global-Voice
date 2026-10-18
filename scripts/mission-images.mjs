@@ -22,5 +22,11 @@ export const missionImages = [
     "alt": "Hands holding a sapling in soil",
     "width": 1672,
     "height": 941
+  },
+  {
+    "src": "7D468478-7090-4002-A24F-3965E7EE738B.png",
+    "alt": "Diverse hands forming a complete heart shape",
+    "width": 1536,
+    "height": 1024
   }
 ];

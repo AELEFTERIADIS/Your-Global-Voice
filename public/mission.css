@@ -1,4 +1,5 @@
-.mission-sections { padding-top: 1.5rem; }
+.mission-sections { margin-top: 1.5rem; border-top: 1px solid rgba(183, 148, 78, .3); padding-top: 1.5rem; }
+.mission-body > p:first-child { margin-bottom: 0; }
 
 .mission-body { max-width: 68ch; min-width: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; }
 .mission-body p { margin-block: 0 1.5rem; }
@@ -10,7 +11,7 @@
 .mission-hero { margin-top: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
 .mission-hero > .lead { margin-bottom: 0; }
 .mission-commitment { gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
-.mission-commitment .mission-body > .motto { margin-bottom: 0; }
+.mission-commitment .mission-body .motto { margin-bottom: 0; }
 
 .mission-commitment-line { display: flex; align-items: baseline; gap: .4em; }
 .mission-commitment-icon { width: .65em; height: .65em; color: var(--gold); flex-shrink: 0; }
@@ -29,6 +30,7 @@
  .mission-purpose { position: relative; }
  .mission-purpose:has(> .mission-image-area) { min-height: calc(var(--mission-image-width) * 941 / 1672); }
  .mission-purpose + .mission-purpose:has(> .mission-image-area) { min-height: calc(var(--mission-image-width) * 941 / 1672 + 2rem); }
+ .mission-purpose:last-child:has(> .mission-image-area) { min-height: calc(var(--mission-image-width) * 2 / 3 + 2rem); }
  .mission-image-area { position: absolute; top: 0; right: calc(100% + 1.5rem); width: var(--mission-image-width); margin: 0; }
  .mission-purpose + .mission-purpose > .mission-image-area { top: 2rem; }
 }
@@ -43,3 +45,5 @@
 @media (max-width: 42rem) { .mission-invitation-actions > .button { width: 100%; } }
 
 .mission-support { margin-top: 1.5rem; }
+
+@media (min-width: 42.0625rem) and (max-width: 64rem) { .mission-commitment { grid-template-columns: minmax(0, 1fr); } }
