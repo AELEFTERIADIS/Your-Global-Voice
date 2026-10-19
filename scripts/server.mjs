@@ -10,7 +10,7 @@ const routes = new Map([
   ['/about.js', ['../public/about.js', 'text/javascript; charset=utf-8']],
   ['/about.css', ['../public/about.css', 'text/css; charset=utf-8']],
   ['/3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', ['../public/3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', 'image/png']],
-  ['/6EA67AC3-FA48-4E3A-BAE3-EE6AC001823C.png', ['../public/6EA67AC3-FA48-4E3A-BAE3-EE6AC001823C.png', 'image/png']],
+  ['/76294CB8-5CC1-405F-92D0-03D3AFBEA081.png', ['../public/76294CB8-5CC1-405F-92D0-03D3AFBEA081.png', 'image/png']],
   ...missionImages.map(image => [`/${image.src}`, [`../public/${image.src}`, 'image/png']]),
   ['/', ['../public/index.html', 'text/html; charset=utf-8']],
   ['/index.html', ['../public/index.html', 'text/html; charset=utf-8']],
