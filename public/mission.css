@@ -42,7 +42,7 @@
 .mission-support { margin-top: 1.5rem; }
 @media (min-width: 64.0625rem) {
  .mission-invitation { padding-block: 2rem 1.5rem; }
- .mission-invitation > h2, .mission-invitation > p, .mission-invitation-actions { width: min(100%, 46rem); margin-inline: auto; }
+ .mission-invitation > h2, .mission-invitation > p, .mission-invitation-actions { width: min(100%, 46rem); margin-inline: 0; }
 }
 
 @media (max-width: 64rem) {
