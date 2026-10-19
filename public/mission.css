@@ -105,3 +105,9 @@
 @media (min-width: 64.0625rem) {
  .mission-commitment-intro { width: var(--mission-image-width); height: 321.1875px; }
 }
+
+/* Keep desktop closing rows compact without changing photograph geometry. */
+@media (min-width: 64.0625rem) {
+ .mission-purpose:last-child:has(> .mission-image-area) { min-height: calc(var(--mission-image-width) * 941 / 1672 + 2rem); }
+ .mission-commitment, .mission-invitation { padding-bottom: 1.5rem; }
+}
