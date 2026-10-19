@@ -1,113 +1,61 @@
-.mission-sections { margin-top: 1.5rem; border-top: 1px solid rgba(183, 148, 78, .3); padding-top: 1.5rem; }
-.mission-body .mission-intro-content > p { margin-bottom: 0; }
-
-.mission-body { max-width: 68ch; min-width: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; }
-.mission-body p { margin-block: 0 1.5rem; }
-.mission-body .mission-purpose + .mission-purpose { margin-top: 2rem; border-top: 1px solid rgba(183, 148, 78, .3); padding-top: 2rem; }
-.mission-body .mission-purpose h3, .mission-body .mission-intro-heading { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 400; line-height: 1.35; color: var(--navy); border-left: 2px solid var(--gold); padding-left: .875rem; margin-block: 0 1rem; }
-.mission-body .motto { font-family: Arial, Helvetica, sans-serif; font-size: .9375rem; line-height: 1.6; }
-
 .mission-box { width: 100%; max-width: none; border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); background: var(--cream); padding: clamp(1.5rem, 4vw, 3rem); }
 .mission-hero { margin-top: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
 .mission-hero > .lead { margin-bottom: 0; }
-.mission-commitment { gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
-.mission-commitment .mission-body .motto { margin-bottom: 0; }
-
-.mission-commitment-line { display: flex; align-items: baseline; gap: .4em; }
-.mission-commitment-icon { width: .65em; height: .65em; color: var(--gold); flex-shrink: 0; }
-
-/* Keep images with their section in reading order; on desktop they occupy the main left column. */
-.mission-image-area { width: min(100%, 340px); margin: 0 0 1.25rem; border-radius: .5rem; overflow: hidden; }
+.mission-commitment { align-items: start; margin-bottom: 1.5rem; }
+.mission-body { max-width: none; min-width: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; }
+.mission-body p { margin-block: 0 1.5rem; }
+.mission-body .mission-intro-content > p, .mission-purpose-copy > p:last-child { margin-bottom: 0; }
+.mission-body .mission-purpose h3, .mission-body .mission-intro-heading { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 400; line-height: 1.35; color: var(--navy); border-left: 2px solid var(--gold); padding-left: .875rem; margin-block: 0 1rem; }
+.mission-body .motto { font-family: Arial, Helvetica, sans-serif; font-size: .9375rem; line-height: 1.6; margin-bottom: 0; }
+.mission-commitment-intro { min-width: 0; }
+.mission-commitment-intro > .eyebrow { margin-bottom: 1rem; }
+.mission-commitment-image, .mission-image-area { margin: 0; padding: 0; border: 0; border-radius: .5rem; overflow: hidden; }
+.mission-commitment-image { aspect-ratio: 1672 / 941; }
+.mission-commitment-image > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; border-radius: inherit; }
 .mission-image-area > img { display: block; width: 100%; height: auto; }
 .mission-purpose-copy { min-width: 0; }
+
+/* Images participate in row sizing, so no estimated heights or offsets are needed. */
 @media (min-width: 64.0625rem) {
  .mission-commitment {
   container-type: inline-size;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
   --mission-column-gap: clamp(1.5rem, 4vw, 4rem);
-  --mission-image-width: calc((100cqw - var(--mission-column-gap)) / 2.3 + var(--mission-column-gap) - 1.5rem);
+  --mission-image-width: calc((100% - var(--mission-column-gap)) / 2.3 + var(--mission-column-gap) - 1.5rem);
+  grid-template-columns: var(--mission-image-width) minmax(0, 1fr);
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  padding-bottom: 1.5rem;
  }
-
- .mission-purpose { position: relative; }
- .mission-purpose:has(> .mission-image-area) { min-height: calc(var(--mission-image-width) * 941 / 1672); }
- .mission-purpose + .mission-purpose:has(> .mission-image-area) { min-height: calc(var(--mission-image-width) * 941 / 1672 + 2rem); }
- .mission-purpose:last-child:has(> .mission-image-area) { min-height: calc(var(--mission-image-width) * 2 / 3 + 2rem); }
- .mission-image-area { position: absolute; top: 0; right: calc(100% + 1.5rem); width: var(--mission-image-width); margin: 0; }
- .mission-purpose + .mission-purpose > .mission-image-area { top: 2rem; }
+ .mission-body, .mission-sections { display: contents; }
+ .mission-intro-content { padding-top: calc(.75rem * 1.6 + 1rem); }
+ .mission-purpose { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: start; }
+ .mission-purpose-copy { border-top: 1px solid rgba(183, 148, 78, .3); padding-top: .75rem; }
+ .mission-purpose:last-child > .mission-image-area > img { aspect-ratio: 1672 / 941; object-fit: cover; object-position: center; }
 }
 
-.mission-invitation { background: var(--cream); }
 .mission-invitation h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); }
-.mission-invitation > p { max-width: 68ch; font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; margin-bottom: 1.75rem; }
+.mission-invitation > p { font-family: Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.8; margin-bottom: 1.5rem; }
 .mission-invitation-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch; }
 .mission-invitation-actions > .button { border: 1px solid var(--navy); justify-content: center; }
 .mission-invitation-actions > .mission-projects-button { background: transparent; color: var(--navy); border-color: var(--gold); }
 .mission-invitation-actions > .mission-projects-button:hover { background: var(--cream); }
-@media (max-width: 42rem) { .mission-invitation-actions > .button { width: 100%; } }
-
 .mission-support { margin-top: 1.5rem; }
-
-@media (min-width: 42.0625rem) and (max-width: 64rem) { .mission-commitment { grid-template-columns: minmax(0, 1fr); } }
-
-.mission-commitment-intro { width: min(100%, 340px); min-width: 0; }
-@media (min-width: 64.0625rem) { .mission-commitment-intro { width: var(--mission-image-width); } }
-
 @media (min-width: 64.0625rem) {
- /* Keep the existing border space so images stay fixed; draw each rule at its image's top edge. */
- .mission-body .mission-purpose + .mission-purpose { border-top-color: transparent; }
- .mission-purpose + .mission-purpose::before { content: ''; position: absolute; top: 2rem; left: 0; right: 0; height: 1px; background: rgba(183, 148, 78, .3); pointer-events: none; }
- .mission-purpose + .mission-purpose > .mission-purpose-copy { position: relative; top: .75rem; }
+ .mission-invitation { padding-block: 2rem 1.5rem; }
+ .mission-invitation > h2, .mission-invitation > p, .mission-invitation-actions { width: min(100%, 46rem); margin-inline: auto; }
 }
 
-/* Match only the closing photograph to the existing landscape image frame. */
-.mission-purpose:last-child > .mission-image-area > img { aspect-ratio: 1672 / 941; object-fit: cover; object-position: center; }
-@media (min-width: 64.0625rem) {
- .mission-sections { border-top-color: transparent; }
- .mission-purpose:first-child::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(183, 148, 78, .3); pointer-events: none; }
- .mission-purpose:first-child > .mission-purpose-copy { position: relative; top: .75rem; }
-}
-
-/* The complete commitment block shares the introductory row without shifting the mission images. */
-.mission-commitment-intro { border: 1px solid rgba(164, 124, 50, .28); border-radius: .25rem; background: var(--cream); padding: .6875rem; }
-.mission-commitment-intro > .eyebrow { margin-bottom: .5rem; }
-.mission-commitment-lines { margin-bottom: 0; }
-@media (min-width: 64.0625rem) {
- .mission-commitment { row-gap: 0; }
- .mission-commitment-intro { grid-column: 1; grid-row: 1; align-self: stretch; }
- .mission-body { display: contents; }
- .mission-intro-content { grid-column: 2; grid-row: 1; }
- .mission-sections { grid-column: 2; grid-row: 2; }
-}
-
-@media (min-width: 64.0625rem) {
- .mission-commitment-intro { width: min(509px, calc(var(--mission-image-width) + .75rem)); align-self: start; border: 0; border-radius: 0; background: transparent; padding: 0; }
- .mission-commitment-intro > .eyebrow { margin-bottom: 1rem; }
- .mission-commitment-lines { display: flex; flex-direction: column; justify-content: space-evenly; width: 100%; height: 286px; padding: 1.5rem; border: 1px solid rgba(164, 124, 50, .28); border-radius: .25rem; background: var(--cream); }
-}
-
-@media (min-width: 64.0625rem) {
- .mission-intro-content { position: relative; top: calc(.75rem * 1.6 + 1rem); }
- .mission-commitment-lines { justify-content: center; gap: .5rem; font-size: calc(1.08 * clamp(1.75rem, 3vw, 2.5rem)); }
- .mission-commitment-lines > .mission-commitment-line { gap: calc(.4em / 1.08); }
- .mission-commitment-lines .mission-commitment-icon { width: calc(.65em / 1.08); height: calc(.65em / 1.08); }
-}
-
-/* Keep the label outside the content-sized commitment box on smaller screens. */
 @media (max-width: 64rem) {
- .mission-commitment-intro { border: 0; border-radius: 0; background: transparent; padding: 0; }
- .mission-commitment-intro > .eyebrow { margin-bottom: 1rem; }
- .mission-commitment-lines { display: flex; flex-direction: column; gap: .5rem; width: 100%; height: auto; padding: .6875rem; border: 1px solid rgba(164, 124, 50, .28); border-radius: .25rem; background: var(--cream); }
+ .mission-box { padding: clamp(1rem, 2.5vw, 1.5rem); }
+ .mission-hero { margin-top: 1.5rem; }
+ .mission-commitment { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+ .mission-commitment > div.mission-body { max-width: none; }
+ .mission-sections { margin-top: 1.5rem; }
+ .mission-purpose { border-top: 1px solid rgba(183, 148, 78, .3); padding-top: 1.5rem; }
+ .mission-purpose + .mission-purpose { margin-top: 1.5rem; }
+ .mission-image-area { margin-bottom: 1rem; }
 }
-
-/* Match the commitment photograph to the other left-column photographs. */
-.mission-commitment-image { padding: 0; border: 0; background: transparent; overflow: hidden; border-radius: .5rem; height: auto; aspect-ratio: 1672 / 941; }
-.mission-commitment-image > img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: cover; object-position: center bottom; border-radius: inherit; }
-@media (min-width: 64.0625rem) {
- .mission-commitment-intro { width: var(--mission-image-width); height: 321.1875px; }
-}
-
-/* Keep desktop closing rows compact without changing photograph geometry. */
-@media (min-width: 64.0625rem) {
- .mission-purpose:last-child:has(> .mission-image-area) { min-height: calc(var(--mission-image-width) * 941 / 1672 + 2rem); }
- .mission-commitment, .mission-invitation { padding-bottom: 1.5rem; }
+@media (max-width: 42rem) {
+ .mission-invitation-actions { gap: .75rem; }
+ .mission-invitation-actions > .button { width: 100%; }
 }
