@@ -75,7 +75,7 @@ test('all pages share working navigation and preserve the approved purposes', as
       assert.match(response.headers.get('content-security-policy'), /script-src 'self'/);
       assert.match(html, /<script src="about.js" defer><\/script>/);
       assert.match(html, /aria-expanded="false" aria-controls="about-who-expanded"/);
-      assert.match(html, /id="about-who-expanded" hidden><p>As a newly established, multicultural organization/);
+      assert.match(html, /id="about-who-expanded" hidden><p>We stand for human rights, dignity, and freedom/);
       const script = await fetch(base + '/about.js');
       assert.equal(script.status, 200);
       assert.match(script.headers.get('content-type'), /javascript/);

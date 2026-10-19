@@ -1,15 +1,14 @@
-.about-who { align-items: start; }
+.about-who { container-type: inline-size; margin-bottom: 4rem; }
+.about-who-box { display: grid; grid-template-columns: calc((100cqw - 4rem) / 2.3) minmax(0, 1fr); column-gap: 4rem; row-gap: 1.5rem; align-items: start; border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); background: var(--cream); padding: clamp(1.5rem, 4vw, 3rem); }
 .about-who-image { display: block; width: 100%; height: auto; border-radius: .5rem; }
+.about-who-copy, .about-who-expanded { min-width: 0; }
+.about-who-copy > p + p, .about-who-expanded > p { border-top: 1px solid rgba(183, 148, 78, .3); padding-top: 1.5rem; }
+.about-who-expanded > p + p { margin-top: 1.5rem; }
 @media (max-width: 64rem) {
- .about-who { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
-}
-
-@media (min-width: 64.0625rem) {
- .about-who-copy { margin-top: calc(.75rem * 1.6 + 1rem); }
+ .about-who-box { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
 }
 
 .about-who-toggle { min-height: 44px; display: flex; align-items: center; width: fit-content; padding: .5rem 0; border: 0; border-radius: 0; background: transparent; color: var(--navy); font: inherit; cursor: pointer; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: .3em; }
 .about-who-toggle:hover { text-decoration-thickness: 2px; }
 .about-who-expanded, .about-who-motto { grid-column: 1 / -1; }
 .about-who-expanded > p:last-child, .about-who-motto { margin-bottom: 0; }
-.about-who { row-gap: 1.5rem; }
