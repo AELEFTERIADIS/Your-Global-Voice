@@ -32,10 +32,10 @@ function alignImageBottom() {
     return;
   }
   const text = secondParagraph.firstChild;
-  const start = text.textContent.indexOf('regardless of religion');
+  const start = text.textContent.indexOf('As an independent, nonpartisan organization');
   const range = document.createRange();
   range.setStart(text, start);
-  range.setEnd(text, start + 'regardless of religion'.length);
+  range.setEnd(text, start + 'As an independent, nonpartisan organization'.length);
   const line = range.getClientRects()[0];
   const height = line.top - image.getBoundingClientRect().top;
   if (height > 0) image.style.setProperty('--about-image-height', `${height}px`);
