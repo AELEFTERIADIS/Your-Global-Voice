@@ -2,8 +2,9 @@ const toggle = document.querySelector('.about-who-toggle');
 const content = document.querySelector('#about-who-expanded');
 const copy = document.querySelector('.about-who-copy');
 const secondParagraph = copy.querySelectorAll('p')[1];
-const mobile = window.matchMedia('(max-width: 42rem)');
-const desktop = window.matchMedia('(min-width: 64.0625rem)');
+const design = getComputedStyle(document.documentElement);
+const mobile = window.matchMedia(`(max-width: ${design.getPropertyValue('--breakpoint-phone').trim()})`);
+const desktop = window.matchMedia(`(min-width: ${design.getPropertyValue('--breakpoint-editorial-start').trim()})`);
 
 function placeSecondParagraph() {
   copy.append(toggle);

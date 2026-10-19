@@ -1,3 +1,5 @@
+import { buildStyles } from './build-styles.mjs';
+await buildStyles();
 import { missionImages } from './mission-images.mjs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { renderContact } from './contact.mjs';

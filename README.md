@@ -91,3 +91,15 @@ policies, payment arrangements, mailing/collection locations, international
 logistics, and receipt/tax guidance. The four original official purpose statements
 and supplied logo have not been changed. No active projects or partnerships are
 claimed. No deployment or infrastructure changes are included.
+
+## Responsive design and verification
+
+CSS is authored in `styles/` and compiled by `npm run build` into the versioned
+`public/*.css` files. Shared tokens and named breakpoint conditions are defined in
+`styles/tokens.json`; see [the responsive design standards](docs/responsive-design-system.md)
+for component usage, approved exceptions and baseline-review policy.
+
+Run `npm test` for functional/security/build checks. With the documented Chromium
+and fonts installed, run `npm ci && npm run test:responsive` for all eight pages at
+all eight viewport widths. CI requires both checks before GitHub Pages publication.
+Use `npm run test:visual:update` only for a deliberately reviewed visual change.

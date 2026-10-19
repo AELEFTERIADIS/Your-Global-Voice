@@ -10,6 +10,11 @@
     "build": "node scripts/build.mjs",
     "dev": "node scripts/build.mjs && node scripts/server.mjs",
     "start": "node scripts/build.mjs && node scripts/server.mjs",
-    "test": "node scripts/build.mjs && node --test"
+    "test": "node scripts/build.mjs && node --test",
+    "test:responsive": "npm run build && playwright test",
+    "test:visual:update": "npm run build && playwright test --update-snapshots"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
   }
 }
