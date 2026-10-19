@@ -74,3 +74,9 @@
  .about-foundation { margin-top: .75rem; }
  .about-foundation > .eyebrow { margin-bottom: .5rem; }
 }
+
+@media (max-width: 64rem) {
+ .about-who { margin-bottom: .75rem; }
+ .about-foundation { margin-top: .75rem; }
+ .about-foundation > .eyebrow { margin-bottom: .5rem; }
+}
