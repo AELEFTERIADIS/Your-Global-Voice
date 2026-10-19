@@ -3,16 +3,20 @@ const content = document.querySelector('#about-who-expanded');
 const copy = document.querySelector('.about-who-copy');
 const secondParagraph = copy.querySelectorAll('p')[1];
 const mobile = window.matchMedia('(max-width: 42rem)');
+const desktop = window.matchMedia('(min-width: 64.0625rem)');
 
 function placeSecondParagraph() {
+  copy.append(toggle);
   if (mobile.matches) {
     content.prepend(secondParagraph);
   } else {
     copy.insertBefore(secondParagraph, toggle);
+    if (desktop.matches) secondParagraph.append(toggle);
   }
 }
 
 mobile.addEventListener('change', placeSecondParagraph);
+desktop.addEventListener('change', placeSecondParagraph);
 placeSecondParagraph();
 
 
@@ -24,7 +28,6 @@ toggle.addEventListener('click', () => {
 });
 
 const image = document.querySelector('.about-who-image');
-const desktop = window.matchMedia('(min-width: 64.0625rem)');
 
 function alignImageBottom() {
   if (!desktop.matches) {
