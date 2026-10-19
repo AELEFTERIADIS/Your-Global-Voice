@@ -9,7 +9,3 @@ node_modules/
 .wrangler/
 .dev.vars
 .dev.vars.*
-
-# Browser reports; approved baselines remain versioned.
-playwright-report/
-test-results/

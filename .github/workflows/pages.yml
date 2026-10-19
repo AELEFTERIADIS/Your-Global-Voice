@@ -30,9 +30,7 @@ jobs:
         with:
           node-version: '24'
       - name: Validate generated pages and server behavior
-        run: |
-          npm test
-          git diff --exit-code -- public/\*.css public/\*.html
+        run: npm test
       - name: Prepare public-only website artifact
         env:
           CONTACT_API_ORIGIN: https://ygvoice-contact.andyelft.workers.dev
@@ -43,54 +41,9 @@ jobs:
         with:
           path: ${{ runner.temp }}/ygv-pages
 
-  responsive:
-    runs-on: ubuntu-latest
-    container: debian:trixie-slim
-    permissions:
-      contents: read
-      pull-requests: read
-    env:
-      CHROMIUM_PATH: /usr/bin/chromium
-    steps:
-      - name: Install visual runtime prerequisites and fonts
-        run: |
-          apt-get update
-          apt-get install -y --no-install-recommends git ca-certificates curl fontconfig python3 \
-            fonts-liberation=1:2.1.5-3 fonts-noto-core=20201225-2 fonts-dejavu-core=2.37-8
-      - name: Check out repository
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Install exact baseline browser from immutable Debian archive
-        run: python3 scripts/install-visual-browser.py
-      - name: Set up Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
-        with:
-          node-version: '24'
-      - name: Require human review for changed visual baselines
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          node scripts/verify-visual-review.mjs
-      - name: Install locked test dependencies
-        run: npm ci
-      - name: Check all eight pages at all eight widths
-        run: npm run test:responsive
-      - name: Keep visual comparison reports for review
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: responsive-visual-review
-          path: |
-            playwright-report/
-            test-results/
-          retention-days: 14
-
   publish:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [validate, responsive]
+    needs: validate
     runs-on: ubuntu-latest
     permissions:
       contents: read

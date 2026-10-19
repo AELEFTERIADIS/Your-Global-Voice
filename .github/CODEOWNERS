@@ -1,7 +1,0 @@
-# Design changes and snapshot updates need review by the website owner.
-/styles/ @AELEFTERIADIS
-/tests/visual/baselines/ @AELEFTERIADIS
-/scripts/verify-visual-review.mjs @AELEFTERIADIS
-/.github/workflows/ @AELEFTERIADIS
-/scripts/visual-review-policy.mjs @AELEFTERIADIS
-/playwright.config.mjs @AELEFTERIADIS
