@@ -55,5 +55,9 @@ button.button:disabled { background: #53636d; cursor: not-allowed; }
 
 .contact-mailing { grid-column: 1 / -1; }
 
-.contact-intro { padding-bottom: 1.25rem; margin-bottom: 1.5rem; }
+.contact-intro { width: 100%; max-width: none; border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); background: var(--cream); padding: clamp(1.5rem, 4vw, 3rem); margin-top: clamp(2rem, 4vw, 3rem); margin-bottom: 1.5rem; }
 .contact-intro > .lead { margin-bottom: 0; }
+
+@media (max-width: 64rem) {
+ .contact-intro { padding: clamp(1rem, 2.5vw, 1.5rem); margin-top: 1.5rem; }
+}
