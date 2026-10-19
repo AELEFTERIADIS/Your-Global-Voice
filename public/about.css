@@ -47,3 +47,7 @@
  .about-who-expanded > p + p { margin-top: 1rem; }
  .about-who-motto { margin-top: .75rem; }
 }
+
+@media (min-width: 64.0625rem) {
+ .about-who-image-overlay { background: rgba(255, 252, 243, .76); padding: .25rem .5rem; border-radius: .2rem; }
+}
