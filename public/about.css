@@ -15,3 +15,7 @@
 .about-who-details::details-content { height: 0; overflow: hidden; transition: height .3s ease, content-visibility .3s allow-discrete; }
 .about-who-details[open]::details-content { height: auto; }
 @media (prefers-reduced-motion: reduce) { .about-who-details::details-content { transition: none; } }
+
+@media (min-width: 64.0625rem) {
+ .about-who-copy { margin-top: calc(.75rem * 1.6 + 1rem); }
+}
