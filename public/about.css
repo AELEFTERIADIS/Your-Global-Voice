@@ -27,3 +27,6 @@
 @media (min-width: 64.0625rem) {
  .about-who-image { height: var(--about-image-height, auto); object-fit: cover; object-position: left center; }
 }
+
+.about-who-image-frame { position: relative; }
+.about-who-image-overlay { position: absolute; left: 50%; top: 82.5%; transform: translate(-50%, -50%); max-width: calc(100% - 2rem); white-space: nowrap; color: #fff; font-size: clamp(.625rem, 1.15vw, .875rem); font-weight: 500; line-height: 1.4; text-align: center; text-shadow: 0 1px 3px rgba(0, 0, 0, .95), 0 0 6px rgba(0, 0, 0, .7); }
