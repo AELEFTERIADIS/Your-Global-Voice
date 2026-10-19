@@ -68,3 +68,9 @@
  .about-foundation { margin-top: 2rem; }
  .about-foundation + .callout { margin-top: 2rem; }
 }
+
+@media (min-width: 64.0625rem) {
+ .about-who { margin-bottom: .75rem; }
+ .about-foundation { margin-top: .75rem; }
+ .about-foundation > .eyebrow { margin-bottom: .5rem; }
+}
