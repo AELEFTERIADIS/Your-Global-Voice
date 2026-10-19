@@ -32,6 +32,7 @@ const image = document.querySelector('.about-who-image');
 function alignImageBottom() {
   if (!desktop.matches) {
     image.style.removeProperty('--about-image-height');
+    image.style.removeProperty('--about-image-offset');
     return;
   }
   const text = secondParagraph.firstChild;
@@ -42,7 +43,13 @@ function alignImageBottom() {
   const line = range.getClientRects()[0];
   const statement = copy.querySelector('.about-who-statement');
   const statementSpace = statement.getBoundingClientRect().height + parseFloat(getComputedStyle(statement).marginBottom);
-  const height = line.top - image.getBoundingClientRect().top - statementSpace;
+  const frameTop = image.parentElement.getBoundingClientRect().top;
+  const height = line.top - frameTop - statementSpace;
+  const firstLine = document.createRange();
+  const firstText = copy.querySelector('p').firstChild;
+  firstLine.setStart(firstText, 0);
+  firstLine.setEnd(firstText, 'Your Global Voice, Inc.'.length);
+  image.style.setProperty('--about-image-offset', `${firstLine.getClientRects()[0].top - frameTop}px`);
   if (height > 0) image.style.setProperty('--about-image-height', `${height}px`);
 }
 

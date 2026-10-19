@@ -25,7 +25,7 @@
 }
 
 @media (min-width: 64.0625rem) {
- .about-who-image { height: var(--about-image-height, auto); object-fit: cover; object-position: left center; }
+ .about-who-image { height: var(--about-image-height, auto); object-fit: cover; object-position: left center; position: relative; top: var(--about-image-offset, 0px); }
 }
 
 .about-who-image-frame { position: relative; }
