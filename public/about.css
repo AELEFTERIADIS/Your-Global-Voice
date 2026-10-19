@@ -37,3 +37,13 @@
  .about-who-copy > p:last-child { margin-bottom: 0; }
  .about-who-box:has(.about-who-toggle[aria-expanded="false"]) { row-gap: 1rem; padding-bottom: 1.5rem; }
 }
+
+@media (min-width: 64.0625rem) {
+ .about-who { margin-top: -.5rem; }
+ .about-who > .eyebrow { margin-bottom: .625rem; }
+ .about-who-box { row-gap: 1rem; padding-bottom: 1.25rem; }
+ .about-who-box:has(.about-who-toggle[aria-expanded="false"]) { row-gap: .75rem; padding-bottom: 1.25rem; }
+ .about-who-expanded > p { padding-top: 1rem; }
+ .about-who-expanded > p + p { margin-top: 1rem; }
+ .about-who-motto { margin-top: .75rem; }
+}
