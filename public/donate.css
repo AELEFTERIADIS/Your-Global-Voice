@@ -96,10 +96,14 @@
 
 /* Unified hero panel, matching the existing trust panel treatment. */
 .donation-intro {
+ margin-top: clamp(2rem, 4vw, 3rem);
  background: var(--cream);
  border-top: 3px solid var(--gold);
  border-bottom: 0;
  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+@media (max-width: 64rem) {
+ .donation-intro { margin-top: 1.5rem; }
 }
 @media (min-width: 56.0625rem) {
  /* Retain the approved desktop image width while adding panel padding. */
