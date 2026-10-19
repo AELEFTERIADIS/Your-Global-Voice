@@ -52,5 +52,9 @@
  .about-who-image-overlay { background: rgba(255, 252, 243, .76); padding: .25rem .5rem; border-radius: .2rem; }
 }
 
-.about-foundation-cards .card > .eyebrow { display: flex; align-items: center; gap: .125rem; font-size: .825rem; line-height: 1.2rem; letter-spacing: .1125rem; }
-.about-purpose-icon { width: .75rem; height: .75rem; flex-shrink: 0; color: var(--gold); }
+.about-foundation-cards .card > .eyebrow { display: flex; align-items: center; gap: .5rem; font-size: .825rem; line-height: 1.2rem; letter-spacing: .1125rem; }
+.about-purpose-icon { width: 1.2rem; height: 1.2rem; flex-shrink: 0; color: var(--gold); }
+
+.about-foundation-box { position: relative; background: var(--cream); padding-block: clamp(1.5rem, 4vw, 3rem); }
+.about-foundation-box::before { content: ''; position: absolute; inset: 0; border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); pointer-events: none; }
+.about-foundation-box > .section-heading { margin-inline: clamp(1.25rem, 3vw, 2.25rem); }
