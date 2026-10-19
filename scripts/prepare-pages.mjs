@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const pagesFiles = ['index.html', 'about.html', 'mission.html', 'purposes.html', 'projects.html', 'get-involved.html', 'donate.html', 'contact.html'];
-export const assets = ['about.js', 'about.css', '3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', '8337C640-7660-4322-A455-0287065CF88A.png', ...missionImages.map(image => image.src), 'cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'mission.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
+export const assets = ['about.js', 'about.css', '3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', '6EA67AC3-FA48-4E3A-BAE3-EE6AC001823C.png', ...missionImages.map(image => image.src), 'cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'mission.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
 
 export async function preparePages(destination, apiOrigin = process.env.CONTACT_API_ORIGIN || '') {
   if (apiOrigin) {
