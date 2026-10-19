@@ -40,7 +40,9 @@ function alignImageBottom() {
   range.setStart(text, start);
   range.setEnd(text, start + 'As an independent, nonpartisan organization'.length);
   const line = range.getClientRects()[0];
-  const height = line.top - image.getBoundingClientRect().top;
+  const statement = copy.querySelector('.about-who-statement');
+  const statementSpace = statement.getBoundingClientRect().height + parseFloat(getComputedStyle(statement).marginBottom);
+  const height = line.top - image.getBoundingClientRect().top - statementSpace;
   if (height > 0) image.style.setProperty('--about-image-height', `${height}px`);
 }
 
