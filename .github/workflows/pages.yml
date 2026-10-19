@@ -52,17 +52,18 @@ jobs:
     env:
       CHROMIUM_PATH: /usr/bin/chromium
     steps:
-      - name: Install pinned visual baseline browser and fonts
+      - name: Install visual runtime prerequisites and fonts
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends git ca-certificates curl fontconfig \
-            chromium=154.0.8037.57-1~deb13u1 chromium-common=154.0.8037.57-1~deb13u1 \
+          apt-get install -y --no-install-recommends git ca-certificates curl fontconfig python3 \
             fonts-liberation=1:2.1.5-3 fonts-noto-core=20201225-2 fonts-dejavu-core=2.37-8
       - name: Check out repository
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
           fetch-depth: 0
+      - name: Install exact baseline browser from immutable Debian archive
+        run: python3 scripts/install-visual-browser.py
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:

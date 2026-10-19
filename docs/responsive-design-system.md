@@ -88,7 +88,7 @@ CI does not update baselines and blocks publication on visual or layout failures
 
 `npm ci && npm run test:responsive` uses `/usr/bin/chromium` (override with
 `CHROMIUM_PATH` only when deliberately refreshing the browser baseline).
-CI uses Debian trixie, Chromium **154.0.8037.57**, Liberation **2.1.5**, Noto Core
+CI uses Debian trixie and its immutable Snapshot binary archive for Chromium **154.0.8037.57**, Liberation **2.1.5**, Noto Core
 **20201225**, and DejaVu **2.37**. `fontconfig.conf` fixes platform fallback names
 for Arial, Georgia and Times New Roman to these fonts, without changing website
 font declarations. Footer webfonts are loaded from the built artifact. Browser/font
@@ -143,3 +143,9 @@ remain explicitly scoped and are not reusable layout standards.
 
 Page-specific dimensions are intentionally kept out of global defaults. Prefer
 shared tokens; document any new exception with its design reason and browser test.
+
+The baseline browser is installed by `scripts/install-visual-browser.py` from the
+version-specific Debian Snapshot API. Its content-addressed SHA1 is verified and
+the Debian package version is checked before installation; SHA256 is logged for
+review. This preserves the exact browser after current mirrors retire older
+packages. Installation runs only in the disposable CI container, not the website.
