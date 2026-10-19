@@ -58,3 +58,7 @@
 .about-foundation-box { position: relative; background: var(--cream); padding-block: clamp(1.5rem, 4vw, 3rem); }
 .about-foundation-box::before { content: ''; position: absolute; inset: 0; border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); pointer-events: none; }
 .about-foundation-box > .section-heading { margin-inline: clamp(1.25rem, 3vw, 2.25rem); }
+
+@media (max-width: 64rem) {
+ .about-who-image-overlay { color: var(--navy); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(.625rem, 2.8vw, 1.09375rem); gap: .3em; letter-spacing: -.025em; background: rgba(255, 252, 243, .76); padding: clamp(.1875rem, .5vw, .25rem) clamp(.375rem, 1vw, .5rem); border-radius: .2rem; text-shadow: 0 1px 2px rgba(255, 255, 255, .7); }
+}
