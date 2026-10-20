@@ -130,3 +130,15 @@
  .about-final-actions > .button { min-height: 2.875rem; padding: .625rem .5rem; font-size: .875rem; }
  main:has(> .about-final-callout) { padding-bottom: 2rem; }
 }
+
+/* About-only exterior spacing; retain each section's internal geometry. */
+main > .page-intro.mission-hero { margin-top: 2rem; margin-bottom: 1.25rem; }
+.about-who { margin-bottom: .5rem; }
+.about-foundation { margin-top: .5rem; }
+main:has(> .about-final-callout) { padding-bottom: 2rem; }
+@media (max-width: 64rem) {
+ main > .page-intro.mission-hero { margin-top: 1.25rem; margin-bottom: 1rem; }
+ .about-who { margin-bottom: .625rem; }
+ .about-foundation { margin-top: .625rem; }
+ main:has(> .about-final-callout) { padding-bottom: 1.5rem; }
+}
