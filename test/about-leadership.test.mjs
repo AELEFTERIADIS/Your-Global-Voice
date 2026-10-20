@@ -14,7 +14,13 @@ test('About leadership preserves the approved introduction, profile order, and h
   for (const [index, [name, position]] of [['Andreas Elefteriadis', 'Founder &amp; President'], ['Archimandrite Maximos Weimar', 'Vice President'], ['Robert Shillenn', 'Secretary &amp; Treasurer']].entries()) {
     assert.ok(profiles[index].includes(`>${name}</h3>`));
     assert.ok(profiles[index].includes(`>${position}</p>`));
-    assert.ok(profiles[index].includes('Portrait forthcoming'));
+    if (index === 0) {
+      assert.match(profiles[index], /<img src="E7F71712-32D1-43FE-BA18-618193E48BA8.png"/);
+      assert.match(profiles[index], /alt="Andreas Elefteriadis"/);
+      assert.doesNotMatch(profiles[index], /Portrait forthcoming/);
+    } else {
+      assert.ok(profiles[index].includes('Portrait forthcoming'));
+    }
     if (index === 0) {
       assert.match(profiles[index], /aria-expanded="false" aria-controls="andreas-biography-expanded"/);
       assert.match(profiles[index], /id="andreas-biography-expanded" hidden/);
@@ -45,6 +51,6 @@ test('About leadership preserves the approved introduction, profile order, and h
   "As Secretary and Treasurer of Your Global Voice, Robert contributes his extensive knowledge, international perspective, and dedication to responsible leadership. His experience reflects the belief that understanding brings people together, compassion crosses borders, and meaningful action can create lasting change."
 ]);
     }
-    assert.doesNotMatch(profiles[index], /<img\b/);
+    if (index !== 0) assert.doesNotMatch(profiles[index], /<img\b/);
   }
 });
