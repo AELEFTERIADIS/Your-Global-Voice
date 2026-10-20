@@ -218,3 +218,11 @@ summary:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
 main { padding-top: var(--header-content-gap); }
 main > section:first-child,
 main > .donation-page > section:first-child { margin-top: 0; }
+
+/* Rounded link boxes only while the existing mobile menu is expanded. */
+@media (max-width: 56rem) {
+ .site-header .mobile-menu[open] nav { gap: .5rem; }
+ .site-header .mobile-menu[open] nav a { padding: .5rem .75rem; border: 0; border-radius: .375rem; background: #193a5b; color: #fff; }
+ .site-header .mobile-menu[open] nav a[aria-current='page'] { color: #D7B56D; }
+ .site-header .mobile-menu[open] nav a:hover { background: #21496b; }
+}
