@@ -154,3 +154,8 @@ main:has(> .about-final-callout) { padding-bottom: 2rem; }
  }
  main:has(> .about-final-callout) { padding-bottom: 1.5rem; }
 }
+
+/* Approved mobile-only gap from the leadership border to the closing panel. */
+@media (min-width: 320px) and (max-width: 430px) {
+ .about-leadership + .about-final-callout { margin-top: 39.1875px; }
+}
