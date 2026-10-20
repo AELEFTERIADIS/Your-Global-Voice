@@ -205,3 +205,16 @@ summary:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
  .footer-navigation-break { display: none; }
  .footer-navigation a { margin-inline: .1875rem; vertical-align: top; }
 }
+
+/* One shared exterior gap below the header; first-section margins must not add to it. */
+:root {
+ --header-content-gap-desktop: 43.1875px;
+ --header-content-gap-compact: 39.1875px;
+ --header-content-gap: var(--header-content-gap-desktop);
+}
+@media (max-width: 1024px) {
+ :root { --header-content-gap: var(--header-content-gap-compact); }
+}
+main { padding-top: var(--header-content-gap); }
+main > section:first-child,
+main > .donation-page > section:first-child { margin-top: 0; }
