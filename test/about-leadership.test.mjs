@@ -23,7 +23,9 @@ test('About leadership preserves the approved introduction, profile order, and h
       assert.match(profiles[index], /alt="Robert Shillenn"/);
       assert.doesNotMatch(profiles[index], /Portrait forthcoming/);
     } else {
-      assert.ok(profiles[index].includes('Portrait forthcoming'));
+      assert.match(profiles[index], /<img src="C877690E-4E12-4A62-BCE4-47A36456254D.png"/);
+      assert.match(profiles[index], /alt="Archimandrite Maximos Weimar"/);
+      assert.doesNotMatch(profiles[index], /Portrait forthcoming/);
     }
     if (index === 0) {
       assert.match(profiles[index], /aria-expanded="false" aria-controls="andreas-biography-expanded"/);
@@ -55,6 +57,6 @@ test('About leadership preserves the approved introduction, profile order, and h
   "As Secretary and Treasurer of Your Global Voice, Robert contributes his extensive knowledge, international perspective, and dedication to responsible leadership. His experience reflects the belief that understanding brings people together, compassion crosses borders, and meaningful action can create lasting change."
 ]);
     }
-    if (index === 1) assert.doesNotMatch(profiles[index], /<img\b/);
+    assert.equal((profiles[index].match(/<img\b/g) || []).length, 1);
   }
 });
