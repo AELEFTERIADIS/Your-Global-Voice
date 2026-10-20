@@ -94,6 +94,9 @@
 .about-leadership-toggle { display: inline; border: 0; padding: 0; background: transparent; color: var(--navy); font: inherit; cursor: pointer; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: .2em; }
 .about-leadership-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 @media (min-width: 64.0625rem) {
+ .about-leadership-profiles { grid-auto-rows: 1fr; }
+ .about-leadership-profile + .about-leadership-profile { border-top-color: var(--gold); border-top-color: color-mix(in srgb, var(--gold) 65%, var(--cream)); }
+ .about-leadership-profile + .about-leadership-profile::before { display: none; }
  .about-leadership + .callout { margin-top: 2rem; }
 }
 @media (max-width: 42rem) {
