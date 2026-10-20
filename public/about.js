@@ -68,3 +68,24 @@ document.querySelectorAll('.about-leadership-toggle').forEach(biographyToggle =>
     biographyExpanded.hidden = !expanded;
   });
 });
+
+const leadershipProfiles = [...document.querySelectorAll('.about-leadership-profile')];
+
+function alignLeadershipDividers() {
+  leadershipProfiles.slice(1).forEach((profile, index) => {
+    const previous = leadershipProfiles[index];
+    const visibleContent = [...previous.querySelectorAll('.about-leadership-portrait, h3, .about-leadership-position, .about-leadership-biography')]
+      .map(element => element.getBoundingClientRect())
+      .filter(rect => rect.width && rect.height);
+    const previousBottom = Math.max(...visibleContent.map(rect => rect.bottom));
+    const nextTop = profile.querySelector('.about-leadership-portrait').getBoundingClientRect().top;
+    const dividerTop = (previousBottom + nextTop - 1) / 2;
+    profile.style.setProperty('--leadership-divider-offset', `${dividerTop - profile.getBoundingClientRect().top}px`);
+  });
+}
+
+const leadershipDividerObserver = new ResizeObserver(alignLeadershipDividers);
+leadershipProfiles.forEach(profile => leadershipDividerObserver.observe(profile));
+document.fonts.ready.then(alignLeadershipDividers);
+window.addEventListener('load', alignLeadershipDividers);
+alignLeadershipDividers();

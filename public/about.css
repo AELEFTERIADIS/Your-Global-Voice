@@ -77,8 +77,10 @@
 .about-leadership > h2 { border-left: 2px solid var(--gold); padding-left: .875rem; }
 .about-leadership-intro { max-width: 60rem; margin-bottom: 2rem; }
 .about-leadership-profiles { display: grid; gap: 2rem; }
-.about-leadership-profile { display: grid; grid-template-columns: 12.5rem minmax(0, 1fr); gap: 2rem; align-items: start; }
+.about-leadership-profile { display: grid; grid-template-columns: 12.5rem minmax(0, 1fr); gap: 2rem; align-items: start; position: relative; }
 .about-leadership-profile { border-top: 1px solid var(--gold); border-top-color: color-mix(in srgb, var(--gold) 65%, var(--cream)); padding-top: 2rem; }
+.about-leadership-profile + .about-leadership-profile { border-top-color: transparent; }
+.about-leadership-profile + .about-leadership-profile::before { content: ''; position: absolute; inset-inline: 0; top: calc(var(--leadership-divider-offset, 0px) - 1px); border-top: 1px solid var(--gold); border-top-color: color-mix(in srgb, var(--gold) 65%, var(--cream)); pointer-events: none; }
 .about-leadership-portrait { width: 12.5rem; aspect-ratio: 4 / 5; display: grid; place-items: center; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--cream); color: var(--muted); font-size: .875rem; text-align: center; }
 .about-leadership-portrait-photo { position: relative; padding: 0; overflow: hidden; }
 .about-leadership-portrait-photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
@@ -100,13 +102,17 @@
  .about-leadership-profile { padding-top: 1.5rem; }
 }
 
-.about-final-callout { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+.about-final-callout { flex-direction: column; align-items: flex-start; text-align: left; gap: 1.5rem; }
 .about-final-callout > .about-final-copy { max-width: 54rem; }
 .about-final-copy > h2, .about-final-copy > p { text-wrap: balance; }
+.about-final-separator { color: var(--gold); color: color-mix(in srgb, var(--gold) 65%, var(--cream)); }
 .about-final-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; width: min(100%, 32rem); }
 .about-final-actions > .button { display: flex; align-items: center; justify-content: center; min-height: 3.25rem; border: 1px solid var(--navy); text-align: center; }
 .about-final-actions > .about-final-mission { background: transparent; color: var(--navy); border-color: var(--gold); }
 .about-final-actions > .about-final-mission:hover { background: var(--navy); color: white; border-color: var(--navy); }
+@media (min-width: 64.0625rem) {
+ .about-final-copy > h2 { white-space: nowrap; }
+}
 @media (max-width: 42rem) {
  .about-final-actions { gap: .75rem; }
  .about-final-actions > .button { font-size: .875rem; padding: .75rem .5rem; }
