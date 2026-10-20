@@ -11,7 +11,7 @@ test('About leadership preserves the approved introduction, profile order, and h
   assert.ok(section.includes('At Your Global Voice, our leadership is guided by a shared belief that every life deserves dignity, compassion, and care. United by a commitment to serving others, we work toward a world where human rights are respected, communities in need are supported, vulnerable animals are protected, and our environment is preserved for future generations.'));
   const profiles = [...section.matchAll(/<article\b[\s\S]*?<\/article>/g)].map(match => match[0]);
   assert.equal(profiles.length, 3);
-  for (const [index, [name, position]] of [['Andreas Elefteriadis', 'Founder &amp; President'], ['Archimandrite Maximos Weimar', 'Vice President'], ['Robert', 'Secretary &amp; Treasurer']].entries()) {
+  for (const [index, [name, position]] of [['Andreas Elefteriadis', 'Founder &amp; President'], ['Archimandrite Maximos Weimar', 'Vice President'], ['Robert Shillenn', 'Secretary &amp; Treasurer']].entries()) {
     assert.ok(profiles[index].includes(`>${name}</h3>`));
     assert.ok(profiles[index].includes(`>${position}</p>`));
     assert.ok(profiles[index].includes('Portrait forthcoming'));
@@ -31,13 +31,19 @@ test('About leadership preserves the approved introduction, profile order, and h
       assert.match(profiles[index], /id="maximos-biography-expanded" hidden/);
       const biography = [...profiles[index].matchAll(/<p class="about-leadership-biography">([\s\S]*?)<\/p>/g)].map(match => match[1].replace(/<button\b[\s\S]*?<\/button>/g, '').replace(/<[^>]+>/g, '').trim());
       assert.deepEqual(biography, [
-  "Archimandrite Maximos Weimar is an Orthodox Christian priest, spiritual leader, and educator with more than three decades of monastic experience. Elevated to the rank of Archimandrite in 2003, he has dedicated his life to spiritual guidance, theological education, and service to others.",
+  "Born on Long Island, New York, Archimandrite Maximos Weimar is an Orthodox Christian priest, spiritual leader, and educator with more than three decades of monastic experience. Elevated to the rank of Archimandrite in 2003, he has dedicated his life to spiritual guidance, theological education, and service to others.",
   "He currently serves in the Russian Orthodox Church Outside Russia as Abbot of Saint Panteleimon Skete in Florida and Administrator of Saint John Cassian Chapel in Alabama. He is also Abbot Emeritus of the Monastery of Saint Dionysios the Areopagite in New York. His extensive leadership experience reflects a longstanding commitment to compassion, human dignity, and community service.",
   "As Vice President of Your Global Voice, Father Maximos brings his spiritual wisdom, leadership experience, and dedication to helping others. His vision is one where compassion unites us, kindness inspires action, and every life is treated with dignity and respect."
 ]);
     } else {
-      assert.ok(profiles[index].includes('Biography forthcoming.'));
-      assert.doesNotMatch(profiles[index], /about-leadership-toggle/);
+      assert.match(profiles[index], /aria-expanded="false" aria-controls="robert-biography-expanded"/);
+      assert.match(profiles[index], /id="robert-biography-expanded" hidden/);
+      const biography = [...profiles[index].matchAll(/<p class="about-leadership-biography">([\s\S]*?)<\/p>/g)].map(match => match[1].replace(/<button\b[\s\S]*?<\/button>/g, '').replace(/<[^>]+>/g, '').trim());
+      assert.deepEqual(biography, [
+  "Born in Pennsylvania, Robert Shillenn brings to Your Global Voice a wealth of international experience, academic knowledge, and a longstanding commitment to education and community service. He earned his bachelor’s degree from Providence College in Rhode Island and a master’s degree in theology from Saint Mary’s Seminary and University in Baltimore, Maryland.",
+  "Throughout his career, Robert has worked as an educator, interpreter, and translator across the United States, Europe, and West Africa. His multilingual expertise and international experience have strengthened his understanding of diverse cultures and communities. He has also participated in humanitarian volunteer work in rural Mexico and served on organizational boards, including that of a rural hospital in Nevada.",
+  "As Secretary and Treasurer of Your Global Voice, Robert contributes his extensive knowledge, international perspective, and dedication to responsible leadership. His experience reflects the belief that understanding brings people together, compassion crosses borders, and meaningful action can create lasting change."
+]);
     }
     assert.doesNotMatch(profiles[index], /<img\b/);
   }
