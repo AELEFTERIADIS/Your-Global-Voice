@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const pagesFiles = ['index.html', 'about.html', 'mission.html', 'purposes.html', 'projects.html', 'get-involved.html', 'donate.html', 'contact.html'];
-export const assets = ['E7F71712-32D1-43FE-BA18-618193E48BA8.png', 'about.js', 'about.css', '3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', '76294CB8-5CC1-405F-92D0-03D3AFBEA081.png', ...missionImages.map(image => image.src), 'cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'mission.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
+export const assets = ['Elderly Cleric in Embroidered Hat.png', 'E7F71712-32D1-43FE-BA18-618193E48BA8.png', 'about.js', 'about.css', '3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', '76294CB8-5CC1-405F-92D0-03D3AFBEA081.png', ...missionImages.map(image => image.src), 'cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'mission.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
 
 export async function preparePages(destination, apiOrigin = process.env.CONTACT_API_ORIGIN || '') {
   if (apiOrigin) {

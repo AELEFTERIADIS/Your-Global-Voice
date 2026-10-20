@@ -20,7 +20,7 @@ test('Pages artifact preserves all eight pages, excludes private files, and work
     for (const [, target] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
       if (/^(#|mailto:|https:)/.test(target)) continue;
       assert.ok(!target.startsWith('/'));
-      assert.equal(new URL(target, `https://example.github.io/Your-Global-Voice/${file}`).pathname, `/Your-Global-Voice/${target.split('#')[0]}`);
+      assert.equal(decodeURIComponent(new URL(target, `https://example.github.io/Your-Global-Voice/${file}`).pathname), `/Your-Global-Voice/${target.split('#')[0]}`);
       await access(new URL(target, pathToFileURL(join(destination, file))));
     }
   }
