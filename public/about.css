@@ -132,12 +132,12 @@
 }
 
 /* About-only exterior spacing; retain each section's internal geometry. */
-main > .page-intro.mission-hero { margin-top: 2rem; margin-bottom: 1.25rem; }
+main > .page-intro.mission-hero { margin-top: 1rem; margin-bottom: 1rem; }
 .about-who { margin-bottom: .5rem; }
 .about-foundation { margin-top: .5rem; }
 main:has(> .about-final-callout) { padding-bottom: 2rem; }
 @media (max-width: 64rem) {
- main > .page-intro.mission-hero { margin-top: 1.25rem; margin-bottom: 1rem; }
+ main > .page-intro.mission-hero { margin-top: .75rem; margin-bottom: .75rem; }
  .about-who { margin-bottom: .625rem; }
  .about-foundation { margin-top: .625rem; }
  main:has(> .about-final-callout) { padding-bottom: 1.5rem; }
