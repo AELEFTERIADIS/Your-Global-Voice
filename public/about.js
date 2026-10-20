@@ -89,3 +89,15 @@ leadershipProfiles.forEach(profile => leadershipDividerObserver.observe(profile)
 document.fonts.ready.then(alignLeadershipDividers);
 window.addEventListener('load', alignLeadershipDividers);
 alignLeadershipDividers();
+
+// Keep the original desktop destination; compact screens open the existing message form.
+const messageLink = document.querySelector('.about-final-actions > a:first-child');
+const originalMessageDestination = messageLink.getAttribute('href');
+const compactMessageNavigation = window.matchMedia('(max-width: 64rem)');
+function updateMessageDestination() {
+  messageLink.setAttribute('href', compactMessageNavigation.matches
+    ? 'contact.html#message-heading'
+    : originalMessageDestination);
+}
+compactMessageNavigation.addEventListener('change', updateMessageDestination);
+updateMessageDestination();
