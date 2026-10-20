@@ -115,6 +115,7 @@
 .about-final-actions > .about-final-mission:hover { background: var(--navy); color: white; border-color: var(--navy); }
 @media (min-width: 64.0625rem) {
  .about-final-copy > h2 { white-space: nowrap; }
+ .about-final-actions { position: relative; left: min(15%, calc((100% - min(100%, 32rem)) / 2)); }
 }
 @media (max-width: 42rem) {
  .about-final-actions { gap: .75rem; }
