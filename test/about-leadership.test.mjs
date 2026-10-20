@@ -33,9 +33,9 @@ test('About leadership preserves the approved introduction, profile order, and h
       assert.equal((profiles[index].match(/class="about-leadership-toggle"/g) || []).length, 1);
       const biography = [...profiles[index].matchAll(/<p class="about-leadership-biography">([\s\S]*?)<\/p>/g)].map(match => match[1].replace(/<button\b[\s\S]*?<\/button>/g, '').replace(/<[^>]+>/g, '').trim());
       assert.deepEqual(biography, [
-  "Born in 1982, Andreas Elefteriadis has spent much of his life witnessing the struggles of people facing discrimination, persecution, and humanitarian crises. He has also been deeply affected by the cruelty and suffering of animals and the growing destruction of our planet.",
-  "Throughout his life, Andreas has taken part in humanitarian efforts, supported animal welfare, and participated in activities to protect the environment. These experiences strengthened his belief that compassion alone is not enough — meaningful change begins when we choose to act.",
-  "Driven by this belief, he founded Your Global Voice to stand against injustice, bring hope to those in need, protect vulnerable animals, and help preserve our planet for future generations.",
+  "Born in 1982 in Trabzon, Turkey, Andreas Elefteriadis has devoted much of his life to humanitarian service, advocating for human dignity, and supporting vulnerable communities.",
+  "His experience includes volunteering in international humanitarian projects, assisting refugees and disadvantaged communities, and working as an interpreter across cultural and linguistic barriers. He currently supports individuals with developmental disabilities and has actively contributed to animal welfare and environmental protection.",
+  "Inspired by these experiences, Andreas founded Your Global Voice to unite people across borders, stand against injustice, and turn compassion into meaningful action.",
   "His vision is to build a world where kindness becomes action, every life is valued, and every voice has the chance to be heard."
 ]);
     } else if (index === 1) {
