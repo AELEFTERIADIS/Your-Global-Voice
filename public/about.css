@@ -99,3 +99,15 @@
  .about-leadership-profiles { gap: 1.5rem; }
  .about-leadership-profile { padding-top: 1.5rem; }
 }
+
+.about-final-callout { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+.about-final-callout > .about-final-copy { max-width: 54rem; }
+.about-final-copy > h2, .about-final-copy > p { text-wrap: balance; }
+.about-final-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; width: min(100%, 32rem); }
+.about-final-actions > .button { display: flex; align-items: center; justify-content: center; min-height: 3.25rem; border: 1px solid var(--navy); text-align: center; }
+.about-final-actions > .about-final-mission { background: transparent; color: var(--navy); border-color: var(--gold); }
+.about-final-actions > .about-final-mission:hover { background: var(--navy); color: white; border-color: var(--navy); }
+@media (max-width: 42rem) {
+ .about-final-actions { gap: .75rem; }
+ .about-final-actions > .button { font-size: .875rem; padding: .75rem .5rem; }
+}

@@ -7,7 +7,7 @@ test('About leadership preserves the approved introduction, profile order, and h
   const section = html.match(/<section class="about-leadership"[\s\S]*?<\/section>/)?.[0];
   assert.ok(section);
   assert.ok(html.indexOf('about-foundation') < html.indexOf(section));
-  assert.ok(html.indexOf(section) < html.indexOf('Discover what guides us.'));
+  assert.ok(html.indexOf(section) < html.indexOf('One World. Countless Voices. One Shared Purpose.'));
   assert.ok(section.includes('At Your Global Voice, our leadership is guided by a shared belief that every life deserves dignity, compassion, and care. United by a commitment to serving others, we work toward a world where human rights are respected, communities in need are supported, vulnerable animals are protected, and our environment is preserved for future generations.'));
   const profiles = [...section.matchAll(/<article\b[\s\S]*?<\/article>/g)].map(match => match[0]);
   assert.equal(profiles.length, 3);
