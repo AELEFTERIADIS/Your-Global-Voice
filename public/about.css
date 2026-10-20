@@ -131,16 +131,26 @@
  main:has(> .about-final-callout) { padding-bottom: 2rem; }
 }
 
-/* About-only exterior spacing; retain each section's internal geometry. */
-main > .page-intro.mission-hero { margin-bottom: 1.5rem; }
-.about-who { margin-top: 0; }
-.about-who > .eyebrow { margin-bottom: 1rem; }
-.about-who-box { margin-top: 0; }
-.about-who { margin-bottom: .5rem; }
-.about-foundation { margin-top: .5rem; }
+/* About-only transitions: one owner for each exterior gap, without collapsed additions. */
+main:has(> .about-who) {
+ --about-transition-desktop-above: 16px;
+ --about-transition-desktop-below: 8px;
+ --about-transition-compact-above: 12px;
+ --about-transition-compact-below: 8px;
+ --about-transition-above: var(--about-transition-desktop-above);
+ --about-transition-below: var(--about-transition-desktop-below);
+}
+main > .page-intro.mission-hero { margin-bottom: var(--about-transition-above); }
+.about-who { margin-top: 0; margin-bottom: 0; }
+.about-who > .eyebrow { margin-bottom: var(--about-transition-below); }
+.about-who-box { margin-top: 0; margin-bottom: 0; }
+.about-foundation { margin-top: var(--about-transition-above); }
+.about-foundation > .eyebrow { margin-bottom: var(--about-transition-below); }
 main:has(> .about-final-callout) { padding-bottom: 2rem; }
 @media (max-width: 64rem) {
- .about-who { margin-bottom: .625rem; }
- .about-foundation { margin-top: .625rem; }
+ main:has(> .about-who) {
+  --about-transition-above: var(--about-transition-compact-above);
+  --about-transition-below: var(--about-transition-compact-below);
+ }
  main:has(> .about-final-callout) { padding-bottom: 1.5rem; }
 }
