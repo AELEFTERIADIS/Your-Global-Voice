@@ -73,7 +73,7 @@
 
 .about-who-statement { margin-bottom: .75rem; color: var(--navy); font-size: .75rem; font-weight: 700; line-height: 1.5; letter-spacing: .08em; }
 
-.about-leadership { margin-top: 2rem; }
+.about-leadership { margin-top: 2rem; border: 1px solid rgba(164, 124, 50, .28); border-radius: .5rem; padding: clamp(1rem, 3vw, 2rem); }
 .about-leadership > h2 { border-left: 2px solid var(--gold); padding-left: .875rem; }
 .about-leadership-intro { max-width: 60rem; margin-bottom: 2rem; }
 .about-leadership-profiles { display: grid; gap: 2rem; }
@@ -86,6 +86,10 @@
 .about-leadership-position::after { content: ''; display: block; width: 3rem; height: 1px; background: var(--gold); margin-top: .75rem; }
 .about-leadership-biography { margin-bottom: 0; }
 .about-leadership-biography + .about-leadership-biography { margin-top: 1rem; }
+.about-leadership-expanded { margin-top: 1rem; }
+.about-leadership-toggle-group { white-space: nowrap; }
+.about-leadership-toggle { display: inline; border: 0; padding: 0; background: transparent; color: var(--navy); font: inherit; cursor: pointer; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: .2em; }
+.about-leadership-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 @media (min-width: 64.0625rem) {
  .about-leadership + .callout { margin-top: 2rem; }
 }

@@ -58,3 +58,13 @@ desktop.addEventListener('change', alignImageBottom);
 window.addEventListener('load', alignImageBottom);
 document.fonts.ready.then(alignImageBottom);
 alignImageBottom();
+
+const biographyToggle = document.querySelector('.about-leadership-toggle');
+const biographyExpanded = document.querySelector('#andreas-biography-expanded');
+
+biographyToggle.addEventListener('click', () => {
+  const expanded = biographyToggle.getAttribute('aria-expanded') !== 'true';
+  biographyToggle.setAttribute('aria-expanded', String(expanded));
+  biographyToggle.textContent = expanded ? 'Read Less' : 'Read More';
+  biographyExpanded.hidden = !expanded;
+});

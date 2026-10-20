@@ -16,7 +16,10 @@ test('About leadership preserves the approved introduction, profile order, and h
     assert.ok(profiles[index].includes(`>${position}</p>`));
     assert.ok(profiles[index].includes('Portrait forthcoming'));
     if (index === 0) {
-      const biography = [...profiles[index].matchAll(/<p class="about-leadership-biography">([^<]+)<\/p>/g)].map(match => match[1]);
+      assert.match(profiles[index], /aria-expanded="false" aria-controls="andreas-biography-expanded"/);
+      assert.match(profiles[index], /id="andreas-biography-expanded" hidden/);
+      assert.equal((profiles[index].match(/class="about-leadership-toggle"/g) || []).length, 1);
+      const biography = [...profiles[index].matchAll(/<p class="about-leadership-biography">([\s\S]*?)<\/p>/g)].map(match => match[1].replace(/<button\b[\s\S]*?<\/button>/g, '').replace(/<[^>]+>/g, '').trim());
       assert.deepEqual(biography, [
   "Born in 1982, Andreas Elefteriadis has spent much of his life witnessing the struggles of people facing discrimination, persecution, and humanitarian crises. He has also been deeply affected by the cruelty and suffering of animals and the growing destruction of our planet.",
   "Throughout his life, Andreas has taken part in humanitarian efforts, supported animal welfare, and participated in activities to protect the environment. These experiences strengthened his belief that compassion alone is not enough — meaningful change begins when we choose to act.",
@@ -25,6 +28,7 @@ test('About leadership preserves the approved introduction, profile order, and h
 ]);
     } else {
       assert.ok(profiles[index].includes('Biography forthcoming.'));
+      assert.doesNotMatch(profiles[index], /about-leadership-toggle/);
     }
     assert.doesNotMatch(profiles[index], /<img\b/);
   }
