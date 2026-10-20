@@ -121,3 +121,12 @@
  .about-final-actions { gap: .75rem; }
  .about-final-actions > .button { font-size: .875rem; padding: .75rem .5rem; }
 }
+
+@media (max-width: 64rem) {
+ .about-final-callout { padding: clamp(1.125rem, 2.5vw, 1.5rem); gap: 1.125rem; }
+ .about-final-copy > h2 { font-size: clamp(1.5rem, 2.7vw, 1.75rem); line-height: 1.2; margin-bottom: .75rem; }
+ .about-final-copy > p { font-size: .9375rem; line-height: 1.6; }
+ .about-final-actions { gap: .75rem; }
+ .about-final-actions > .button { min-height: 2.875rem; padding: .625rem .5rem; font-size: .875rem; }
+ main:has(> .about-final-callout) { padding-bottom: 2rem; }
+}
