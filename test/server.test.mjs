@@ -54,7 +54,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     const response = await fetch(base + route);
     assert.equal(response.status, 200, route);
     const html = await response.text();
-    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 8 : route === '/mission' ? 7 : route === '/about' ? 5 : route === '/purposes' ? 2 : 1);
+    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 8 : route === '/mission' ? 7 : route === '/about' ? 5 : route === '/purposes' ? 3 : 1);
     assert.match(html, /class="header-logo"[^>]*alt="Your Global Voice official logo"/);
     const logoPath = html.match(/class="header-logo" src="([^"]+)"/)[1];
     const logo = await fetch(new URL(logoPath, response.url));
@@ -92,7 +92,8 @@ test('all pages share working navigation and preserve the approved purposes', as
     }
     if (['/', '/purposes'].includes(route)) {
       for (const [title, text] of expected) {
-        assert.ok(html.includes(`<h3>${title}</h3>`), title);
+        const displayTitle = route === '/purposes' && title === expected[0][0] ? 'Human Rights &amp; Dignity' : title;
+        assert.ok(html.includes(`<h3>${displayTitle}</h3>`), displayTitle);
         assert.ok(html.includes(`<p>${text}</p>`), title);
       }
     }

@@ -242,3 +242,14 @@ main > .donation-page > section:first-child { margin-top: 0; }
  .causes-intro { grid-template-columns: minmax(0, 1fr); }
  .causes-hero-image { max-width: 38rem; justify-self: center; }
 }
+
+/* First Our Causes card only. */
+.purpose-grid > .human-rights-card { border: 1px solid rgba(164, 124, 50, .28); border-radius: .5rem; }
+.human-rights-photo { display: block; width: 100%; height: auto; border-radius: .5rem; margin-bottom: 1.5rem; }
+.human-rights-icon { display: block; width: 2rem; height: 2rem; color: var(--gold); margin-bottom: 1rem; }
+.human-rights-card h3 { color: var(--navy); font-family: Georgia, 'Times New Roman', serif; }
+.human-rights-more { margin-top: 1rem; }
+.human-rights-more summary { width: fit-content; min-height: 44px; display: flex; align-items: center; cursor: pointer; color: #8c6824; list-style: none; }
+.human-rights-more summary::-webkit-details-marker { display: none; }
+.human-rights-more summary:hover { text-decoration: underline; text-underline-offset: .25em; }
+.human-rights-more summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
