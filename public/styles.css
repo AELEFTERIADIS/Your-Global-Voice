@@ -253,3 +253,5 @@ main > .donation-page > section:first-child { margin-top: 0; }
 .human-rights-more summary::-webkit-details-marker { display: none; }
 .human-rights-more summary:hover { text-decoration: underline; text-underline-offset: .25em; }
 .human-rights-more summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+
+.humanitarian-photo { aspect-ratio: 1078 / 516; object-fit: cover; object-position: center; }
