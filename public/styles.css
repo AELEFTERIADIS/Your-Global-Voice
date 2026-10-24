@@ -226,3 +226,10 @@ main > .donation-page > section:first-child { margin-top: 0; }
  .site-header .mobile-menu[open] nav a[aria-current='page'] { color: #D7B56D; }
  .site-header .mobile-menu[open] nav a:hover { background: #21496b; }
 }
+
+/* Our Causes introduction only; retain the existing cause cards unchanged. */
+.causes-intro { padding-block: clamp(1.5rem, 3vw, 2.5rem); margin-bottom: 2rem; }
+.causes-intro > h1 { margin-top: 0; }
+.causes-intro > .lead { max-width: 56rem; margin-bottom: 0; }
+.causes-intro > .causes-slogan { margin: 1.5rem 0 0; padding-left: 1rem; border-left: 2px solid var(--gold); color: var(--navy); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.1875rem, 1.5vw, 1.3125rem); line-height: 1.6; text-wrap: balance; }
+.causes-intro + .purpose-section { border-top: 0; padding-top: 0; }
