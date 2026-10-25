@@ -94,7 +94,8 @@ test('all pages share working navigation and preserve the approved purposes', as
       for (const [title, text] of expected) {
         const displayTitle = route === '/purposes' && title === expected[0][0] ? 'Human Rights &amp; Dignity' : title;
         assert.ok(html.includes(`<h3>${displayTitle}</h3>`), displayTitle);
-        assert.ok(html.includes(`<p>${text}</p>`), title);
+        const expandedText = route === '/purposes' && title === expected[0][0] ? 'At Your Global Voice, we believe that every individual deserves to live with dignity, freedom, and respect. We stand with those facing persecution, discrimination, and injustice, regardless of their background or beliefs. Through advocacy, compassionate assistance, and community support, we seek to protect fundamental human rights, amplify unheard voices, and help build a world where everyone is treated with fairness and humanity.' : text;
+        assert.ok(html.includes(`<p>${expandedText}</p>`), title);
       }
     }
     if (route === '/donate') {
