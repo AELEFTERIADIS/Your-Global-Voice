@@ -257,3 +257,8 @@ main > .donation-page > section:first-child { margin-top: 0; }
 .humanitarian-photo { aspect-ratio: 1078 / 516; object-fit: cover; object-position: center; }
 
 .animal-welfare-photo { aspect-ratio: 1078 / 516; object-fit: cover; object-position: center; }
+
+.environmental-photo { aspect-ratio: 1078 / 516; object-fit: cover; object-position: center; }
+.environmental-more .environmental-read-less,
+.environmental-more[open] .environmental-read-more { display: none; }
+.environmental-more[open] .environmental-read-less { display: inline; }
