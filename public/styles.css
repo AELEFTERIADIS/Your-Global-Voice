@@ -262,3 +262,13 @@ main > .donation-page > section:first-child { margin-top: 0; }
 .environmental-more .environmental-read-less,
 .environmental-more[open] .environmental-read-more { display: none; }
 .environmental-more[open] .environmental-read-less { display: inline; }
+
+/* Official motto beneath the Our Causes hero photograph only. */
+.causes-hero-media { width: 100%; min-width: 0; }
+.causes-hero-motto { display: flex; align-items: center; justify-content: center; gap: .5rem; margin: .875rem 0 0; color: #102B49; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(.75rem, 1.15vw, .875rem); font-weight: 700; line-height: 1.5; text-align: center; }
+.causes-hero-motto > span { min-width: 0; text-wrap: balance; }
+.causes-hero-motto::before, .causes-hero-motto::after { content: ''; flex: 1 1 1.5rem; max-width: 2rem; min-width: .375rem; height: 1px; background: #D7B56D; }
+.causes-motto-gold { color: #D7B56D; white-space: nowrap; }
+@media (max-width: 1024px) {
+ .causes-hero-media { max-width: 38rem; justify-self: center; }
+}
