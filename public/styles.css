@@ -281,3 +281,11 @@ main > .donation-page > section:first-child { margin-top: 0; }
 .causes-closing h2 { margin-bottom: .75rem; }
 .causes-closing .button { background: #102B49; }
 .causes-closing .button:hover { background: var(--green); }
+
+/* Compact Our Causes desktop hero; retain the approved stacked layouts. */
+@media (min-width: 1025px) {
+ .causes-intro { padding-block: clamp(1.25rem, 2vw, 1.75rem); }
+ .causes-intro-copy > h1 { font-size: clamp(2.255rem, 5.33vw, 4.51rem); }
+ .causes-intro-copy > .causes-slogan { font-size: clamp(1.640625rem, 2.1875vw, 1.75rem); margin-top: 1rem; padding-top: 1rem; }
+ .causes-hero-media { width: 85%; justify-self: center; }
+}
