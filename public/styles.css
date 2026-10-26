@@ -228,19 +228,17 @@ main > .donation-page > section:first-child { margin-top: 0; }
 }
 
 /* Our Causes introduction only; retain the existing cause cards unchanged. */
-.causes-intro { background: var(--cream); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; max-width: none; border: 1px solid rgba(164, 124, 50, .6); border-radius: .5rem; padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.5rem); margin-bottom: 1rem; }
+.causes-intro { background: var(--cream); display: block; max-width: none; border: 1px solid rgba(164, 124, 50, .6); border-radius: .5rem; padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.5rem); margin-bottom: 1rem; }
 .causes-intro-copy > h1 { margin-top: 0; color: var(--navy); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.75rem, 6.5vw, 5.5rem); line-height: 1.08; }
-.causes-intro-copy > .lead { max-width: 56rem; margin-bottom: 0; font-size: clamp(1.1875rem, 1.5vw, 1.25rem); line-height: 1.8; }
+.causes-intro-copy > .lead { max-width: 65ch; margin-bottom: 0; font-size: clamp(1.1875rem, 1.5vw, 1.25rem); line-height: 1.8; }
 .causes-intro-copy > .causes-slogan { position: relative; margin: 1.25rem 0 0; padding: 1.25rem 0 0; color: var(--gold); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.875rem, 2.5vw, 2rem); line-height: 1.4; text-wrap: balance; }
 .causes-slogan > span { display: block; }
 .causes-slogan::before { content: ''; position: absolute; top: 0; left: 0; width: 4rem; height: 1px; background: currentColor; }
 .causes-intro + .purpose-section { border-top: 0; padding-top: 0; }
 
 .causes-intro-copy { min-width: 0; }
-.causes-hero-image { display: block; width: 100%; height: auto; min-width: 0; border-radius: .625rem; }
 @media (max-width: 1024px) {
- .causes-intro { grid-template-columns: minmax(0, 1fr); margin-bottom: .75rem; }
- .causes-hero-image { max-width: 38rem; justify-self: center; }
+ .causes-intro { margin-bottom: .75rem; }
 }
 
 /* First Our Causes card only. */
@@ -263,15 +261,6 @@ main > .donation-page > section:first-child { margin-top: 0; }
 .environmental-more[open] .environmental-read-more { display: none; }
 .environmental-more[open] .environmental-read-less { display: inline; }
 
-/* Official motto beneath the Our Causes hero photograph only. */
-.causes-hero-media { width: 100%; min-width: 0; }
-.causes-hero-motto { display: flex; align-items: center; justify-content: center; gap: .5rem; margin: .875rem 0 0; color: #102B49; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(.75rem, 1.15vw, .875rem); font-weight: 700; line-height: 1.5; text-align: center; }
-.causes-hero-motto > span { min-width: 0; text-wrap: balance; }
-.causes-hero-motto::before, .causes-hero-motto::after { content: ''; flex: 1 1 1.5rem; max-width: 2rem; min-width: .375rem; height: 1px; background: #D7B56D; }
-.causes-motto-gold { color: #D7B56D; white-space: nowrap; }
-@media (max-width: 1024px) {
- .causes-hero-media { max-width: 38rem; justify-self: center; }
-}
 
 .causes-section-heading { font-family: inherit; color: var(--navy); margin: 0 0 .5rem; text-align: left; }
 
@@ -288,7 +277,4 @@ main > .donation-page > section:first-child { margin-top: 0; }
  .causes-intro-copy > h1 { font-size: clamp(2.255rem, 5.33vw, 4.51rem); }
  .causes-intro-copy > .causes-slogan { color: var(--navy); font-size: clamp(1.509375rem, 2.0125vw, 1.61rem); line-height: clamp(2.296875rem, 3.0625vw, 2.45rem); margin-top: 1rem; padding-top: 1rem; }
  .causes-slogan::before { width: 100px; background: var(--gold); }
- .causes-hero-motto { font-size: clamp(.8625rem, 1.3225vw, 1.00625rem); line-height: clamp(1.125rem, 1.725vw, 1.3125rem); }
- .causes-hero-motto > span { white-space: nowrap; }
- .causes-hero-media { width: 76.5%; padding-block: calc(8.5% * 1331 / 1996 / 2); justify-self: center; }
 }
