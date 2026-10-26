@@ -286,6 +286,9 @@ main > .donation-page > section:first-child { margin-top: 0; }
 @media (min-width: 1025px) {
  .causes-intro { padding-block: clamp(1.25rem, 2vw, 1.75rem); }
  .causes-intro-copy > h1 { font-size: clamp(2.255rem, 5.33vw, 4.51rem); }
- .causes-intro-copy > .causes-slogan { font-size: clamp(1.509375rem, 2.0125vw, 1.61rem); line-height: clamp(2.296875rem, 3.0625vw, 2.45rem); margin-top: 1rem; padding-top: 1rem; }
+ .causes-intro-copy > .causes-slogan { color: var(--navy); font-size: clamp(1.509375rem, 2.0125vw, 1.61rem); line-height: clamp(2.296875rem, 3.0625vw, 2.45rem); margin-top: 1rem; padding-top: 1rem; }
+ .causes-slogan::before { width: 100px; background: var(--gold); }
+ .causes-hero-motto { font-size: clamp(.8625rem, 1.3225vw, 1.00625rem); line-height: clamp(1.125rem, 1.725vw, 1.3125rem); }
+ .causes-hero-motto > span { white-space: nowrap; }
  .causes-hero-media { width: 76.5%; padding-block: calc(8.5% * 1331 / 1996 / 2); justify-self: center; }
 }
