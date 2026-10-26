@@ -274,3 +274,10 @@ main > .donation-page > section:first-child { margin-top: 0; }
 }
 
 .causes-section-heading { font-family: inherit; color: var(--navy); margin: 0 0 .5rem; text-align: left; }
+
+/* Our Causes closing call-to-action only. */
+.causes-closing { border-left-color: var(--gold); gap: 1.5rem; }
+.causes-closing > div > .eyebrow { color: var(--navy); margin-bottom: .5rem; }
+.causes-closing h2 { margin-bottom: .75rem; }
+.causes-closing .button { background: #102B49; }
+.causes-closing .button:hover { background: var(--green); }
