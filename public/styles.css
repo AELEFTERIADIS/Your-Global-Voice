@@ -272,3 +272,5 @@ main > .donation-page > section:first-child { margin-top: 0; }
 @media (max-width: 1024px) {
  .causes-hero-media { max-width: 38rem; justify-self: center; }
 }
+
+.causes-section-heading { font-size: clamp(1.5rem, 2.5vw, 2.125rem); margin: 0 0 1rem; text-align: left; }
