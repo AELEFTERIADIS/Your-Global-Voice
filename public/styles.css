@@ -277,3 +277,8 @@ main > .donation-page > section:first-child { margin-top: 0; }
  .causes-intro-copy > .causes-slogan { white-space: nowrap; color: var(--navy); font-size: clamp(1.509375rem, 2.0125vw, 1.61rem); line-height: clamp(2.296875rem, 3.0625vw, 2.45rem); margin-top: 1rem; padding-top: 1rem; }
  .causes-slogan::before { width: 100px; background: var(--gold); }
 }
+
+.causes-desktop-break { display: none; }
+@media (min-width: 1280px) {
+ .causes-desktop-break { display: inline; }
+}
