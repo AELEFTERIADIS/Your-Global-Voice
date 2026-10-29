@@ -7,6 +7,7 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+  ['/application.css', ['../public/application.css', 'text/css; charset=utf-8']],
   ['/get%20involved%20111.JPEG', ['../public/get involved 111.JPEG', 'image/jpeg']],
   ['/30D02897-5227-4D75-B420-B17C1E5737F6.jpeg', ['../public/30D02897-5227-4D75-B420-B17C1E5737F6.jpeg', 'image/jpeg']],
   ['/D9F50182-33A3-4256-A66C-C0ED63B26F1E.jpeg', ['../public/D9F50182-33A3-4256-A66C-C0ED63B26F1E.jpeg', 'image/jpeg']],
@@ -46,7 +47,7 @@ const routes = new Map([
 export function createPreviewServer(contactOptions) {
   const handleContact = createContactHandler(contactOptions);
   return createServer(async (request, response) => {
-    const contactRoute = /^\/contact(?:\.html|\/)?(?:\?|$)/.test(request.url);
+    const contactRoute = /^\/(?:contact|get-involved)(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const donateRoute = /^\/donate(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const aboutRoute = /^\/about(?:\.html|\/)?(?:\?|$)/.test(request.url);
     response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : (donateRoute || aboutRoute) ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);

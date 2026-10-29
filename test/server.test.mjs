@@ -70,7 +70,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.match(html, /Where Every Voice Matters/);
     assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
     assert.doesNotMatch(html, /<iframe\b/);
-    if (!['/contact', '/donate', '/about'].includes(route)) assert.doesNotMatch(html, /<script\b/);
+    if (!['/contact', '/get-involved', '/donate', '/about'].includes(route)) assert.doesNotMatch(html, /<script\b/);
     if (route === '/about') {
       assert.match(response.headers.get('content-security-policy'), /script-src 'self'/);
       assert.match(html, /<script src="about.js" defer><\/script>/);
@@ -80,7 +80,7 @@ test('all pages share working navigation and preserve the approved purposes', as
       assert.equal(script.status, 200);
       assert.match(script.headers.get('content-type'), /javascript/);
     }
-    if (route !== '/contact') assert.doesNotMatch(html, /<form\b/);
+    if (!['/contact', '/get-involved'].includes(route)) assert.doesNotMatch(html, /<form\b/);
     for (const destination of routes) assert.ok(html.includes(`href="${destination === "/" ? "index" : destination.slice(1)}.html"`));
     if (route === '/mission') {
       assert.match(html, /Be Part of Our Mission/);

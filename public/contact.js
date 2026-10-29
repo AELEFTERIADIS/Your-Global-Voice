@@ -55,6 +55,24 @@ async function prepare(enableSubmit = true) {
     return false;
   }
 }
+// Applications use the same validated inquiry endpoint and security checks.
+function submissionData() {
+  const fields = new FormData(form);
+  const data = Object.fromEntries(fields);
+  if (form.hasAttribute?.('data-application')) {
+    data.subject = 'Volunteering Opportunities';
+    data.message = [
+      'Get Involved Application',
+      'Phone Number: ' + (fields.get('phone') || 'Not provided'),
+      'Country / Location: ' + (fields.get('location') || 'Not provided'),
+      'Our Causes: ' + (fields.getAll('causes').join(', ') || 'Not selected'),
+      'How Would You Like to Get Involved?: ' + (fields.getAll('interests').join(', ') || 'Not selected'),
+      'Other: ' + (fields.get('other') || 'Not provided'),
+      'Your Message: ' + (fields.get('message') || 'Not provided')
+    ].join('\n\n');
+  }
+  return data;
+}
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   if (!token || submit.disabled || !form.reportValidity()) return;
@@ -67,14 +85,16 @@ form.addEventListener('submit', async (event) => {
     if (!await prepare(false)) throw new Error('Verification unavailable.');
     // Preserve the backend minimum completion time for the freshly issued token.
     await new Promise(resolve => setTimeout(resolve, 1100));
-    const response = await fetch(apiUrl('api/contact'), { method: 'POST', signal: AbortSignal.timeout(15000), headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...Object.fromEntries(new FormData(form)), token }) });
+    const response = await fetch(apiUrl('api/contact'), { method: 'POST', signal: AbortSignal.timeout(15000), headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...submissionData(), token }) });
     const result = await response.json();
     if (!response.ok || result.accepted !== true) {
       if (typeof result.message === 'string') failureMessage = result.message;
       throw new Error();
     }
     resultStatus.className = 'contact-success';
-    resultStatus.textContent = 'Thank you for contacting Your Global Voice. Your message has been sent successfully. We will respond as soon as possible.';
+    resultStatus.textContent = form.hasAttribute?.('data-application')
+      ? 'Thank you for your interest in Your Global Voice. Your application has been submitted successfully. We will review it and respond as soon as possible.'
+      : 'Thank you for contacting Your Global Voice. Your message has been sent successfully. We will respond as soon as possible.';
     form.reset(); token = null;
     await prepare();
   } catch {

@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const pagesFiles = ['index.html', 'about.html', 'mission.html', 'purposes.html', 'projects.html', 'get-involved.html', 'donate.html', 'contact.html'];
-export const assets = ['get involved 111.JPEG', '30D02897-5227-4D75-B420-B17C1E5737F6.jpeg', 'D9F50182-33A3-4256-A66C-C0ED63B26F1E.jpeg', 'CFA1FD8E-17F4-49FE-A5D8-4F97EBB1E587.png', 'YGV-Humanitarian-Aid.jpeg', '8C534551-DFAE-4F96-B226-14203E48BE5D.jpeg', '011A7EA4-9734-4150-A3F7-7694CB94F46D.jpeg', 'C877690E-4E12-4A62-BCE4-47A36456254D.png', 'Elderly Cleric in Embroidered Hat.png', 'E7F71712-32D1-43FE-BA18-618193E48BA8.png', 'about.js', 'about.css', '3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', '76294CB8-5CC1-405F-92D0-03D3AFBEA081.png', ...missionImages.map(image => image.src), 'cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'mission.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
+export const assets = ['application.css', 'get involved 111.JPEG', '30D02897-5227-4D75-B420-B17C1E5737F6.jpeg', 'D9F50182-33A3-4256-A66C-C0ED63B26F1E.jpeg', 'CFA1FD8E-17F4-49FE-A5D8-4F97EBB1E587.png', 'YGV-Humanitarian-Aid.jpeg', '8C534551-DFAE-4F96-B226-14203E48BE5D.jpeg', '011A7EA4-9734-4150-A3F7-7694CB94F46D.jpeg', 'C877690E-4E12-4A62-BCE4-47A36456254D.png', 'Elderly Cleric in Embroidered Hat.png', 'E7F71712-32D1-43FE-BA18-618193E48BA8.png', 'about.js', 'about.css', '3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', '76294CB8-5CC1-405F-92D0-03D3AFBEA081.png', ...missionImages.map(image => image.src), 'cinzel-regular.woff', 'garamond-regular.woff2', 'footer-font-licenses.txt', 'styles.css', 'mission.css', 'contact.css', 'contact.js', 'donate.css', 'donate.js', 'donation-globe.webp', 'paypal-logo.svg', 'amex-logo.svg', 'link-logo.svg', 'visa-logo.svg', 'mastercard-logo.svg', 'discover-logo.svg', '603250A8-B1C4-4533-848C-4028A6E0AD49.png'];
 
 export async function preparePages(destination, apiOrigin = process.env.CONTACT_API_ORIGIN || '') {
   if (apiOrigin) {
@@ -17,7 +17,7 @@ export async function preparePages(destination, apiOrigin = process.env.CONTACT_
     const source = new URL(`../public/${file}`, import.meta.url);
     if (file.endsWith('.html')) {
       let html = await readFile(source, 'utf8');
-      const contact = file === 'contact.html';
+      const contact = ['contact.html', 'get-involved.html'].includes(file);
       const donate = file === 'donate.html';
       const about = file === 'about.html';
       const csp = `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'${contact ? `; script-src 'self'; connect-src 'self'${apiOrigin ? " " + apiOrigin : ""}` : (donate || about) ? "; script-src 'self'" : ''}`;
