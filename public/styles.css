@@ -282,3 +282,8 @@ main > .donation-page > section:first-child { margin-top: 0; }
 @media (min-width: 1280px) {
  .causes-desktop-break { display: inline; }
 }
+
+/* Get Involved opening hero only. */
+.get-involved-intro { max-width: none; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); border-radius: .5rem; background: var(--cream); text-align: center; }
+.get-involved-intro > h1 { max-width: none; margin: 0 0 .875rem; font-size: clamp(2.25rem, 4.5vw, 3.5rem); }
+.get-involved-intro > .lead { max-width: 75ch; margin: 0 auto; }
