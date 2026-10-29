@@ -20,3 +20,14 @@
 .involvement-application .contact-success { color: var(--green); }
 .involvement-application .contact-error { color: #a32626; }
 @media (max-width: 42rem) { .application-fields, .application-checks { grid-template-columns: 1fr; } .application-fields { gap: 0; } }
+
+/* Compact disclosure fields keep multi-select options out of the closed form. */
+.application-multiselect { min-width: 0; }
+.application-multiselect > summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 48px; padding: .75rem; border: 1px solid var(--muted); background: white; color: var(--ink); cursor: pointer; list-style: none; line-height: 1.6; }
+.application-multiselect > summary::-webkit-details-marker { display: none; }
+.application-multiselect > summary::after { content: ''; width: .5rem; height: .5rem; border-right: 1.5px solid var(--navy); border-bottom: 1.5px solid var(--navy); transform: rotate(45deg); flex-shrink: 0; margin-right: .25rem; }
+.application-multiselect[open] > summary::after { transform: rotate(225deg); }
+.application-selected { min-width: 0; overflow-wrap: anywhere; }
+.application-multiselect .application-checks { grid-template-columns: 1fr; gap: 0; max-height: 18rem; overflow-y: auto; overscroll-behavior: contain; padding: .5rem .75rem; border: 1px solid var(--muted); border-top: 0; background: white; }
+.application-multiselect summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.application-other[hidden] { display: none; }
