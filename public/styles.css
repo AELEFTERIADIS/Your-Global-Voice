@@ -283,7 +283,9 @@ main > .donation-page > section:first-child { margin-top: 0; }
  .causes-desktop-break { display: inline; }
 }
 
-/* Get Involved opening hero only. */
-.get-involved-intro { max-width: none; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid rgba(164, 124, 50, .28); border-top: 2px solid rgba(164, 124, 50, .65); border-radius: .5rem; background: var(--cream); text-align: center; }
-.get-involved-intro > h1 { max-width: none; margin: 0 0 .875rem; font-size: clamp(2.25rem, 4.5vw, 3.5rem); }
-.get-involved-intro > .lead { max-width: 75ch; margin: 0 auto; }
+/* Get Involved reuses the About Us hero's mission-box and mission-hero styles. */
+.get-involved-intro.mission-hero { text-align: left; margin-bottom: 1rem; }
+.get-involved-hero-motto { margin: .75rem 0 0; color: #8c6824; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(.875rem, 1.5vw, 1rem); font-weight: 700; line-height: 1.5; }
+@media (max-width: 1024px) {
+ .get-involved-intro.mission-hero { margin-bottom: .75rem; }
+}
