@@ -291,3 +291,12 @@ main > .donation-page > section:first-child { margin-top: 0; }
 @media (max-width: 1024px) {
  .get-involved-intro.mission-hero { margin-bottom: .75rem; }
 }
+
+/* Get Involved image/text section follows the About Us panel treatment. */
+.get-involved-meaningful { display: grid; grid-template-columns: minmax(0, .35fr) minmax(0, .65fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: start; margin-bottom: 3rem; }
+.get-involved-meaningful-image { display: block; width: 100%; height: auto; border-radius: .5rem; }
+.get-involved-meaningful-copy { min-width: 0; }
+.get-involved-meaningful-copy > p:last-child { margin-bottom: 0; }
+@media (max-width: 1024px) {
+ .get-involved-meaningful { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+}
