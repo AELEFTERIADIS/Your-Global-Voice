@@ -300,3 +300,6 @@ main > .donation-page > section:first-child { margin-top: 0; }
 @media (max-width: 1024px) {
  .get-involved-meaningful { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; margin-bottom: .75rem; }
 }
+
+/* Decorative icon for the Get Involved Support card only. */
+.involvement-support-icon { display: inline-block; width: 1.5rem; height: 1.5rem; margin-right: .5rem; vertical-align: -.15em; color: var(--gold); }
