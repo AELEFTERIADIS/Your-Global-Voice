@@ -285,7 +285,8 @@ main > .donation-page > section:first-child { margin-top: 0; }
 
 /* Get Involved reuses the About Us hero's mission-box and mission-hero styles. */
 .get-involved-intro.mission-hero { text-align: left; margin-bottom: 1rem; }
-.get-involved-hero-motto { margin: .75rem 0 0; color: #8c6824; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(.875rem, 1.5vw, 1rem); font-weight: 700; line-height: 1.5; }
+.get-involved-intro > .lead { max-width: none; }
+.get-involved-hero-motto { margin: .75rem 0 0; color: var(--navy); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(.875rem, 1.5vw, 1rem); font-weight: 700; line-height: 1.5; }
 @media (max-width: 1024px) {
  .get-involved-intro.mission-hero { margin-bottom: .75rem; }
 }
