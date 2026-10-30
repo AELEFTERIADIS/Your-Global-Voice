@@ -1,7 +1,7 @@
-/* Get Involved hero: Donate hero panel, proportions, and type scale. */
+/* Local hero test: full, uncropped photograph above the existing text. */
 .involvement-hero {
  display: grid;
- grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+ grid-template-columns: minmax(0, 1fr);
  gap: clamp(1.5rem, 4vw, 3rem);
  align-items: start;
  max-width: none;
@@ -11,14 +11,11 @@
  border-top: 3px solid var(--gold);
  border-bottom: 0;
 }
-.involvement-hero-copy { min-width: 0; }
+.involvement-hero-copy { min-width: 0; text-align: left; }
 .involvement-hero-copy > .eyebrow { color: var(--gold); }
 .involvement-hero h1 { max-width: 60rem; font-size: clamp(2.625rem, 4.725vw, 4.2rem); line-height: calc(1.1 * clamp(2.5rem, 4.5vw, 4rem)); }
 .involvement-hero-motto { color: var(--green); font-family: Georgia, serif; font-size: 1.16875rem; line-height: 1.7; margin: 12px 0 1rem; }
-.involvement-hero-image { display: block; width: 100%; max-width: 30rem; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 30%; border-radius: .75rem; justify-self: start; }
-@media (min-width: 56.0625rem) {
- .involvement-hero { grid-template-columns: minmax(0, 1fr) min(30rem, calc((min(100vw - 3rem, 78rem) - clamp(1.5rem, 4vw, 3rem)) / 2.25)); }
-}
+.involvement-hero-image { display: block; width: 100%; max-width: none; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: .75rem; justify-self: start; }
 @media (max-width: 56rem) {
  .involvement-hero { grid-template-columns: 1fr; gap: 2rem; }
  .involvement-hero-image { justify-self: center; }
