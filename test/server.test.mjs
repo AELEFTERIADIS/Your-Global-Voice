@@ -54,7 +54,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     const response = await fetch(base + route);
     assert.equal(response.status, 200, route);
     const html = await response.text();
-    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 8 : route === '/mission' ? 7 : route === '/about' ? 5 : route === '/purposes' ? 5 : route === '/get-involved' ? 2 : 1);
+    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 8 : route === '/mission' ? 7 : route === '/about' ? 5 : route === '/purposes' ? 5 : route === '/get-involved' ? 3 : 1);
     assert.match(html, /class="header-logo"[^>]*alt="Your Global Voice official logo"/);
     const logoPath = html.match(/class="header-logo" src="([^"]+)"/)[1];
     const logo = await fetch(new URL(logoPath, response.url));
