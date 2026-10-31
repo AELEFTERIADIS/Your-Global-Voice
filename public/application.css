@@ -33,3 +33,15 @@
 .application-other[hidden] { display: none; }
 
 .involvement-application .application-heading-note { font-size: .8em; font-weight: 400; font-style: normal; color: #53636d; }
+
+/* Country search keeps the existing field footprint and form palette. */
+.application-country { min-width: 0; }
+.country-control { position: relative; }
+.involvement-application .country-control input { padding-right: 3rem; }
+.involvement-application .country-toggle { position: absolute; top: 1px; right: 1px; bottom: 1px; width: 44px; padding: 0; background: white; color: var(--navy); font-size: 1.25rem; }
+.country-options { max-height: 16rem; overflow-y: auto; overscroll-behavior: contain; border: 1px solid var(--muted); border-top: 0; background: white; }
+.country-options [role="option"] { min-height: 44px; padding: .625rem .75rem; line-height: 1.5; cursor: pointer; }
+.country-options [role="option"]:hover, .country-options .country-active { background: var(--cream); color: var(--navy); outline: 1px solid var(--gold); outline-offset: -1px; }
+.country-options [aria-selected="true"] { font-weight: 700; }
+.country-no-results { padding: .75rem; font-size: .875rem; }
+.country-options[hidden], .country-options [hidden], .country-manual[hidden] { display: none; }

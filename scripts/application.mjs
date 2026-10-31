@@ -1,3 +1,7 @@
+import { readFile } from 'node:fs/promises';
+// 193 UN member states and the two UN observer states; territories use Other.
+const countries = JSON.parse(await readFile(new URL('../content/countries.json', import.meta.url), 'utf8'));
+const countryOptions = [...countries].sort(new Intl.Collator('en').compare).concat('Other');
 const causes = ['Humanitarian Assistance', 'Human Rights & Dignity', 'Animal Welfare', 'Environmental Protection'];
 const interests = ['One-time donations', 'Monthly donations', 'Project sponsorship', 'In-kind donations', 'Volunteering', 'Humanitarian activities', 'Human rights advocacy', 'Animal welfare', 'Environmental protection', 'Leadership', 'Project management', 'Professional expertise', 'Legal assistance', 'Fundraising', 'Grant writing', 'Marketing', 'Technology', 'Translation', 'Events', 'Community representation', 'Partnerships', 'International collaboration', 'Project proposals', 'Advisory roles', 'Other'];
 const checks = (name, values) => values.map(value => `<label><input type="checkbox" name="${name}" value="${value}"><span>${value}</span></label>`).join('');
@@ -12,7 +16,11 @@ export const renderApplication = () => `<section class="involvement-application"
 <div><label for="application-name">Full Name (required)</label><input id="application-name" name="name" autocomplete="name" required maxlength="120"></div>
 <div><label for="application-email">Email Address (required)</label><input id="application-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
 <div><label for="application-phone">Phone Number (optional)</label><input id="application-phone" name="phone" type="tel" autocomplete="tel" maxlength="50"></div>
-<div><label for="application-location">Country / Location</label><input id="application-location" name="location" autocomplete="country-name" maxlength="120"></div>
+<div class="application-country"><label for="application-country-search">Country</label>
+<div class="country-control"><input id="application-country-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="application-country-options" autocomplete="off" placeholder="Search or select a country" maxlength="120"><button class="country-toggle" type="button" aria-label="Show countries" aria-expanded="false" aria-controls="application-country-options"><span aria-hidden="true">⌄</span></button></div>
+<input type="hidden" name="location" id="application-location">
+<div id="application-country-options" class="country-options" role="listbox" aria-label="Country" hidden>${countryOptions.map((country, i) => `<div id="application-country-option-${i}" role="option" aria-selected="false" data-country="${country}">${country}</div>`).join('')}<p class="country-no-results" role="status" hidden>No matching countries. Select Other to enter a location manually.</p></div>
+<div class="country-manual" hidden><label for="application-country-other">Country / Location</label><input id="application-country-other" name="locationOther" maxlength="120" disabled></div></div>
 </div>
 ${dropdown('causes', 'Our Causes', causes)}
 ${dropdown('interests', 'How Would You Like to Get Involved?', interests)}

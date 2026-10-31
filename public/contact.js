@@ -64,7 +64,7 @@ function submissionData() {
     data.message = [
       'Get Involved Application',
       'Phone Number: ' + (fields.get('phone') || 'Not provided'),
-      'Country / Location: ' + (fields.get('location') || 'Not provided'),
+      'Country / Location: ' + (fields.get('location') === 'Other' ? fields.get('locationOther') : fields.get('location') || 'Not provided'),
       'Our Causes: ' + (fields.getAll('causes').join(', ') || 'Not selected'),
       'How Would You Like to Get Involved?: ' + (fields.getAll('interests').join(', ') || 'Not selected'),
       'Other: ' + (fields.get('other') || 'Not provided'),
