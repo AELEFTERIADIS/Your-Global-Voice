@@ -31,3 +31,5 @@
 .application-multiselect .application-checks { grid-template-columns: 1fr; gap: 0; max-height: 18rem; overflow-y: auto; overscroll-behavior: contain; padding: .5rem .75rem; border: 1px solid var(--muted); border-top: 0; background: white; }
 .application-multiselect summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 .application-other[hidden] { display: none; }
+
+.involvement-application .application-heading-note { font-size: .8em; font-weight: 400; font-style: normal; color: #53636d; }

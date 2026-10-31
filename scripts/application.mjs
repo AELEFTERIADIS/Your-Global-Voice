@@ -3,9 +3,9 @@ const interests = ['One-time donations', 'Monthly donations', 'Project sponsorsh
 const checks = (name, values) => values.map(value => `<label><input type="checkbox" name="${name}" value="${value}"><span>${value}</span></label>`).join('');
 const dropdown = (name, label, values) => `<fieldset><legend id="application-${name}-label">${label}</legend><details class="application-multiselect" data-selection="${name}"><summary aria-labelledby="application-${name}-label application-${name}-selected"><span id="application-${name}-selected" class="application-selected">Select one or more</span></summary><div class="application-checks">${checks(name, values)}</div></details></fieldset>`;
 export const renderApplication = () => `<section class="involvement-application" id="application" aria-labelledby="application-heading">
-<h2 id="application-heading">Ready to Get Involved? (Application Form)</h2>
+<h2 id="application-heading">Ready to Get Involved? <span class="application-heading-note">(Application Form)</span></h2>
 <div class="card application-box"><h2>Your Journey With Us Starts Here</h2>
-<p>Share your interests, skills, or ideas with us. Whether you wish to volunteer, donate, collaborate, or propose an initiative, we welcome your involvement.</p>
+<p>Whether you wish to volunteer, share your ideas, or contribute to our initiatives, we welcome you to be part of our community.</p>
 <p id="contact-status" role="status"></p>
 <form class="contact-form" data-application method="post" action="api/contact" aria-describedby="contact-status contact-privacy">
 <div class="application-fields">
