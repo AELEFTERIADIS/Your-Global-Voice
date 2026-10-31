@@ -167,7 +167,8 @@ test('every generated page link resolves to an existing sibling file', async () 
     }
     const anchoredLinks = [...html.matchAll(/href="donate.html#donation-payment"/g)];
     assert.equal(anchoredLinks.length, ['mission', 'get-involved'].includes(name) ? 1 : 0);
-    if (name === 'get-involved') assert.match(html, /Help Fund Our Mission[\s\S]*?href="donate.html#donation-payment">Donate Now/);
+    if (name === 'get-involved') assert.match(html, /Your Generosity, Their Hope[\s\S]*?href="donate.html#donation-payment">Donate Now/);
+    if (name === 'get-involved') { assert.match(html, /href="#application">Get Started &rarr;/); assert.match(html, /id="application"/); }
     if (name === 'mission') assert.match(html, /class="mission-box mission-invitation mission-support"[\s\S]*?href="donate.html#donation-payment">Donate Now/);
     for (const destination of files) {
       assert.ok(html.includes(`href="${destination}.html"`));
