@@ -1,25 +1,25 @@
-/* Local hero test: full, uncropped photograph above the existing text. */
+/* Hero outer treatment matches the existing Ways to Get Involved cards. */
 .involvement-hero {
- display: grid;
- grid-template-columns: minmax(0, 1fr);
- gap: clamp(1.5rem, 4vw, 3rem);
- align-items: start;
  max-width: none;
- margin-bottom: 2rem;
- padding: clamp(1.5rem, 3vw, 2.5rem);
+ margin-bottom: .5rem;
+ padding: 0;
+ background: transparent;
+ border: 0;
+}
+.involvement-hero-panel {
+ display: flex;
+ flex-direction: column;
+ gap: 0;
+ align-items: stretch;
+ padding: 0;
  background: var(--cream);
+ border: 1px solid var(--line);
  border-top: 3px solid var(--gold);
- border-bottom: 0;
 }
 .involvement-hero-copy { min-width: 0; text-align: left; }
-.involvement-hero > .eyebrow { color: var(--navy); margin: 0; }
-.involvement-hero h1 { max-width: none; font-size: clamp(2.625rem, 4.725vw, 4.2rem); line-height: calc(1.1 * clamp(2.5rem, 4.5vw, 4rem)); }
-.involvement-hero-motto { color: var(--green); font-family: Georgia, serif; font-size: 1.16875rem; line-height: 1.7; margin: 12px 0 1rem; }
-.involvement-hero-image { display: block; width: 100%; max-width: none; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: .75rem; justify-self: start; }
-@media (max-width: 56rem) {
- .involvement-hero { grid-template-columns: 1fr; gap: 2rem; }
- .involvement-hero-image { justify-self: center; }
-}
-@media (max-width: 24rem) {
- .involvement-hero { padding-inline: clamp(0px, calc((100vw - 20rem) / 2), 1.5rem); }
-}
+.involvement-hero h1 { margin: 0 0 4px; max-width: none; font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1.12; }
+.involvement-hero-motto { color: #D7B56D; font-family: Georgia, serif; font-size: clamp(1.375rem, 2.4vw, 2rem); font-weight: 700; line-height: 1.3; margin: 0; }
+.involvement-hero-image { display: block; width: 100%; max-width: none; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: .75rem; justify-self: start; margin-bottom: 8px; }
+
+/* Direct children: gold border, natural-height label, then photograph. */
+.involvement-hero-panel > .involvement-hero-label { flex: none; margin: 0; padding: 0; line-height: 1; }
