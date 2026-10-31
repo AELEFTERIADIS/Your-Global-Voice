@@ -1,7 +1,7 @@
 /* Hero outer treatment matches the existing Ways to Get Involved cards. */
 .involvement-hero {
  max-width: none;
- margin-bottom: .5rem;
+ margin-bottom: 1.5rem;
  padding: 0;
  background: transparent;
  border: 0;
@@ -11,15 +11,19 @@
  flex-direction: column;
  gap: 0;
  align-items: stretch;
- padding: 0;
+ padding: 12px clamp(1.5rem, 4vw, 3rem) 24px;
  background: var(--cream);
  border: 1px solid var(--line);
  border-top: 3px solid var(--gold);
 }
 .involvement-hero-copy { min-width: 0; text-align: left; }
-.involvement-hero h1 { margin: 0 0 4px; max-width: none; font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1.12; }
+.involvement-hero h1 { margin: 0 0 16px; max-width: none; font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1.12; }
 .involvement-hero-motto { color: #D7B56D; font-family: Georgia, serif; font-size: clamp(1.375rem, 2.4vw, 2rem); font-weight: 700; line-height: 1.3; margin: 0; }
-.involvement-hero-image { display: block; width: 100%; max-width: none; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: .75rem; justify-self: start; margin-bottom: 8px; }
+.involvement-hero-image { display: block; width: 100%; max-width: none; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: .75rem; justify-self: start; margin-bottom: 24px; }
 
 /* Direct children: gold border, natural-height label, then photograph. */
-.involvement-hero-panel > .involvement-hero-label { flex: none; margin: 0; padding: 0; line-height: 1; }
+.involvement-hero-panel > .involvement-hero-label { flex: none; margin: 0 0 12px; padding: 0; line-height: 1.4; }
+
+@media (max-width: 64rem) {
+ .involvement-hero-panel { padding-inline: clamp(1rem, 2.5vw, 1.5rem); padding-bottom: 20px; }
+}
