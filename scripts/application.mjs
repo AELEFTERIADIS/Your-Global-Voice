@@ -1,9 +1,11 @@
 import { readFile } from 'node:fs/promises';
 // 193 UN member states and the two UN observer states; territories use Other.
 const countries = JSON.parse(await readFile(new URL('../content/countries.json', import.meta.url), 'utf8'));
+// Country calling codes: libphonenumber metadata via phonenumbers 9.0.42.
+const dialingCodes = JSON.parse(await readFile(new URL('../content/dialing-codes.json', import.meta.url), 'utf8')).sort((a, b) => new Intl.Collator('en').compare(a.country, b.country));
 const countryOptions = [...countries].sort(new Intl.Collator('en').compare).concat('Other');
-const causes = ['Humanitarian Assistance', 'Human Rights & Dignity', 'Animal Welfare', 'Environmental Protection'];
-const interests = ['One-time donations', 'Monthly donations', 'Project sponsorship', 'In-kind donations', 'Volunteering', 'Humanitarian activities', 'Human rights advocacy', 'Animal welfare', 'Environmental protection', 'Leadership', 'Project management', 'Professional expertise', 'Legal assistance', 'Fundraising', 'Grant writing', 'Marketing', 'Technology', 'Translation', 'Events', 'Community representation', 'Partnerships', 'International collaboration', 'Project proposals', 'Advisory roles', 'Other'];
+const causes = ['Human Rights & Dignity', 'Humanitarian Assistance and Relief', 'Animal Welfare', 'Environmental Conservation and Sustainability'];
+const interests = ['Volunteering', 'Sharing Ideas', 'Contributing Skills & Experience', 'Community Outreach', 'Project Participation', 'Collaboration & Partnerships', 'One-Time Donations', 'Monthly Donations', 'Project Sponsorship', 'In-Kind Donations', 'Other'];
 const checks = (name, values) => values.map(value => `<label><input type="checkbox" name="${name}" value="${value}"><span>${value}</span></label>`).join('');
 const dropdown = (name, label, values) => `<fieldset><legend id="application-${name}-label">${label}</legend><details class="application-multiselect" data-selection="${name}"><summary aria-labelledby="application-${name}-label application-${name}-selected"><span id="application-${name}-selected" class="application-selected">Select one or more</span></summary><div class="application-checks">${checks(name, values)}</div></details></fieldset>`;
 export const renderApplication = () => `<section class="involvement-application" id="application" aria-labelledby="application-heading">
@@ -15,7 +17,11 @@ export const renderApplication = () => `<section class="involvement-application"
 <div class="application-fields">
 <div><label for="application-name">Full Name (required)</label><input id="application-name" name="name" autocomplete="name" required maxlength="120"></div>
 <div><label for="application-email">Email Address (required)</label><input id="application-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
-<div><label for="application-phone">Phone Number (optional)</label><input id="application-phone" name="phone" type="tel" autocomplete="tel" maxlength="50"></div>
+<div><label for="application-phone">Phone Number (optional)</label><div class="application-phone-fields">
+<div class="application-dial"><div class="country-control"><input id="application-dial-search" aria-label="International dialing code" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="application-dial-options" autocomplete="off" placeholder="Dial code" maxlength="120"><button class="country-toggle" type="button" aria-label="Show dialing codes" aria-expanded="false" aria-controls="application-dial-options"><span aria-hidden="true">⌄</span></button></div>
+<input type="hidden" name="dialCode"><input type="hidden" name="dialCountry">
+<div id="application-dial-options" class="country-options" role="listbox" aria-label="International dialing code" hidden>${dialingCodes.map((item, i) => `<div id="application-dial-option-${i}" role="option" aria-selected="false" data-country="${item.country}" data-code="${item.code}" data-flag="${item.flag}" data-iso="${item.iso}"><span aria-hidden="true">${item.flag}</span> ${item.country} ${item.code}</div>`).join('')}<p class="country-no-results" role="status" hidden>No matching dialing codes.</p></div></div>
+<input id="application-phone" name="phone" type="tel" autocomplete="tel-national" maxlength="50"></div></div>
 <div class="application-country"><label for="application-country-search">Country</label>
 <div class="country-control"><input id="application-country-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="application-country-options" autocomplete="off" placeholder="Search or select a country" maxlength="120"><button class="country-toggle" type="button" aria-label="Show countries" aria-expanded="false" aria-controls="application-country-options"><span aria-hidden="true">⌄</span></button></div>
 <input type="hidden" name="location" id="application-location">
@@ -23,9 +29,10 @@ export const renderApplication = () => `<section class="involvement-application"
 <div class="country-manual" hidden><label for="application-country-other">Country / Location</label><input id="application-country-other" name="locationOther" maxlength="120" disabled></div></div>
 </div>
 ${dropdown('causes', 'Our Causes', causes)}
-${dropdown('interests', 'How Would You Like to Get Involved?', interests)}
+${dropdown('interests', 'Opportunities to Make a Difference', interests)}
 <div class="application-other" hidden><label for="application-other">Other — please specify</label><input id="application-other" name="other" maxlength="200" disabled></div>
-<label for="application-message">Your Message</label><textarea id="application-message" name="message" rows="5" maxlength="3000"></textarea>
+<label for="application-message">Your Message</label><textarea id="application-message" name="message" rows="5" maxlength="1000" aria-describedby="application-message-count"></textarea>
+<p id="application-message-count" class="application-message-count" role="status" aria-live="polite" aria-atomic="true">0 / 1,000 characters</p>
 <p id="contact-privacy" class="application-note">Please share only information needed for your application. Do not include identity documents, payment details, medical records, or other sensitive information.</p>
 <label class="application-consent"><input type="checkbox" name="consent" value="yes" required><span>I agree that Your Global Voice may use the information I provide to review my application and contact me about my involvement. (required)</span></label>
 <div class="application-trap" aria-hidden="true"><label for="application-website">Leave this field empty</label><input id="application-website" name="website" tabindex="-1" autocomplete="off"></div>

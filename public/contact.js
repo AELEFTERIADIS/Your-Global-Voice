@@ -63,10 +63,11 @@ function submissionData() {
     data.subject = 'Volunteering Opportunities';
     data.message = [
       'Get Involved Application',
-      'Phone Number: ' + (fields.get('phone') || 'Not provided'),
+      'International Dialing Code: ' + (fields.get('dialCode') ? fields.get('dialCode') + ' (' + fields.get('dialCountry') + ')' : 'Not selected'),
+      'Phone Number: ' + (fields.get('phone') ? ((fields.get('dialCode') && !fields.get('phone').trim().startsWith('+') ? fields.get('dialCode') + ' ' : '') + fields.get('phone')) : 'Not provided'),
       'Country / Location: ' + (fields.get('location') === 'Other' ? fields.get('locationOther') : fields.get('location') || 'Not provided'),
       'Our Causes: ' + (fields.getAll('causes').join(', ') || 'Not selected'),
-      'How Would You Like to Get Involved?: ' + (fields.getAll('interests').join(', ') || 'Not selected'),
+      'Opportunities to Make a Difference: ' + (fields.getAll('interests').join(', ') || 'Not selected'),
       'Other: ' + (fields.get('other') || 'Not provided'),
       'Your Message: ' + (fields.get('message') || 'Not provided')
     ].join('\n\n');

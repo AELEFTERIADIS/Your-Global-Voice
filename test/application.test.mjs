@@ -10,7 +10,7 @@ test('application retains every multi-select value and submits a valid inquiry o
     const accepted = scenario !== 'failure';
     let callback, payload, resets = 0;
     const submit = { disabled: true }, status = {}, result = {};
-    const values = [['name', 'Application Test'], ['email', 'test@example.org'], ['phone', '+1 555 0100'], ['location', scenario === 'manual' ? 'Other' : 'Canada'], ['locationOther', 'Test location'], ['causes', 'Animal Welfare'], ['causes', 'Human Rights & Dignity'], ['interests', 'Volunteering'], ['interests', 'Translation'], ['other', 'Test idea'], ['message', 'Application message'], ['consent', 'yes'], ['website', '']];
+    const values = [['name', 'Application Test'], ['email', 'test@example.org'], ['phone', '555 0100'], ['dialCode', '+1'], ['dialCountry', 'Canada'], ['location', scenario === 'manual' ? 'Other' : 'Canada'], ['locationOther', 'Test location'], ['causes', 'Animal Welfare'], ['causes', 'Human Rights & Dignity'], ['interests', 'Volunteering'], ['interests', 'Sharing Ideas'], ['other', 'Test idea'], ['message', 'Application message'], ['consent', 'yes'], ['website', '']];
     const form = { hasAttribute: () => true, querySelector: () => submit, addEventListener: (_, fn) => { callback = fn; }, reportValidity: () => true, setAttribute() {}, removeAttribute() {}, reset() { resets++; } };
     runInNewContext(source, {
       document: { querySelector: s => s === '.contact-form' ? form : s === '#contact-status' ? status : s === '#contact-result' ? result : null },
@@ -33,7 +33,7 @@ test('application retains every multi-select value and submits a valid inquiry o
     assert.equal(validateInquiry(payload), null);
     assert.equal(recipientFor(payload.subject), 'info@ygvoice.org');
     assert.match(payload.message, /Animal Welfare, Human Rights & Dignity/);
-    assert.match(payload.message, /Volunteering, Translation/);
+    assert.match(payload.message, /Volunteering, Sharing Ideas/);
     assert.match(payload.message, /Phone Number: \+1 555 0100/);
     assert.ok(payload.message.includes('Country / Location: ' + (scenario === 'manual' ? 'Test location' : 'Canada')));
     assert.match(payload.message, /Other: Test idea/);
@@ -48,7 +48,8 @@ test('application retains every multi-select value and submits a valid inquiry o
 test('country picker contains 195 alphabetized countries followed by Other, with a separate manual input', async () => {
   const { renderApplication } = await import('../scripts/application.mjs');
   const html = renderApplication();
-  const options = [...html.matchAll(/data-country="([^"]+)"/g)].map(match => match[1]);
+  const countryMarkup = html.slice(html.indexOf('id="application-country-options"'), html.indexOf('<div class="country-manual"'));
+  const options = [...countryMarkup.matchAll(/data-country="([^"]+)"/g)].map(match => match[1]);
   assert.equal(options.length, 196);
   assert.equal(new Set(options).size, 196);
   assert.equal(options.at(-1), 'Other');
@@ -56,4 +57,30 @@ test('country picker contains 195 alphabetized countries followed by Other, with
   for (const country of ['Afghanistan', 'Canada', 'Palestine', 'Vatican City (Holy See)', 'Zimbabwe']) assert.ok(options.includes(country));
   assert.match(html, /role="combobox"[^>]*aria-controls="application-country-options"/);
   assert.match(html, /name="locationOther"[^>]*disabled/);
+});
+
+
+test('application uses exact cause headings, approved opportunity order, verified dial data, and a 1000-character optional message', async () => {
+  const { renderApplication } = await import('../scripts/application.mjs');
+  const html = renderApplication();
+  const causes = [...html.matchAll(/name="causes" value="([^"]+)"/g)].map(match => match[1]);
+  const page = await readFile(new URL('../public/purposes.html', import.meta.url), 'utf8');
+  const headings = [...page.matchAll(/<h3>([^<]+)<\/h3>/g)].map(match => match[1].replaceAll('&amp;', '&'));
+  assert.deepEqual(causes, headings);
+  const opportunities = [...html.matchAll(/name="interests" value="([^"]+)"/g)].map(match => match[1]);
+  assert.deepEqual(opportunities, ['Volunteering', 'Sharing Ideas', 'Contributing Skills & Experience', 'Community Outreach', 'Project Participation', 'Collaboration & Partnerships', 'One-Time Donations', 'Monthly Donations', 'Project Sponsorship', 'In-Kind Donations', 'Other']);
+  assert.match(html, /<legend[^>]*>Opportunities to Make a Difference<\/legend>/);
+  const message = html.match(/<textarea id="application-message"[^>]*>/)[0];
+  assert.match(message, /maxlength="1000"/);
+  assert.doesNotMatch(message, /required/);
+  assert.match(html, /id="application-message-count"/);
+  const dialing = JSON.parse(await readFile(new URL('../content/dialing-codes.json', import.meta.url), 'utf8'));
+  assert.equal(dialing.length, 195);
+  assert.equal(new Set(dialing.map(item => item.country)).size, 195);
+  for (const [country, code] of [['United States', '+1'], ['United Kingdom', '+44'], ['Greece', '+30'], ['Palestine', '+970'], ['Vatican City (Holy See)', '+39']]) assert.equal(dialing.find(item => item.country === country).code, code);
+  for (const item of dialing) {
+    assert.match(item.iso, /^[A-Z]{2}$/);
+    assert.match(item.code, /^\+[1-9]\d{0,2}$/);
+    assert.equal([...item.flag].length, 2);
+  }
 });

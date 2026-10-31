@@ -45,3 +45,11 @@
 .country-options [aria-selected="true"] { font-weight: 700; }
 .country-no-results { padding: .75rem; font-size: .875rem; }
 .country-options[hidden], .country-options [hidden], .country-manual[hidden] { display: none; }
+
+.application-phone-fields { display: grid; grid-template-columns: 8.25rem minmax(0, 1fr); gap: .5rem; align-items: start; }
+.application-phone-fields > input { min-width: 0; }
+.application-dial { position: relative; min-width: 0; }
+.application-dial .country-options { position: absolute; z-index: 2; top: 100%; left: 0; width: min(22rem, calc(100vw - 4.25rem)); box-shadow: 0 3px 8px rgba(16, 43, 73, .12); }
+.application-dial .country-options [role="option"] { overflow-wrap: anywhere; }
+.involvement-application #application-message { overflow-y: hidden; }
+.application-message-count { font-size: .8125rem; color: var(--muted); margin: .375rem 0 0; }
