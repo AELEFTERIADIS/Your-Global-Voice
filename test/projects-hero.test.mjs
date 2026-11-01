@@ -35,5 +35,30 @@ test('Projects approach replaces placeholders with one left-aligned section titl
   assert.match(html, /src="DE95C446-F64B-4963-923B-8703F03269C5.png" width="1774" height="887"/);
   assert.doesNotMatch(html, /Future initiatives will be guided|Project information will be added|No projects are listed|Where our purposes can lead|What future project updates will include|Stay connected to our direction/);
   const sections = [...html.matchAll(/<section\b/g)];
-  assert.equal(sections.length, 2);
+  assert.equal(sections.length, 3);
+});
+
+test('Voices for Dignity retains approved paragraphs and cannot initiate a payment', async () => {
+  const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
+  const paragraphs = JSON.parse(await readFile(new URL('../content/project-dignity.json', import.meta.url), 'utf8'));
+  const project = html.match(/<section class="project-initiatives"[\s\S]*?<\/section>/)[0];
+  for (const paragraph of paragraphs) assert.ok(project.includes('<p>' + paragraph + '</p>'));
+  const amounts = [...project.matchAll(/name="dignity-amount" value="([^"]+)"/g)].map(match => match[1]);
+  assert.deepEqual(amounts, ['25', '50', '100', '250', 'custom']);
+  assert.equal((project.match(/<button type="button" disabled>/g) || []).length, 2);
+  assert.doesNotMatch(project, /https?:|<form\b|action=|buy\.stripe|paypal\.com/);
+  assert.match(project, /href="contact.html#message-heading">Send Us a Message/);
+  const { renderDignityProject } = await import('../scripts/project-dignity.mjs');
+  assert.throws(() => renderDignityProject(), /Approved Voices for Dignity text is required/);
+});
+
+test('Projects deployment permits only local selection scripts and ships their assets', async () => {
+  const temp = await mkdtemp(join(tmpdir(), 'ygv-project-giving-'));
+  try {
+    await preparePages(join(temp, 'pages'));
+    const html = await readFile(join(temp, 'pages/projects.html'), 'utf8');
+    assert.match(html, /script-src 'self'/);
+    assert.doesNotMatch(html, /connect-src/);
+    for (const asset of ['projects.css', 'projects.js']) assert.equal(await readFile(join(temp, 'pages', asset), 'utf8'), await readFile(new URL('../public/' + asset, import.meta.url), 'utf8'));
+  } finally { await rm(temp, { recursive: true, force: true }); }
 });

@@ -1,0 +1,25 @@
+.project-initiatives { margin-block: 1.5rem 2rem; }
+.project-initiatives > h2 { font-size: clamp(1.5rem, 2.8vw, 2.25rem); margin-bottom: 1.25rem; }
+.project-dignity-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+.project-dignity-info, .project-giving { min-width: 0; border: 1px solid var(--line); border-top: 3px solid var(--gold); background: var(--cream); padding: clamp(1.25rem, 2.5vw, 2rem); }
+.project-dignity-info > h3, .project-giving > h3 { font-size: clamp(1.375rem, 2.3vw, 1.875rem); line-height: 1.25; margin-bottom: 1rem; }
+.project-contact { border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: .375rem; background: white; margin-top: 1.5rem; padding: 1rem; }
+.project-contact > p { margin-bottom: .375rem; }
+.project-giving fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.project-giving legend, .project-custom-label { display: block; font-weight: 700; margin-bottom: .625rem; }
+.project-amounts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .625rem; margin-bottom: 1rem; }
+.project-amounts label { position: relative; cursor: pointer; }
+.project-amounts label:last-child { grid-column: 1 / -1; }
+.project-amounts input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.project-amounts span { display: flex; min-height: 48px; align-items: center; justify-content: center; padding: .625rem; background: white; border: 1px solid var(--line); color: var(--navy); }
+.project-amounts input:checked + span { background: var(--navy); color: white; border-color: var(--gold); }
+.project-amounts input:focus-visible + span, .project-custom:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.project-custom { width: 100%; min-height: 48px; padding: .625rem; font: inherit; color: var(--ink); background: white; border: 1px solid var(--muted); }
+.project-custom:disabled { background: #ecefee; }
+.project-giving-note { font-size: .875rem; line-height: 1.6; margin-block: .625rem 0; }
+.project-giving-summary { margin-block: 1rem; color: var(--navy); }
+.project-payment-pending { display: grid; gap: .625rem; }
+.project-payment-pending button { min-height: 48px; padding: .625rem; border: 1px solid var(--line); background: #e4e8ea; color: #53636d; font: inherit; cursor: not-allowed; }
+@media (max-width: 64rem) { .project-dignity-layout { grid-template-columns: 1fr; gap: 1.5rem; } }
+.project-contact .text-link { color: var(--navy); }
+.project-contact .text-link:hover { color: var(--gold); }

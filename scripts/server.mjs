@@ -7,6 +7,8 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+  ['/projects.css', ['../public/projects.css', 'text/css; charset=utf-8']],
+  ['/projects.js', ['../public/projects.js', 'text/javascript; charset=utf-8']],
   ['/DE95C446-F64B-4963-923B-8703F03269C5.png', ['../public/DE95C446-F64B-4963-923B-8703F03269C5.png', 'image/png']],
   ['/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', ['../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', 'image/png']],
   ['/C4112960-9D5E-444E-92F1-4F3CE664A3D6.png', ['../public/C4112960-9D5E-444E-92F1-4F3CE664A3D6.png', 'image/png']],
@@ -57,8 +59,9 @@ export function createPreviewServer(contactOptions) {
   return createServer(async (request, response) => {
     const contactRoute = /^\/(?:contact|get-involved)(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const donateRoute = /^\/donate(?:\.html|\/)?(?:\?|$)/.test(request.url);
+    const projectsRoute = /^\/projects(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const aboutRoute = /^\/about(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : (donateRoute || aboutRoute) ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
+    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : (donateRoute || aboutRoute || projectsRoute) ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Referrer-Policy', 'no-referrer');
