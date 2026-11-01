@@ -14,8 +14,8 @@ test('Projects hero uses one real heading, live motto and four cause labels over
   assert.match(hero, /<p class="projects-artwork-motto">Every Action Matters, Every Life Deserves Dignity<\/p>/);
   assert.equal((hero.match(/<li\b/g) || []).length, 4);
   for (const text of ['Human Rights<br>&amp; Dignity', 'Humanitarian<br>Aid', 'Animal<br>Welfare', 'Nature &amp;<br>Environment']) assert.ok(hero.includes(text));
-  const image = await readFile(new URL('../public/56EA6270-EEBB-4E87-A031-4D6FCC6D8A22.png', import.meta.url));
-  assert.equal(createHash('sha256').update(image).digest('hex'), '4cdd5163d90c71cd0771b8737d2762fd3d3d966aef7e3ac2621daa2eaf84f4d6');
+  const image = await readFile(new URL('../public/C4112960-9D5E-444E-92F1-4F3CE664A3D6.png', import.meta.url));
+  assert.equal(createHash('sha256').update(image).digest('hex'), '8703712565c85ceea604501fcce127a26b273212b650f42f0b963fd60eead40d');
 });
 
 test('Projects lettering backdrop is local, self-contained and included unchanged in the Pages artifact', async () => {
