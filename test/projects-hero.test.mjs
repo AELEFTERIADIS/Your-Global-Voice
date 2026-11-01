@@ -28,3 +28,12 @@ test('Pages artifact includes the unmodified latest Projects hero and no previou
     await assert.rejects(readFile(join(temp, 'pages/projects-text-backdrop.svg')), { code: 'ENOENT' });
   } finally { await rm(temp, { recursive: true, force: true }); }
 });
+
+test('Projects approach replaces placeholders with one left-aligned section title and the latest sunset artwork', async () => {
+  const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
+  assert.match(html, /<h2 id="projects-approach-heading">Our Approach to Making a Difference<\/h2>/);
+  assert.match(html, /src="DE95C446-F64B-4963-923B-8703F03269C5.png" width="1774" height="887"/);
+  assert.doesNotMatch(html, /Future initiatives will be guided|Project information will be added|No projects are listed|Where our purposes can lead|What future project updates will include|Stay connected to our direction/);
+  const sections = [...html.matchAll(/<section\b/g)];
+  assert.equal(sections.length, 2);
+});
