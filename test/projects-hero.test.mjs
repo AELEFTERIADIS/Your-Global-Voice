@@ -62,3 +62,15 @@ test('Projects deployment permits only local selection scripts and ships their a
     for (const asset of ['projects.css', 'projects.js']) assert.equal(await readFile(join(temp, 'pages', asset), 'utf8'), await readFile(new URL('../public/' + asset, import.meta.url), 'utf8'));
   } finally { await rm(temp, { recursive: true, force: true }); }
 });
+
+test('Voices for Dignity initially shows its introduction and keeps two approved paragraphs in a closed disclosure', async () => {
+  const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
+  const paragraphs = JSON.parse(await readFile(new URL('../content/project-dignity.json', import.meta.url), 'utf8'));
+  const details = html.match(/<details class="project-read-more">([\s\S]*?)<\/details>/)[1];
+  assert.ok(!details.includes(paragraphs[0]));
+  assert.ok(details.includes('<p>' + paragraphs[1] + '</p>'));
+  assert.ok(details.includes('<p>' + paragraphs[2] + '</p>'));
+  assert.match(details, /project-read-more-label">Read More/);
+  assert.match(details, /project-read-less-label">Read Less/);
+  assert.match(html, /<\/details>\n<div class="project-contact">/);
+});
