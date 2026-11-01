@@ -1,7 +1,7 @@
 .project-initiatives { margin-block: 1.5rem 2rem; }
 .project-initiatives > h2 { font-size: clamp(1.5rem, 2.8vw, 2.25rem); margin-bottom: 1.25rem; }
 .project-dignity-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 2rem; align-items: start; outline: 1px solid rgba(164, 124, 50, .6); outline-offset: 8px; border-radius: .5rem; }
-.project-dignity-info, .project-giving { min-width: 0; border: 1px solid var(--line); border-top: 3px solid var(--gold); background: var(--cream); padding: clamp(1.25rem, 2.5vw, 2rem); }
+.project-dignity-info, .project-giving { min-width: 0; border: 0; background: var(--cream); padding: calc(clamp(1.25rem, 2.5vw, 2rem) + 3px) calc(clamp(1.25rem, 2.5vw, 2rem) + 1px) calc(clamp(1.25rem, 2.5vw, 2rem) + 1px); }
 .project-dignity-info > h3, .project-giving > h3 { font-size: clamp(1.375rem, 2.3vw, 1.875rem); line-height: 1.25; margin-bottom: 1rem; }
 .project-contact { border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: .375rem; background: white; margin-top: 1.5rem; padding: 1rem; }
 .project-contact > p { margin-bottom: .375rem; }
@@ -36,4 +36,10 @@
 @media (max-width: 42rem) {
  .project-read-more > summary { display: inline-flex; }
  .project-read-more > p:first-of-type { margin-top: .75rem; }
+}
+
+/* One separator in the existing desktop column gap; no divider when stacked. */
+@media (min-width: 64.0625rem) {
+ .project-giving { position: relative; }
+ .project-giving::before { content: ""; position: absolute; left: calc(-1rem - .5px); top: 0; bottom: 0; width: 1px; background: rgba(164, 124, 50, .6); }
 }
