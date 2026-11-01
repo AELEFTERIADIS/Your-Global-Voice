@@ -16,3 +16,13 @@ for (const giving of document.querySelectorAll('.project-giving')) {
   custom.addEventListener('input', updateProjectAmount);
   updateProjectAmount();
 }
+
+// Full description on larger screens; phones retain an optional disclosure.
+const projectPhoneLayout = window.matchMedia('(max-width: 42rem)');
+for (const details of document.querySelectorAll('.project-read-more')) {
+  let phoneExpanded = false;
+  function syncProjectDescription() { details.open = !projectPhoneLayout.matches || phoneExpanded; }
+  details.addEventListener('toggle', () => { if (projectPhoneLayout.matches) phoneExpanded = details.open; });
+  projectPhoneLayout.addEventListener('change', syncProjectDescription);
+  syncProjectDescription();
+}

@@ -24,11 +24,16 @@
 .project-contact .text-link { color: var(--navy); }
 .project-contact .text-link:hover { color: var(--gold); }
 
-.project-read-more > summary { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold); font-weight: 700; cursor: pointer; list-style: none; text-decoration: underline; text-underline-offset: .2em; }
+.project-read-more > summary { display: none; align-items: center; min-height: 44px; color: var(--gold); font-weight: 700; cursor: pointer; list-style: none; text-decoration: underline; text-underline-offset: .2em; }
 .project-read-more > summary::-webkit-details-marker { display: none; }
 .project-read-more > summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 .project-read-more .project-read-less-label { display: none; }
 .project-read-more[open] .project-read-more-label { display: none; }
 .project-read-more[open] .project-read-less-label { display: inline; }
-.project-read-more > p:first-of-type { margin-top: .75rem; }
+.project-read-more > p:first-of-type { margin-top: 0; }
 .project-read-more > p:last-child { margin-bottom: 0; }
+
+@media (max-width: 42rem) {
+ .project-read-more > summary { display: inline-flex; }
+ .project-read-more > p:first-of-type { margin-top: .75rem; }
+}

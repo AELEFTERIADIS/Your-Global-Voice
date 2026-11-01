@@ -63,10 +63,10 @@ test('Projects deployment permits only local selection scripts and ships their a
   } finally { await rm(temp, { recursive: true, force: true }); }
 });
 
-test('Voices for Dignity initially shows its introduction and keeps two approved paragraphs in a closed disclosure', async () => {
+test('Voices for Dignity keeps its approved paragraphs in an accessible desktop-open responsive disclosure', async () => {
   const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
   const paragraphs = JSON.parse(await readFile(new URL('../content/project-dignity.json', import.meta.url), 'utf8'));
-  const details = html.match(/<details class="project-read-more">([\s\S]*?)<\/details>/)[1];
+  const details = html.match(/<details class="project-read-more" open>([\s\S]*?)<\/details>/)[1];
   assert.ok(!details.includes(paragraphs[0]));
   assert.ok(details.includes('<p>' + paragraphs[1] + '</p>'));
   assert.ok(details.includes('<p>' + paragraphs[2] + '</p>'));
