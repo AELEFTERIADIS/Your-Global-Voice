@@ -6,25 +6,25 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparePages } from '../scripts/prepare-pages.mjs';
 
-test('Projects hero uses one real heading, live motto and four cause labels over the unchanged approved image', async () => {
+test('Projects hero displays the exact latest approved artwork without HTML lettering overlays', async () => {
   const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
   const hero = html.match(/<section class="page-intro projects-hero">([\s\S]*?)<\/section>/)[1];
   assert.equal((hero.match(/<h1\b/g) || []).length, 1);
-  assert.match(hero, /<h1 class="projects-artwork-heading">Our Projects<\/h1>/);
-  assert.match(hero, /<p class="projects-artwork-motto">Every Action Matters, Every Life Deserves Dignity<\/p>/);
-  assert.equal((hero.match(/<li\b/g) || []).length, 4);
-  for (const text of ['Human Rights<br>&amp; Dignity', 'Humanitarian<br>Aid', 'Animal<br>Welfare', 'Nature &amp;<br>Environment']) assert.ok(hero.includes(text));
-  const image = await readFile(new URL('../public/C4112960-9D5E-444E-92F1-4F3CE664A3D6.png', import.meta.url));
-  assert.equal(createHash('sha256').update(image).digest('hex'), '8703712565c85ceea604501fcce127a26b273212b650f42f0b963fd60eead40d');
+  assert.match(hero, /<h1 class="projects-hero-title">Our Projects<\/h1>/);
+  assert.doesNotMatch(hero, /projects-artwork|<ul|<li/);
+  assert.match(hero, /src="2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png" width="1672" height="941"/);
+  const image = await readFile(new URL('../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', import.meta.url));
+  assert.equal(createHash('sha256').update(image).digest('hex'), '4d131e62d2ff1a73e6bd778645bafef052d5b24eb05f8d2197bc4eb337f7061b');
+  const css = await readFile(new URL('../public/styles.css', import.meta.url), 'utf8');
+  assert.doesNotMatch(css, /projects-artwork|projects-text-backdrop/);
 });
 
-test('Projects lettering backdrop is local, self-contained and included unchanged in the Pages artifact', async () => {
-  const svg = await readFile(new URL('../public/projects-text-backdrop.svg', import.meta.url), 'utf8');
-  assert.match(svg, /viewBox="0 0 869 440"/);
-  assert.doesNotMatch(svg, /<script|<image|https?:\/\/(?!www\.w3\.org)/);
-  const temp = await mkdtemp(join(tmpdir(), 'ygv-projects-text-'));
+test('Pages artifact includes the unmodified latest Projects hero and no previous text backdrop', async () => {
+  const temp = await mkdtemp(join(tmpdir(), 'ygv-projects-image-'));
   try {
     await preparePages(join(temp, 'pages'));
-    assert.equal(await readFile(join(temp, 'pages/projects-text-backdrop.svg'), 'utf8'), svg);
+    const file = '2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png';
+    assert.ok((await readFile(join(temp, 'pages', file))).equals(await readFile(new URL('../public/' + file, import.meta.url))));
+    await assert.rejects(readFile(join(temp, 'pages/projects-text-backdrop.svg')), { code: 'ENOENT' });
   } finally { await rm(temp, { recursive: true, force: true }); }
 });

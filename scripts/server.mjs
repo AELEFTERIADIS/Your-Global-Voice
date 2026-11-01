@@ -7,8 +7,8 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+  ['/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', ['../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', 'image/png']],
   ['/C4112960-9D5E-444E-92F1-4F3CE664A3D6.png', ['../public/C4112960-9D5E-444E-92F1-4F3CE664A3D6.png', 'image/png']],
-  ['/projects-text-backdrop.svg', ['../public/projects-text-backdrop.svg', 'image/svg+xml']],
   ['/56EA6270-EEBB-4E87-A031-4D6FCC6D8A22.png', ['../public/56EA6270-EEBB-4E87-A031-4D6FCC6D8A22.png', 'image/png']],
   ['/Get%20involved%202.png', ['../public/Get involved 2.png', 'image/png']],
   ['/Get%20involve%20Hero%20PNG.PNG', ['../public/Get involve Hero PNG.PNG', 'image/png']],
