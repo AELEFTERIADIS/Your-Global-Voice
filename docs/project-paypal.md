@@ -52,3 +52,26 @@ If capture fails or its response is lost, the page does not claim success and as
 the donor to contact the organization before paying again. Check the PayPal
 Dashboard's order/capture record before advising a retry. No webhook or automatic
 accounting/fulfillment is added by this integration.
+
+## Readiness diagnostics
+
+The allowed-origin status response includes safe reason codes when unavailable:
+
+- `configuration_incomplete`: `missing` lists variable/binding names only. Set
+  PAYPAL_CHECKOUT_ENABLED to the exact string `true`, configure any listed secret
+  in the active Production version, or restore the CONTACT_LIMITS binding.
+- `paypal_credentials_rejected`: Live OAuth returned HTTP 401. Verify the two
+  encrypted credentials are a matching pair from the same **Live** REST app.
+- `paypal_access_denied`: Live OAuth returned HTTP 403. Review app/account access
+  restrictions in PayPal; do not change credentials blindly.
+- `paypal_service_unavailable`: PayPal OAuth returned a server error; check PayPal
+  availability and retry before modifying account settings.
+- `paypal_authentication_failed`: another non-success OAuth HTTP response; inspect
+  the matching request in PayPal's developer tools/support for its exact reason.
+- `paypal_invalid_response`: OAuth returned malformed JSON or an invalid token
+  response. Investigate the provider response without publishing its contents.
+- `paypal_unreachable`: OAuth could not complete (for example network/timeout).
+  Check Worker-to-PayPal connectivity and runtime errors.
+
+No secret values, OAuth tokens, raw provider errors or exception text are returned.
+Redeploy the Worker to obtain these diagnostics; the frontend is unchanged.

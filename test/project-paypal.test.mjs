@@ -59,3 +59,16 @@ test('invalid payloads, unsafe URLs, expiry, rate limits and provider errors fai
  for(let i=0;i<4;i++)await paypalRequest(request('/orders',{amountCents:2500,requestId:nonceId}),good.env,good.transport);
  assert.equal((await paypalRequest(request('/orders',{amountCents:2500,requestId:nonceId}),good.env,good.transport)).status,429);
 });
+
+test('readiness identifies missing configuration and sanitized authentication failures', async () => {
+ for (const key of ['PAYPAL_CHECKOUT_ENABLED','PAYPAL_CLIENT_ID','PAYPAL_CLIENT_SECRET','CONTACT_LIMITS']) {
+  const f=fixture(); const result=await paypalRequest(request('/status'),{...f.env,[key]:''},f.transport);
+  assert.deepEqual(await result.json(),{available:false,reason:'configuration_incomplete',missing:[key]});assert.equal(f.calls.length,0);
+ }
+ for(const [code,reason] of [[401,'paypal_credentials_rejected'],[403,'paypal_access_denied'],[503,'paypal_service_unavailable'],[400,'paypal_authentication_failed']]) {
+  const f=fixture();const result=await paypalRequest(request('/status'),f.env,async()=>Response.json({error:'private provider details',access_token:'do-not-return'}, {status:code}));
+  assert.deepEqual(await result.json(),{available:false,reason});
+ }
+ const malformed=fixture();assert.deepEqual(await (await paypalRequest(request('/status'),malformed.env,async()=>new Response('not JSON'))).json(),{available:false,reason:'paypal_invalid_response'});
+ const network=fixture();assert.deepEqual(await (await paypalRequest(request('/status'),network.env,async()=>{throw new Error('private connection details');})).json(),{available:false,reason:'paypal_unreachable'});
+});

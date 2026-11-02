@@ -4,12 +4,16 @@ const reply = (status, data) => Response.json(data, { status, headers: { 'Cache-
 const ready = env => env.PAYPAL_CHECKOUT_ENABLED === 'true' && !!env.PAYPAL_CLIENT_ID && !!env.PAYPAL_CLIENT_SECRET && !!env.CONTACT_LIMITS;
 const uuid = value => typeof value === 'string' && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(value);
 const orderId = value => typeof value === 'string' && /^[A-Z0-9]{10,32}$/.test(value);
+class PayPalAuthError extends Error {
+  constructor(reason) { super('PayPal authentication failed'); this.reason = reason; }
+}
 let cachedToken;
 async function accessToken(env, transport) {
   if (cachedToken?.client === env.PAYPAL_CLIENT_ID && cachedToken.secret === env.PAYPAL_CLIENT_SECRET && cachedToken.expires > Date.now()) return cachedToken.token;
   const response = await transport(api + '/v1/oauth2/token', { method: 'POST', headers: { Authorization: 'Basic ' + btoa(env.PAYPAL_CLIENT_ID + ':' + env.PAYPAL_CLIENT_SECRET), 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'grant_type=client_credentials', signal: AbortSignal.timeout(10000) });
-  if (!response.ok) throw new Error('PayPal unavailable');
-  const data = await response.json(); if (!data.access_token || !(Number(data.expires_in) > 60)) throw new Error('PayPal unavailable');
+  if (!response.ok) throw new PayPalAuthError(response.status === 401 ? 'paypal_credentials_rejected' : response.status === 403 ? 'paypal_access_denied' : response.status >= 500 ? 'paypal_service_unavailable' : 'paypal_authentication_failed');
+  let data; try { data = await response.json(); } catch { throw new PayPalAuthError('paypal_invalid_response'); }
+  if (typeof data.access_token !== 'string' || !data.access_token || !(Number(data.expires_in) > 60)) throw new PayPalAuthError('paypal_invalid_response');
   cachedToken = { client: env.PAYPAL_CLIENT_ID, secret: env.PAYPAL_CLIENT_SECRET, token: data.access_token, expires: Date.now() + Math.min(Number(data.expires_in) - 60, 300) * 1000 };
   return data.access_token;
 }
@@ -34,9 +38,16 @@ export async function paypalRequest(request, env, transport = fetch) {
     const path = new URL(request.url).pathname;
     if (request.method === 'OPTIONS') result = new Response(null, { status: 204, headers: { 'Access-Control-Allow-Methods': 'GET, POST', 'Access-Control-Allow-Headers': 'Content-Type' } });
     else if (path === root + '/status' && request.method === 'GET') {
-      let available = false;
-      if (ready(env)) { try { await accessToken(env, transport); available = true; } catch {} }
-      result = reply(200, { available });
+      const missing = [];
+      if (env.PAYPAL_CHECKOUT_ENABLED !== 'true') missing.push('PAYPAL_CHECKOUT_ENABLED');
+      if (!env.PAYPAL_CLIENT_ID) missing.push('PAYPAL_CLIENT_ID');
+      if (!env.PAYPAL_CLIENT_SECRET) missing.push('PAYPAL_CLIENT_SECRET');
+      if (!env.CONTACT_LIMITS) missing.push('CONTACT_LIMITS');
+      if (missing.length) result = reply(200, { available: false, reason: 'configuration_incomplete', missing });
+      else {
+        try { await accessToken(env, transport); result = reply(200, { available: true }); }
+        catch (error) { result = reply(200, { available: false, reason: error instanceof PayPalAuthError ? error.reason : 'paypal_unreachable' }); }
+      }
     } else if (request.method !== 'POST' || ![root + '/orders', root + '/capture'].includes(path)) result = reply(405, { message: 'Method not allowed.' });
     else if (!ready(env)) result = reply(503, { message: 'PayPal checkout is not available yet.' });
     else {
