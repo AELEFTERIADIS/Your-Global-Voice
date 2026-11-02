@@ -131,8 +131,13 @@ all six registered designations on each provider, USD 1.00–1.05 per donation.
 Each request ID is deterministic for the run UUID/provider/designation, so reuse
 the **same run UUID** after interruptions to avoid another set of test gifts.
 
-For each pending gift, the runner automatically opens its validated checkout URL
-in the browser (or prints the URL if the browser cannot open). Stripe requires a
+For each pending gift, the runner automatically opens its validated checkout URL.
+On Mac, Stripe explicitly opens Google Chrome with `open -a "Google Chrome"`,
+regardless of the default browser. If Chrome cannot launch, the runner prints
+instructions to open the same URL in Chrome and continues polling; it does not
+fall back to Safari or create a replacement checkout. PayPal Sandbox continues
+to use the default browser. Existing run UUIDs and saved progress are preserved.
+Stripe requires a
 test card (`4242 4242 4242 4242`, future expiry, valid test CVC). After browser
 payment, the runner detects completion by authenticated reconciliation every
 three seconds; no terminal approval is needed. Polling stops after 15 minutes

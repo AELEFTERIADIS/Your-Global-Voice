@@ -75,7 +75,7 @@ function checkoutURL(value, provider) {
 
 export function openCheckout(value, provider, platform = process.platform, execute = execFileSync) {
  const url=checkoutURL(value,provider);
- const commands = {darwin:['open',[url.href]],linux:['xdg-open',[url.href]],win32:['rundll32',['url.dll,FileProtocolHandler',url.href]]};
+ const commands = {darwin:['open',provider==='stripe'?['-a','Google Chrome',url.href]:[url.href]],linux:['xdg-open',[url.href]],win32:['rundll32',['url.dll,FileProtocolHandler',url.href]]};
  if (!commands[platform]) throw Error('Open the printed checkout URL in your browser.');
  execute(...commands[platform],{stdio:'ignore'});
 }
@@ -153,7 +153,9 @@ async function main() {
      console.log(`Checkout: ${url.href}`);
      try { openCheckout(url.href,input.provider); }
      catch {
-      console.log('Browser could not open automatically; open the printed URL manually.');
+      console.log(process.platform==='darwin' && input.provider==='stripe'
+       ? 'Google Chrome could not open automatically. Ensure Google Chrome is installed, then paste the printed checkout URL into Chrome. Waiting for payment; reuse the same run UUID if you restart.'
+       : 'Browser could not open automatically; open the printed URL manually.');
      }
     } else console.log(`Resume the previously returned approval URL for ${checkout.checkoutReference}.`);
     console.log(input.provider==='stripe'

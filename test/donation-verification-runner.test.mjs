@@ -51,12 +51,17 @@ test('D1 verification uses only SELECT with validated request UUIDs',()=>{
  assert.throws(()=>ledgerSQL([{requestId:"x'); DROP TABLE donations; --"}]));
 });
 
-test('Stripe opens the validated checkout as an argument without a shell',()=>{
+test('Stripe explicitly opens Google Chrome on Mac without a shell or default-browser fallback',()=>{
  const calls=[];
  openCheckout('https://checkout.stripe.com/c/pay/cs_test_example','stripe','darwin',(...args)=>calls.push(args));
- assert.deepEqual(calls,[['open',['https://checkout.stripe.com/c/pay/cs_test_example'],{stdio:'ignore'}]]);
+ assert.deepEqual(calls,[['open',['-a','Google Chrome','https://checkout.stripe.com/c/pay/cs_test_example'],{stdio:'ignore'}]]);
  for(const url of ['https://evil.example','https://checkout.stripe.com.evil.example','https://user@checkout.stripe.com','http://checkout.stripe.com'])assert.throws(()=>openCheckout(url,'stripe','darwin',()=>assert.fail('unsafe open')));
- openCheckout('https://www.sandbox.paypal.com/checkoutnow?token=TEST','paypal','darwin',()=>{});
+ const paypalCalls=[];
+ openCheckout('https://www.sandbox.paypal.com/checkoutnow?token=TEST','paypal','darwin',(...args)=>paypalCalls.push(args));
+ assert.deepEqual(paypalCalls,[['open',['https://www.sandbox.paypal.com/checkoutnow?token=TEST'],{stdio:'ignore'}]]);
+ let attempts=0;
+ assert.throws(()=>openCheckout('https://checkout.stripe.com/c/pay/cs_test_example','stripe','darwin',()=>{attempts++;throw Error('Chrome missing');}),/Chrome missing/);
+ assert.equal(attempts,1);
  assert.throws(()=>openCheckout('https://www.paypal.com/checkoutnow','paypal','darwin',()=>assert.fail('live PayPal')));
 });
 
