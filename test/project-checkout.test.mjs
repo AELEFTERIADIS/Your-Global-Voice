@@ -18,6 +18,7 @@ test('exact cents, fixed currency/project, idempotency and trusted return URLs',
  const result = await createProjectSession(req(cents, { currency: 'eur', project: 'other', success_url: 'https://evil.example' }), env, storage(), async (url, options) => {
  assert.equal(url, 'https://api.stripe.com/v1/checkout/sessions');
  const data = new URLSearchParams(options.body);
+ assert.equal([...data.keys()].some(key => key.startsWith('payment_method_types')), false);
  assert.equal(data.get('line_items[0][price_data][unit_amount]'), String(cents));
  assert.equal(data.get('line_items[0][price_data][currency]'), 'usd');
  assert.equal(data.get('metadata[project]'), 'voices-for-dignity');
