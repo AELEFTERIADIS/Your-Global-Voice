@@ -20,7 +20,7 @@
 .project-giving-note { font-size: .875rem; line-height: 1.6; margin-block: .625rem 0; }
 .project-giving-summary { margin-block: 1rem; color: var(--navy); }
 .project-payment-pending { display: grid; gap: .625rem; }
-.project-payment-pending button { min-height: 48px; padding: .625rem; border: 1px solid var(--line); background: #e4e8ea; color: #53636d; font: inherit; cursor: not-allowed; }
+.project-payment-pending button { min-height: 48px; padding: .625rem; border: 1px solid var(--line); background: #e4e8ea; color: #53636d; font: inherit; cursor: pointer; }
 @media (max-width: 64rem) { .project-dignity-layout { grid-template-columns: 1fr; } .project-giving { border-left: 0; border-top: 1px solid rgba(196, 149, 55, .65); } }
 .project-contact .text-link { color: var(--navy); }
 .project-contact .text-link:hover { color: var(--gold); }
@@ -61,6 +61,7 @@
 .project-amounts label:hover > span { border-color: var(--gold); }
 .project-custom { border-radius: .375rem; }
 .project-payment-pending button { display: flex; align-items: center; justify-content: center; gap: .75rem; border-radius: .5rem; font-weight: 700; }
+.project-payment-pending button:disabled { cursor: not-allowed; }
 .project-payment-pending button:first-child { background: linear-gradient(#e9c36b, #d8a93e); border-color: #c89432; color: #102B49; }
 .project-payment-pending button:last-child { background: linear-gradient(#edf0f4, #e5eaf0); }
 .project-card-icon { width: 26px; height: 20px; flex-shrink: 0; }
