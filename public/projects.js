@@ -29,11 +29,32 @@ for (const giving of document.querySelectorAll('.project-giving')) {
   giving.addEventListener('change', updateProjectAmount);
   custom.addEventListener('input', updateProjectAmount);
   updateProjectAmount();
-  if (endpoint) fetch(endpoint + '/status', { mode: 'cors', credentials: 'omit', cache: 'no-store', signal: AbortSignal.timeout(10000) }).then(async response => {
-    checkoutAvailable = response.ok && (await response.json()).available === true;
-    if (checkoutAvailable) status.textContent = 'Card checkout is available. PayPal is not available for this project yet.';
-    updateProjectAmount();
-  }).catch(() => { checkoutAvailable = false; updateProjectAmount(); });
+  if (!endpoint) {
+    status.textContent = 'Card checkout connection is not configured. Please contact us for assistance.';
+  } else {
+    fetch(endpoint + '/status', { mode: 'cors', credentials: 'omit', cache: 'no-store', signal: AbortSignal.timeout(10000) }).then(async response => {
+      if (!response.ok) {
+        status.textContent = `Card checkout availability check failed (HTTP ${response.status}). Please try again later.`;
+        return;
+      }
+      let data;
+      try { data = await response.json(); } catch {
+        status.textContent = 'The card checkout service returned an invalid response. Please try again later.';
+        return;
+      }
+      if (typeof data?.available !== 'boolean') {
+        status.textContent = 'The card checkout service returned an invalid response. Please try again later.';
+        return;
+      }
+      checkoutAvailable = data.available === true;
+      status.textContent = checkoutAvailable
+        ? 'Card checkout is available. PayPal is not available for this project yet.'
+        : 'Card checkout is not enabled on the payment service yet. Please contact us for assistance.';
+    }).catch(() => {
+      checkoutAvailable = false;
+      status.textContent = 'Unable to connect to the card checkout service. Please try again later.';
+    }).finally(updateProjectAmount);
+  }
   card.addEventListener('click', async () => {
     const amountCents = selectedCents();
     if (!checkoutAvailable || busy || amountCents === null) return;
