@@ -1,4 +1,5 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, rename } from 'node:fs/promises';
+import { setTimeout as delay } from 'node:timers/promises';
 import { homedir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -64,6 +65,52 @@ function queryD1(sql) {
  return batches.flatMap(b=>b.results || []);
 }
 
+function checkoutURL(value, provider) {
+ const url = new URL(value);
+ if (url.username || url.password || (provider==='stripe'
+  ? url.origin!=='https://checkout.stripe.com'
+  : url.origin!=='https://www.sandbox.paypal.com' || !['/checkoutnow','/checkoutnow/'].includes(url.pathname))) throw Error('Unexpected checkout destination.');
+ return url;
+}
+
+export function openCheckout(value, provider, platform = process.platform, execute = execFileSync) {
+ const url=checkoutURL(value,provider);
+ const commands = {darwin:['open',[url.href]],linux:['xdg-open',[url.href]],win32:['rundll32',['url.dll,FileProtocolHandler',url.href]]};
+ if (!commands[platform]) throw Error('Open the printed checkout URL in your browser.');
+ execute(...commands[platform],{stdio:'ignore'});
+}
+
+export async function waitForStripe(post, donationId, {interval=3000, timeout=900000, sleep=delay, now=Date.now, signal} = {}) {
+ const deadline=now()+timeout;
+ while (true) {
+  signal?.throwIfAborted();
+  const result=await post('/test/reconcile',{donationId});
+  if(result.status==='completed')return result;
+  if(result.status!=='pending')throw Error('Unexpected payment state; no success is claimed.');
+  const remaining=deadline-now();
+  if(remaining<=0)throw Error('Timed out waiting for Stripe test payment. Resume with the same run UUID.');
+  await sleep(Math.min(interval,remaining),undefined,{signal});
+ }
+}
+
+export async function loadProgress(path, runId) {
+ try {
+  const saved=JSON.parse(await readFile(path,'utf8'));
+  if(saved.runId!==runId.toLowerCase() || !saved.checkouts || typeof saved.checkouts!=='object' || Array.isArray(saved.checkouts))throw Error('Invalid saved verification progress.');
+  return saved;
+ } catch(error) {
+  if(error.code!=='ENOENT')throw error;
+  return {runId:runId.toLowerCase(),checkouts:{}};
+ }
+}
+
+export async function saveProgress(path, progress) {
+ await mkdir(resolve(path,'..'),{recursive:true,mode:0o700});
+ const temporary=path+'.'+process.pid+'.tmp';
+ await writeFile(temporary,JSON.stringify(progress,null,2),{mode:0o600});
+ await rename(temporary,path);
+}
+
 async function main() {
  const cases = testCases(process.argv[2]);
  const token = (await readFile(resolve(homedir(),'.ygvoice-donation-test-token'),'utf8')).trim();
@@ -78,7 +125,9 @@ async function main() {
   return response.json();
  };
  const checkouts = new Map();
- const terminal = createInterface({input:process.stdin,output:process.stdout});
+ const progressPath=resolve(homedir(),'.ygvoice-donation-verification',process.argv[2].toLowerCase()+'.json');
+ const progress=await loadProgress(progressPath,process.argv[2]);
+ let terminal;
  try {
   console.log(`Test Worker: ${worker}\nD1: ${database}\nRun: ${process.argv[2]} (reuse this UUID to resume)`);
   for (const input of cases) {
@@ -86,6 +135,11 @@ async function main() {
    if (!uuid.test(checkout.donationId || '') || (input.provider==='stripe'
     ? !/^cs_test_/.test(checkout.checkoutReference || '')
     : !/^[A-Z0-9]{10,32}$/.test(checkout.checkoutReference || ''))) throw Error('Unexpected test checkout reference.');
+   const saved=progress.checkouts[input.requestId];
+   if(saved && (saved.donationId!==checkout.donationId || saved.checkoutReference!==checkout.checkoutReference))throw Error('Saved checkout conflicts with remote progress.');
+   if(!checkout.approvalURL && saved?.approvalURL)checkout.approvalURL=saved.approvalURL;
+   progress.checkouts[input.requestId]={donationId:checkout.donationId,checkoutReference:checkout.checkoutReference,...(checkout.approvalURL?{approvalURL:checkout.approvalURL}:{})};
+   await saveProgress(progressPath,progress);
    checkouts.set(input.requestId,checkout);
    const retry = await post('/test/donations',input);
    if (retry.donationId!==checkout.donationId || retry.checkoutReference!==checkout.checkoutReference) throw Error('Duplicate checkout created.');
@@ -95,17 +149,24 @@ async function main() {
     if (result.status!=='pending') throw Error('Unexpected payment state.');
     console.log(`\n${input.provider}: ${input.designationId}, USD ${(input.amountCents/100).toFixed(2)}`);
     if (checkout.approvalURL) {
-     const url = new URL(checkout.approvalURL);
-     if (url.username || url.password || (input.provider==='stripe'
-      ? url.origin!=='https://checkout.stripe.com'
-      : url.origin!=='https://www.sandbox.paypal.com' || !['/checkoutnow','/checkoutnow/'].includes(url.pathname))) throw Error('Unexpected checkout destination.');
-     console.log(`Open: ${url.href}`);
+     const url=checkoutURL(checkout.approvalURL,input.provider);
+     console.log(`Checkout: ${url.href}`);
+     try { openCheckout(url.href,input.provider); }
+     catch {
+      console.log('Browser could not open automatically; open the printed URL manually.');
+     }
     } else console.log(`Resume the previously returned approval URL for ${checkout.checkoutReference}.`);
     console.log(input.provider==='stripe'
      ? 'Use Stripe test card 4242 4242 4242 4242, a future expiry and any valid test CVC. Never use a real card.'
      : 'Approve using a PayPal Sandbox buyer different from the Sandbox merchant.');
-    if ((await terminal.question('After test approval, type approved (anything else stops): ')).trim()!=='approved') throw Error('Stopped; resume using the same run UUID.');
-    result = await post(input.provider==='paypal'?'/test/paypal/capture':'/test/reconcile',{donationId:checkout.donationId});
+    if(input.provider==='stripe') {
+     console.log('Waiting for Stripe test payment confirmation automatically. Ctrl+C stops; reuse this run UUID to resume.');
+     result=await waitForStripe(post,checkout.donationId);
+    } else {
+     terminal ??= createInterface({input:process.stdin,output:process.stdout});
+     await terminal.question('After Sandbox buyer approval, press Enter to capture and verify: ');
+     result=await post('/test/paypal/capture',{donationId:checkout.donationId});
+    }
    }
    if (result.status!=='completed') throw Error('Payment not completed; no success is claimed.');
    if (input.provider==='paypal') {
@@ -121,7 +182,7 @@ async function main() {
   const records = verifyLedgerRows(queryD1(ledgerSQL(cases)),cases,checkouts);
   console.log(JSON.stringify({runId:process.argv[2],testMode:true,providerVerified:true,
    remoteD1Verified:true,records},null,2));
- } finally { terminal.close(); }
+ } finally { terminal?.close(); }
 }
 
 if (process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url)) {

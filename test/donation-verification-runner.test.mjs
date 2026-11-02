@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {testCases,ledgerSQL,verifyLedgerRows} from '../scripts/verify-donation-payments.mjs';
+import {testCases,ledgerSQL,verifyLedgerRows,openCheckout,waitForStripe,loadProgress,saveProgress} from '../scripts/verify-donation-payments.mjs';
+import {mkdtemp,rm,stat} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 import {resolveDesignation} from '../worker/donation-registry.mjs';
 
 const run='00000000-0000-4000-8000-000000000001';
@@ -46,4 +49,49 @@ test('D1 verification uses only SELECT with validated request UUIDs',()=>{
  assert.doesNotMatch(sql,/\b(INSERT|UPDATE|DELETE|DROP|ALTER|CREATE)\b/i);
  assert.throws(()=>testCases("x'); DROP TABLE donations; --"));
  assert.throws(()=>ledgerSQL([{requestId:"x'); DROP TABLE donations; --"}]));
+});
+
+test('Stripe opens the validated checkout as an argument without a shell',()=>{
+ const calls=[];
+ openCheckout('https://checkout.stripe.com/c/pay/cs_test_example','stripe','darwin',(...args)=>calls.push(args));
+ assert.deepEqual(calls,[['open',['https://checkout.stripe.com/c/pay/cs_test_example'],{stdio:'ignore'}]]);
+ for(const url of ['https://evil.example','https://checkout.stripe.com.evil.example','https://user@checkout.stripe.com','http://checkout.stripe.com'])assert.throws(()=>openCheckout(url,'stripe','darwin',()=>assert.fail('unsafe open')));
+ openCheckout('https://www.sandbox.paypal.com/checkoutnow?token=TEST','paypal','darwin',()=>{});
+ assert.throws(()=>openCheckout('https://www.paypal.com/checkoutnow','paypal','darwin',()=>assert.fail('live PayPal')));
+});
+
+test('Stripe polls automatically until completed, with no interactive approval',async()=>{
+ let count=0,clock=0;
+ const result=await waitForStripe(async(path,body)=>{
+  assert.equal(path,'/test/reconcile');assert.equal(body.donationId,'existing-id');
+  return {status:++count<3?'pending':'completed'};
+ },'existing-id',{interval:10,timeout:100,now:()=>clock,sleep:async ms=>clock+=ms});
+ assert.equal(result.status,'completed');assert.equal(count,3);assert.equal(clock,20);
+ let slept=false;
+ await waitForStripe(async()=>({status:'completed'}),'existing-id',{sleep:async()=>slept=true});
+ assert.equal(slept,false);
+});
+
+test('Stripe polling stops on timeout, provider errors, unexpected state and cancellation',async()=>{
+ let clock=0;
+ await assert.rejects(waitForStripe(async()=>({status:'pending'}),'id',{interval:10,timeout:20,now:()=>clock,sleep:async ms=>clock+=ms}),/same run UUID/);
+ await assert.rejects(waitForStripe(async()=>{throw Error('HTTP 403');},'id'),/403/);
+ await assert.rejects(waitForStripe(async()=>({status:'failed'}),'id'),/no success/);
+ const controller=new AbortController();controller.abort();
+ await assert.rejects(waitForStripe(()=>assert.fail('aborted request'),'id',{signal:controller.signal}));
+});
+
+test('progress saves and resumes the original run and approval URLs without credentials',async()=>{
+ const dir=await mkdtemp(join(tmpdir(),'donation-progress-'));
+ const path=join(dir,'cache',run+'.json');
+ try {
+  const progress=await loadProgress(path,run);
+  assert.equal(progress.runId,run);
+  const request=testCases(run)[0];
+  progress.checkouts[request.requestId]={donationId:crypto.randomUUID(),checkoutReference:'cs_test_existing',approvalURL:'https://checkout.stripe.com/c/pay/existing'};
+  await saveProgress(path,progress);
+  assert.deepEqual(await loadProgress(path,run),progress);
+  assert.equal((await stat(path)).mode&0o777,0o600);
+  await assert.rejects(loadProgress(path,'00000000-0000-4000-8000-000000000002'),/Invalid saved/);
+ } finally {await rm(dir,{recursive:true,force:true});}
 });

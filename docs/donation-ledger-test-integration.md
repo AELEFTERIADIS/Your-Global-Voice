@@ -131,17 +131,26 @@ all six registered designations on each provider, USD 1.00–1.05 per donation.
 Each request ID is deterministic for the run UUID/provider/designation, so reuse
 the **same run UUID** after interruptions to avoid another set of test gifts.
 
-For each pending gift, open the printed approval URL. Stripe requires a test
-card (`4242 4242 4242 4242`, future expiry, valid test CVC); PayPal requires a
-Sandbox buyer different from the Sandbox merchant. Type `approved` only after
-test approval. The runner performs Sandbox capture, repeats capture and
+For each pending gift, the runner automatically opens its validated checkout URL
+in the browser (or prints the URL if the browser cannot open). Stripe requires a
+test card (`4242 4242 4242 4242`, future expiry, valid test CVC). After browser
+payment, the runner detects completion by authenticated reconciliation every
+three seconds; no terminal approval is needed. Polling stops after 15 minutes
+or on an API error. Ctrl+C stops the runner; reuse the same UUID to resume.
+PayPal requires a Sandbox buyer different from the Sandbox merchant; after
+browser approval, press Enter to capture and verify. The runner repeats capture and
 reconciliation, and checks that an altered attribution with the same request ID
 is rejected. It never calls a production payment endpoint, creates secrets,
 changes provider settings, migrates D1 or deploys a Worker.
 
 If an earlier run lost its approval URL on the older deployed adapter, recover
 that existing session/order in the provider's test dashboard rather than creating
-a new run. A return URL alone is not payment confirmation. Any missing access,
+a new run. Checkout IDs and approval URLs are now saved under
+`~/.ygvoice-donation-verification/<run-uuid>.json` with private file permissions;
+the admin token and provider credentials are never saved there. Existing D1
+progress remains authoritative: saved references must match it, and completed
+gifts are reverified without reopening a checkout. Existing run UUIDs and their
+request IDs are unchanged. A return URL alone is not payment confirmation. Any missing access,
 403, provider error, still-pending payment, mismatched attribution, duplicate
 donation/reference/event or synthetic row stops verification without claiming
 success. A successful final JSON report contains twelve completed provider-backed
