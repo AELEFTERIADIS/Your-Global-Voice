@@ -5,6 +5,7 @@ compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 
 [vars]
+PAYPAL_CHECKOUT_ENABLED = "true"
 STRIPE_CHECKOUT_ENABLED = "true"
 CONTACT_SITE_ORIGIN = "https://aelefteriadis.github.io"
 CONTACT_SITE_ORIGINS = "https://aelefteriadis.github.io,https://ygvoice.org,https://www.ygvoice.org"

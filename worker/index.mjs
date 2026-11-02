@@ -1,3 +1,4 @@
+import { paypalRequest, paypalDurable } from './project-paypal.mjs';
 import { checkoutRequest, createProjectSession } from './project-checkout.mjs';
 import { providerTransport, validateInquiry, successMessage } from '../scripts/contact-delivery.mjs';
 
@@ -7,6 +8,7 @@ const json = (status, message, extra = {}) => Response.json({ message, ...extra 
 export default {
   async fetch(request, env) {
     const path = new URL(request.url).pathname;
+    if (['/api/projects/dignity/paypal/status', '/api/projects/dignity/paypal/orders', '/api/projects/dignity/paypal/capture'].includes(path)) return paypalRequest(request, env);
     if (['/api/projects/dignity/checkout', '/api/projects/dignity/checkout/status'].includes(path)) return checkoutRequest(request, env);
     if (!['/api/contact', '/api/contact/status'].includes(path)) return json(404, 'Not found.');
     // The browser never receives credentials; deny every other website origin.
@@ -41,6 +43,7 @@ export class ContactLimits {
   async fetch(request) {
     // Persist rate limits and single-use tokens across restarts, serializing submissions.
     return this.state.blockConcurrencyWhile(async () => {
+      if (new URL(request.url).hostname === 'internal' && new URL(request.url).pathname.startsWith('/paypal/')) return paypalDurable(request, this.env, this.state.storage);
       if (new URL(request.url).pathname === '/api/projects/dignity/checkout') return createProjectSession(request, this.env, this.state.storage);
       const now = Date.now();
       const storage = this.state.storage;
@@ -77,6 +80,14 @@ export class ContactLimits {
   }
   async alarm() {
     return this.state.blockConcurrencyWhile(async () => {
+      const paypalOrder = await this.state.storage.get('paypal-order');
+      const paypalRate = await this.state.storage.get('paypal-rate');
+      if (paypalOrder || paypalRate) {
+        const expires = paypalOrder?.expires || paypalRate.start + 900000;
+        if (Date.now() >= expires) await this.state.storage.deleteAll();
+        else await this.state.storage.setAlarm(expires);
+        return;
+      }
       const checkoutRate = await this.state.storage.get('checkout-rate');
       if (checkoutRate && Date.now() >= checkoutRate.start + 900000) await this.state.storage.delete('checkout-rate');
       const record = await this.state.storage.get('window');

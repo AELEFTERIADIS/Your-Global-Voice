@@ -18,6 +18,6 @@ export function renderDignityProject(paragraphs) {
 <label class="project-custom-label" for="dignity-custom">Custom amount in USD</label><input id="dignity-custom" class="project-custom" type="number" placeholder="Enter amount" min="1" max="10000" step="0.01" inputmode="decimal" disabled aria-describedby="dignity-amount-note"><p id="dignity-amount-note" class="project-giving-note">For a custom amount, enter $1 or more with up to two decimal places.</p></fieldset>
 <p class="project-giving-summary" role="status" aria-live="polite">$25.00 USD selected.</p>
 <div class="project-payment-pending" role="group" aria-label="Project payment methods" aria-describedby="dignity-payment-status"><button type="button" disabled><svg class="project-card-icon" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="1" y="1" width="22" height="16" rx="2"/><path d="M1 6h22M5 12h4m3 0h3"/></svg>Credit or Debit Card</button><button type="button" disabled><img class="project-paypal-logo" src="paypal-logo.svg" width="101" height="32" alt="PayPal" loading="lazy" decoding="async"></button></div>
-<p id="dignity-payment-status" class="project-giving-note">Online donations for this project are not available yet.</p></aside>
+<p id="dignity-payment-status" role="status" aria-live="polite" class="project-giving-note">Online donations for this project are not available yet.</p></aside>
 </div></section>`;
 }

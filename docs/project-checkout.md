@@ -1,7 +1,9 @@
 # Voices for Dignity — Stripe Checkout Sessions
 
-Project payments remain OFF by default. No secret or activation flag is committed.
-PayPal remains disabled. General Donate page checkout links are unchanged.
+Stripe availability requires the committed STRIPE_CHECKOUT_ENABLED flag and the
+encrypted STRIPE_SECRET_KEY in Cloudflare. No secret is committed.
+PayPal now has a separate server-side Orders integration documented in
+`project-paypal.md`. General Donate page checkout links are unchanged.
 
 ## Cloudflare configuration (existing ygvoice-contact Worker)
 
