@@ -1,9 +1,9 @@
 .project-initiatives { margin-block: 1.5rem 2rem; }
 .project-initiatives > h2 { font-size: clamp(1.5rem, 2.8vw, 2.25rem); margin-bottom: 1.25rem; }
-.project-dignity-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 2rem; align-items: start; outline: 1px solid rgba(164, 124, 50, .6); outline-offset: 8px; border-radius: .5rem; }
-.project-dignity-info, .project-giving { --project-panel-padding: clamp(1.25rem, 2.5vw, 2rem); min-width: 0; border: 0; background: var(--cream); padding: calc(var(--project-panel-padding) + 3px) calc(var(--project-panel-padding) + 1px) calc(var(--project-panel-padding) + 1px); }
+.project-dignity-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 2rem; align-items: stretch; }
+.project-dignity-info, .project-giving { --project-panel-padding: clamp(1.25rem, 2.5vw, 2rem); position: relative; min-width: 0; border: 1px solid rgba(196, 149, 55, .65); border-radius: 1rem; background: linear-gradient(120deg, #fcfaf5, #fff 60%, #fcfaf5); padding: var(--project-panel-padding); box-shadow: 0 6px 18px rgba(16, 43, 73, .08); }
 .project-dignity-info > h3, .project-giving > h3 { font-size: clamp(1.375rem, 2.3vw, 1.875rem); line-height: 1.25; margin-bottom: 1rem; }
-.project-contact { border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: .375rem; background: white; margin-top: 1.5rem; padding: 1rem; }
+.project-contact { border: 1px solid #cbd0d6; border-radius: .625rem; background: linear-gradient(120deg, #f8f9fa, #fff); margin-top: 1.5rem; padding: 1rem; box-shadow: 0 2px 5px rgba(16, 43, 73, .08); }
 .project-contact > p { margin-bottom: .375rem; }
 .project-giving fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
 .project-giving legend, .project-custom-label { display: block; font-weight: 700; margin-bottom: .625rem; }
@@ -38,19 +38,41 @@
  .project-read-more > p:first-of-type { margin-top: .75rem; }
 }
 
-/* One separator in the existing desktop column gap; no divider when stacked. */
-@media (min-width: 64.0625rem) {
- .project-giving { position: relative; }
- .project-giving::before { content: ""; position: absolute; left: calc(-1rem - .5px); top: 0; bottom: 0; width: 1px; background: rgba(164, 124, 50, .6); }
-}
-
 .project-dignity-info > .project-purpose-label { color: var(--gold); margin: 0 0 .5rem; }
 .project-dignity-info > .project-dignity-slogan { color: var(--gold); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.125rem, 1.5vw, 1.375rem); font-weight: 400; line-height: 1.45; margin: 1.25rem 0 0; }
 
-/* Refined project hierarchy and a dedicated navy-and-gold giving header. */
-.project-initiatives > h2::after { content: ""; display: block; width: 96px; height: 2px; margin-top: .75rem; background: #D7B56D; }
-.project-dignity-info > h3 { color: #102B49; font-size: clamp(1.625rem, 2.7vw, 2.25rem); font-weight: 700; }
-.project-purpose-label { letter-spacing: .16em; }
+
+/* Reference: B1619DDC-747F-4A20-8D9F-CEB3CAAAE997.png; preserve approved copy and controls. */
+.project-initiatives > h2 { display: flex; align-items: center; gap: 1.5rem; color: #102B49; font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 700; margin-bottom: 1.75rem; }
+.project-initiatives > h2 > span { min-width: 0; }
+.project-initiatives > h2::after { content: ""; flex: 1; min-width: 48px; height: 2px; background: linear-gradient(90deg, #e5c981, #c48c22); }
+.project-dignity-info::before { content: ""; position: absolute; top: 1.5rem; right: 1.25rem; width: 24%; height: 44px; background: url("projects-title-accent.svg") center / 100% 100% no-repeat; pointer-events: none; }
+.project-dignity-info > h3 { position: relative; display: flex; align-items: center; gap: 1rem; color: #102B49; font-size: clamp(1.75rem, 2.8vw, 2.5rem); font-weight: 700; }
+.project-scales-icon { width: 3rem; height: 3rem; flex-shrink: 0; color: #c18b25; }
+.project-dignity-info > .project-purpose-label { position: relative; color: #b57b18; font-size: clamp(.875rem, 1.2vw, 1rem); letter-spacing: .05em; margin-bottom: .625rem; }
+.project-dignity-info > .project-dignity-slogan { color: #936323; font-style: italic; font-weight: 700; font-size: clamp(1.25rem, 1.8vw, 1.5rem); }
+.project-dignity-slogan::after { content: ""; display: block; width: 100%; max-width: 500px; height: 12px; margin-top: .5rem; background: url("projects-slogan-accent.svg") center / 100% 100% no-repeat; }
+.project-contact .text-link { display: inline-flex; align-items: center; gap: 1rem; font-size: 1.125rem; }
+.project-contact-arrow { width: 14px; height: 22px; color: #c48c22; flex-shrink: 0; }
+.project-giving > h3 { position: relative; font-size: clamp(1.375rem, 2.3vw, 2rem); margin: calc(0px - var(--project-panel-padding)) calc(0px - var(--project-panel-padding)) 1.5rem; padding: 1.25rem var(--project-panel-padding) 2rem; border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0; background: linear-gradient(120deg, #102B49, #071c38); color: white; font-weight: 700; }
+.project-giving > h3::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 28px; background: url("projects-gold-wave.svg") center / 100% 100% no-repeat; pointer-events: none; }
+.project-amounts span { border-radius: .375rem; box-shadow: 0 2px 4px rgba(16, 43, 73, .05); }
 .project-amounts label:hover > span { border-color: var(--gold); }
-.project-giving > h3 { position: relative; margin: calc(0px - var(--project-panel-padding) - 3px) calc(0px - var(--project-panel-padding) - 1px) 1.5rem; padding: 1.25rem calc(var(--project-panel-padding) + 1px) 2rem; border-radius: .375rem .375rem 0 0; background: #102B49; color: #D7B56D; }
-.project-giving > h3::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 24px; background: url("projects-gold-wave.svg") center / 100% 100% no-repeat; pointer-events: none; }
+.project-custom { border-radius: .375rem; }
+.project-payment-pending button { display: flex; align-items: center; justify-content: center; gap: .75rem; border-radius: .5rem; font-weight: 700; }
+.project-payment-pending button:first-child { background: linear-gradient(#e9c36b, #d8a93e); border-color: #c89432; color: #102B49; }
+.project-payment-pending button:last-child { background: linear-gradient(#edf0f4, #e5eaf0); }
+.project-card-icon { width: 26px; height: 20px; flex-shrink: 0; }
+.project-paypal-logo { display: block; width: 104px; height: auto; }
+@media (max-width: 42rem) {
+ .project-initiatives > h2 { display: block; }
+ .project-initiatives > h2::after { display: block; margin-top: .75rem; width: 100%; }
+ .project-dignity-info::before { display: none; }
+ .project-dignity-info > h3 { gap: .625rem; }
+ .project-scales-icon { width: 2.25rem; height: 2.25rem; }
+}
+
+.project-dignity-info > p:not(.eyebrow):not(.project-dignity-slogan), .project-read-more > p { font-size: 1.125rem; line-height: 1.5; }
+@media (max-width: 42rem) {
+ .project-dignity-info > p:not(.eyebrow):not(.project-dignity-slogan), .project-read-more > p { font-size: 1rem; line-height: 1.75; }
+}
