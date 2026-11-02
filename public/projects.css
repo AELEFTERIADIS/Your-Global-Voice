@@ -1,7 +1,7 @@
 .project-initiatives { margin-block: 1.5rem 2rem; }
 .project-initiatives > h2 { font-size: clamp(1.5rem, 2.8vw, 2.25rem); margin-bottom: 1.25rem; }
 .project-dignity-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 2rem; align-items: start; outline: 1px solid rgba(164, 124, 50, .6); outline-offset: 8px; border-radius: .5rem; }
-.project-dignity-info, .project-giving { min-width: 0; border: 0; background: var(--cream); padding: calc(clamp(1.25rem, 2.5vw, 2rem) + 3px) calc(clamp(1.25rem, 2.5vw, 2rem) + 1px) calc(clamp(1.25rem, 2.5vw, 2rem) + 1px); }
+.project-dignity-info, .project-giving { --project-panel-padding: clamp(1.25rem, 2.5vw, 2rem); min-width: 0; border: 0; background: var(--cream); padding: calc(var(--project-panel-padding) + 3px) calc(var(--project-panel-padding) + 1px) calc(var(--project-panel-padding) + 1px); }
 .project-dignity-info > h3, .project-giving > h3 { font-size: clamp(1.375rem, 2.3vw, 1.875rem); line-height: 1.25; margin-bottom: 1rem; }
 .project-contact { border: 1px solid var(--line); border-left: 2px solid var(--gold); border-radius: .375rem; background: white; margin-top: 1.5rem; padding: 1rem; }
 .project-contact > p { margin-bottom: .375rem; }
@@ -46,3 +46,11 @@
 
 .project-dignity-info > .project-purpose-label { color: var(--gold); margin: 0 0 .5rem; }
 .project-dignity-info > .project-dignity-slogan { color: var(--gold); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.125rem, 1.5vw, 1.375rem); font-weight: 400; line-height: 1.45; margin: 1.25rem 0 0; }
+
+/* Refined project hierarchy and a dedicated navy-and-gold giving header. */
+.project-initiatives > h2::after { content: ""; display: block; width: 96px; height: 2px; margin-top: .75rem; background: #D7B56D; }
+.project-dignity-info > h3 { color: #102B49; font-size: clamp(1.625rem, 2.7vw, 2.25rem); font-weight: 700; }
+.project-purpose-label { letter-spacing: .16em; }
+.project-amounts label:hover > span { border-color: var(--gold); }
+.project-giving > h3 { position: relative; margin: calc(0px - var(--project-panel-padding) - 3px) calc(0px - var(--project-panel-padding) - 1px) 1.5rem; padding: 1.25rem calc(var(--project-panel-padding) + 1px) 2rem; border-radius: .375rem .375rem 0 0; background: #102B49; color: #D7B56D; }
+.project-giving > h3::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 24px; background: url("projects-gold-wave.svg") center / 100% 100% no-repeat; pointer-events: none; }
