@@ -1,8 +1,8 @@
 # Isolated existing test Worker; never use worker/wrangler.toml for these tests.
 name = "ygvoice-donations-test"
 main = "ledger-test.mjs"
-compatibility_date = "2025-10-01"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2026-11-02"
+compatibility_flags = []
 workers_dev = true
 
 [vars]
