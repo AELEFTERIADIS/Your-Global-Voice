@@ -37,6 +37,7 @@ export async function reconcileTestDonation(env, donationId, send = fetch) {
  if(typeof donationId!=='string' || !/^[a-f0-9-]{36}$/i.test(donationId))throw new Error('Invalid donation ID.');
  if(env.DONATION_TEST_MODE!=='true' || !env.DONATION_DB)throw new Error('Test ledger is not configured.');
  const record=await env.DONATION_DB.prepare('SELECT * FROM donations WHERE id = ?').bind(donationId).first();
+ if(record?.checkout_reference?.startsWith('cs_synthetic_'))throw new Error('Synthetic records cannot use provider reconciliation.');
  if(!record?.checkout_reference)throw new Error('Donation checkout not found.');
  configured(env,record.provider);
  const attribution=resolveDesignation(record.designation_id);
