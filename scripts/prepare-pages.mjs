@@ -21,8 +21,8 @@ export async function preparePages(destination, apiOrigin = process.env.CONTACT_
       const donate = file === 'donate.html';
       const about = file === 'about.html';
       const projects = file === 'projects.html';
-      const csp = `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'${contact ? `; script-src 'self'; connect-src 'self'${apiOrigin ? " " + apiOrigin : ""}` : (donate || about || projects) ? "; script-src 'self'" : ''}`;
-      html = html.replace('<head>', `<head>\n  <meta http-equiv="Content-Security-Policy" content="${csp}">${contact ? `\n  <meta name="ygv-hosting" content="static">${apiOrigin ? '\n  <meta name="ygv-contact-api" content="' + apiOrigin + '">' : ''}` : ''}`);
+      const csp = `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'${(contact || projects) ? `; script-src 'self'; connect-src 'self'${apiOrigin ? " " + apiOrigin : ""}` : (donate || about || projects) ? "; script-src 'self'" : ''}`;
+      html = html.replace('<head>', `<head>\n  <meta http-equiv="Content-Security-Policy" content="${csp}">${(contact || projects) ? `\n  <meta name="ygv-hosting" content="static">${apiOrigin ? '\n  <meta name="ygv-contact-api" content="' + apiOrigin + '">' : ''}` : ''}`);
       await writeFile(resolve(destination, file), html);
     } else {
       await copyFile(source, resolve(destination, file));

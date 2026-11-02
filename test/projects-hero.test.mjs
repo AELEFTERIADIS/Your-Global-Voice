@@ -52,13 +52,13 @@ test('Voices for Dignity retains approved paragraphs and cannot initiate a payme
   assert.throws(() => renderDignityProject(), /Approved Voices for Dignity text is required/);
 });
 
-test('Projects deployment permits only local selection scripts and ships their assets', async () => {
+test('Projects deployment permits local scripts and scoped API connectivity', async () => {
   const temp = await mkdtemp(join(tmpdir(), 'ygv-project-giving-'));
   try {
     await preparePages(join(temp, 'pages'));
     const html = await readFile(join(temp, 'pages/projects.html'), 'utf8');
     assert.match(html, /script-src 'self'/);
-    assert.doesNotMatch(html, /connect-src/);
+    assert.match(html, /connect-src 'self'/);
     for (const asset of ['projects.css', 'projects.js']) assert.equal(await readFile(join(temp, 'pages', asset), 'utf8'), await readFile(new URL('../public/' + asset, import.meta.url), 'utf8'));
   } finally { await rm(temp, { recursive: true, force: true }); }
 });

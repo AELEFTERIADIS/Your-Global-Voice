@@ -1,3 +1,4 @@
+import { checkoutRequest, createProjectSession } from './project-checkout.mjs';
 import { providerTransport, validateInquiry, successMessage } from '../scripts/contact-delivery.mjs';
 
 const unavailable = 'Message delivery is unavailable. Please use our email or WhatsApp contact.';
@@ -6,6 +7,7 @@ const json = (status, message, extra = {}) => Response.json({ message, ...extra 
 export default {
   async fetch(request, env) {
     const path = new URL(request.url).pathname;
+    if (['/api/projects/dignity/checkout', '/api/projects/dignity/checkout/status'].includes(path)) return checkoutRequest(request, env);
     if (!['/api/contact', '/api/contact/status'].includes(path)) return json(404, 'Not found.');
     // The browser never receives credentials; deny every other website origin.
     const origin = request.headers.get('Origin');
@@ -39,6 +41,7 @@ export class ContactLimits {
   async fetch(request) {
     // Persist rate limits and single-use tokens across restarts, serializing submissions.
     return this.state.blockConcurrencyWhile(async () => {
+      if (new URL(request.url).pathname === '/api/projects/dignity/checkout') return createProjectSession(request, this.env, this.state.storage);
       const now = Date.now();
       const storage = this.state.storage;
       let record = await storage.get('window');
@@ -74,6 +77,8 @@ export class ContactLimits {
   }
   async alarm() {
     return this.state.blockConcurrencyWhile(async () => {
+      const checkoutRate = await this.state.storage.get('checkout-rate');
+      if (checkoutRate && Date.now() >= checkoutRate.start + 900000) await this.state.storage.delete('checkout-rate');
       const record = await this.state.storage.get('window');
       if (!record) return;
       const expires = Math.max(record.start, ...Object.values(record.tokens)) + 900000;
