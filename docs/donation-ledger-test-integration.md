@@ -148,9 +148,19 @@ reconciliation, and checks that an altered attribution with the same request ID
 is rejected. It never calls a production payment endpoint, creates secrets,
 changes provider settings, migrates D1 or deploys a Worker.
 
-If an earlier run lost its approval URL on the older deployed adapter, recover
-that existing session/order in the provider's test dashboard rather than creating
-a new run. Checkout IDs and approval URLs are now saved under
+If the older deployed adapter returns an existing pending session/order without
+its URL and no saved URL exists, the runner asks for that existing checkout's
+complete payment URL from its browser tab or provider test dashboard. It checks
+that the URL belongs to the existing Stripe Session or Sandbox order and saves
+it for subsequent resumes. A dashboard URL or `cs_test_...` ID alone is not a
+payment link. It never fabricates a URL or creates a replacement checkout.
+Blank input stops safely; keep the same run UUID.
+
+The full provider URL, including Stripe's fragment after `#`, is passed to
+Chrome and printed on its own line without shortening. Interactive terminals
+also receive a clickable link with that complete target, even if the displayed
+URL wraps. Completed gifts are reconciled without requesting or opening a link.
+Checkout IDs and approval URLs are saved under
 `~/.ygvoice-donation-verification/<run-uuid>.json` with private file permissions;
 the admin token and provider credentials are never saved there. Existing D1
 progress remains authoritative: saved references must match it, and completed

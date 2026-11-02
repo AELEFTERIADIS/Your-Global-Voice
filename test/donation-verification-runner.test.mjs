@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {testCases,ledgerSQL,verifyLedgerRows,openCheckout,waitForStripe,loadProgress,saveProgress} from '../scripts/verify-donation-payments.mjs';
+import {testCases,ledgerSQL,verifyLedgerRows,openCheckout,waitForStripe,loadProgress,saveProgress,resolveApprovalURL,printCheckoutLink} from '../scripts/verify-donation-payments.mjs';
 import {mkdtemp,rm,stat} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
@@ -99,4 +99,36 @@ test('progress saves and resumes the original run and approval URLs without cred
   assert.equal((await stat(path)).mode&0o777,0o600);
   await assert.rejects(loadProgress(path,'00000000-0000-4000-8000-000000000002'),/Invalid saved/);
  } finally {await rm(dir,{recursive:true,force:true});}
+});
+
+test('complete Stripe session URL and fragment reach Chrome and clickable terminal output intact',async()=>{
+ const url='https://checkout.stripe.com/c/pay/cs_test_existing#fidkdWxOYHwnPyd1blpxYHZxWjA0%2Babc';
+ const checkout={donationId:crypto.randomUUID(),checkoutReference:'cs_test_existing',approvalURL:url};
+ assert.equal(await resolveApprovalURL(checkout,'stripe',()=>assert.fail('already have URL')),url);
+ const calls=[];
+ openCheckout(url,'stripe','darwin',(...args)=>calls.push(args));
+ assert.equal(calls[0][1][2],url);
+ let tty='',plain='';
+ printCheckoutLink(url,'stripe',{isTTY:true,write:value=>tty+=value});
+ printCheckoutLink(url,'stripe',{isTTY:false,write:value=>plain+=value});
+ assert(tty.includes('\x1b]8;;'+url+'\x1b\\'));
+ assert(plain.includes('\n'+url+'\n'));
+ assert(!plain.includes('\x1b'));
+});
+
+test('older deployed API missing URL recovers the same session without changing request identity',async()=>{
+ const checkout={donationId:crypto.randomUUID(),checkoutReference:'cs_test_existing'};
+ const before=structuredClone(checkout);
+ let prompts=0;
+ const url=await resolveApprovalURL(checkout,'stripe',async message=>{
+  prompts++;assert(message.includes(checkout.checkoutReference));
+  return ' https://checkout.stripe.com/c/pay/cs_test_existing#full-fragment ';
+ });
+ assert.equal(url,'https://checkout.stripe.com/c/pay/cs_test_existing#full-fragment');
+ assert.deepEqual(checkout,before);assert.equal(prompts,1);
+ await assert.rejects(resolveApprovalURL(checkout,'stripe',async()=>''),/same run UUID/);
+ for(const approvalURL of ['cs_test_existing','https://dashboard.stripe.com/test/payments/existing','https://checkout.stripe.com/c/pay/cs_test_other','https://checkout.stripe.com/','https://checkout.stripe.com/c/pay/cs_test_existing\n#broken']) {
+  await assert.rejects(resolveApprovalURL({...checkout,approvalURL},'stripe',()=>assert.fail('do not replace session')));
+ }
+ assert.equal(await resolveApprovalURL({checkoutReference:'TESTORDER12345',approvalURL:'https://www.sandbox.paypal.com/checkoutnow?token=TESTORDER12345'},'paypal',()=>assert.fail()),'https://www.sandbox.paypal.com/checkoutnow?token=TESTORDER12345');
 });

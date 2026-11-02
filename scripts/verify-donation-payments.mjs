@@ -66,11 +66,32 @@ function queryD1(sql) {
 }
 
 function checkoutURL(value, provider) {
+ if(typeof value!=='string' || /[\x00-\x20\x7f]/.test(value))throw Error('Paste the complete checkout URL without spaces or line breaks.');
  const url = new URL(value);
  if (url.username || url.password || (provider==='stripe'
   ? url.origin!=='https://checkout.stripe.com'
   : url.origin!=='https://www.sandbox.paypal.com' || !['/checkoutnow','/checkoutnow/'].includes(url.pathname))) throw Error('Unexpected checkout destination.');
  return url;
+}
+
+export async function resolveApprovalURL(checkout, provider, ask) {
+ let value=checkout.approvalURL;
+ if(!value) {
+  value=(await ask(`The deployed API did not return the payment URL for ${checkout.checkoutReference}.\nPaste the complete existing checkout URL from its browser tab or provider test dashboard (blank stops without replacing it): `)).trim();
+  if(!value)throw Error('No checkout URL supplied. Existing payments are preserved; resume with the same run UUID.');
+ }
+ const url=checkoutURL(value,provider);
+ if(provider==='stripe' && !['/c/pay/'+checkout.checkoutReference,'/pay/'+checkout.checkoutReference].includes(url.pathname))throw Error('Stripe URL does not match this existing Checkout Session. Copy its complete payment URL, not the dashboard link or session ID.');
+ if(provider==='paypal' && url.searchParams.get('token')!==checkout.checkoutReference)throw Error('Sandbox URL does not match this existing order.');
+ return url.href;
+}
+
+export function printCheckoutLink(value, provider, output=process.stdout) {
+ const url=checkoutURL(value,provider).href;
+ // OSC 8 keeps the entire URL (including Stripe's fragment) clickable when a
+ // terminal visually wraps it. Also print the complete URL for copy/paste/logs.
+ output.write('Complete payment URL:\n'+url+'\n');
+ if(output.isTTY)output.write('\x1b]8;;'+url+'\x1b\\Open '+(provider==='stripe'?'Stripe test':'PayPal Sandbox')+' payment page\x1b]8;;\x1b\\\n');
 }
 
 export function openCheckout(value, provider, platform = process.platform, execute = execFileSync) {
@@ -148,16 +169,22 @@ async function main() {
    if (result.status!=='completed') {
     if (result.status!=='pending') throw Error('Unexpected payment state.');
     console.log(`\n${input.provider}: ${input.designationId}, USD ${(input.amountCents/100).toFixed(2)}`);
-    if (checkout.approvalURL) {
-     const url=checkoutURL(checkout.approvalURL,input.provider);
-     console.log(`Checkout: ${url.href}`);
-     try { openCheckout(url.href,input.provider); }
+    {
+     const url=await resolveApprovalURL(checkout,input.provider,async question=>{
+      terminal ??= createInterface({input:process.stdin,output:process.stdout});
+      return terminal.question(question);
+     });
+     checkout.approvalURL=url;
+     progress.checkouts[input.requestId].approvalURL=url;
+     await saveProgress(progressPath,progress);
+     printCheckoutLink(url,input.provider);
+     try { openCheckout(url,input.provider); }
      catch {
       console.log(process.platform==='darwin' && input.provider==='stripe'
        ? 'Google Chrome could not open automatically. Ensure Google Chrome is installed, then paste the printed checkout URL into Chrome. Waiting for payment; reuse the same run UUID if you restart.'
        : 'Browser could not open automatically; open the printed URL manually.');
      }
-    } else console.log(`Resume the previously returned approval URL for ${checkout.checkoutReference}.`);
+    }
     console.log(input.provider==='stripe'
      ? 'Use Stripe test card 4242 4242 4242 4242, a future expiry and any valid test CVC. Never use a real card.'
      : 'Approve using a PayPal Sandbox buyer different from the Sandbox merchant.');
