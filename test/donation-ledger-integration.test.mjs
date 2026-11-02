@@ -150,3 +150,38 @@ test('authentication is exact and GET is rejected only after valid authorization
  } finally { f.sql.close(); }
 });
 
+test('authenticated PayPal errors distinguish OAuth and order creation without exposing secrets or changing completed Stripe records',async()=>{
+ const f=fixture(),original=globalThis.fetch;
+ try {
+  const stripe=await createTestCheckout(f.env,{provider:'stripe',designationId:'voices-for-dignity',amountCents:105,requestId:crypto.randomUUID()},'https://test.workers.dev/return',f.send);
+  f.paid(true);await reconcileTestDonation(f.env,stripe.donationId,f.send);
+  const completed=f.sql.prepare('SELECT * FROM donations WHERE id=?').get(stripe.donationId);
+  const events=f.sql.prepare('SELECT * FROM donation_events').all();
+  const input={provider:'paypal',designationId:'general-support',amountCents:100,requestId:crypto.randomUUID()};
+  const accessToken='access-token-never-expose',debugId='a1b2c3d4e5f67';
+  for(const stage of ['paypal_oauth','paypal_order_create']) {
+   const calls=[];
+   globalThis.fetch=async(url)=>{
+    assert.equal(new URL(url).origin,'https://api-m.sandbox.paypal.com');calls.push(new URL(url).pathname);
+    if(stage==='paypal_order_create' && url.endsWith('/oauth2/token'))return Response.json({access_token:accessToken});
+    return Response.json({error:stage==='paypal_oauth'?'invalid_client':undefined,name:stage==='paypal_order_create'?'UNPROCESSABLE_ENTITY':undefined,debug_id:debugId,
+     error_description:f.env.TEST_PAYPAL_CLIENT_SECRET,message:f.env.TEST_PAYPAL_CLIENT_ID,
+     access_token:accessToken,Authorization:'Basic '+btoa(f.env.TEST_PAYPAL_CLIENT_ID+':'+f.env.TEST_PAYPAL_CLIENT_SECRET),
+     details:[{issue:'PAYEE_ACCOUNT_RESTRICTED',description:accessToken},{issue:accessToken}],links:[{href:'https://example.invalid/'+f.env.DONATION_TEST_ADMIN_TOKEN}]},{status:stage==='paypal_oauth'?401:422});
+   };
+   const response=await handler.fetch(new Request('https://test.workers.dev/test/donations',{method:'POST',headers:{Authorization:'Bearer '+f.env.DONATION_TEST_ADMIN_TOKEN,'Content-Type':'application/json'},body:JSON.stringify(input)}),f.env);
+   assert.equal(response.status,400);
+   const result=await response.json();
+   assert.deepEqual(result.diagnostic,{provider:'paypal_sandbox',stage,status:stage==='paypal_oauth'?401:422,reason:'provider_http_error',errorName:stage==='paypal_oauth'?'invalid_client':'UNPROCESSABLE_ENTITY',debugId,issues:['PAYEE_ACCOUNT_RESTRICTED']});
+   assert.equal(calls.length,stage==='paypal_oauth'?1:2);
+   const text=JSON.stringify(result);
+   for(const secret of [f.env.TEST_PAYPAL_CLIENT_ID,f.env.TEST_PAYPAL_CLIENT_SECRET,f.env.DONATION_TEST_ADMIN_TOKEN,accessToken,btoa(f.env.TEST_PAYPAL_CLIENT_ID+':'+f.env.TEST_PAYPAL_CLIENT_SECRET)])assert(!text.includes(secret));
+   assert.deepEqual(f.sql.prepare('SELECT * FROM donations WHERE id=?').get(stripe.donationId),completed);
+   assert.deepEqual(f.sql.prepare('SELECT * FROM donation_events').all(),events);
+   assert.equal(f.sql.prepare('SELECT count(*) n FROM donations WHERE request_id=?').get(input.requestId).n,1);
+  }
+  const unauthorized=await handler.fetch(new Request('https://test.workers.dev/test/donations',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input)}),f.env);
+  assert.equal(unauthorized.status,403);assert.equal((await unauthorized.json()).diagnostic,undefined);
+ } finally {globalThis.fetch=original;f.sql.close();}
+});
+

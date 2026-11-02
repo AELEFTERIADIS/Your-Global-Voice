@@ -7,11 +7,17 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
 import { donationRegistry, resolveDesignation } from '../worker/donation-registry.mjs';
+import { safePayPalDiagnostic } from '../worker/paypal-test-diagnostics.mjs';
 
 const worker = 'https://ygvoice-donations-test.andyelft.workers.dev';
 const database = 'ygvoice-donations-test';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
+
+export function formatTestFailure(path,status,expected,data,sensitive=[]) {
+ const diagnostic=data?.diagnostic?.provider==='paypal_sandbox'?safePayPalDiagnostic(data.diagnostic,sensitive):undefined;
+ return `${path}: HTTP ${status}, expected ${expected}.`+(diagnostic?' '+JSON.stringify(diagnostic):' Check the existing test configuration/token; do not rotate secrets.');
+}
 
 export function testCases(runId) {
  if (!uuid.test(runId || '')) throw Error('Supply a run UUID; reuse it to resume the same payments.');
@@ -142,7 +148,10 @@ async function main() {
   const response = await fetch(worker+path,{method:'POST',redirect:'error',
    headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},
    body:JSON.stringify(body),signal:AbortSignal.timeout(40000)});
-  if (response.status!==expected) throw Error(`${path}: HTTP ${response.status}, expected ${expected}. Check the existing test configuration/token; do not rotate secrets.`);
+  if (response.status!==expected) {
+   let data;try {data=await response.json();}catch {}
+   throw Error(formatTestFailure(path,response.status,expected,data,[token]));
+  }
   return response.json();
  };
  const checkouts = new Map();

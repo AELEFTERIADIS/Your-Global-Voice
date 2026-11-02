@@ -1,10 +1,20 @@
+import { paypalSandboxJSON, PayPalSandboxError } from './paypal-test-diagnostics.mjs';
 import { resolveDesignation } from './donation-registry.mjs';
 import { createPendingDonation, attachCheckoutReference } from './donation-ledger.mjs';
 const stripe = 'https://api.stripe.com/v1/checkout/sessions';
 const paypal = 'https://api-m.sandbox.paypal.com';
 async function jsonResponse(response) { if (!response.ok) throw new Error('Test provider request failed.'); return response.json(); }
+function paypalSensitive(env, token) {
+ return [env.TEST_PAYPAL_CLIENT_ID,env.TEST_PAYPAL_CLIENT_SECRET,env.DONATION_TEST_ADMIN_TOKEN,env.TEST_STRIPE_SECRET_KEY,token,
+  btoa(env.TEST_PAYPAL_CLIENT_ID+':'+env.TEST_PAYPAL_CLIENT_SECRET)];
+}
+async function paypalJSON(stage, env, url, options, send, token) {
+ return paypalSandboxJSON(stage,url,options,send,paypalSensitive(env,token));
+}
 async function paypalToken(env, send) {
- return (await jsonResponse(await send(paypal + '/v1/oauth2/token', { method:'POST', headers:{ Authorization:'Basic '+btoa(env.TEST_PAYPAL_CLIENT_ID+':'+env.TEST_PAYPAL_CLIENT_SECRET), 'Content-Type':'application/x-www-form-urlencoded' }, body:'grant_type=client_credentials', signal:AbortSignal.timeout(10000) }))).access_token;
+ const data=await paypalJSON('paypal_oauth',env,paypal + '/v1/oauth2/token', { method:'POST', headers:{ Authorization:'Basic '+btoa(env.TEST_PAYPAL_CLIENT_ID+':'+env.TEST_PAYPAL_CLIENT_SECRET), 'Content-Type':'application/x-www-form-urlencoded' }, body:'grant_type=client_credentials', signal:AbortSignal.timeout(10000) },send);
+ if(typeof data?.access_token!=='string' || !data.access_token || /[\r\n]/.test(data.access_token))throw new PayPalSandboxError({stage:'paypal_oauth',status:200,reason:'invalid_response'});
+ return data.access_token;
 }
 function configured(env, provider) {
  if (env.DONATION_TEST_MODE !== 'true' || !env.DONATION_DB) throw new Error('Test ledger is not configured.');
@@ -36,7 +46,7 @@ async function resumeCheckout(env, donation, send) {
   if(result.status==='open')url=result.url;
  } else {
   const token=await paypalToken(env,send);
-  result=await jsonResponse(await send(paypal+'/v2/checkout/orders/'+encodeURIComponent(donation.checkout_reference),{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)}));
+  result=await paypalJSON('paypal_order_read',env,paypal+'/v2/checkout/orders/'+encodeURIComponent(donation.checkout_reference),{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)},send,token);
   validatePayPal(donation,result);
   if(['CREATED','PAYER_ACTION_REQUIRED'].includes(result.status))url=result.links?.find(link=>['payer-action','approve'].includes(link.rel))?.href;
  }
@@ -65,7 +75,7 @@ export async function createTestCheckout(env, input, returnURL, send = fetch) {
   reference=result.id; approvalURL=result.url;
  } else {
   const token=await paypalToken(env,send);
-  const result=await jsonResponse(await send(paypal+'/v2/checkout/orders',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json','PayPal-Request-Id':donation.id},body:JSON.stringify({intent:'CAPTURE',purchase_units:[{reference_id:donation.designation_id,custom_id:donation.id,amount:{currency_code:'USD',value:(donation.amount_cents/100).toFixed(2)}}],payment_source:{paypal:{experience_context:{return_url:returnURL,cancel_url:returnURL,user_action:'PAY_NOW',shipping_preference:'NO_SHIPPING'}}}}),signal:AbortSignal.timeout(15000)}));
+  const result=await paypalJSON('paypal_order_create',env,paypal+'/v2/checkout/orders',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json','PayPal-Request-Id':donation.id},body:JSON.stringify({intent:'CAPTURE',purchase_units:[{reference_id:donation.designation_id,custom_id:donation.id,amount:{currency_code:'USD',value:(donation.amount_cents/100).toFixed(2)}}],payment_source:{paypal:{experience_context:{return_url:returnURL,cancel_url:returnURL,user_action:'PAY_NOW',shipping_preference:'NO_SHIPPING'}}}}),signal:AbortSignal.timeout(15000)},send,token);
   reference=result.id; approvalURL=result.links?.find(link=>['payer-action','approve'].includes(link.rel))?.href;
  }
  // If persistence fails, retry this request ID: provider idempotency recovers the same object.
@@ -89,7 +99,7 @@ export async function reconcileTestDonation(env, donationId, send = fetch) {
   completed=result.payment_status==='paid' && result.status==='complete';
  } else {
   const token=await paypalToken(env,send);
-  const result=await jsonResponse(await send(paypal+'/v2/checkout/orders/'+encodeURIComponent(record.checkout_reference),{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)}));
+  const result=await paypalJSON('paypal_order_read',env,paypal+'/v2/checkout/orders/'+encodeURIComponent(record.checkout_reference),{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)},send,token);
   const unit=result.purchase_units?.[0],captures=unit?.payments?.captures;
   validatePayPal(record,result);
   completed=result.status==='COMPLETED';
@@ -112,12 +122,12 @@ export async function captureTestPayPal(env, donationId, send = fetch) {
  if(!record || record.provider!=='paypal' || !record.checkout_reference)throw new Error('PayPal test order not found.');
  if(!['pending','completed'].includes(record.status))throw new Error('Donation requires manual reconciliation.');
  const token=await paypalToken(env,send),url=paypal+'/v2/checkout/orders/'+encodeURIComponent(record.checkout_reference);
- const order=await jsonResponse(await send(url,{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)}));
+ const order=await paypalJSON('paypal_order_read',env,url,{headers:{Authorization:'Bearer '+token},signal:AbortSignal.timeout(15000)},send,token);
  validatePayPal(record,order);
  if(record.status==='completed' && order.status!=='COMPLETED')throw new Error('Provider state conflicts with completed ledger record.');
  if(order.status!=='COMPLETED') {
   if(order.status!=='APPROVED')throw new Error('Sandbox buyer approval is required.');
-  await jsonResponse(await send(url+'/capture',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json','PayPal-Request-Id':'cap-'+record.id.replaceAll('-','')},body:'{}',signal:AbortSignal.timeout(15000)}));
+  await paypalJSON('paypal_capture',env,url+'/capture',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json','PayPal-Request-Id':'cap-'+record.id.replaceAll('-','')},body:'{}',signal:AbortSignal.timeout(15000)},send,token);
  }
  return reconcileTestDonation(env,donationId,send);
 }

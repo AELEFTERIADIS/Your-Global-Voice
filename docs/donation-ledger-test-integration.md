@@ -176,3 +176,32 @@ No actual Stripe test checkout, Sandbox payment or remote D1 result has been
 confirmed by the cloud session. Those confirmations require running this command
 on the Mac with its existing access and completing the test approvals.
 
+## Safe PayPal Sandbox diagnostics
+
+The authenticated test Worker retains HTTP 400 for provider failures but adds a
+`diagnostic` object. `stage=paypal_oauth` identifies token acquisition failures;
+`stage=paypal_order_create` identifies creation failures after token acquisition.
+Existing-order reads and captures use `paypal_order_read` and `paypal_capture`.
+`status` is the upstream HTTP status, or null for a transport failure. `reason`
+is one of `provider_http_error`, `transport_error`, or `invalid_response`.
+Optional `errorName` and `issues` come from fixed allowlists; `debugId` must be a
+13-character hexadecimal PayPal identifier. Unknown identifiers are omitted.
+
+Example (illustrative, not an observed provider failure):
+
+```json
+{"message":"PayPal Sandbox request failed.","diagnostic":{"provider":"paypal_sandbox","stage":"paypal_oauth","status":401,"reason":"provider_http_error","errorName":"invalid_client"}}
+```
+
+The runner prints only these validated fields on unexpected errors. Provider
+messages, descriptions, request/response headers, URLs, raw bodies, credentials
+and access tokens are never included in diagnostics or logs. Known secrets and
+the active access token are also excluded if they match an identifier. Error
+body parsing is capped at 8 KiB. Authentication gates diagnostics just like the
+payment endpoints; unauthenticated requests still receive only HTTP 403.
+
+No schema, request UUID, saved progress, payment status or credentials change is
+needed. These diagnostics are source changes only until a separately authorized
+test Worker deployment. This change does not deploy or retry any real Sandbox
+request. Do not restart with a new run UUID to investigate an existing failure.
+

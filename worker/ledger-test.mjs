@@ -1,4 +1,5 @@
 import { verifySyntheticLedger } from './synthetic-ledger-test.mjs';
+import { PayPalSandboxError } from './paypal-test-diagnostics.mjs';
 import { createTestCheckout, reconcileTestDonation, captureTestPayPal } from './donation-test-service.mjs';
 const response=(status,data)=>Response.json(data,{status,headers:{'Cache-Control':'no-store'}});
 export default { async fetch(request,env) {
@@ -14,5 +15,9 @@ export default { async fetch(request,env) {
   const data=JSON.parse(text+decoder.decode());
   const result=path==='/test/ledger/verify'?await verifySyntheticLedger(env,data):path==='/test/donations'?await createTestCheckout(env,data,new URL('/return',request.url).href):path==='/test/paypal/capture'?await captureTestPayPal(env,data.donationId):await reconcileTestDonation(env,data.donationId);
   return response(200,result);
- } catch {return response(400,{message:'Test donation request failed validation or provider verification. Inspect test records before retrying.'});}
+ } catch(error) {
+  if(error instanceof PayPalSandboxError)return response(400,{message:'PayPal Sandbox request failed.',diagnostic:error.diagnostic});
+  return response(400,{message:'Test donation request failed validation or provider verification. Inspect test records before retrying.'});
+ }
 } };
+
