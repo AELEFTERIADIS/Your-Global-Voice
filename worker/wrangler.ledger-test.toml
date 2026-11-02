@@ -1,0 +1,15 @@
+# Isolated existing test Worker; never use worker/wrangler.toml for these tests.
+name = "ygvoice-donations-test"
+main = "ledger-test.mjs"
+compatibility_date = "2025-10-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[vars]
+DONATION_TEST_MODE = "true"
+
+[[d1_databases]]
+binding = "DONATION_DB"
+database_name = "ygvoice-donations-test"
+database_id = "32afbb53-9d54-45be-9a70-64c7d5832a9d"
+migrations_dir = "migrations"
