@@ -4,6 +4,7 @@ main = "ledger-test.mjs"
 compatibility_date = "2026-11-02"
 compatibility_flags = []
 workers_dev = true
+preview_urls = false
 
 [vars]
 DONATION_TEST_MODE = "true"
@@ -13,3 +14,9 @@ binding = "DONATION_DB"
 database_name = "ygvoice-donations-test"
 database_id = "32afbb53-9d54-45be-9a70-64c7d5832a9d"
 migrations_dir = "migrations"
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
