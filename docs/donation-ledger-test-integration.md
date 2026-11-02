@@ -13,8 +13,8 @@ service. No remote Worker or D1 changes were executed by the implementation.
 
 ## Test environment prerequisites
 
-After verifying the existing test Worker configuration, set encrypted secrets on
-that Worker only:
+Reuse the encrypted secrets already configured on the existing test Worker.
+Do not rotate them or copy them into source code:
 
 - `DONATION_TEST_ADMIN_TOKEN`: a cryptographically random token of at least 32
   characters, held by the tester and never published.
@@ -54,8 +54,10 @@ No CORS access is granted to website visitors. Never put the token in a URL.
 Use a new UUID for each new gift, and provider `paypal` for Sandbox. All six
 registered designations are supported. Do not send separate cause/project fields:
 those relationships are derived from the validated registry. Response contains
-`donationId`, `checkoutReference` and, on initial creation, `approvalURL`.
-A retry returns the original record/reference, not a second donation.
+`donationId`, `checkoutReference` and `approvalURL` while approval is available.
+A retry fetches the original provider checkout to recover its approval URL;
+it never intentionally creates a second donation or provider object. Completed
+or expired sessions do not receive a new checkout URL.
 
 The pending D1 row exists before the provider call. Stripe Session/PaymentIntent
 metadata includes donation_id, designation_id, and applicable cause_id/project_id.
@@ -77,6 +79,15 @@ or unapproved payments stay pending. Mismatches fail closed. A D1 transaction
 inserts a unique reconciliation event and updates status together. Duplicate
 reconciliation does not add another event or gift.
 
+After provider verification, reconciliation rereads the persisted D1 row and
+requires one donation and one matching completion event. Its response includes
+`testMode`, `paymentVerified`, provider/reference, exact cents/currency, resolved
+cause/project attribution and donation/event counts. Pending payments explicitly
+return `paymentVerified=false`. These richer responses and approval recovery
+require the updated test adapter; committing them does not deploy that adapter.
+PayPal capture rejects cancelled or other nonpayable ledger states before making
+any provider request, and rejects a completed-ledger/provider-state conflict.
+
 This is authenticated polling reconciliation for one-time test completion, not
 webhook verification, refunds, accounting exports or a production payment rollout.
 Events record the time completion was observed; they do not claim an exact
@@ -95,3 +106,49 @@ also remain in the suite.
 Remote D1 binding/deployment, actual Stripe test-mode checkout, PayPal Sandbox
 approval/capture and remote D1 reconciliation remain to be verified when
 Cloudflare/provider access and the separate test secrets are available.
+
+## Mac verification using existing access, without deployment
+
+The runner below also supports the already deployed API's minimal status
+responses: it independently reads remote D1 to verify persisted evidence.
+Run from a current checkout of `main`, with Node 24 and existing Wrangler
+Cloudflare authentication. It reads the existing raw admin token from
+`~/.ygvoice-donation-test-token`; no token is printed or passed on the command
+line. Provider credentials remain in the deployed test Worker. Do not use a
+production config or apply migrations.
+
+```bash
+git pull --ff-only
+DONATION_VERIFICATION_RUN_ID="$(uuidgen)"
+printf 'Keep this run UUID for retries: %s\n' "$DONATION_VERIFICATION_RUN_ID"
+npx --yes --package=wrangler@4 -- node scripts/verify-donation-payments.mjs "$DONATION_VERIFICATION_RUN_ID"
+```
+
+The fixed targets are `https://ygvoice-donations-test.andyelft.workers.dev` and
+the existing `ygvoice-donations-test` D1 binding. Before creating any checkout,
+the runner confirms remote D1 read access. It creates twelve test donations:
+all six registered designations on each provider, USD 1.00–1.05 per donation.
+Each request ID is deterministic for the run UUID/provider/designation, so reuse
+the **same run UUID** after interruptions to avoid another set of test gifts.
+
+For each pending gift, open the printed approval URL. Stripe requires a test
+card (`4242 4242 4242 4242`, future expiry, valid test CVC); PayPal requires a
+Sandbox buyer different from the Sandbox merchant. Type `approved` only after
+test approval. The runner performs Sandbox capture, repeats capture and
+reconciliation, and checks that an altered attribution with the same request ID
+is rejected. It never calls a production payment endpoint, creates secrets,
+changes provider settings, migrates D1 or deploys a Worker.
+
+If an earlier run lost its approval URL on the older deployed adapter, recover
+that existing session/order in the provider's test dashboard rather than creating
+a new run. A return URL alone is not payment confirmation. Any missing access,
+403, provider error, still-pending payment, mismatched attribution, duplicate
+donation/reference/event or synthetic row stops verification without claiming
+success. A successful final JSON report contains twelve completed provider-backed
+D1 records with correct attribution, one donation and one completion event each.
+The runner retains test records and does not delete ledger events.
+
+No actual Stripe test checkout, Sandbox payment or remote D1 result has been
+confirmed by the cloud session. Those confirmations require running this command
+on the Mac with its existing access and completing the test approvals.
+
