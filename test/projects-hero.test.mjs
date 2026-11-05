@@ -12,10 +12,15 @@ test('Projects hero displays the exact latest approved artwork without HTML lett
   assert.equal((hero.match(/<h1\b/g) || []).length, 1);
   assert.match(hero, /<h1 class="projects-hero-title">Our Projects<\/h1>/);
   assert.doesNotMatch(hero, /projects-artwork|<ul|<li|Nature &amp; Environment/);
-  assert.match(hero, /Animal Welfare; Environmental Protection\./);
+  const causeLinks=[...hero.matchAll(/<a class="projects-hero-cause"[^>]*>/g)].map(match=>match[0]);
+  assert.equal(causeLinks.length,4);
+  for(const [index,label] of ['Human Rights &amp; Dignity','Humanitarian Aid','Animal Welfare','Environmental Protection'].entries())assert(causeLinks[index].includes(`aria-label="${label} projects"`));
+  const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]));
+  for(const link of causeLinks)assert(ids.has(link.match(/href="#([^"]+)"/)[1]),'native fallback must resolve on this page');
+  assert.equal((html.match(/id="project-initiatives-heading"/g)||[]).length,1);
   assert.match(hero, /src="2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png" width="1672" height="941"/);
   const image = await readFile(new URL('../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', import.meta.url));
-  assert.equal(createHash('sha256').update(image).digest('hex'), '0d2a0c80ea26d6b419b77c8108b59ecd22b4dcfa89eb3c8a9bded0a6bb68a5dd');
+  assert.equal(createHash('sha256').update(image).digest('hex'), '3a701b04ca79d46d3e130663c2534becdb24eef6cb2dd3c94bf3b72fc70859c0');
   const css = await readFile(new URL('../public/styles.css', import.meta.url), 'utf8');
   assert.doesNotMatch(css, /projects-artwork|projects-text-backdrop/);
 });

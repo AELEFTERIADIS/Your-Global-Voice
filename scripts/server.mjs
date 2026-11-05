@@ -12,6 +12,7 @@ const routes = new Map([
   ['/projects-gold-wave.svg', ['../public/projects-gold-wave.svg', 'image/svg+xml']],
   ['/projects.css', ['../public/projects.css', 'text/css; charset=utf-8']],
   ['/projects.js', ['../public/projects.js', 'text/javascript; charset=utf-8']],
+  ['/projects-hero.js', ['../public/projects-hero.js', 'text/javascript; charset=utf-8']],
   ['/DE95C446-F64B-4963-923B-8703F03269C5.png', ['../public/DE95C446-F64B-4963-923B-8703F03269C5.png', 'image/png']],
   ['/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', ['../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', 'image/png']],
   ['/C4112960-9D5E-444E-92F1-4F3CE664A3D6.png', ['../public/C4112960-9D5E-444E-92F1-4F3CE664A3D6.png', 'image/png']],
