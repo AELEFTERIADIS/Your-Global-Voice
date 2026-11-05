@@ -1,3 +1,4 @@
+import { renderProjectCategories } from './project-categories.mjs';
 const escape = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 
 // No project prose is supplied by default: publication requires approved copy.
@@ -6,9 +7,10 @@ export function renderDignityProject(paragraphs) {
     throw new Error('Approved Voices for Dignity text is required before publishing.');
   }
   return `<section class="project-initiatives" aria-labelledby="project-initiatives-heading">
-<h2 id="project-initiatives-heading"><span>Our Projects &amp; Initiatives</span></h2>
+<h2 id="project-initiatives-heading"><span>Explore Our Projects</span></h2>
+${renderProjectCategories()}
 <div class="project-dignity-layout">
-<article class="project-dignity-info" aria-labelledby="project-dignity-heading"><p class="eyebrow project-purpose-label">HUMAN RIGHTS &amp; DIGNITY PROJECT</p><h3 id="project-dignity-heading"><svg class="project-scales-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M24 5v35M8 13h32M18 43h12M24 40l-5 3m5-3 5 3M10 14 3 29h14l-7-15Zm28 0-7 15h14l-7-15Z"/><path d="M3 29a7 7 0 0 0 14 0m14 0a7 7 0 0 0 14 0" fill="currentColor"/><circle cx="24" cy="10" r="3" fill="currentColor"/></svg><span>Voices for Dignity</span></h3>
+<article class="project-dignity-info" aria-labelledby="project-dignity-heading"><p class="eyebrow project-purpose-label">HUMAN RIGHTS &amp; DIGNITY PROJECT</p><h3 id="project-dignity-heading" tabindex="-1"><svg class="project-scales-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M24 5v35M8 13h32M18 43h12M24 40l-5 3m5-3 5 3M10 14 3 29h14l-7-15Zm28 0-7 15h14l-7-15Z"/><path d="M3 29a7 7 0 0 0 14 0m14 0a7 7 0 0 0 14 0" fill="currentColor"/><circle cx="24" cy="10" r="3" fill="currentColor"/></svg><span>Voices for Dignity</span></h3>
 <p>${escape(paragraphs[0])}</p>
 <details class="project-read-more" open><summary><span class="project-read-more-label">Read More</span><span class="project-read-less-label">Read Less</span></summary>${paragraphs.slice(1).map(text => `<p>${escape(text)}</p>`).join('')}</details>
 <p class="project-dignity-slogan">Together, We Can Make Every Voice Count</p>

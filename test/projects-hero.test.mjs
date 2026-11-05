@@ -84,6 +84,6 @@ test('Voices for Dignity keeps its approved paragraphs in an accessible desktop-
 
 test('Voices for Dignity has the approved gold label above its title and a separate slogan before the contact box', async () => {
   const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
-  assert.match(html, /<p class="eyebrow project-purpose-label">HUMAN RIGHTS &amp; DIGNITY PROJECT<\/p><h3 id="project-dignity-heading"><svg class="project-scales-icon"[\s\S]*?<span>Voices for Dignity<\/span>/);
+  assert.match(html, /<p class="eyebrow project-purpose-label">HUMAN RIGHTS &amp; DIGNITY PROJECT<\/p><h3 id="project-dignity-heading" tabindex="-1"><svg class="project-scales-icon"[\s\S]*?<span>Voices for Dignity<\/span>/);
   assert.match(html, /<\/details>\n<p class="project-dignity-slogan">Together, We Can Make Every Voice Count<\/p>\n<div class="project-contact">/);
 });
