@@ -60,20 +60,21 @@ hero dimensions.
 ## Shape Our Future Together
 
 The former Voices for Dignity section and separate donation box are no longer
-rendered on Projects. A navy heading and small filled navy/gold three-person unity icon
-sit outside and above one full-width warm ivory panel (`#F9F6EC`) with a subtle
-beige border and rounded corners. The panel aligns with the cards and closing
-sunset in the existing main content container.
+rendered on Projects. Shape Our Future Together is one rounded, full-width navy
+and gold banner aligned exactly with the cards and closing sunset. No white
+frame, padding or blank border from the visual reference surrounds the banner.
+Normal page margins and inter-section spacing remain shared with its neighbors.
 
-The paragraph is unchanged, uses the reference’s serif styling, and has a subtle
-gold vertical accent. The rounded gold button also uses matching serif lettering. Balanced
-wrapping produces three lines at the verified desktop sizes, with natural
-wrapping on mobile. The navy motto is upright: “My Voice + Your Voice = Our
-Voice.” The gold Share Your Ideas link still opens the existing
-`contact.html#message-heading` form. There are no photographs, waves or additional
-illustrations inside this section; the prior background asset is not referenced.
-All content remains accessible HTML/SVG, with visible keyboard focus and no
-horizontal overflow at the verified 1440, 1024, 390 and 320 pixel widths.
+The heading, three-person unity icon, unchanged approved paragraph, vertical
+gold accent and prominent gold motto are native HTML/SVG. A separate,
+reference-inspired landscape asset contains only scenery, with no flattened
+text or controls. A scalable gold curve separates the navy text area from the
+sunset. The gold Share Your Ideas link is positioned beneath the sun in the
+right landscape area and uses the existing `contact.html#message-heading` form.
+On mobile, text sits above the landscape and button without horizontal overflow.
+All lettering is upright, with visible keyboard focus and at least 48px action
+height. Browser checks verify alignment, clipping, button hit testing and native
+navigation at 1440, 1024, 390 and 320 pixel widths.
 
 The legacy `project-dignity-heading` target stays on the focusable replacement
 panel so the unchanged Human Rights card still has a working destination.
