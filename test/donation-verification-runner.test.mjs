@@ -23,6 +23,8 @@ function evidence() {
 test('remote verification resumes twelve isolated requests across all designations and both providers',()=>{
  const f=evidence();
  assert.equal(f.cases.length,12);
+ const legacy=['general-support','human-rights-dignity','humanitarian-assistance','animal-welfare','environmental-conservation','voices-for-dignity'];
+ assert.deepEqual(f.cases.map(c=>[c.provider,c.designationId,c.amountCents]),['stripe','paypal'].flatMap(provider=>legacy.map((id,index)=>[provider,id,100+index])));
  assert.equal(new Set(f.cases.map(c=>c.requestId)).size,12);
  assert.deepEqual(testCases(run.toUpperCase()),f.cases);
  assert.notDeepEqual(testCases('00000000-0000-4000-8000-000000000002'),f.cases);

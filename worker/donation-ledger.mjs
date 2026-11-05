@@ -7,6 +7,10 @@ export async function createPendingDonation(db, input) {
   if (!input || Object.keys(input).some(key => !['designationId', 'provider', 'amountCents', 'requestId'].includes(key))) throw new TypeError('Invalid donation fields.');
   const designation = resolveDesignation(input.designationId);
   if (!['stripe', 'paypal'].includes(input.provider) || !uuid(input.requestId) || !Number.isSafeInteger(input.amountCents) || input.amountCents < 100 || input.amountCents > 1000000) throw new TypeError('Invalid one-time USD donation.');
+  // Fail before inserts/provider calls if a source edit disagrees with the
+  // permanent database hierarchy. Existing donation attribution stays intact.
+  const registered = await db.prepare('SELECT id, kind, cause_id FROM donation_designations WHERE id = ?').bind(designation.designationId).first();
+  if(!registered || registered.kind!==designation.kind || (registered.cause_id || null)!==(designation.kind==='project'?designation.causeId:null))throw new Error('Donation designation does not match the permanent ledger registry.');
   const requestId = input.requestId.toLowerCase();
   await db.prepare("INSERT INTO donations (id, request_id, designation_id, provider, amount_cents, currency, status, created_at) VALUES (?, ?, ?, ?, ?, 'USD', 'pending', ?) ON CONFLICT(request_id) DO NOTHING")
     .bind(crypto.randomUUID(), requestId, designation.designationId, input.provider, input.amountCents, new Date().toISOString()).run();

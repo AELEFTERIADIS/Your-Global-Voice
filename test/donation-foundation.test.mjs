@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { readFile } from 'node:fs/promises';
-import { donationRegistry, resolveDesignation, validateRegistry } from '../worker/donation-registry.mjs';
+import { donationRegistry, donationCauses, generalSupportDesignation, approvedCauseIds, resolveDesignation, validateRegistry } from '../worker/donation-registry.mjs';
 import { createPendingDonation, attachCheckoutReference } from '../worker/donation-ledger.mjs';
 const sql = await readFile(new URL('../worker/migrations/0001_donation_ledger.sql', import.meta.url), 'utf8');
+const permanence = await readFile(new URL('../worker/migrations/0002_permanent_donation_designations.sql', import.meta.url), 'utf8');
 function setup() {
  const sqlite = new DatabaseSync(':memory:'); sqlite.exec(sql);
  const db = { prepare: query => ({ bind: (...values) => ({ run: async () => ({ meta: { changes: Number(sqlite.prepare(query).run(...values).changes) } }), first: async () => sqlite.prepare(query).get(...values) || null }) }) };
@@ -60,4 +61,74 @@ test('checkout references cannot be reassigned, reused or treated as payment com
  assert.throws(()=>sqlite.prepare("UPDATE donation_events SET event_type = 'changed'").run());
  assert.throws(()=>sqlite.prepare('DELETE FROM donation_events').run());
  } finally { sqlite.close(); }
+});
+
+test('the grouped registry has four directly donatable causes and retains project and general identities',()=>{
+ assert.deepEqual(donationCauses.map(c=>c.id),approvedCauseIds);
+ assert.deepEqual(donationCauses.map(c=>[c.name,c.projects.map(p=>p.id)]),[
+  ['Human Rights & Dignity',['voices-for-dignity']],
+  ['Humanitarian Assistance and Relief',[]],
+  ['Animal Welfare',[]],
+  ['Environmental Conservation and Sustainability',[]]
+ ]);
+ for(const cause of donationCauses) {
+  assert.deepEqual(resolveDesignation(cause.id),{designationId:cause.id,kind:'cause',causeId:cause.id,projectId:null});
+  for(const project of cause.projects) {
+   assert.equal(project.causeId,cause.id);
+   assert.equal(resolveDesignation(project.id).projectId,project.id);
+  }
+  assert(Object.isFrozen(cause));assert(Object.isFrozen(cause.projects));
+ }
+ assert.equal(generalSupportDesignation.id,'general-support');
+ assert.equal(resolveDesignation(generalSupportDesignation.id).causeId,null);
+ assert.throws(()=>donationCauses[0].projects[0].causeId='animal-welfare');
+});
+
+test('registry updates cannot add a fifth cause, remove identities or reparent published projects',()=>{
+ assert.throws(()=>validateRegistry([...donationRegistry,{id:'another-cause',kind:'cause',name:'Another'}]),/four approved/);
+ assert.throws(()=>validateRegistry(donationRegistry.filter(e=>e.id!=='animal-welfare')),/four approved/);
+ assert.throws(()=>validateRegistry(donationRegistry.filter(e=>e.id!=='voices-for-dignity')),/permanent/);
+ assert.throws(()=>validateRegistry(donationRegistry.map(e=>e.id==='voices-for-dignity'?{...e,causeId:'animal-welfare'}:e)),/permanent/);
+ for(const causeId of approvedCauseIds) {
+  const project={id:'future-project',kind:'project',name:'Future project',causeId};
+  const extended=validateRegistry([...donationRegistry,project]);
+  assert.equal(extended.at(-1).causeId,causeId);
+  const reparented=extended.map(e=>e.id===project.id?{...e,causeId:approvedCauseIds.find(id=>id!==causeId)}:e);
+  assert.throws(()=>validateRegistry(reparented,extended),/permanent/);
+ }
+ for(const causeId of [null,'general-support','unknown','voices-for-dignity'])assert.throws(()=>validateRegistry([...donationRegistry,{id:'invalid-project',kind:'project',name:'Invalid',causeId}]));
+});
+
+test('additive permanence migration preserves historical donation rows and events and closes delete/reinsert loopholes',async()=>{
+ const {sqlite,db}=setup();
+ try {
+  const a=await createPendingDonation(db,input());
+  await attachCheckoutReference(db,a.id,'cs_test_historical');
+  sqlite.prepare("UPDATE donations SET status='completed' WHERE id=?").run(a.id);
+  sqlite.prepare("INSERT INTO donation_events (donation_id,provider,provider_event_id,event_type,occurred_at,received_at) VALUES (?, 'stripe', 'historical-event', 'reconciled.completed', 'before', 'before')").run(a.id);
+  const snapshot=()=>['donation_designations','donations','donation_events'].map(table=>sqlite.prepare('SELECT * FROM '+table+' ORDER BY 1').all());
+  const before=snapshot();
+  sqlite.exec(permanence);
+  assert.deepEqual(snapshot(),before);
+  assert.equal((await createPendingDonation(db,input({requestId:a.request_id}))).id,a.id);
+  assert.throws(()=>sqlite.prepare("DELETE FROM donation_designations WHERE id='animal-welfare'").run(),/permanent/);
+  assert.throws(()=>sqlite.prepare("INSERT INTO donation_designations (id,kind,name) VALUES ('new-cause','cause','New')").run(),/four approved/);
+  sqlite.prepare("INSERT INTO donation_designations (id,kind,name,cause_id) VALUES ('future-project','project','Future','humanitarian-assistance')").run();
+  assert.throws(()=>sqlite.prepare("UPDATE donation_designations SET cause_id='animal-welfare' WHERE id='future-project'").run(),/immutable/);
+  assert.throws(()=>sqlite.prepare("DELETE FROM donation_designations WHERE id='future-project'").run(),/permanent/);
+  for(const causeId of ['general-support','unknown','future-project'])assert.throws(()=>sqlite.prepare("INSERT INTO donation_designations (id,kind,name,cause_id) VALUES ('bad-project','project','Bad',?)").run(causeId));
+  assert.deepEqual(sqlite.prepare('SELECT * FROM donations').all(),before[1]);
+  assert.deepEqual(sqlite.prepare('SELECT * FROM donation_events').all(),before[2]);
+ } finally {sqlite.close();}
+});
+
+test('ledger rejects a registry/database parent mismatch before writing a donation',async()=>{
+ const {sqlite,db}=setup();
+ try {
+  // Simulate a mismatched older database without weakening application guards.
+  sqlite.exec("DROP TRIGGER designation_identity_immutable; UPDATE donation_designations SET cause_id='animal-welfare' WHERE id='voices-for-dignity';");
+  await assert.rejects(createPendingDonation(db,input()),/permanent ledger registry/);
+  assert.equal(sqlite.prepare('SELECT count(*) n FROM donations').get().n,0);
+  assert.equal(sqlite.prepare('SELECT count(*) n FROM donation_events').get().n,0);
+ } finally {sqlite.close();}
 });

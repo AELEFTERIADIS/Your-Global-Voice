@@ -1,61 +1,101 @@
-# Central one-time donation foundation (not activated)
+# Central donation registry and permanent cause hierarchy
 
-This foundation adds server-owned designation validation and a permanent D1 schema
-and data-access module. Existing checkout endpoints, provider requests, secrets,
-Wrangler settings, interfaces and deployment workflows are unchanged. Neither
-payment adapter imports these modules yet. No D1 database is created, no migration
-is applied, and no production ledger writes occur in this phase.
+The centralized ledger uses one stable designation ID per gift. It supports
+direct cause donations and individual project donations in the same donations
+table, with one permanent parent cause for each project. Separate payment
+accounts or ledgers per cause/project are not needed.
 
-## Designations
+## Four approved causes
 
-`worker/donation-registry.mjs` contains general support, the four existing causes,
-and the only existing project: Voices for Dignity, under Human Rights & Dignity.
-Project/cause attribution is derived server-side from one stable designation ID;
-client-supplied cause IDs, status, currency and other extra fields are rejected.
-These IDs support reporting; they do not declare legally restricted gift terms.
+| Cause | Direct donation designation | Individually designated projects |
+| --- | --- | --- |
+| Human Rights & Dignity | `human-rights-dignity` | Voices for Dignity: `voices-for-dignity` |
+| Humanitarian Assistance and Relief | `humanitarian-assistance` | None registered yet |
+| Animal Welfare | `animal-welfare` | None registered yet |
+| Environmental Conservation and Sustainability | `environmental-conservation` | None registered yet |
 
-## D1 schema and internal API
+Voices for Dignity is the only currently registered project. No new projects or
+relationships are invented for the other causes. `general-support` remains an
+independent existing designation for unrestricted/general giving; it is not a
+fifth cause and historical general gifts are not reassigned to causes.
 
-`worker/migrations/0001_donation_ledger.sql` creates:
-- `donation_designations`: normalized general/cause/project registry with validated
-  parent links. Identity and parent attribution cannot be changed after creation.
-- `donations`: permanent UUID, unique normalized request ID, designation, Stripe or
-  PayPal provider, exact integer USD cents ($1–$10,000), pending status, optional
-  unique checkout reference and UTC creation timestamp.
-- `donation_events`: append-only, deduplicated provider-event identifiers reserved
-  for future verified reconciliation. There is no current writer or HTTP route.
+`worker/donation-registry.mjs` exports:
 
-`createPendingDonation(db, input)` accepts designationId, provider, amountCents and
-requestId. Repeated identical requests return the original record; different
-values under the same ID are rejected. `attachCheckoutReference` associates a
-provider session/order without marking the gift completed, and prevents replacing
-or sharing checkout references. The ledger is not an expiring Durable Object.
-No donor PII, card data, secrets, OAuth tokens or raw provider payloads are stored.
+- `donationCauses`: an immutable grouped view of the four cause designations,
+  each with its own ID/name and an immutable `projects` array. Project entries
+  retain their individual IDs and permanent `causeId`.
+- `generalSupportDesignation`: the existing general-support designation.
+- `donationRegistry`: the compatible flat list, with all six IDs, names and their
+  order preserved. Existing test run UUIDs, request IDs and amounts do not change.
+- `resolveDesignation(id)`: server-owned attribution. A direct cause gift returns
+  that cause's ID and `projectId=null`; a project gift returns its own designation
+  and project ID plus its permanent parent cause. General gifts have no cause.
 
-A checkout/order is not a completed donation. The foundation deliberately has no
-API to mark donations paid. Future signature-verified webhooks and transactional
-reconciliation must implement completion, refunds and financial reporting. Do not
-calculate contribution totals from pending rows or double-count project gifts
-when aggregating their parent cause. Fees/net amounts and recurring gifts are
-outside this first phase.
+Client input supplies one `designationId`, never a separate parent cause. Both
+test payment providers already accept the four direct cause IDs through the
+existing centralized API. Choosing a project does not collapse the designation
+into its cause or create a second donation row for the cause.
 
-## Later activation — separate reviewed step
+## Permanent identities and preserved records
 
-1. Create a D1 database in the intended Cloudflare account and approve its region,
-   retention/access and backup/export procedures. No database ID is invented here.
-2. Add a `DONATION_DB` D1 binding and migrations directory only after those details
-   exist. Apply the migration to a test database, then verify constraints and
-   recovery before any remote production migration.
-3. Integrate adapters with pending ledger creation and durable provider-reference
-   recovery. Handle provider-success/DB-failure cases explicitly; external API and
-   D1 writes cannot form one distributed transaction.
-4. Add verified Stripe/PayPal webhooks, event deduplication, atomic state updates,
-   refund reconciliation and an authenticated reporting path. Never expose D1 or
-   write endpoints directly to visitors, or treat browser return URLs as proof.
-5. Verify in provider test environments, then approve production activation while
-   retaining existing checkout flows until the migration is validated.
+Registry validation requires exactly the four approved cause roots, rejects
+unparented projects and projects under non-causes, and preserves established
+designation identities and parent relationships. `validateRegistry(candidate,
+previousRegistry)` additionally protects every designation in a supplied prior
+registry when checking additions. Keep the published identity history when
+registering future projects; never reuse an old ID for a different purpose.
 
-Tests execute the actual migration using SQLite and the internal API through a
-D1-compatible prepared-statement adapter. They verify data constraints, registry
-consistency, idempotency and reference isolation. Remote Cloudflare D1 deployment
-and live provider-to-ledger reconciliation are not verified or enabled.
+`worker/migrations/0001_donation_ledger.sql` remains unchanged. It already stores
+normalized designation relationships, prevents identity/parent updates, preserves
+donation identities, enforces unique request/provider references and keeps events
+append-only. The existing `designation_id` foreign key preserves project identity
+on historical donations without duplicating parent data on every gift.
+
+`0002_permanent_donation_designations.sql` is an additive migration containing
+only two guards: prevent deletion/recreation of registered designations (even
+unused projects), and reject insertion of a fifth cause root. It does not rewrite,
+rename, backfill, delete or reassign any existing designation, donation or event.
+Future projects can still be inserted beneath an approved cause; once inserted,
+their parent cannot be changed. The migration is supplied for separate review
+and application to the intended database; it has not been applied remotely by
+this change. Never rerun the initial schema migration on an existing database.
+
+Before creating a pending donation, the ledger compares the source registry's
+kind/parent with the stored D1 designation. A mismatch fails before any insert
+or provider request. Repeated identical request IDs still recover the existing
+donation; changed amounts, providers or designations under the same request ID
+are rejected. Existing checkout references and completed events stay attached to
+their original donations.
+
+## Payment architecture and current scope
+
+The public production Worker continues using its existing project Stripe and
+PayPal adapters and Durable Object protections. They do not import the central
+registry/ledger; their paths, provider configuration, checkout metadata, secrets,
+frontend and Wrangler configuration are unchanged. The existing general hosted
+donation flow is also unchanged. This registry change does not enable new live
+checkout buttons, move historic provider payments into D1 or activate production
+ledger writes.
+
+The separate `ygvoice-donations-test` Worker uses the existing centralized D1
+binding, Stripe test checkout, PayPal Sandbox and authenticated reconciliation.
+Its provider adapters derive attribution from the selected designation; they
+require verified provider completion before marking a gift completed. See
+[test integration and diagnostics](donation-ledger-test-integration.md) and
+[synthetic verification](synthetic-ledger-verification.md).
+
+For reporting, keep direct cause gifts and project gifts distinguishable. A
+cause's combined total includes its direct gifts plus its child project gifts,
+counting each donation once. General gifts remain separate. Pending rows do not
+represent received payments. Exclude `cs_synthetic_` references and
+`synthetic.reconciled.completed` events from provider-payment totals. Refund/net
+accounting and production webhook rollout remain separate work.
+
+## Validation
+
+Local tests exercise the real schema and additive migration with SQLite through
+a D1-compatible adapter. They cover all four direct cause designations and
+Voices for Dignity on both simulated providers, immutable parents, rejection of
+extra cause roots, preservation of historical completed rows/events, mismatched
+registry rejection, idempotency, provider-reference isolation and unchanged test
+run identities. No live payment, remote migration or deployment is performed.
