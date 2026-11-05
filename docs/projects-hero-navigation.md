@@ -1,7 +1,13 @@
 # Projects hero and cause-category panels
 
 The approved hero artwork, its 1672 × 941 canvas, full container width, height,
-wording, imagery, smaller icons/labels and gold dividers are unchanged. Its four
+imagery, smaller icons, alignment, spacing and gold dividers are unchanged.
+Only the four hero labels now read Justice, Compassion, Protection and
+Sustainability in the existing order. A clipped overlay replaces just their four
+text rectangles; the approved base PNG remains byte-identical, so no icon or
+other hero artwork is replaced. The overlay scales with the original canvas.
+The hero links use the new labels and retain the same cause destinations.
+Official cause names and all content below the hero are unchanged. Its four
 native, keyboard-accessible links now point directly to real panels underneath
 **Explore Our Projects**. No JavaScript is needed for these fragment links.
 

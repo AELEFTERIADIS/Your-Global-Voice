@@ -308,6 +308,7 @@ main > .donation-page > section:first-child { margin-top: 0; }
 .projects-hero { max-width: none; padding: 0; border: 0; margin-bottom: 1.5rem; }
 .projects-hero-image { display: block; width: 100%; height: auto; }
 .projects-hero-frame { position: relative; }
+.projects-hero-label-artwork { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
 .projects-hero-causes { position: absolute; inset: 0; pointer-events: none; }
 .projects-hero-cause { position: absolute; top: 63.5%; height: 24%; min-height: 44px; pointer-events: auto; border-radius: .375rem; }
 .projects-hero-cause:nth-child(1) { left: 9%; width: 20.5%; }

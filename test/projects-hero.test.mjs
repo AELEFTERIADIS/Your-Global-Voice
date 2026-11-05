@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparePages } from '../scripts/prepare-pages.mjs';
 
-test('Projects hero displays the exact latest approved artwork without HTML lettering overlays', async () => {
+test('Projects hero displays the approved base artwork with labels confined to the four text regions', async () => {
   const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
   const hero = html.match(/<section class="page-intro projects-hero">([\s\S]*?)<\/section>/)[1];
   assert.equal((hero.match(/<h1\b/g) || []).length, 1);
@@ -14,7 +14,7 @@ test('Projects hero displays the exact latest approved artwork without HTML lett
   assert.doesNotMatch(hero, /projects-artwork|<ul|<li|Nature &amp; Environment/);
   const causeLinks=[...hero.matchAll(/<a class="projects-hero-cause"[^>]*>/g)].map(match=>match[0]);
   assert.equal(causeLinks.length,4);
-  for(const [index,label] of ['Human Rights &amp; Dignity','Humanitarian Aid','Animal Welfare','Environmental Protection'].entries())assert(causeLinks[index].includes(`aria-label="${label} projects"`));
+  for(const [index,label] of ['Justice','Compassion','Protection','Sustainability'].entries())assert(causeLinks[index].includes(`aria-label="${label} projects"`));
   const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]));
   for(const link of causeLinks)assert(ids.has(link.match(/href="#([^"]+)"/)[1]),'native fallback must resolve on this page');
   assert.equal((html.match(/id="project-initiatives-heading"/g)||[]).length,1);
