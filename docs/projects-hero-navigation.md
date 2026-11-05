@@ -66,10 +66,13 @@ frame, padding or blank border from the visual reference surrounds the banner.
 Normal page margins and inter-section spacing remain shared with its neighbors.
 
 The heading, three-person unity icon, unchanged approved paragraph, vertical
-gold accent and prominent gold motto are native HTML/SVG. A separate,
-reference-inspired landscape asset contains only scenery, with no flattened
-text or controls. A scalable gold curve separates the navy text area from the
-sunset. The gold Share Your Ideas link is positioned beneath the sun in the
+gold accent and prominent gold motto are native HTML/SVG. The original approved upload, `public/ChatGPT Image Nov 5, 2026,
+05_43_26 PM.png` from commit `52113a9`, supplies only the clipped landscape and
+gold curve. Its white margins and all embedded text are outside the photo clip;
+a mask also excludes its embedded button. The original source file remains
+unmodified (Git blob `e0b889b94fd5da4c3c90944af655edb02e876244`).
+The entire reference is never used as a banner background or interface. The
+three balanced desktop paragraph lines retain the previously approved wording. The gold Share Your Ideas link is positioned beneath the sun in the
 right landscape area and uses the existing `contact.html#message-heading` form.
 On mobile, text sits above the landscape and button without horizontal overflow.
 All lettering is upright, with visible keyboard focus and at least 48px action
