@@ -7,7 +7,7 @@ export function renderProjectsOverview() {
 <h2 id="project-initiatives-heading"><span>Explore Our Projects</span></h2>
 ${renderProjectCategories()}
 </section><section class="projects-future" id="project-dignity-heading" aria-labelledby="projects-future-heading" tabindex="-1">
-<h2 id="projects-future-heading"><svg class="projects-unity-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="16" cy="7" r="3"/><path d="M10 22v-5a6 6 0 0 1 12 0v5"/><g stroke="#b1842a"><circle cx="6" cy="12" r="2.5"/><circle cx="26" cy="12" r="2.5"/><path d="M2 25v-5a4 4 0 0 1 7-2m21 7v-5a4 4 0 0 0-7-2M6 28l5 2 5-4 5 4 5-2"/></g></svg><span>Shape Our Future Together</span></h2>
+<h2 id="projects-future-heading"><svg class="projects-unity-icon" viewBox="0 0 48 32" aria-hidden="true" focusable="false"><g fill="#102B49"><circle cx="24" cy="6" r="5"/><path d="M15 23v-5a9 9 0 0 1 18 0v5Z"/></g><g fill="#dca51c"><circle cx="11" cy="10" r="4"/><circle cx="37" cy="10" r="4"/><path d="M2 25v-5a8 8 0 0 1 15-4v8ZM31 24v-8a8 8 0 0 1 15 4v5Z"/><path d="M1 32c12-12 27-5 46-8-11 12-26 1-46 8Z"/></g></svg><span>Shape Our Future Together</span></h2>
 <div class="projects-future-panel">
 <p class="projects-future-copy">From active projects to developing initiatives and future plans, Your Global Voice welcomes your ideas and participation in creating meaningful change for a better world.</p>
 <p class="projects-future-motto">My Voice + Your Voice = Our Voice.</p>

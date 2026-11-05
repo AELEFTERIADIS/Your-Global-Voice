@@ -15,7 +15,8 @@ test('approved future panel replaces the project box with exact copy and one exi
  assert.equal((panel.match(/<a /g)||[]).length,1);
  assert.equal((panel.match(/class="projects-future-panel"/g)||[]).length,1);
  assert(panel.indexOf('</h2>')<panel.indexOf('class="projects-future-panel"'));
- assert.match(panel,/stroke="#b1842a"/);
+ assert.match(panel,/fill="#102B49"/);
+ assert.match(panel,/fill="#dca51c"/);
  assert.match(panel,/href="contact.html#message-heading">Share Your Ideas<\/a>/);
  assert.match(panel,/class="projects-unity-icon"[^>]*aria-hidden="true"/);
  assert.doesNotMatch(panel,/<img|<image|<form|<input|<button|checkout|donation|Voices for Dignity/i);

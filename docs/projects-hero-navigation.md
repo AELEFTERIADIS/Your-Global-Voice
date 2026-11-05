@@ -60,12 +60,13 @@ hero dimensions.
 ## Shape Our Future Together
 
 The former Voices for Dignity section and separate donation box are no longer
-rendered on Projects. A navy heading and small navy/gold three-person unity icon
+rendered on Projects. A navy heading and small filled navy/gold three-person unity icon
 sit outside and above one full-width warm ivory panel (`#F9F6EC`) with a subtle
 beige border and rounded corners. The panel aligns with the cards and closing
 sunset in the existing main content container.
 
-The paragraph is unchanged and has a subtle gold vertical accent. Balanced
+The paragraph is unchanged, uses the reference’s serif styling, and has a subtle
+gold vertical accent. The rounded gold button also uses matching serif lettering. Balanced
 wrapping produces three lines at the verified desktop sizes, with natural
 wrapping on mobile. The navy motto is upright: “My Voice + Your Voice = Our
 Voice.” The gold Share Your Ideas link still opens the existing
