@@ -17,6 +17,10 @@ test('approved future panel replaces the project box with exact copy and one exi
  assert.equal((panel.match(/<a /g)||[]).length,1);
  assert.equal((panel.match(/class="projects-future-panel"/g)||[]).length,1);
  assert(panel.indexOf('class="projects-future-panel"')<panel.indexOf('<h2'));
+ assert(panel.indexOf('class="projects-future-panel"')<panel.indexOf('class="projects-future-scene"'));
+ assert.match(panel,/viewBox="1245 0 800 624" preserveAspectRatio="xMidYMid slice"/);
+ assert.match(panel,/class="projects-future-divider"/);
+ assert.doesNotMatch(panel,/<div class="projects-future-scene" aria-hidden/);
  assert(panel.indexOf('class="projects-future-motto"')<panel.indexOf('class="projects-future-action"'));
  assert.equal((panel.match(/class="projects-future-scene"/g)||[]).length,1);
  assert.match(panel,/fill="#1884b9"/);

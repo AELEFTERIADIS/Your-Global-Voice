@@ -85,15 +85,27 @@ panel so the unchanged Human Rights card still has a working destination.
 and all Worker/payment integrations are retained. With no `.project-giving`
 element, the retained frontend payment module makes no checkout requests.
 
-### Desktop line-fit correction
+### Structural divider separation
 
-Desktop heading and gold motto stay on one line, using sizes based on the
-banner container rather than the viewport. The content area uses 68% of the
-banner width, with all rendered text checked to stay clear of the gold curve.
-The unchanged paragraph has three desktop lines: the first ends in “plans,”,
-the second ends in “participation”, and the third is shortest and ends in
-“world.” Below 60rem, the spans become inline text and wrap naturally.
-The gold contact action has a defined border, shadow, navy lettering and a
-visible bottom gap (28–36px at the verified desktop sizes; 24px on mobile).
-Actual desktop screenshots at 1024, 1280, 1440 and 1920px were checked against
-the approved reference, including a same-width visual comparison.
+The previous 68%-wide text box and absolute full-banner artwork were sized
+independently. The artwork's curve swept left into the nominal text area;
+font-size or z-index changes could not reserve safe space.
+
+The banner now uses an actual 64%/36% desktop grid. The first column reserves
+the navy text area; the sunset, native gold curve and contact action live in
+the second. Its overflow is clipped to that column, so the divider cannot
+enter the text column. The original image is cropped proportionally around
+the sun and its embedded control remains masked; the real contact link is
+centered beneath the sun with a defined gold background and navy lettering.
+Overall desktop banner aspect ratio and surrounding alignment are unchanged.
+
+The desktop heading and motto stay on separate single lines; the motto is
+smaller than the heading. The unchanged paragraph uses three desktop lines,
+first ending in “plans,” and third shortest. Below 60rem, the grid stacks and
+text wraps naturally. The mobile motto remains smaller than the heading.
+
+Before commit, actual screenshots were captured and inspected at 1440, 1024,
+768 and 390px. Text clearance from the landscape column is at least 97px and
+76px at the two desktop widths. Button bottom gaps are 34px, 26px and 24px on
+mobile. Browser checks also verify all text bounds, one-line desktop text,
+three paragraph lines, alignment, focus, button hit testing and no overflow.
