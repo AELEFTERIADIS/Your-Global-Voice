@@ -11,10 +11,11 @@ test('Projects hero displays the exact latest approved artwork without HTML lett
   const hero = html.match(/<section class="page-intro projects-hero">([\s\S]*?)<\/section>/)[1];
   assert.equal((hero.match(/<h1\b/g) || []).length, 1);
   assert.match(hero, /<h1 class="projects-hero-title">Our Projects<\/h1>/);
-  assert.doesNotMatch(hero, /projects-artwork|<ul|<li/);
+  assert.doesNotMatch(hero, /projects-artwork|<ul|<li|Nature &amp; Environment/);
+  assert.match(hero, /Animal Welfare; Environmental Protection\./);
   assert.match(hero, /src="2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png" width="1672" height="941"/);
   const image = await readFile(new URL('../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', import.meta.url));
-  assert.equal(createHash('sha256').update(image).digest('hex'), '4d131e62d2ff1a73e6bd778645bafef052d5b24eb05f8d2197bc4eb337f7061b');
+  assert.equal(createHash('sha256').update(image).digest('hex'), '12833f22e14fe1e1c4a24b67f8106abff2b1eeee3118f450e96086bd6329aa6c');
   const css = await readFile(new URL('../public/styles.css', import.meta.url), 'utf8');
   assert.doesNotMatch(css, /projects-artwork|projects-text-backdrop/);
 });
