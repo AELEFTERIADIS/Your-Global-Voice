@@ -10,8 +10,10 @@ test('approved future panel replaces the project box with exact copy and one exi
  const overview=renderProjectsOverview();
  assert(overview.includes(renderProjectCategories()));
  const panel=html.match(/<section class="projects-future"[\s\S]*?<\/section>/)[0];
- for(const text of ['Shape Our Future Together','From active projects to developing initiatives and future plans, Your Global Voice welcomes your ideas and participation in creating meaningful change for a better world.','My Voice + Your Voice = Our Voice','Share Your Ideas'])assert(panel.includes(text));
+ for(const text of ['Shape Our Future Together','From active projects to developing initiatives and future plans, Your Global Voice welcomes your ideas and participation in creating meaningful change for a better world.','My Voice + Your Voice = Our Voice','Share Your Ideas'])assert(panel.replace(/<[^>]+>/g,'').includes(text));
  assert.match(panel,/id="project-dignity-heading" aria-labelledby="projects-future-heading" tabindex="-1"/);
+ const lines=[...panel.matchAll(/<span class="projects-future-copy-line">([^<]+)<\/span>/g)].map(m=>m[1]);
+ assert.deepEqual(lines,['From active projects to developing initiatives and future plans,','Your Global Voice welcomes your ideas and participation','in creating meaningful change for a better world.']);
  assert.equal((panel.match(/<a /g)||[]).length,1);
  assert.equal((panel.match(/class="projects-future-panel"/g)||[]).length,1);
  assert(panel.indexOf('class="projects-future-panel"')<panel.indexOf('<h2'));
