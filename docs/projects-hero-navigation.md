@@ -19,10 +19,14 @@ stack within each card below 30rem, keeping targets at least 44px tall.
 
 Each card has a decorative SVG icon, curved gold photo edge, gold heading accent,
 and selectable HTML description. The Humanitarian Assistance description uses
-the exact approved wording. The four illustration scenes were recreated from
-the supplied visual reference as one compressed WebP sprite; they are not
-pixel-identical source-photo crops. Inline SVG viewports crop each quadrant
-proportionally, with descriptive image labels and no text/buttons in the asset.
+the exact approved wording. The photo source is the original repository upload,
+`public/Explore Our Impact Projects (1).png` (Git blob
+`796c39d3493e5905e9a2b5ac23074e2607c35f9f`). The file is unmodified: inline SVG
+viewports and clip paths reveal only its four photo regions and curved gold
+edges. All titles, descriptions and actions remain separate HTML/SVG content,
+so the reference's embedded wording and buttons are not used as interface text.
+The previously recreated WebP is no longer referenced or published in the Pages
+artifact. Proportional photo cropping adapts to each card's available space.
 
 - Explore Projects goes to Voices for Dignity or opens a native disclosure for a
   cause with no published project, including the existing contact destination.
@@ -32,7 +36,7 @@ proportionally, with descriptive image labels and no text/buttons in the asset.
 - Send a Message goes to `contact.html#message-heading`, the existing form.
 
 The gold/navy wave closes the category cards before the unchanged Voices for
-Dignity section. The new photo asset is explicitly included in the existing
+Dignity section. The uploaded reference is explicitly included in the existing
 Pages artifact allowlist and local preview server.
 
 Panel and project-heading targets accept keyboard focus and have a scroll margin

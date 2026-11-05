@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {projectCategories,renderProjectCategories} from '../scripts/project-categories.mjs';
+import {projectCategories,renderProjectCategories,projectDesignReference} from '../scripts/project-categories.mjs';
 import {approvedCauseIds} from '../worker/donation-registry.mjs';
 const html=await readFile(new URL('../public/projects.html',import.meta.url),'utf8');
 
@@ -61,5 +61,10 @@ test('approved cause copy and all three actions use existing destinations withou
  const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');
  assert.match(css,/grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
  assert.match(css,/@media \(max-width: 56rem\).*grid-template-columns: 1fr/);
- assert((await readFile(new URL('../public/project-cause-photos.webp',import.meta.url))).length>0);
+ assert.equal(projectDesignReference,'Explore Our Impact Projects (1).png');
+ assert.equal((cards.match(/<image href="Explore Our Impact Projects \(1\).png"/g)||[]).length,4);
+ assert.doesNotMatch(cards,/project-cause-photos\.webp/);
+ const {createHash}=await import('node:crypto');
+ const source=await readFile(new URL('../public/'+projectDesignReference,import.meta.url));
+ assert.equal(createHash('sha1').update(`blob ${source.length}\0`).update(source).digest('hex'),'796c39d3493e5905e9a2b5ac23074e2607c35f9f');
 });
