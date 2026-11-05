@@ -60,16 +60,19 @@ hero dimensions.
 ## Shape Our Future Together
 
 The former Voices for Dignity section and separate donation box are no longer
-rendered on Projects. The replacement is one full-width horizontal panel with a white base matching
-the surrounding page, in the same main content container as the cards and
-closing sunset. A decorative, reference-inspired background softly shows people,
-companion animals and a landscape on the right. It contains no text or controls.
-A neutral palette, top fade and reduced mobile opacity preserve readability.
-It uses the exact approved heading, paragraph and navy motto (`#102B49`), a
-small gold decorative unity icon, and one gold Share Your Ideas link to the
-existing `contact.html#message-heading` form. All text remains native HTML. The
-heading stays in place, the unchanged paragraph uses balanced wrapping, and
-all panel lettering is upright. It adds no payment form.
+rendered on Projects. A navy heading and small navy/gold three-person unity icon
+sit outside and above one full-width warm ivory panel (`#F9F6EC`) with a subtle
+beige border and rounded corners. The panel aligns with the cards and closing
+sunset in the existing main content container.
+
+The paragraph is unchanged and has a subtle gold vertical accent. Balanced
+wrapping produces three lines at the verified desktop sizes, with natural
+wrapping on mobile. The navy motto is upright: “My Voice + Your Voice = Our
+Voice.” The gold Share Your Ideas link still opens the existing
+`contact.html#message-heading` form. There are no photographs, waves or additional
+illustrations inside this section; the prior background asset is not referenced.
+All content remains accessible HTML/SVG, with visible keyboard focus and no
+horizontal overflow at the verified 1440, 1024, 390 and 320 pixel widths.
 
 The legacy `project-dignity-heading` target stays on the focusable replacement
 panel so the unchanged Human Rights card still has a working destination.

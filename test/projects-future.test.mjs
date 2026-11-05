@@ -10,9 +10,12 @@ test('approved future panel replaces the project box with exact copy and one exi
  const overview=renderProjectsOverview();
  assert(overview.includes(renderProjectCategories()));
  const panel=html.match(/<section class="projects-future"[\s\S]*?<\/section>/)[0];
- for(const text of ['Shape Our Future Together','From active projects to developing initiatives and future plans, Your Global Voice welcomes your ideas and participation in creating meaningful change for a better world.','My Voice + Your Voice = Our Voice','Share Your Ideas'])assert(panel.includes(text));
+ for(const text of ['Shape Our Future Together','From active projects to developing initiatives and future plans, Your Global Voice welcomes your ideas and participation in creating meaningful change for a better world.','My Voice + Your Voice = Our Voice.','Share Your Ideas'])assert(panel.includes(text));
  assert.match(panel,/id="project-dignity-heading" aria-labelledby="projects-future-heading" tabindex="-1"/);
  assert.equal((panel.match(/<a /g)||[]).length,1);
+ assert.equal((panel.match(/class="projects-future-panel"/g)||[]).length,1);
+ assert(panel.indexOf('</h2>')<panel.indexOf('class="projects-future-panel"'));
+ assert.match(panel,/stroke="#b1842a"/);
  assert.match(panel,/href="contact.html#message-heading">Share Your Ideas<\/a>/);
  assert.match(panel,/class="projects-unity-icon"[^>]*aria-hidden="true"/);
  assert.doesNotMatch(panel,/<img|<image|<form|<input|<button|checkout|donation|Voices for Dignity/i);
