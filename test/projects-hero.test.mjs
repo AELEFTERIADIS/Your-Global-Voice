@@ -15,7 +15,7 @@ test('Projects hero displays the exact latest approved artwork without HTML lett
   assert.match(hero, /Animal Welfare; Environmental Protection\./);
   assert.match(hero, /src="2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png" width="1672" height="941"/);
   const image = await readFile(new URL('../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', import.meta.url));
-  assert.equal(createHash('sha256').update(image).digest('hex'), '12833f22e14fe1e1c4a24b67f8106abff2b1eeee3118f450e96086bd6329aa6c');
+  assert.equal(createHash('sha256').update(image).digest('hex'), '0d2a0c80ea26d6b419b77c8108b59ecd22b4dcfa89eb3c8a9bded0a6bb68a5dd');
   const css = await readFile(new URL('../public/styles.css', import.meta.url), 'utf8');
   assert.doesNotMatch(css, /projects-artwork|projects-text-backdrop/);
 });
