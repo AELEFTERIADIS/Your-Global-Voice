@@ -66,11 +66,10 @@ frame, padding or blank border from the visual reference surrounds the banner.
 Normal page margins and inter-section spacing remain shared with its neighbors.
 
 The heading, three-person unity icon, unchanged approved paragraph, vertical
-gold accent and prominent gold motto are native HTML/SVG. The original approved upload, `public/ChatGPT Image Nov 5, 2026,
-05_43_26 PM.png` from commit `52113a9`, supplies only the clipped landscape and
+gold accent and prominent gold motto are native HTML/SVG. The original approved upload, `public/11111111(1).png` from commit `7e1a5d4`, supplies only the clipped landscape and
 gold curve. Its white margins and all embedded text are outside the photo clip;
 a mask also excludes its embedded button. The original source file remains
-unmodified (Git blob `e0b889b94fd5da4c3c90944af655edb02e876244`).
+unmodified (Git blob `749e12f0807324a348e5f71413759c7d03671219`).
 The entire reference is never used as a banner background or interface. The
 three balanced desktop paragraph lines retain the previously approved wording. The gold Share Your Ideas link is positioned beneath the sun in the
 right landscape area and uses the existing `contact.html#message-heading` form.
@@ -85,27 +84,26 @@ panel so the unchanged Human Rights card still has a working destination.
 and all Worker/payment integrations are retained. With no `.project-giving`
 element, the retained frontend payment module makes no checkout requests.
 
-### Structural divider separation
+### Layout and latest approved reference
 
-The previous 68%-wide text box and absolute full-banner artwork were sized
-independently. The artwork's curve swept left into the nominal text area;
-font-size or z-index changes could not reserve safe space.
+The banner uses separate 60%/40% desktop grid columns. Text occupies reserved
+navy space; the curve, original softer sunset and native contact action stay
+inside the landscape column. The heading and gold motto remain single-line on
+desktop, with the motto smaller, and paragraph lines end in “plans,”,
+“participation”, and “world.” The third line is shortest. Mobile text wraps
+naturally above the landscape, with no overlap or clipping.
 
-The banner now uses an actual 64%/36% desktop grid. The first column reserves
-the navy text area; the sunset, native gold curve and contact action live in
-the second. Its overflow is clipped to that column, so the divider cannot
-enter the text column. The original image is cropped proportionally around
-the sun and its embedded control remains masked; the real contact link is
-centered beneath the sun with a defined gold background and navy lettering.
-Overall desktop banner aspect ratio and surrounding alignment are unchanged.
+The approved upload is named `public/11111111(1).png` (eight ones), rather than
+the seven-one filename in the request. Its outer white frame and separate gold
+mark above the banner are excluded. Only the photo is rendered from the upload;
+its embedded control is masked and the small obscured patch is filled from a
+forest-only region of that same source. All text, unity icon, gold accent,
+motto underline and contact action are separate HTML/SVG. No cursor illustration
+is rendered: the real link uses a pointer cursor and subtle gold hover feedback.
 
-The desktop heading and motto stay on separate single lines; the motto is
-smaller than the heading. The unchanged paragraph uses three desktop lines,
-first ending in “plans,” and third shortest. Below 60rem, the grid stacks and
-text wraps naturally. The mobile motto remains smaller than the heading.
-
-Before commit, actual screenshots were captured and inspected at 1440, 1024,
-768 and 390px. Text clearance from the landscape column is at least 97px and
-76px at the two desktop widths. Button bottom gaps are 34px, 26px and 24px on
-mobile. Browser checks also verify all text bounds, one-line desktop text,
-three paragraph lines, alignment, focus, button hit testing and no overflow.
+Typography and the shorter 2128:565 banner proportions follow the latest
+reference. The overall width, rounded corners, contact destination, all other
+sections and all payment integrations are preserved. Actual screenshots at
+1440, 1024, 768 and 390px are inspected against the reference before commit;
+browser checks cover line counts, text clearance, bounds, button placement,
+keyboard focus, pointer cursor, click hit testing and overflow.
