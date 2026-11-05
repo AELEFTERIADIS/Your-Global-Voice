@@ -28,7 +28,7 @@ test('Explore Projects navigates to the existing project or provides native empt
  const cards=renderProjectCategories();
  assert.equal((cards.match(/class="project-cause-icon"/g)||[]).length,4);
  assert.equal((cards.match(/Explore Projects <span/g)||[]).length,4);
- assert.match(cards,/<a class="project-cause-action" href="#project-dignity-heading"/);
+ assert.match(cards,/<a class="project-cause-action project-cause-explore" href="#project-dignity-heading"/);
  assert.equal((cards.match(/<details class="project-cause-empty">/g)||[]).length,3);
  assert.equal((cards.match(/There are no published projects for this cause yet\./g)||[]).length,3);
  assert.doesNotMatch(cards,/<form|<input|<fieldset|<button|checkout|paypal|stripe/i);
@@ -41,4 +41,25 @@ test('Voices for Dignity retains one donation panel and all approved paragraphs'
  assert.equal((html.match(/id="dignity-custom"/g)||[]).length,1);
  assert.equal((html.match(/<button type="button" disabled>/g)||[]).length,2);
  assert.doesNotMatch(html,/Our Projects &amp; Initiatives<\/span>/);
+});
+
+
+test('approved cause copy and all three actions use existing destinations without adding checkout',async()=>{
+ const cards=renderProjectCategories();
+ assert.equal((cards.match(/class="project-cause-description"/g)||[]).length,4);
+ assert(cards.includes('Providing emergency relief and essential assistance to individuals and communities affected by disasters, crises, and hardship.'));
+ assert.equal((cards.match(/href="donate.html#giving-heading"/g)||[]).length,4);
+ assert.equal((cards.match(/>Support This Cause<\/span>/g)||[]).length,4);
+ assert.equal((cards.match(/>Send a Message<\/span>/g)||[]).length,4);
+ assert.equal((cards.match(/role="img" aria-label="[^"]+"/g)||[]).length,4);
+ assert.equal((cards.match(/class="project-cause-accent"/g)||[]).length,4);
+ assert.doesNotMatch(cards,/https?:|test-checkout|data-payment|<form|<input|<button/i);
+ for(const [page,id] of [['donate','giving-heading'],['contact','message-heading']]) {
+  const destination=await readFile(new URL(`../public/${page}.html`,import.meta.url),'utf8');
+  assert(destination.includes(`id="${id}"`));
+ }
+ const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');
+ assert.match(css,/grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
+ assert.match(css,/@media \(max-width: 56rem\).*grid-template-columns: 1fr/);
+ assert((await readFile(new URL('../public/project-cause-photos.webp',import.meta.url))).length>0);
 });

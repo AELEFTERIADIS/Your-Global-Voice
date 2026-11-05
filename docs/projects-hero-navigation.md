@@ -12,11 +12,28 @@ native, keyboard-accessible links now point directly to real panels underneath
 | Animal Welfare | `animal-welfare` / `projects-animal-welfare` | Native disclosure explains that no projects are published yet |
 | Environmental Protection | `environmental-conservation` / `projects-environmental-conservation` | Native disclosure explains that no projects are published yet |
 
-These are four views of the existing causes, not new categories in the donation
-registry and not duplicated projects. Each navy/gold/white panel has a matching
-decorative SVG icon and an Explore Projects action with a specific accessible
-name. Four columns on desktop become two on tablet and one on mobile. The
-existing project and donation panel remain intact below the four panels.
+The cards preserve the four existing cause identities and the single existing
+project. The approved heading, divider and hero are unchanged. White cards with
+gold borders use a two-column desktop grid and stack below 56rem. Three actions
+stack within each card below 30rem, keeping targets at least 44px tall.
+
+Each card has a decorative SVG icon, curved gold photo edge, gold heading accent,
+and selectable HTML description. The Humanitarian Assistance description uses
+the exact approved wording. The four illustration scenes were recreated from
+the supplied visual reference as one compressed WebP sprite; they are not
+pixel-identical source-photo crops. Inline SVG viewports crop each quadrant
+proportionally, with descriptive image labels and no text/buttons in the asset.
+
+- Explore Projects goes to Voices for Dignity or opens a native disclosure for a
+  cause with no published project, including the existing contact destination.
+- Support This Cause goes to `donate.html#giving-heading`, the existing giving
+  arrangements. This does not claim to preselect a cause in the generic checkout,
+  create a donation form, or enable the test ledger/checkout.
+- Send a Message goes to `contact.html#message-heading`, the existing form.
+
+The gold/navy wave closes the category cards before the unchanged Voices for
+Dignity section. The new photo asset is explicitly included in the existing
+Pages artifact allowlist and local preview server.
 
 Panel and project-heading targets accept keyboard focus and have a scroll margin
 for the existing header. Native links, focus outlines, 44px actions and native
