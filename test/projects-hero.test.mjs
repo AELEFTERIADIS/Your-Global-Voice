@@ -14,7 +14,7 @@ test('Projects hero displays the approved base artwork with labels confined to t
   assert.doesNotMatch(hero, /projects-artwork|<ul|<li|Nature &amp; Environment/);
   const causeLinks=[...hero.matchAll(/<a class="projects-hero-cause"[^>]*>/g)].map(match=>match[0]);
   assert.equal(causeLinks.length,4);
-  for(const [index,label] of ['Justice','Compassion','Protection','Sustainability'].entries())assert(causeLinks[index].includes(`aria-label="${label} projects"`));
+  for(const [index,label] of ['Justice','Compassion','Protection','Nature'].entries())assert(causeLinks[index].includes(`aria-label="${label} projects"`));
   const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]));
   for(const link of causeLinks)assert(ids.has(link.match(/href="#([^"]+)"/)[1]),'native fallback must resolve on this page');
   assert.equal((html.match(/id="project-initiatives-heading"/g)||[]).length,1);

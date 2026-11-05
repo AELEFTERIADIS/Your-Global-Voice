@@ -18,7 +18,7 @@ function setup({existing=false,dialogs=true}={}) {
 }
 test('hero navigation reuses exactly the four cause identities without creating category sections',()=>{
  assert.deepEqual(projectHeroCauses.map(c=>c.id),approvedCauseIds);
- assert.deepEqual(projectHeroCauses.map(c=>c.label),['Justice','Compassion','Protection','Sustainability']);
+ assert.deepEqual(projectHeroCauses.map(c=>c.label),['Justice','Compassion','Protection','Nature']);
  assert.equal(projectHeroLabelRegions.length,4);
  for(const region of projectHeroLabelRegions) {
   assert.equal(region.y,719);assert.equal(region.height,94);

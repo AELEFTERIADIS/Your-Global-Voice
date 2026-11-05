@@ -3,7 +3,7 @@ export const projectHeroCauses=Object.freeze([
  {id:'human-rights-dignity',label:'Justice'},
  {id:'humanitarian-assistance',label:'Compassion'},
  {id:'animal-welfare',label:'Protection'},
- {id:'environmental-conservation',label:'Sustainability'}
+ {id:'environmental-conservation',label:'Nature'}
 ].map(cause=>Object.freeze(cause)));
 // Only these text rectangles may be replaced. The approved base image keeps
 // every icon, divider, photograph and all other hero pixels unchanged.
@@ -13,7 +13,7 @@ export const projectHeroLabelRegions=Object.freeze([
  {x:918,y:719,width:220,height:94},
  {x:1248,y:719,width:292,height:94}
 ].map(region=>Object.freeze(region)));
-const renderLabelArtwork=()=>`<svg class="projects-hero-label-artwork" viewBox="0 0 1672 941" aria-hidden="true" focusable="false"><defs><clipPath id="projects-hero-label-regions">${projectHeroLabelRegions.map(region=>`<rect x="${region.x}" y="${region.y}" width="${region.width}" height="${region.height}"/>`).join('')}</clipPath><filter id="projects-hero-label-soft-edge" x="-10%" y="-25%" width="120%" height="150%"><feGaussianBlur stdDeviation="2"/></filter><mask id="projects-hero-label-blend" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941">${projectHeroLabelRegions.map(region=>`<rect x="${region.x+3}" y="${region.y+3}" width="${region.width-6}" height="${region.height-6}" fill="white" filter="url(#projects-hero-label-soft-edge)"/>`).join('')}</mask></defs><image href="projects-hero-value-labels.webp" width="1672" height="941" preserveAspectRatio="none" clip-path="url(#projects-hero-label-regions)" mask="url(#projects-hero-label-blend)"/></svg>`;
+const renderLabelArtwork=()=>`<svg class="projects-hero-label-artwork" viewBox="0 0 1672 941" aria-hidden="true" focusable="false"><defs><clipPath id="projects-hero-label-regions">${projectHeroLabelRegions.map(region=>`<rect x="${region.x}" y="${region.y}" width="${region.width}" height="${region.height}"/>`).join('')}</clipPath><clipPath id="projects-hero-nature-region"><rect x="1248" y="719" width="292" height="94"/></clipPath><filter id="projects-hero-label-soft-edge" x="-10%" y="-25%" width="120%" height="150%"><feGaussianBlur stdDeviation="2"/></filter><mask id="projects-hero-label-blend" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941">${projectHeroLabelRegions.map(region=>`<rect x="${region.x+3}" y="${region.y+3}" width="${region.width-6}" height="${region.height-6}" fill="white" filter="url(#projects-hero-label-soft-edge)"/>`).join('')}</mask></defs><image href="projects-hero-value-labels.webp" width="1672" height="941" preserveAspectRatio="none" clip-path="url(#projects-hero-label-regions)" mask="url(#projects-hero-label-blend)"/><image href="projects-hero-nature-label.webp" width="1672" height="941" preserveAspectRatio="none" clip-path="url(#projects-hero-nature-region)"/></svg>`;
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;');
 
 export function renderProjectsHero() {
