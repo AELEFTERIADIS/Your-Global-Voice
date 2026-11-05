@@ -41,13 +41,14 @@ test('Projects approach replaces placeholders with one left-aligned section titl
   assert.match(html, /src="DE95C446-F64B-4963-923B-8703F03269C5.png" width="1774" height="887"/);
   assert.doesNotMatch(html, /Future initiatives will be guided|Project information will be added|No projects are listed|Where our purposes can lead|What future project updates will include|Stay connected to our direction/);
   const sections = [...html.matchAll(/<section\b/g)];
-  assert.equal(sections.length, 3);
+  assert.equal(sections.length, 4);
 });
 
-test('Voices for Dignity retains approved paragraphs and cannot initiate a payment', async () => {
+test('retained Voices for Dignity renderer preserves approved paragraphs and disabled payment controls', async () => {
   const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
   const paragraphs = JSON.parse(await readFile(new URL('../content/project-dignity.json', import.meta.url), 'utf8'));
-  const project = html.match(/<section class="project-initiatives"[\s\S]*?<\/section>/)[0];
+  const { renderDignityProject: renderRetainedProject } = await import('../scripts/project-dignity.mjs');
+  const project = renderRetainedProject(paragraphs);
   for (const paragraph of paragraphs) assert.ok(project.includes('<p>' + paragraph + '</p>'));
   const amounts = [...project.matchAll(/name="dignity-amount" value="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(amounts, ['25', '50', '100', '250', 'custom']);
@@ -69,9 +70,10 @@ test('Projects deployment permits local scripts and scoped API connectivity', as
   } finally { await rm(temp, { recursive: true, force: true }); }
 });
 
-test('Voices for Dignity keeps its approved paragraphs in an accessible desktop-open responsive disclosure', async () => {
-  const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
+test('retained Voices for Dignity renderer keeps its accessible responsive disclosure', async () => {
   const paragraphs = JSON.parse(await readFile(new URL('../content/project-dignity.json', import.meta.url), 'utf8'));
+  const {renderDignityProject}=await import('../scripts/project-dignity.mjs');
+  const html=renderDignityProject(paragraphs);
   const details = html.match(/<details class="project-read-more" open>([\s\S]*?)<\/details>/)[1];
   assert.ok(!details.includes(paragraphs[0]));
   assert.ok(details.includes('<p>' + paragraphs[1] + '</p>'));
@@ -82,8 +84,9 @@ test('Voices for Dignity keeps its approved paragraphs in an accessible desktop-
 });
 
 
-test('Voices for Dignity has the approved gold label above its title and a separate slogan before the contact box', async () => {
-  const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
+test('retained Voices for Dignity renderer keeps its approved heading and slogan', async () => {
+  const {renderDignityProject}=await import('../scripts/project-dignity.mjs');
+  const html=renderDignityProject(JSON.parse(await readFile(new URL('../content/project-dignity.json',import.meta.url),'utf8')));
   assert.match(html, /<p class="eyebrow project-purpose-label">HUMAN RIGHTS &amp; DIGNITY PROJECT<\/p><h3 id="project-dignity-heading" tabindex="-1"><svg class="project-scales-icon"[\s\S]*?<span>Voices for Dignity<\/span>/);
   assert.match(html, /<\/details>\n<p class="project-dignity-slogan">Together, We Can Make Every Voice Count<\/p>\n<div class="project-contact">/);
 });

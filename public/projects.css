@@ -107,3 +107,14 @@
 @media (max-width: 42rem) {
  .project-dignity-info > p:not(.eyebrow):not(.project-dignity-slogan), .project-read-more > p { font-size: 1rem; line-height: 1.75; }
 }
+
+/* Full-width replacement panel; inherit the same content container as its neighbors. */
+.projects-future { width: 100%; max-width: none; min-width: 0; margin: 1.5rem 0 2rem; padding: clamp(1.25rem, 2.5vw, 2rem); border: 1px solid #e4d9bc; border-radius: 1rem; background: #FAF8F2; color: #102B49; text-align: left; }
+.projects-future > h2 { display: flex; align-items: center; gap: .75rem; margin: 0 0 .75rem; color: #102B49; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.5rem, 2.2vw, 1.875rem); font-weight: 700; line-height: 1.2; }
+.projects-unity-icon { flex: 0 0 auto; width: 2rem; height: 2rem; color: #b1842a; }
+.projects-future > .projects-future-copy { max-width: none; margin: 0 0 .875rem; color: #102B49; font-size: 1.0625rem; line-height: 1.6; }
+.projects-future > .projects-future-motto { margin: 0 0 1rem; color: #102B49; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.125rem, 1.6vw, 1.375rem); font-style: italic; font-weight: 700; line-height: 1.4; }
+.projects-future-action { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; max-width: 100%; padding: .65rem 1.25rem; border: 1px solid #b58a32; border-radius: .5rem; background: linear-gradient(#f0d38c, #dfb24c); color: #102B49; font-weight: 700; line-height: 1.4; text-decoration: none; }
+.projects-future-action:hover { background: #e9c46d; text-decoration: underline; text-underline-offset: .2em; }
+.projects-future-action:focus-visible, .projects-future:focus-visible { outline: 3px solid #102B49; outline-offset: 3px; }
+@media (max-width: 42rem) { .projects-future > h2 { gap: .625rem; } .projects-unity-icon { width: 1.75rem; height: 1.75rem; } .projects-future > .projects-future-copy { font-size: 1rem; } }

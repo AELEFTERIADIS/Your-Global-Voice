@@ -5,14 +5,15 @@ import {projectCategories,renderProjectCategories,projectDesignReference} from '
 import {approvedCauseIds} from '../worker/donation-registry.mjs';
 const html=await readFile(new URL('../public/projects.html',import.meta.url),'utf8');
 
-test('four unique cause panels follow Explore Our Projects and precede the one existing project',()=>{
+test('four unique cause panels follow Explore Our Projects and precede the approved future panel',()=>{
  assert.deepEqual(projectCategories.map(c=>c.id),approvedCauseIds);
  assert.deepEqual(projectCategories.map(c=>c.label),['Human Rights & Dignity','Humanitarian Assistance & Relief','Animal Welfare','Environmental Protection']);
  assert.match(html,/<h2 id="project-initiatives-heading"><span>Explore Our Projects<\/span><\/h2>\s*<div class="project-cause-panels">/);
  assert.equal((html.match(/class="project-cause-panel"/g)||[]).length,4);
- assert.equal((html.match(/class="project-dignity-layout"/g)||[]).length,1);
+ assert.equal((html.match(/class="project-dignity-layout"/g)||[]).length,0);
+ assert.equal((html.match(/class="projects-future"/g)||[]).length,1);
  assert.equal((html.match(/id="project-dignity-heading"/g)||[]).length,1);
- assert(html.indexOf('class="project-cause-panels"')<html.indexOf('class="project-dignity-layout"'));
+ assert(html.indexOf('class="project-cause-panels"')<html.indexOf('class="projects-future"'));
 });
 
 test('every hero link resolves directly to its corresponding accessible panel without JavaScript',()=>{
@@ -24,7 +25,7 @@ test('every hero link resolves directly to its corresponding accessible panel wi
  }
 });
 
-test('Explore Projects navigates to the existing project or provides native empty-category feedback',()=>{
+test('Explore Projects keeps its existing destination or provides native empty-category feedback',()=>{
  const cards=renderProjectCategories();
  assert.equal((cards.match(/class="project-cause-icon"/g)||[]).length,4);
  assert.equal((cards.match(/Explore Projects <span/g)||[]).length,4);
@@ -34,12 +35,15 @@ test('Explore Projects navigates to the existing project or provides native empt
  assert.doesNotMatch(cards,/<form|<input|<fieldset|<button|checkout|paypal|stripe/i);
 });
 
-test('Voices for Dignity retains one donation panel and all approved paragraphs',async()=>{
+test('Voices for Dignity copy and donation renderer remain retained but unpublished',async()=>{
+ const {renderDignityProject}=await import('../scripts/project-dignity.mjs');
  const paragraphs=JSON.parse(await readFile(new URL('../content/project-dignity.json',import.meta.url),'utf8'));
- for(const paragraph of paragraphs)assert(html.includes('<p>'+paragraph+'</p>'));
- assert.equal((html.match(/class="project-giving"/g)||[]).length,1);
- assert.equal((html.match(/id="dignity-custom"/g)||[]).length,1);
- assert.equal((html.match(/<button type="button" disabled>/g)||[]).length,2);
+ const retained=renderDignityProject(paragraphs);
+ for(const paragraph of paragraphs)assert(retained.includes('<p>'+paragraph+'</p>'));
+ assert.doesNotMatch(html,/Voices for Dignity|project-dignity-layout|project-payment-pending/);
+ assert.equal((html.match(/class="project-giving"/g)||[]).length,0);
+ assert.equal((html.match(/id="dignity-custom"/g)||[]).length,0);
+ assert.equal((retained.match(/<button type="button" disabled>/g)||[]).length,2);
  assert.doesNotMatch(html,/Our Projects &amp; Initiatives<\/span>/);
 });
 
