@@ -1,15 +1,15 @@
 # Projects hero and cause-category panels
 
-The approved hero artwork, its 1672 × 941 canvas, full container width, height,
-imagery, smaller icons, alignment, spacing and gold dividers are unchanged.
-Only the four hero labels now read Justice, Compassion, Protection and
-Nature in the existing order. A clipped overlay replaces just their four
-text rectangles; the approved base PNG remains byte-identical, so no icon or
-other hero artwork is replaced. The overlay scales with the original canvas.
-The hero links use the new labels and retain the same cause destinations.
-Official cause names and the four cards are unchanged. Its four
-native, keyboard-accessible links now point directly to real panels underneath
-**Explore Our Projects**. No JavaScript is needed for these fragment links.
+The hero uses a vertically recomposed, lossless 1774 × 887 WebP at its native
+2:1 aspect ratio. At the same full container width this reduces its height by
+approximately 11% compared with the original 1672 × 941 canvas. The original
+PNG remains byte-identical. The compact artwork retains the four scenes,
+heading, motto, icons, gold dividers and labels: Justice, Compassion, Protection
+and Nature. The image scales uniformly without CSS cropping or distortion.
+The four native, keyboard-accessible links retain their cause destinations;
+their hit areas follow the compact icon row. Official cause names and cards
+are unchanged. These links point directly to the real panels underneath
+**Explore Our Projects**, without JavaScript.
 
 | Panel label | Existing cause identity and panel ID | Explore Projects action |
 | --- | --- | --- |

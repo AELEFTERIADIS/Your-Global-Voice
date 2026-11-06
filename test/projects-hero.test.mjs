@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparePages } from '../scripts/prepare-pages.mjs';
 
-test('Projects hero displays the approved base artwork with labels confined to the four text regions', async () => {
+test('Projects hero displays the vertically recomposed artwork at its native aspect ratio', async () => {
   const html = await readFile(new URL('../public/projects.html', import.meta.url), 'utf8');
   const hero = html.match(/<section class="page-intro projects-hero">([\s\S]*?)<\/section>/)[1];
   assert.equal((hero.match(/<h1\b/g) || []).length, 1);
@@ -18,7 +18,11 @@ test('Projects hero displays the approved base artwork with labels confined to t
   const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]));
   for(const link of causeLinks)assert(ids.has(link.match(/href="#([^"]+)"/)[1]),'native fallback must resolve on this page');
   assert.equal((html.match(/id="project-initiatives-heading"/g)||[]).length,1);
-  assert.match(hero, /src="2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png" width="1672" height="941"/);
+  assert.match(hero, /src="projects-hero-compact.webp" width="1774" height="887"/);
+  assert.doesNotMatch(hero,/projects-hero-label-artwork/);
+  const compact=await readFile(new URL('../public/projects-hero-compact.webp',import.meta.url));
+  assert.equal(compact.subarray(0,4).toString(),'RIFF');
+  assert.equal(compact.subarray(8,12).toString(),'WEBP');
   const image = await readFile(new URL('../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', import.meta.url));
   assert.equal(createHash('sha256').update(image).digest('hex'), '3a701b04ca79d46d3e130663c2534becdb24eef6cb2dd3c94bf3b72fc70859c0');
   const css = await readFile(new URL('../public/styles.css', import.meta.url), 'utf8');
@@ -29,7 +33,7 @@ test('Pages artifact includes the unmodified latest Projects hero and no previou
   const temp = await mkdtemp(join(tmpdir(), 'ygv-projects-image-'));
   try {
     await preparePages(join(temp, 'pages'));
-    const file = '2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png';
+    const file = 'projects-hero-compact.webp';
     assert.ok((await readFile(join(temp, 'pages', file))).equals(await readFile(new URL('../public/' + file, import.meta.url))));
     await assert.rejects(readFile(join(temp, 'pages/projects-text-backdrop.svg')), { code: 'ENOENT' });
   } finally { await rm(temp, { recursive: true, force: true }); }

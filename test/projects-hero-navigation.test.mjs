@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
-import {projectHeroCauses,renderProjectsHero,projectHeroLabelRegions} from '../scripts/projects-hero.mjs';
+import {projectHeroCauses,renderProjectsHero,projectHeroArtwork} from '../scripts/projects-hero.mjs';
 import {approvedCauseIds} from '../worker/donation-registry.mjs';
 const script=await readFile(new URL('../public/projects-hero.js',import.meta.url),'utf8');
 function setup({existing=false,dialogs=true}={}) {
@@ -19,12 +19,10 @@ function setup({existing=false,dialogs=true}={}) {
 test('hero navigation reuses exactly the four cause identities without creating category sections',()=>{
  assert.deepEqual(projectHeroCauses.map(c=>c.id),approvedCauseIds);
  assert.deepEqual(projectHeroCauses.map(c=>c.label),['Justice','Compassion','Protection','Nature']);
- assert.equal(projectHeroLabelRegions.length,4);
- for(const region of projectHeroLabelRegions) {
-  assert.equal(region.y,719);assert.equal(region.height,94);
-  assert(region.x>0 && region.x+region.width<1672);
-  for(const divider of [506,866,1182])assert(divider<region.x || divider>region.x+region.width);
- }
+ assert.equal(projectHeroArtwork.width/projectHeroArtwork.height,2);
+ assert.equal(projectHeroArtwork.src,'projects-hero-compact.webp');
+ const relativeHeight=(projectHeroArtwork.height/projectHeroArtwork.width)/(941/1672);
+ assert(relativeHeight>=.88 && relativeHeight<=.92);
  const hero=renderProjectsHero();
  assert.equal((hero.match(/<section\b/g)||[]).length,1);
  assert.equal((hero.match(/<dialog\b/g)||[]).length,1);
