@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { renderProjectsHero } from './projects-hero.mjs';
 import { renderProjectsOverview } from './projects-overview.mjs';
 import { renderApplication } from './application.mjs';
@@ -92,10 +93,18 @@ for (const [path, title, file] of outputPages) {
 </body>
 </html>
 `;
-  const portableHtml = html.replace(/href="([^"#]+)"/g, (match, href) => {
+  let portableHtml = html.replace(/href="([^"#]+)"/g, (match, href) => {
     const target = pageFiles.get(href);
     return target ? `href="${target}"` : match;
   });
+  // Projects CSS URLs change only when their bytes change, independently of page queries.
+  if (path === '/projects') {
+    for (const asset of ['styles.css', 'projects.css']) {
+      const bytes = await readFile(new URL(`../public/${asset}`, import.meta.url));
+      const version = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
+      portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`);
+    }
+  }
   await writeFile(new URL(`../public/${file}`, import.meta.url), portableHtml);
 }
 console.log(`Built all ${outputPages.length} pages from shared layout and official purposes.`);
