@@ -48,13 +48,15 @@ test('Voices for Dignity copy and donation renderer remain retained but unpublis
 });
 
 
-test('approved cause copy and all three actions use existing destinations without adding checkout',async()=>{
+test('approved cause copy, two card actions and one shared contact action use existing destinations without adding checkout',async()=>{
  const cards=renderProjectCategories();
  assert.equal((cards.match(/class="project-cause-description"/g)||[]).length,4);
  assert(cards.includes('Providing emergency relief and essential assistance to individuals and communities affected by disasters, crises, and hardship.'));
  assert.equal((cards.match(/href="donate.html#giving-heading"/g)||[]).length,4);
  assert.equal((cards.match(/>Support This Cause<\/span>/g)||[]).length,4);
- assert.equal((cards.match(/>Send a Message<\/span>/g)||[]).length,4);
+ assert.equal((cards.match(/>Send a Message<\/span>/g)||[]).length,1);
+ assert.match(cards, /<div class="project-categories-contact"><a class="project-cause-action project-cause-message" href="contact.html#message-heading"/);
+ for(const card of cards.matchAll(/<article\b[\s\S]*?<\/article>/g))assert.doesNotMatch(card[0], /project-cause-message|Send a Message/);
  assert.equal((cards.match(/role="img" aria-label="[^"]+"/g)||[]).length,4);
  assert.equal((cards.match(/class="project-cause-accent"/g)||[]).length,4);
  assert.doesNotMatch(cards,/https?:|test-checkout|data-payment|<form|<input|<button/i);

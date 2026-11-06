@@ -26,8 +26,10 @@ are unchanged. These links point directly to the real panels underneath
 | Environmental Protection | `environmental-conservation` / `projects-environmental-conservation` | Native disclosure explains that no projects are published yet |
 
 The cards preserve the four existing cause identities and their approved copy. The approved heading, divider and hero are unchanged. White cards with
-gold borders use a two-column desktop grid and stack below 56rem. Three actions
-stack within each card below 30rem, keeping targets at least 44px tall.
+gold borders use a two-column desktop grid and stack below 56rem. Two evenly sized actions remain in each card and stack below 30rem, keeping
+targets at least 44px tall and retaining the card height. One shared Send a
+Message action sits centered beneath the four cards and links to the existing
+contact form.
 
 Each card has a decorative SVG icon, curved gold photo edge, gold heading accent,
 and selectable HTML description. The Humanitarian Assistance description uses
