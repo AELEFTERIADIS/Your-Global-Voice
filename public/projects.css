@@ -162,3 +162,9 @@
 .projects-future-action:hover { background: #f4cf58; text-decoration: underline; text-underline-offset: .2em; }
 .projects-future-action:focus-visible, .projects-future:focus-visible { outline: 3px solid #fff; outline-offset: -5px; }
 @media (max-width: 60rem) { .projects-future { grid-template-columns: minmax(0, 1fr); aspect-ratio: auto; } .projects-future-panel { width: 100%; padding: 1.25rem; } .projects-future-panel > h2 { gap: .625rem; font-size: 1.5rem; margin-bottom: 1.25rem; } .projects-unity-icon { width: 2.5rem; } .projects-future-panel > .projects-future-copy { max-width: none; font-size: 1rem; line-height: 1.45; margin-bottom: 1.25rem; text-wrap: wrap; } .projects-future-panel > h2 > span { white-space: normal; } .projects-future-copy-line { display: inline; white-space: normal; } .projects-future-panel > .projects-future-motto { font-size: 1.375rem; white-space: normal; margin-left: 0; } .projects-future-swash { height: .875rem; margin-left: 0; } .projects-future-scene { grid-column: 1; grid-row: 2; height: 15rem; } .projects-future-landscape { top: 0; height: 100%; } .projects-future-action { left: 50%; bottom: 1.5rem; transform: translateX(-50%); width: 68.88%; height: 2.665rem; font-size: clamp(.76875rem, 3.444vw, .9225rem); } }
+
+/* Phone-only sizing keeps the approved headings on a single readable line. */
+@media (max-width: 40rem), (max-width: 56rem) and (max-height: 32rem) {
+ .projects-approach > h2 { font-size: clamp(.875rem, 5.5vw, 1.625rem); letter-spacing: -.015em; white-space: nowrap; }
+ .projects-future-panel > .projects-future-motto { font-size: clamp(.75rem, 5.2cqw, 1.375rem); white-space: nowrap; }
+}
