@@ -225,3 +225,9 @@
  .projects-future .projects-future-panel > .projects-future-motto { text-align: center; }
  .projects-future .projects-future-panel > .projects-future-swash { margin-inline: auto; }
 }
+
+/* Share the established section-heading treatment on desktop only. */
+@media (min-width: 64.0625rem) {
+ .project-initiatives > h2, .projects-approach > h2 { display: flex; align-items: center; gap: 1.5rem; margin: 0 0 1.75rem; padding: 0; color: #102B49; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 700; line-height: 1.2; text-align: left; }
+ .project-initiatives > h2::after, .projects-approach > h2::after { content: ""; display: block; flex: 1; min-width: 48px; width: auto; height: 2px; margin: 0; background: linear-gradient(90deg, #e5c981, #c48c22); }
+}
