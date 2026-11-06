@@ -5,7 +5,10 @@ The hero uses a vertically recomposed, lossless 1774 × 887 WebP at its native
 approximately 11% compared with the original 1672 × 941 canvas. The original
 PNG remains byte-identical. The compact artwork retains the four scenes,
 heading, motto, icons, gold dividers and labels: Justice, Compassion, Protection
-and Nature. The image scales uniformly without CSS cropping or distortion.
+and Nature. The image scales uniformly without CSS cropping or distortion. Only the embedded
+slogan is repaired through a narrowly masked navy patch; centered, upright gold
+SVG text reads “Making a Difference Where It Matters Most”. All artwork outside
+that slogan repair remains the original compact image.
 The four native, keyboard-accessible links retain their cause destinations;
 their hit areas follow the compact icon row. Official cause names and cards
 are unchanged. These links point directly to the real panels underneath

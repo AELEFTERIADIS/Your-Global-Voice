@@ -1,3 +1,4 @@
+import {renderProjectsHero} from '../scripts/projects-hero.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
@@ -94,3 +95,12 @@ test('retained Voices for Dignity renderer keeps its approved heading and slogan
   assert.match(html, /<p class="eyebrow project-purpose-label">HUMAN RIGHTS &amp; DIGNITY PROJECT<\/p><h3 id="project-dignity-heading" tabindex="-1"><svg class="project-scales-icon"[\s\S]*?<span>Voices for Dignity<\/span>/);
   assert.match(html, /<\/details>\n<p class="project-dignity-slogan">Together, We Can Make Every Voice Count<\/p>\n<div class="project-contact">/);
 });
+
+ test('Projects hero slogan is centered, upright gold text with an isolated background repair', () => {
+ const hero=renderProjectsHero();
+ assert.match(hero, /Making a Difference Where It Matters Most/);
+ assert.match(hero, /text-anchor="middle"/);
+ assert.match(hero, /font-style="normal"/);
+ assert.match(hero, /mask="url\(#hero-slogan-repair\)"/);
+ assert.doesNotMatch(hero, /Every Action Matters/);
+ });
