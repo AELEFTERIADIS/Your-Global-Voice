@@ -10,7 +10,7 @@
 .project-cause-icon { flex: 0 0 auto; width: 3.5rem; height: 3.5rem; color: #dd8f00; }
 .project-cause-icon[data-cause-icon="scales"] { stroke: url(#project-scales-metallic); }
 .project-cause-icon[data-cause-icon="hand-heart"] { color: #bc923a; }
-.project-cause-icon[data-cause-icon="hand-heart"] .project-cause-heart { color: #b76f6b; stroke: currentColor; }
+.project-cause-icon[data-cause-icon="hand-heart"] .project-cause-heart { color: #B65B60; fill: currentColor; stroke: currentColor; }
 .project-cause-icon[data-cause-icon="paw"] { color: #ab7c48; }
 .project-cause-icon[data-cause-icon="leaf"] { color: #528a3d; }
 .project-cause-panel h3 { min-width: 0; text-wrap: balance; margin: 0; color: #0a1745; font-family: Georgia, 'Times New Roman', serif; font-weight: 700; font-size: clamp(1.25rem, 2vw, 1.875rem); line-height: 1.08; }
