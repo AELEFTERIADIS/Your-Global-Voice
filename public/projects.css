@@ -182,26 +182,43 @@
  .projects-approach-mobile-photo { display: block; width: 100%; height: auto; }
 }
 
-/* Desktop engagement panels reuse the existing donation and messaging pages. */
-.project-engagement-panels { display: none; }
+/* Unified donation/contact composition from public/2222222.PNG. */
+.project-engagement-panels { container-type: inline-size; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1.75rem; padding: 3px; border-radius: 1.5rem; overflow: hidden; background: linear-gradient(110deg, #fff0b0, #e9ad18 35%, #c58b0d 72%, #ffe995); box-shadow: 0 3px 6px #102b4930; }
+.project-engagement-panel { min-width: 0; display: flex; flex-direction: column; padding: 1.25rem 1.5rem; border-bottom: 3px solid #e6b332; }
+.project-engagement-giving { border-radius: 1.25rem 0 0 0; background: linear-gradient(135deg, #073657, #01213f 75%); color: #fff; }
+.project-engagement-message { border-radius: 0 1.25rem 0 0; border-left: 3px solid #e6b332; background: #fdfcf9; color: #102b49; }
+.project-engagement-heading { display: flex; align-items: center; gap: clamp(.625rem, 1.2cqw, 1rem); }
+.project-engagement-heading > svg { flex: 0 0 auto; box-sizing: content-box; width: clamp(2.5rem, 5cqw, 4rem); height: clamp(2.5rem, 5cqw, 4rem); padding-right: clamp(.625rem, 1.2cqw, 1rem); border-right: 1px solid #d7a83b; color: #f5d373; }
+.project-engagement-heading > h3 { margin: 0; color: inherit; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.375rem, 3.2cqw, 2.5rem); font-weight: 700; line-height: 1.1; text-wrap: balance; }
+.project-engagement-accent { display: block; width: 72%; height: .875rem; margin: .25rem 0 .25rem auto; color: #eec45b; }
+.project-engagement-message > .project-engagement-accent { color: #d79a09; }
+.project-engagement-panel > p { flex: 1; margin: .5rem 0 1.25rem; color: inherit; font-size: clamp(1rem, 2.1cqw, 1.625rem); font-weight: 600; line-height: 1.3; text-align: center; text-wrap: balance; }
+.project-engagement-action { display: inline-flex; align-self: center; align-items: center; justify-content: center; gap: .75rem; min-height: 3.25rem; width: 65%; padding: .625rem 1rem; border: 1px solid #e0b43a; border-radius: 1.25rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1rem, 1.9cqw, 1.5rem); font-weight: 700; line-height: 1.15; text-decoration: none; text-align: center; }
+.project-engagement-action > span { font-family: Arial, sans-serif; font-size: 1.35em; line-height: 1; }
+.project-engagement-giving > a { color: #102b49; background: linear-gradient(#ffe38a, #f2ba24); }
+.project-engagement-message > a { color: #fff; border-color: #124a70; background: linear-gradient(#06385d, #01213f); }
+.project-engagement-message > a > span { color: #f0ba26; }
+.project-engagement-action:hover { filter: brightness(1.06); text-decoration: underline; }
+.project-engagement-action:focus-visible { outline: 3px solid #c18a17; outline-offset: 3px; }
+.project-engagement-motto { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: clamp(.75rem, 3cqw, 2rem); margin: 0; padding: .625rem 1rem; border-radius: 0 0 1.25rem 1.25rem; background: #01213f; color: #f4d579; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1rem, 3cqw, 2.25rem); font-weight: 700; line-height: 1.2; text-align: center; }
+.project-engagement-motto::before, .project-engagement-motto::after { content: ""; flex: 1; max-width: 12rem; min-width: 1rem; height: 3px; border-radius: 50%; background: linear-gradient(90deg, #b98411, #fff0b1); }
+.project-engagement-motto::after { transform: rotate(180deg); }
+@media (max-width: 40rem) {
+ .project-engagement-panels { grid-template-columns: minmax(0, 1fr); }
+ .project-engagement-panel { padding: 1.125rem 1rem; }
+ .project-engagement-giving { border-radius: 1.25rem 1.25rem 0 0; }
+ .project-engagement-message { border-radius: 0; border-left: 0; }
+ .project-engagement-heading { justify-content: center; }
+ .project-engagement-heading > h3 { font-size: clamp(1.375rem, 6vw, 1.625rem); }
+ .project-engagement-panel > p { margin: .5rem 0 1rem; font-size: 1rem; line-height: 1.4; }
+ .project-engagement-action { min-height: 44px; width: min(85%, 17rem); font-size: 1.125rem; }
+ .project-engagement-motto { gap: .5rem; padding: .875rem .5rem; font-size: clamp(.8125rem, 3.7vw, 1.25rem); }
+ .project-engagement-motto::before, .project-engagement-motto::after { min-width: .5rem; }
+}
+/* Preserve the separately approved desktop section visibility and spacing. */
 @media (min-width: 64.0625rem) {
  .projects-future, .project-categories-wave { display: none; }
  .project-initiatives { margin-bottom: 2.5rem; }
- .project-categories-contact { display: none; }
- .project-engagement-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 1.75rem; }
- .project-engagement-panel { min-width: 0; min-height: 15rem; display: flex; flex-direction: column; padding: 1.75rem 2rem; border: 1px solid #c7a24d; border-radius: 1rem; }
- .project-engagement-giving { background: #102b49; color: #fff; }
- .project-engagement-message { background: #faf8f2; color: #102b49; }
- .project-engagement-heading { display: flex; align-items: center; gap: 1rem; }
- .project-engagement-heading > svg { width: 3rem; height: 3rem; flex: 0 0 auto; color: #e8c46b; }
- .project-engagement-heading > h3 { margin: 0; color: inherit; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.5rem, 2.1vw, 1.875rem); line-height: 1.15; }
- .project-engagement-giving h3 { color: #efd088; }
- .project-engagement-panel > p { flex: 1; margin: 1rem 0 1.25rem; font-size: 1.0625rem; line-height: 1.55; }
- .project-engagement-action { display: inline-flex; align-self: flex-start; align-items: center; justify-content: center; min-height: 44px; min-width: 12rem; padding: .625rem 1.5rem; border: 1px solid #c7a24d; border-radius: .625rem; font-weight: 700; text-decoration: none; text-align: center; }
- .project-engagement-giving > a { color: #102b49; background: linear-gradient(#f4d98e, #dbb14e); }
- .project-engagement-message > a { color: #fff; background: #102b49; }
- .project-engagement-action:hover { filter: brightness(1.06); text-decoration: underline; }
- .project-engagement-action:focus-visible { outline: 3px solid #b38b36; outline-offset: 4px; }
 }
 /* Complete the separately approved phone-only motto alignment. */
 @media (max-width: 40rem), (max-width: 56rem) and (max-height: 32rem) {
