@@ -65,7 +65,7 @@ test('approved cause copy, two card actions and one shared contact action use ex
  }
  const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');
  assert.match(css,/grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
- assert.match(css,/@media \(max-width: 56rem\).*grid-template-columns: 1fr/);
+ assert.match(css,/@media \(max-width: 64rem\).*grid-template-columns: 1fr/);
  assert.equal(projectDesignReference,'Explore Our Impact Projects (1).png');
  assert.equal((cards.match(/<image href="Explore Our Impact Projects \(1\).png"/g)||[]).length,4);
  assert.doesNotMatch(cards,/project-cause-photos\.webp/);
