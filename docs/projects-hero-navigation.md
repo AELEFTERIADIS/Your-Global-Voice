@@ -20,10 +20,10 @@ are unchanged. These links point directly to the real panels underneath
 
 | Panel label | Existing cause identity and panel ID | Explore Projects action |
 | --- | --- | --- |
-| Human Rights & Dignity | `human-rights-dignity` / `projects-human-rights-dignity` | Goes to Shape Our Future Together through the retained destination anchor |
-| Humanitarian Assistance & Relief | `humanitarian-assistance` / `projects-humanitarian-assistance` | Native disclosure explains that no projects are published yet |
-| Animal Welfare | `animal-welfare` / `projects-animal-welfare` | Native disclosure explains that no projects are published yet |
-| Environmental Protection | `environmental-conservation` / `projects-environmental-conservation` | Native disclosure explains that no projects are published yet |
+| Human Rights & Dignity | `human-rights-dignity` / `projects-human-rights-dignity` | Shared Coming Soon page with `cause=human-rights-dignity` |
+| Humanitarian Assistance & Relief | `humanitarian-assistance` / `projects-humanitarian-assistance` | Shared Coming Soon page |
+| Animal Welfare | `animal-welfare` / `projects-animal-welfare` | Shared Coming Soon page |
+| Environmental Protection | `environmental-conservation` / `projects-environmental-conservation` | Shared Coming Soon page |
 
 The cards preserve the four existing cause identities and their approved copy. The approved heading, divider and hero are unchanged. White cards with
 gold borders use a two-column desktop grid and stack below 56rem. Two evenly sized actions remain in each card and stack below 30rem, keeping
@@ -116,3 +116,5 @@ sections and all payment integrations are preserved. Actual screenshots at
 1440, 1024, 768 and 390px are inspected against the reference before commit;
 browser checks cover line counts, text clearance, bounds, button placement,
 keyboard focus, pointer cursor, click hit testing and overflow.
+
+All four Explore Projects links now navigate to `coming-soon.html?cause=<existing-cause-id>`. The single navy-and-gold placeholder retains cause identity for future project routes. Its Go Back action returns to Projects, with a cause-specific anchor fallback for direct visits. It does not create checkout or alter donation destinations.

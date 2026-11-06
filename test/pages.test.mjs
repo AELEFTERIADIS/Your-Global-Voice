@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { preparePages, pagesFiles, assets } from '../scripts/prepare-pages.mjs';
 
-test('Pages artifact preserves all eight pages, excludes private files, and works under a project path', async (t) => {
+test('Pages artifact preserves all pages, excludes private files, and works under a project path', async (t) => {
   const temp = await mkdtemp(join(tmpdir(), 'ygv-pages-test-'));
   t.after(() => rm(temp, { recursive: true, force: true }));
   const destination = join(temp, 'Your-Global-Voice');
@@ -20,7 +20,7 @@ test('Pages artifact preserves all eight pages, excludes private files, and work
     for (const [, target] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
       if (/^(#|mailto:|https:)/.test(target)) continue;
       assert.ok(!target.startsWith('/'));
-      assert.equal(decodeURIComponent(new URL(target, `https://example.github.io/Your-Global-Voice/${file}`).pathname), `/Your-Global-Voice/${target.split('#')[0]}`);
+      assert.equal(decodeURIComponent(new URL(target, `https://example.github.io/Your-Global-Voice/${file}`).pathname), `/Your-Global-Voice/${target.split(/[?#]/)[0]}`);
       await access(new URL(target, pathToFileURL(join(destination, file))));
     }
   }

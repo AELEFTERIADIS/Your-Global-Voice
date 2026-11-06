@@ -7,6 +7,9 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+  ...['/coming-soon', '/coming-soon/', '/coming-soon.html'].map(path => [path, ['../public/coming-soon.html', 'text/html; charset=utf-8']]),
+  ['/coming-soon.css', ['../public/coming-soon.css', 'text/css; charset=utf-8']],
+  ['/coming-soon.js', ['../public/coming-soon.js', 'text/javascript; charset=utf-8']],
   ['/projects-hero-slogan-repair.webp',['../public/projects-hero-slogan-repair.webp','image/webp']],
  ['/projects-hero-compact.webp', ['../public/projects-hero-compact.webp', 'image/webp']],
   ['/11111111(1).png', ['../public/11111111(1).png', 'image/png']],
@@ -72,7 +75,7 @@ export function createPreviewServer(contactOptions) {
     const donateRoute = /^\/donate(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const projectsRoute = /^\/projects(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const aboutRoute = /^\/about(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : (donateRoute || aboutRoute || projectsRoute) ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
+    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : (donateRoute || aboutRoute || projectsRoute || /^\/coming-soon(?:\.html|\/)?(?:\?|$)/.test(request.url)) ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Referrer-Policy', 'no-referrer');

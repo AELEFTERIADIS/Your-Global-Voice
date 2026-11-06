@@ -25,13 +25,12 @@ test('every hero link resolves directly to its corresponding accessible panel wi
  }
 });
 
-test('Explore Projects keeps its existing destination or provides native empty-category feedback',()=>{
+test('all Explore Projects actions use the shared Coming Soon page and preserve cause identities',()=>{
  const cards=renderProjectCategories();
  assert.equal((cards.match(/class="project-cause-icon"/g)||[]).length,4);
  assert.equal((cards.match(/Explore Projects <span/g)||[]).length,4);
- assert.match(cards,/<a class="project-cause-action project-cause-explore" href="#project-dignity-heading"/);
- assert.equal((cards.match(/<details class="project-cause-empty">/g)||[]).length,3);
- assert.equal((cards.match(/There are no published projects for this cause yet\./g)||[]).length,3);
+ for(const category of projectCategories)assert(cards.includes(`href="coming-soon.html?cause=${category.id}"`));
+ assert.doesNotMatch(cards, /<details|<summary|There are no published projects/);
  assert.doesNotMatch(cards,/<form|<input|<fieldset|<button|checkout|paypal|stripe/i);
 });
 

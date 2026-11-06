@@ -63,8 +63,10 @@ const bodies = {
   '/contact': renderContact(contact),
 };
 // Sibling HTML paths work both from file:// and from the preview server.
-const pageFiles = new Map(pages.map(([path, , file]) => [path, file]));
-for (const [path, title, file] of pages) {
+const outputPages = [...pages, ['/coming-soon', 'Coming Soon', 'coming-soon.html']];
+bodies['/coming-soon'] = `<section class="coming-soon" aria-labelledby="coming-soon-heading"><div class="coming-soon-panel"><span class="coming-soon-accent" aria-hidden="true"></span><h1 id="coming-soon-heading">Coming Soon</h1><p>Something meaningful is taking shape. Stay tuned!</p><a class="button coming-soon-back" href="projects.html#project-initiatives-heading">Go Back</a></div></section>`;
+const pageFiles = new Map(outputPages.map(([path, , file]) => [path, file]));
+for (const [path, title, file] of outputPages) {
   const navigationLinks = pages.map(([url, label]) => `<a href="${url}"${url === path ? ' aria-current="page"' : ''}>${url === "/purposes" ? "Our Causes" : label}</a>`);
   const navigation = navigationLinks.join('');
   const footerNavigation = navigationLinks.slice(0, 5).join('') + '<span class="footer-navigation-break" aria-hidden="true"></span>' + navigationLinks.slice(5).join('');
@@ -77,7 +79,7 @@ for (const [path, title, file] of pages) {
   <title>${path === '/' ? 'Your Global Voice, Inc.' : `${title} | Your Global Voice, Inc.`}</title>
   <meta name="description" content="Your Global Voice, Inc. — human dignity, humanitarian assistance, animal welfare, and environmental protection. Explore our purposes and future ways to participate.">
   <link rel="icon" type="image/png" href="603250A8-B1C4-4533-848C-4028A6E0AD49.png">
-  <link rel="stylesheet" href="styles.css">${path === "/contact" ? '\n  <link rel="stylesheet" href="contact.css">\n  <script src="contact.js" defer></script>' : path === "/donate" ? '\n  <link rel="stylesheet" href="donate.css">\n  <script src="donate.js" defer></script>' : (path === "/mission" || path === "/about" || path === "/get-involved") ? '\n  <link rel="stylesheet" href="mission.css">' : ""}${path === "/get-involved" ? '\n  <link rel="stylesheet" href="get-involved-hero.css">\n  <link rel="stylesheet" href="application.css">\n  <script src="application.js" defer></script>\n  <script src="contact.js" defer></script>' : ""}${path === "/projects" ? '\n  <link rel="stylesheet" href="projects.css">\n  <script src="projects.js" defer></script>\n  <script src="projects-hero.js" defer></script>' : ""}${path === "/about" ? '\n  <link rel="stylesheet" href="about.css">\n  <script src="about.js" defer></script>' : ""}
+  <link rel="stylesheet" href="styles.css">${path === "/coming-soon" ? '\n  <link rel="stylesheet" href="coming-soon.css">\n  <script src="coming-soon.js" defer></script>' : ""}${path === "/contact" ? '\n  <link rel="stylesheet" href="contact.css">\n  <script src="contact.js" defer></script>' : path === "/donate" ? '\n  <link rel="stylesheet" href="donate.css">\n  <script src="donate.js" defer></script>' : (path === "/mission" || path === "/about" || path === "/get-involved") ? '\n  <link rel="stylesheet" href="mission.css">' : ""}${path === "/get-involved" ? '\n  <link rel="stylesheet" href="get-involved-hero.css">\n  <link rel="stylesheet" href="application.css">\n  <script src="application.js" defer></script>\n  <script src="contact.js" defer></script>' : ""}${path === "/projects" ? '\n  <link rel="stylesheet" href="projects.css">\n  <script src="projects.js" defer></script>\n  <script src="projects-hero.js" defer></script>' : ""}${path === "/about" ? '\n  <link rel="stylesheet" href="about.css">\n  <script src="about.js" defer></script>' : ""}
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -96,4 +98,4 @@ for (const [path, title, file] of pages) {
   });
   await writeFile(new URL(`../public/${file}`, import.meta.url), portableHtml);
 }
-console.log('Built all 8 pages from shared layout and official purposes.');
+console.log(`Built all ${outputPages.length} pages from shared layout and official purposes.`);

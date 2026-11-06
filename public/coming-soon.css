@@ -1,0 +1,8 @@
+.coming-soon { display: grid; place-items: center; min-height: 55vh; padding-block: clamp(2rem, 6vw, 5rem); }
+.coming-soon-panel { width: 100%; max-width: 48rem; padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 4vw, 3rem); border: 1px solid #b9954e; border-radius: 1.25rem; background: linear-gradient(135deg, #102b49, #061c35); color: #fff; text-align: center; box-shadow: 0 8px 24px #102b4914; }
+.coming-soon-accent { display: block; width: 4rem; height: 3px; margin: 0 auto 1.5rem; background: #d9b65f; }
+.coming-soon-panel h1 { margin: 0 0 1rem; color: #f0ce7c; font-family: Georgia, serif; font-size: clamp(2.25rem, 6vw, 3.5rem); line-height: 1.15; }
+.coming-soon-panel p { margin: 0 0 2rem; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.6; }
+.coming-soon-back { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: .75rem 2rem; border: 1px solid #c39a3d; border-radius: .625rem; background: linear-gradient(#f4dc98, #d7af4b); color: #102b49; text-decoration: none; font-weight: 700; }
+.coming-soon-back:hover { filter: brightness(1.06); text-decoration: underline; }
+.coming-soon-back:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
