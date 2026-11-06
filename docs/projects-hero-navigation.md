@@ -9,6 +9,10 @@ and Nature. The image scales uniformly without CSS cropping or distortion. Only 
 slogan is repaired through a narrowly masked navy patch; centered, upright gold
 SVG text reads “Making a Difference Where It Matters Most”. All artwork outside
 that slogan repair remains the original compact image.
+The heart, paw and leaves use clipped SVG color filters on the original artwork
+pixels. Their contours, dimensions and positions remain unchanged: muted red
+heart with gold hands, warm brown paw, and natural green leaves. Justice scales,
+white cause labels and gold dividers retain their original colors.
 The four native, keyboard-accessible links retain their cause destinations;
 their hit areas follow the compact icon row. Official cause names and cards
 are unchanged. These links point directly to the real panels underneath
