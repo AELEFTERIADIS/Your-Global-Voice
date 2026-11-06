@@ -73,3 +73,14 @@ test('approved cause copy, two card actions and one shared contact action use ex
  const source=await readFile(new URL('../public/'+projectDesignReference,import.meta.url));
  assert.equal(createHash('sha1').update(`blob ${source.length}\0`).update(source).digest('hex'),'796c39d3493e5905e9a2b5ac23074e2607c35f9f');
 });
+
+ test('desktop engagement actions reuse the central donation and universal contact destinations',async()=>{
+ const cards=renderProjectCategories();
+ assert.match(cards,/class="project-engagement-panels"/);
+ assert(cards.includes('Support our causes and projects to create positive and lasting change.'));
+ assert(cards.includes('Share your ideas, questions, or collaboration opportunities. We’d be glad to hear from you.'));
+ assert.match(cards,/href="donate.html#donation-payment">Donate Now<\/a>/);
+ assert.match(cards,/class="project-engagement-action" href="contact.html#message-heading">Send a Message<\/a>/);
+ const donate=await readFile(new URL('../public/donate.html',import.meta.url),'utf8');assert(donate.includes('id="donation-payment"'));
+ const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');assert.match(css,/\.project-engagement-panels \{ display: none; \}/);assert.match(css,/@media \(min-width: 64\.0625rem\)/);
+ });

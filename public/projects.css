@@ -181,3 +181,28 @@
  .projects-approach-mobile-copy > p { margin: .625rem 0 0; padding: .875rem; border: 2px solid #e5bc5c; border-radius: 1rem; background: #f9f6ec; color: #102b49; font-family: Georgia, 'Times New Roman', serif; font-size: 1rem; font-weight: 600; line-height: 1.45; }
  .projects-approach-mobile-photo { display: block; width: 100%; height: auto; }
 }
+
+/* Desktop engagement panels reuse the existing donation and messaging pages. */
+.project-engagement-panels { display: none; }
+@media (min-width: 64.0625rem) {
+ .project-categories-contact { display: none; }
+ .project-engagement-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 1.75rem; }
+ .project-engagement-panel { min-width: 0; min-height: 15rem; display: flex; flex-direction: column; padding: 1.75rem 2rem; border: 1px solid #c7a24d; border-radius: 1rem; }
+ .project-engagement-giving { background: #102b49; color: #fff; }
+ .project-engagement-message { background: #faf8f2; color: #102b49; }
+ .project-engagement-heading { display: flex; align-items: center; gap: 1rem; }
+ .project-engagement-heading > svg { width: 3rem; height: 3rem; flex: 0 0 auto; color: #e8c46b; }
+ .project-engagement-heading > h3 { margin: 0; color: inherit; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.5rem, 2.1vw, 1.875rem); line-height: 1.15; }
+ .project-engagement-giving h3 { color: #efd088; }
+ .project-engagement-panel > p { flex: 1; margin: 1rem 0 1.25rem; font-size: 1.0625rem; line-height: 1.55; }
+ .project-engagement-action { display: inline-flex; align-self: flex-start; align-items: center; justify-content: center; min-height: 44px; min-width: 12rem; padding: .625rem 1.5rem; border: 1px solid #c7a24d; border-radius: .625rem; font-weight: 700; text-decoration: none; text-align: center; }
+ .project-engagement-giving > a { color: #102b49; background: linear-gradient(#f4d98e, #dbb14e); }
+ .project-engagement-message > a { color: #fff; background: #102b49; }
+ .project-engagement-action:hover { filter: brightness(1.06); text-decoration: underline; }
+ .project-engagement-action:focus-visible { outline: 3px solid #b38b36; outline-offset: 4px; }
+}
+/* Complete the separately approved phone-only motto alignment. */
+@media (max-width: 40rem), (max-width: 56rem) and (max-height: 32rem) {
+ .projects-future .projects-future-panel > .projects-future-motto { text-align: center; }
+ .projects-future .projects-future-panel > .projects-future-swash { margin-inline: auto; }
+}
