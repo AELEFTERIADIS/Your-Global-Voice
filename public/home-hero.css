@@ -1,0 +1,64 @@
+/* The approved artwork is desktop-only; retain the existing phone/tablet hero. */
+.home-hero-desktop { display: none; }
+@media (min-width: 64.0625rem) {
+  .home-hero-legacy { display: none; }
+  .home-hero-desktop {
+    display: block;
+    position: relative;
+    container-type: inline-size;
+    aspect-ratio: 1754 / 897;
+    overflow: hidden;
+    background: #102B49 url('home-hero-landscape.webp') center / cover no-repeat;
+  }
+  /* Retain the approved globe, sunrise and right-hand landscape pixels. */
+  .home-hero-desktop::before {
+    content: ""; position: absolute; inset: 0;
+    background: url('0E3E8863-61DD-4871-976F-125EACDB2842.png') center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(to right, transparent 55.5%, #000 61%);
+    mask-image: linear-gradient(to right, transparent 55.5%, #000 61%);
+  }
+  .home-hero-copy { position: absolute; inset: 18.7% auto auto 3.85%; width: 52%; }
+  .home-hero-desktop h1 {
+    margin: 0;
+    color: #fff;
+    font: 700 7.3cqw / .83 Georgia, 'Times New Roman', serif;
+    letter-spacing: -.035em;
+    white-space: nowrap;
+    overflow-wrap: normal;
+    text-shadow: 0 2px 10px #102b4940;
+  }
+  .home-hero-desktop h1 em { color: #F4C75E; font-weight: 700; }
+  .home-hero-flourish { display: block; width: 65%; height: 2.2cqw; margin: 1cqw 0 .5cqw 1.8cqw; }
+  .home-hero-purpose {
+    margin: 0;
+    padding: .8cqw 1.4cqw;
+    border: .24cqw solid #E5AD34;
+    border-radius: 2.5cqw;
+    background: #F8F2E6;
+    box-shadow: 0 .4cqw 1cqw #102b4938;
+    color: #071F3A;
+    font: 700 2.1cqw / 1.4 Arial, Helvetica, sans-serif;
+    text-align: center;
+  }
+  .home-hero-purpose > span { display: block; white-space: nowrap; }
+  .home-hero-purpose svg { display: inline-block; width: 3.7cqw; height: 3.2cqw; vertical-align: middle; }
+  .home-cause-scales { color: #CB931C; }
+  .home-cause-heart { color: #962C42; }
+  .home-cause-paw { fill: #AE650D; }
+  .home-cause-leaves { fill: #4D7E12; }
+  .home-hero-actions { display: flex; gap: 1.5cqw; margin: 1.6cqw 1cqw 0; }
+  .home-hero-actions a {
+    display: flex; align-items: center; justify-content: center; gap: 1cqw;
+    flex: 1; min-width: 0; padding: 1cqw .7cqw;
+    border: .22cqw solid #F6CD70; border-radius: 4cqw;
+    font: 700 2.2cqw / 1.2 Arial, Helvetica, sans-serif;
+    text-decoration: none; white-space: nowrap;
+    box-shadow: 0 .3cqw .7cqw #102b4940;
+    transition: filter .15s ease;
+  }
+  .home-hero-actions svg { width: 3cqw; height: 3cqw; flex: none; }
+  .home-hero-donate { color: #071F3A; background: linear-gradient(#F9D577, #EAA600); }
+  .home-hero-contact { color: #fff; background: linear-gradient(#123351, #00142C); }
+  .home-hero-actions a:hover { filter: brightness(1.08); }
+  .home-hero-actions a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+}
