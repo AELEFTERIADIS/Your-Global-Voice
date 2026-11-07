@@ -15,7 +15,7 @@ test('Projects hero displays the vertically recomposed artwork at its native asp
   assert.doesNotMatch(hero, /projects-artwork|<ul|<li|Nature &amp; Environment/);
   const causeLinks=[...hero.matchAll(/<a class="projects-hero-cause"[^>]*>/g)].map(match=>match[0]);
   assert.equal(causeLinks.length,4);
-  for(const [index,label] of ['Justice','Compassion','Protection','Nature'].entries())assert(causeLinks[index].includes(`aria-label="${label} projects"`));
+  for(const [index,label] of ['Protection','Compassion','Nature','Justice'].entries())assert(causeLinks[index].includes(`aria-label="${label} projects"`));
   const ids=new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]));
   for(const link of causeLinks)assert(ids.has(link.match(/href="#([^"]+)"/)[1]),'native fallback must resolve on this page');
   assert.equal((html.match(/id="project-initiatives-heading"/g)||[]).length,1);
@@ -24,6 +24,7 @@ test('Projects hero displays the vertically recomposed artwork at its native asp
   const compact=await readFile(new URL('../public/projects-hero-compact.webp',import.meta.url));
   assert.equal(compact.subarray(0,4).toString(),'RIFF');
   assert.equal(compact.subarray(8,12).toString(),'WEBP');
+  assert.equal(createHash('sha1').update(`blob ${compact.length}\0`).update(compact).digest('hex'),'c74af90be435a465f2fe7bb7cffef4da0f2522c2');
   const image = await readFile(new URL('../public/2E318DBA-71A7-4D42-9FC2-5E723868F9CC.png', import.meta.url));
   assert.equal(createHash('sha256').update(image).digest('hex'), '3a701b04ca79d46d3e130663c2534becdb24eef6cb2dd3c94bf3b72fc70859c0');
   const css = await readFile(new URL('../public/styles.css', import.meta.url), 'utf8');

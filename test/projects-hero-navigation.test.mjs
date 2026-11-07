@@ -17,8 +17,9 @@ function setup({existing=false,dialogs=true}={}) {
  return {events,attributes,copy,dialog,closeEvents,viewEvents,heading};
 }
 test('hero navigation reuses exactly the four cause identities without creating category sections',()=>{
- assert.deepEqual(projectHeroCauses.map(c=>c.id),approvedCauseIds);
- assert.deepEqual(projectHeroCauses.map(c=>c.label),['Justice','Compassion','Protection','Nature']);
+ assert.deepEqual(projectHeroCauses.map(c=>c.id).sort(),[...approvedCauseIds].sort());
+ assert.deepEqual(projectHeroCauses.map(c=>c.label),['Protection','Compassion','Nature','Justice']);
+ assert.deepEqual(projectHeroCauses.map(c=>c.id),['animal-welfare','humanitarian-assistance','environmental-conservation','human-rights-dignity']);
  assert.equal(projectHeroArtwork.width/projectHeroArtwork.height,2);
  assert.equal(projectHeroArtwork.src,'projects-hero-compact.webp');
  const relativeHeight=(projectHeroArtwork.height/projectHeroArtwork.width)/(941/1672);

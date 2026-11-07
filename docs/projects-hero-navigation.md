@@ -4,13 +4,15 @@ The hero uses a vertically recomposed, lossless 1774 × 887 WebP at its native
 2:1 aspect ratio. At the same full container width this reduces its height by
 approximately 11% compared with the original 1672 × 941 canvas. The original
 PNG remains byte-identical. The compact artwork retains the four scenes,
-heading, motto, icons, gold dividers and labels: Justice, Compassion, Protection
-and Nature. The image scales uniformly without CSS cropping or distortion. Only the embedded
+heading, motto, icons, gold dividers and labels: Protection, Compassion, Nature
+and Justice, matching the photographs. The image scales uniformly without CSS cropping or distortion. The embedded
 slogan is repaired through a narrowly masked navy patch; centered, upright gold
-SVG text reads “Making a Difference Where It Matters Most”. All artwork outside
-that slogan repair remains the original compact image.
+SVG text reads “Making a Difference Where It Matters Most”. The icon-and-label groups are repositioned through SVG masks and translations
+using their original pixels, without resizing. Narrow background repairs erase
+the old positions. All artwork outside the slogan and icon row remains the
+original compact image.
 The heart, paw and leaves use clipped SVG color filters on the original artwork
-pixels. Their contours, dimensions and positions remain unchanged: muted red
+pixels. Their contours and dimensions remain unchanged: muted red
 heart with gold hands, warm brown paw, and natural green leaves. Justice scales,
 white cause labels and gold dividers retain their original colors.
 The four native, keyboard-accessible links retain their cause destinations;

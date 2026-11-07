@@ -1,9 +1,9 @@
 // Reuse the existing four cause identities; these are navigation labels only.
 export const projectHeroCauses=Object.freeze([
- {id:'human-rights-dignity',label:'Justice'},
- {id:'humanitarian-assistance',label:'Compassion'},
  {id:'animal-welfare',label:'Protection'},
- {id:'environmental-conservation',label:'Nature'}
+ {id:'humanitarian-assistance',label:'Compassion'},
+ {id:'environmental-conservation',label:'Nature'},
+ {id:'human-rights-dignity',label:'Justice'}
 ].map(cause=>Object.freeze(cause)));
 // Recompose vertical whitespace in the artwork; preserve its native aspect ratio.
 export const projectHeroArtwork=Object.freeze({src:'projects-hero-compact.webp',width:1774,height:887});
@@ -12,8 +12,15 @@ const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;');
 
 // Recolor the existing artwork pixels, preserving icon contours and all other pixels.
 const iconColorFilter=(id,r,g,b)=>`<filter id="hero-icon-${id}" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%"><feColorMatrix type="matrix" values="${r} 0 0 0 0  0 ${g} 0 0 0  ${b} 0 0 0 0  4 0 -4 0 0"/></filter>`;
+// Move the existing icon/label pixels without resizing or regenerating their shapes.
+const heroRowRegions=Object.freeze([
+ {id:'justice',x:260,width:180,offset:1122},
+ {id:'paw',x:968,width:235,offset:-736},
+ {id:'leaves',x:1360,width:190,offset:-363}
+]);
 function renderHeroIconColors() {
- return `<svg class="projects-hero-icon-colors" viewBox="0 0 1774 887" aria-hidden="true" focusable="false"><defs>${iconColorFilter('heart',.72,.55,.42)}${iconColorFilter('paw',.68,.52,.28)}${iconColorFilter('leaves',.32,.65,.24)}<clipPath id="hero-heart-area"><path d="M680 622H756V646L719 675 680 649Z"/></clipPath><clipPath id="hero-paw-area"><rect x="1028" y="618" width="104" height="90"/></clipPath><clipPath id="hero-leaves-area"><rect x="1390" y="618" width="130" height="92"/></clipPath></defs>${[['heart','heart'],['paw','paw'],['leaves','leaves']].map(([id,area])=>`<g clip-path="url(#hero-${area}-area)"><image href="${projectHeroArtwork.src}" width="1774" height="887" filter="url(#hero-icon-${id})"/></g>`).join('')}</svg>`;
+ const recolor=(id)=>id==='justice'?'':`<g clip-path="url(#hero-${id}-area)"><image href="${projectHeroArtwork.src}" width="1774" height="887" filter="url(#hero-icon-${id})"/></g>`;
+ return `<svg class="projects-hero-icon-colors" viewBox="0 0 1774 887" aria-hidden="true" focusable="false"><defs>${iconColorFilter('heart',.72,.55,.42)}${iconColorFilter('paw',.68,.52,.28)}${iconColorFilter('leaves',.32,.65,.24)}<filter id="hero-glyph-alpha" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  4 0 0 0 -1.2"/></filter><mask id="hero-glyph-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1774" height="887"><image href="${projectHeroArtwork.src}" width="1774" height="887" filter="url(#hero-glyph-alpha)"/></mask><filter id="hero-row-feather"><feGaussianBlur stdDeviation="10 5"/></filter><mask id="hero-row-background-mask" maskUnits="userSpaceOnUse" x="200" y="580" width="1400" height="220"><g fill="white" filter="url(#hero-row-feather)">${heroRowRegions.map(r=>`<rect x="${r.x-15}" y="605" width="${r.width+30}" height="165"/>`).join('')}</g></mask>${heroRowRegions.map(r=>`<clipPath id="hero-source-${r.id}"><rect x="${r.x-15}" y="605" width="${r.width+30}" height="165"/></clipPath>`).join('')}<clipPath id="hero-row-background-limit"><rect x="200" y="600" width="1400" height="180"/></clipPath><clipPath id="hero-heart-area"><path d="M680 622H756V646L719 675 680 649Z"/></clipPath><clipPath id="hero-paw-area"><rect x="1028" y="618" width="104" height="90"/></clipPath><clipPath id="hero-leaves-area"><rect x="1390" y="618" width="130" height="92"/></clipPath></defs><g clip-path="url(#hero-row-background-limit)"><image href="projects-hero-row-background.webp" width="1774" height="887" mask="url(#hero-row-background-mask)"/></g>${heroRowRegions.map(r=>`<g transform="translate(${r.offset} 0)"><g clip-path="url(#hero-source-${r.id})" mask="url(#hero-glyph-mask)"><image href="${projectHeroArtwork.src}" width="1774" height="887"/>${recolor(r.id)}</g></g>`).join('')}<g clip-path="url(#hero-heart-area)"><image href="${projectHeroArtwork.src}" width="1774" height="887" filter="url(#hero-icon-heart)"/></g></svg>`;
 }
 
 export function renderProjectsHero() {
