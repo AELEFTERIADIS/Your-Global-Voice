@@ -210,3 +210,8 @@
  .projects-approach-mobile-copy { transform: translateY(-15px); }
  .projects-approach-mobile-copy > p { text-align: left; }
 }
+
+/* Desktop closing artwork follows the CTA at the existing standard section gap. */
+@media (min-width: 64.0625rem) {
+ .projects-approach > h2 { display: none; }
+}
