@@ -215,3 +215,8 @@
 @media (min-width: 64.0625rem) {
  .projects-approach > h2 { display: none; }
 }
+
+/* Desktop-only support contrast; retain all existing geometry and smaller layouts. */
+@media (min-width: 64.0625rem) {
+ .project-cause-support { background: #A5C39F; color: #183D28; }
+}
