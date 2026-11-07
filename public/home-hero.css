@@ -31,32 +31,33 @@
   .home-hero-flourish { display: block; width: 65%; height: 2.2cqw; margin: 1cqw 0 .5cqw 1.8cqw; }
   .home-hero-purpose {
     margin: 0;
-    padding: .8cqw 1.4cqw;
-    border: .24cqw solid #E5AD34;
+    padding: .6cqw 1.2cqw;
+    border: .16cqw solid #E5AD34;
     border-radius: 2.5cqw;
     background: #F8F2E6;
     box-shadow: 0 .4cqw 1cqw #102b4938;
     color: #071F3A;
-    font: 700 2.1cqw / 1.4 Arial, Helvetica, sans-serif;
+    font: 400 1.85cqw / 1.45 Arial, Helvetica, sans-serif;
     text-align: center;
+    text-wrap: balance;
   }
-  .home-hero-purpose > span { display: block; white-space: nowrap; }
-  .home-hero-purpose svg { display: inline-block; width: 3.7cqw; height: 3.2cqw; vertical-align: middle; }
+  .home-mission-lead { white-space: nowrap; }
+  .home-hero-purpose svg { display: inline-block; width: 1.45em; height: 1.45em; vertical-align: -.3em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
   .home-cause-scales { color: #CB931C; }
   .home-cause-heart { color: #962C42; }
-  .home-cause-paw { fill: #AE650D; }
-  .home-cause-leaves { fill: #4D7E12; }
-  .home-hero-actions { display: flex; gap: 1.5cqw; margin: 1.6cqw 1cqw 0; }
+  .home-cause-paw { color: #AE650D; }
+  .home-cause-leaves { color: #4D7E12; }
+  .home-hero-actions { display: flex; gap: 1.5cqw; width: 76%; margin: 1.6cqw 1cqw 0; }
   .home-hero-actions a {
-    display: flex; align-items: center; justify-content: center; gap: 1cqw;
-    flex: 1; min-width: 0; padding: 1cqw .7cqw;
+    display: flex; align-items: center; justify-content: center; gap: .78cqw;
+    flex: 1; min-width: 0; padding: .78cqw .55cqw;
     border: .22cqw solid #F6CD70; border-radius: 4cqw;
-    font: 700 2.2cqw / 1.2 Arial, Helvetica, sans-serif;
+    font: 700 1.72cqw / 1.2 Arial, Helvetica, sans-serif;
     text-decoration: none; white-space: nowrap;
     box-shadow: 0 .3cqw .7cqw #102b4940;
     transition: filter .15s ease;
   }
-  .home-hero-actions svg { width: 3cqw; height: 3cqw; flex: none; }
+  .home-hero-actions svg { width: 2.34cqw; height: 2.34cqw; flex: none; }
   .home-hero-donate { color: #071F3A; background: linear-gradient(#F9D577, #EAA600); }
   .home-hero-contact { color: #fff; background: linear-gradient(#123351, #00142C); }
   .home-hero-actions a:hover { filter: brightness(1.08); }
