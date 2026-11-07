@@ -47,7 +47,7 @@ test('Projects approach replaces placeholders with one left-aligned section titl
   assert.match(html, /src="DE95C446-F64B-4963-923B-8703F03269C5.png" width="1774" height="887"/);
   assert.doesNotMatch(html, /Future initiatives will be guided|Project information will be added|No projects are listed|Where our purposes can lead|What future project updates will include|Stay connected to our direction/);
   const sections = [...html.matchAll(/<section\b/g)];
-  assert.equal(sections.length, 4);
+  assert.equal(sections.length, 3);
 });
 
 test('retained Voices for Dignity renderer preserves approved paragraphs and disabled payment controls', async () => {

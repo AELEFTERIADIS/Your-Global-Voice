@@ -6,38 +6,12 @@ import {renderProjectsOverview} from '../scripts/projects-overview.mjs';
 import {renderProjectCategories} from '../scripts/project-categories.mjs';
 
 const html=await readFile(new URL('../public/projects.html',import.meta.url),'utf8');
-test('approved future panel replaces the project box with exact copy and one existing contact destination',async()=>{
- const overview=renderProjectsOverview();
- assert(overview.includes(renderProjectCategories()));
- const panel=html.match(/<section class="projects-future"[\s\S]*?<\/section>/)[0];
- for(const text of ['Shape Our Future Together','From active projects to developing initiatives and future plans, Your Global Voice welcomes your ideas and participation in creating meaningful change for a better world.','My Voice + Your Voice = Our Voice','Share Your Ideas'])assert(panel.replace(/<[^>]+>/g,'').includes(text));
- assert.match(panel,/id="project-dignity-heading" aria-labelledby="projects-future-heading" tabindex="-1"/);
- const lines=[...panel.matchAll(/<span class="projects-future-copy-line">([^<]+)<\/span>/g)].map(m=>m[1]);
- assert.deepEqual(lines,['From active projects to developing initiatives and future plans,','Your Global Voice welcomes your ideas and participation','in creating meaningful change for a better world.']);
- assert.equal((panel.match(/<a /g)||[]).length,1);
- assert.match(panel,/class="projects-future-swash"[^>]*aria-hidden="true"/);
- assert.equal((panel.match(/class="projects-future-panel"/g)||[]).length,1);
- assert(panel.indexOf('class="projects-future-panel"')<panel.indexOf('<h2'));
- assert(panel.indexOf('class="projects-future-panel"')<panel.indexOf('class="projects-future-scene"'));
- assert.match(panel,/viewBox="1245 0 800 565" preserveAspectRatio="xMidYMid slice"/);
- assert.match(panel,/class="projects-future-divider"/);
- assert.doesNotMatch(panel,/<div class="projects-future-scene" aria-hidden/);
- assert(panel.indexOf('class="projects-future-motto"')<panel.indexOf('class="projects-future-action"'));
- assert.equal((panel.match(/class="projects-future-scene"/g)||[]).length,1);
- assert.match(panel,/fill="#1884b9"/);
- assert.match(panel,/fill="#f5c535"/);
- assert.match(panel,/href="contact.html#message-heading">Share Your Ideas <span aria-hidden="true">&rarr;<\/span><\/a>/);
- assert.match(panel,/class="projects-unity-icon"[^>]*aria-hidden="true"/);
- assert.equal((panel.match(/<image /g)||[]).length,2);
- assert.match(panel,/clip-path="url\(#future-landscape-crop\)" mask="url\(#future-landscape-no-controls\)"/);
- assert.match(panel,/<rect x="1354" y="410" width="514" height="97" rx="48" fill="black"/);
- const {createHash}=await import('node:crypto');
- const source=await readFile(new URL('../public/11111111(1).png',import.meta.url));
- assert.equal(createHash('sha1').update(`blob ${source.length}\0`).update(source).digest('hex'),'749e12f0807324a348e5f71413759c7d03671219');
- assert.doesNotMatch(panel,/<img\b|<form|<input|<button|checkout|donation|Voices for Dignity/i);
- const contact=await readFile(new URL('../public/contact.html',import.meta.url),'utf8');
- assert(contact.includes('id="message-heading"'));
- assert(contact.includes('<form'));
+test('obsolete future banner, duplicate mobile artwork and wave are absent from the published page',async()=>{
+ const overview=renderProjectsOverview();assert(overview.includes(renderProjectCategories()));
+ assert.doesNotMatch(html,/Shape Our Future Together|Share Your Ideas|projects-future|projects-unity-icon|project-categories-wave|future-landscape/);
+ const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');assert.doesNotMatch(css,/projects-future|projects-unity-icon|project-categories-wave/);
+ const {assets}=await import('../scripts/prepare-pages.mjs');assert(!assets.includes('11111111(1).png'));assert(!assets.includes('projects-future-background.webp'));
+ assert(html.includes('class="project-engagement-motto"'));assert(html.includes('class="projects-approach"'));
 });
 
 test('retained project script is inert without its removed donation and disclosure elements',async()=>{
@@ -45,6 +19,5 @@ test('retained project script is inert without its removed donation and disclosu
  let calls=0;
  vm.runInNewContext(script,{document:{querySelectorAll:()=>[]},window:{matchMedia:()=>({matches:false})},fetch:()=>{calls++;throw Error('No remote calls expected');}});
  assert.equal(calls,0);
- assert(html.indexOf('class="project-cause-panels"')<html.indexOf('class="projects-future"'));
- assert(html.indexOf('class="projects-future"')<html.indexOf('class="projects-approach"'));
+ assert(html.indexOf('class="project-cause-panels"')<html.indexOf('class="projects-approach"'));
 });

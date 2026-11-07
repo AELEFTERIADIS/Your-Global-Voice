@@ -15,8 +15,6 @@ const routes = new Map([
   ['/coming-soon.js', ['../public/coming-soon.js', 'text/javascript; charset=utf-8']],
   ['/projects-hero-slogan-repair.webp',['../public/projects-hero-slogan-repair.webp','image/webp']],
  ['/projects-hero-compact.webp', ['../public/projects-hero-compact.webp', 'image/webp']],
-  ['/11111111(1).png', ['../public/11111111(1).png', 'image/png']],
-  ['/projects-future-background.webp', ['../public/projects-future-background.webp', 'image/webp']],
   ['/projects-hero-nature-label.webp', ['../public/projects-hero-nature-label.webp', 'image/webp']],
   ['/projects-hero-value-labels.webp', ['../public/projects-hero-value-labels.webp', 'image/webp']],
   ['/Explore%20Our%20Impact%20Projects%20(1).png', ['../public/Explore Our Impact Projects (1).png', 'image/png']],

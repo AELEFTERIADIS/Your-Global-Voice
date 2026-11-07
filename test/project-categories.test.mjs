@@ -5,15 +5,15 @@ import {projectCategories,renderProjectCategories,projectDesignReference} from '
 import {approvedCauseIds} from '../worker/donation-registry.mjs';
 const html=await readFile(new URL('../public/projects.html',import.meta.url),'utf8');
 
-test('four unique cause panels follow Explore Our Projects and precede the approved future panel',()=>{
+test('four unique cause panels follow Explore Our Projects and precede the approved closing section',()=>{
  assert.deepEqual(projectCategories.map(c=>c.id),approvedCauseIds);
  assert.deepEqual(projectCategories.map(c=>c.label),['Human Rights & Dignity','Humanitarian Assistance & Relief','Animal Welfare','Environmental Protection']);
  assert.match(html,/<h2 id="project-initiatives-heading"><span>Explore Our Projects<\/span><\/h2>\s*<div class="project-cause-panels">/);
  assert.equal((html.match(/class="project-cause-panel"/g)||[]).length,4);
  assert.equal((html.match(/class="project-dignity-layout"/g)||[]).length,0);
- assert.equal((html.match(/class="projects-future"/g)||[]).length,1);
- assert.equal((html.match(/id="project-dignity-heading"/g)||[]).length,1);
- assert(html.indexOf('class="project-cause-panels"')<html.indexOf('class="projects-future"'));
+ assert.equal((html.match(/class="projects-future"/g)||[]).length,0);
+ assert.equal((html.match(/id="project-dignity-heading"/g)||[]).length,0);
+ assert(html.indexOf('class="project-cause-panels"')<html.indexOf('class="projects-approach"'));
 });
 
 test('every hero link resolves directly to its corresponding accessible panel without JavaScript',()=>{
