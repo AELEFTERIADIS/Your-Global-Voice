@@ -11,12 +11,12 @@
   }
   /* Native links follow the button areas embedded in the original artwork. */
   .home-hero-desktop > a {
-    position: absolute; top: 74%; width: 21.8%; height: 9.9%;
+    position: absolute; top: 73.8%; height: 10%;
     border-radius: 999px; cursor: pointer;
     transition: background-color .15s ease;
   }
-  .home-hero-donate { left: 4.77%; }
-  .home-hero-contact { left: 28.4%; }
+  .home-hero-donate { left: 3.9%; width: 23.4%; }
+  .home-hero-contact { left: 29.1%; width: 22.8%; }
   .home-hero-desktop > a:hover { background-color: rgb(255 255 255 / 8%); }
   .home-hero-desktop > a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
 }

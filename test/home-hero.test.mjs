@@ -21,7 +21,7 @@ test('desktop homepage hero reuses central donation and messaging destinations a
  const css=await cssResponse.text();assert.match(css,/@media \(min-width: 64\.0625rem\)/);
  assert.match(css,/\.home-hero-desktop \{ display: none; \}/);
  assert.match(css,/\.home-hero-legacy \{ display: none; \}/);
- const image=await fetch(base+'/8ED5B5FC-24D8-415B-AC3C-1D3238049D61.png');assert.equal(image.status,200);assert.match(image.headers.get('content-type'),/image\/png/);
- for(const asset of ['home-hero.css','8ED5B5FC-24D8-415B-AC3C-1D3238049D61.png'])assert(assets.includes(asset));
+ const image=await fetch(base+'/A Shared Voice for a Better World Banner.png');assert.equal(image.status,200);assert.match(image.headers.get('content-type'),/image\/png/);
+ for(const asset of ['home-hero.css','A Shared Voice for a Better World Banner.png'])assert(assets.includes(asset));
  for(const page of ['projects','about','mission','purposes','get-involved','donate','contact'])assert(!(await readFile(new URL('../public/'+page+'.html',import.meta.url),'utf8')).includes('home-hero.css'));
 });
