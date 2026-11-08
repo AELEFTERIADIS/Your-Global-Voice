@@ -18,7 +18,8 @@ test('homepage, assets, and preview security boundaries', async (t) => {
   assert.match(html, /<title>Your Global Voice, Inc\.<\/title>/);
   assert.match(html, /<main id="main"/);
   assert.match(html, /href="#main"/);
-  assert.doesNotMatch(html, /<script\b|<form\b/);
+  assert.doesNotMatch(html, /<form\b/);
+  assert.match(html, /<script src="home-causes.js" defer>/);
 
   const css = await fetch(`${base}/styles.css`);
   assert.equal(css.status, 200);
@@ -70,7 +71,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.match(html, /Where Every Voice Matters/);
     assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
     assert.doesNotMatch(html, /<iframe\b/);
-    if (!['/contact', '/get-involved', '/donate', '/about', '/projects'].includes(route)) assert.doesNotMatch(html, /<script\b/);
+    if (!['/', '/contact', '/get-involved', '/donate', '/about', '/projects'].includes(route)) assert.doesNotMatch(html, /<script\b/);
     if (route === '/about') {
       assert.match(response.headers.get('content-security-policy'), /script-src 'self'/);
       assert.match(html, /<script src="about.js" defer><\/script>/);
@@ -90,7 +91,7 @@ test('all pages share working navigation and preserve the approved purposes', as
       assert.match(html, /href="projects\.html">See Our Projects/);
       assert.doesNotMatch(html, /class="purpose-grid"|Explore our areas of focus\./);
     }
-    if (['/', '/purposes'].includes(route)) {
+    if (route === '/purposes') {
       for (const [title, text] of expected) {
         const displayTitle = route === '/purposes' && title === expected[0][0] ? 'Human Rights &amp; Dignity' : route === '/purposes' && title === expected[2][0] ? 'Animal Welfare' : title;
         assert.ok(html.includes(`<h3>${displayTitle}</h3>`), displayTitle);

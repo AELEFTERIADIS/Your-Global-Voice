@@ -7,6 +7,11 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+ ['/donation-cause.css', ['../public/donation-cause.css', 'text/css; charset=utf-8']],
+ ['/donation-cause.js', ['../public/donation-cause.js', 'text/javascript; charset=utf-8']],
+ ['/home-causes.css', ['../public/home-causes.css', 'text/css; charset=utf-8']],
+ ['/home-causes.js', ['../public/home-causes.js', 'text/javascript; charset=utf-8']],
+ ['/What%20We%20Stand%20For_%20Four%20Causes.png', ['../public/What We Stand For_ Four Causes.png', 'image/png']],
  ['/A%20Shared%20Voice%20for%20a%20Better%20World%20Banner.png', ['../public/A Shared Voice for a Better World Banner.png', 'image/png']],
  ['/8ED5B5FC-24D8-415B-AC3C-1D3238049D61.png', ['../public/8ED5B5FC-24D8-415B-AC3C-1D3238049D61.png', 'image/png']],
  ['/0E3E8863-61DD-4871-976F-125EACDB2842.png', ['../public/0E3E8863-61DD-4871-976F-125EACDB2842.png', 'image/png']],
@@ -81,7 +86,7 @@ export function createPreviewServer(contactOptions) {
     const donateRoute = /^\/donate(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const projectsRoute = /^\/projects(?:\.html|\/)?(?:\?|$)/.test(request.url);
     const aboutRoute = /^\/about(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : (donateRoute || aboutRoute || projectsRoute || /^\/coming-soon(?:\.html|\/)?(?:\?|$)/.test(request.url)) ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
+    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : (donateRoute || aboutRoute || projectsRoute || /^\/(?:index\.html)?(?:\?|$)/.test(request.url) || /^\/coming-soon(?:\.html|\/)?(?:\?|$)/.test(request.url)) ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Referrer-Policy', 'no-referrer');
