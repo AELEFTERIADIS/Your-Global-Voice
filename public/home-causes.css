@@ -1,6 +1,5 @@
-.home-causes { margin-block: 3rem; }
+.home-causes { margin-block: 1.5rem 3rem; }
 .home-causes h2 { margin: 0 0 1.5rem; color: #071f38; font: 700 clamp(2rem, 4.2vw, 3.75rem)/1.15 Georgia, serif; text-align: left; }
-.home-causes h2::before { content: ''; display: block; width: 5rem; height: 4px; margin-bottom: .8rem; background: #ce9216; }
 .home-causes-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
 .home-cause-card { position: relative; min-width: 0; }
 .home-cause-art-frame { position: relative; }
@@ -16,7 +15,7 @@
 .home-cause-menu a:nth-child(2) { background: #f5df9c; }
 .home-cause-card.is-open, .home-cause-card:has(details[open]) { padding-bottom: var(--home-cause-menu-space, 11rem); }
 @media(max-width: 40rem) {
- .home-causes { margin-block: 2rem; }
+ .home-causes { margin-block: 1rem 2rem; }
  .home-causes-grid { grid-template-columns: minmax(0,1fr); gap: 1rem; }
  .home-causes h2 { font-size: clamp(1.8rem,7.5vw,2.6rem); margin-bottom: 1.25rem; }
 }
