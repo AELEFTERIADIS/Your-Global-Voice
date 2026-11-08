@@ -1,0 +1,17 @@
+/* Independent margin navigation: never take width away from page content. */
+.home-sidebar { display: none; }
+@media (min-width: 108rem) and (min-width: 1728px) {
+ main:has(> .home-sidebar) { position: relative; }
+ .home-sidebar { display: block; position: absolute; top: var(--header-content-gap); right: calc(100% + 28px); width: 180px; color: #102b49; }
+ .home-sidebar-item { margin: 0 0 8px; border: 1px solid #d7dce1; border-radius: 4px; background: #fff; }
+ .home-sidebar-item > summary { display: grid; grid-template-columns: 16px minmax(0,1fr) 10px; align-items: center; gap: 6px; min-height: 44px; padding: 8px; font: 600 .8rem/1.35 Arial, Helvetica, sans-serif; cursor: pointer; list-style: none; }
+ .home-sidebar-item > summary::-webkit-details-marker { display: none; }
+ .home-sidebar-icon { width: 16px; height: 16px; color: #bd963e; }
+ .home-sidebar-arrow { width: 10px; height: 10px; }
+ .home-sidebar-item[open] .home-sidebar-arrow { transform: rotate(180deg); }
+ .home-sidebar-links { display: grid; grid-template-columns: minmax(0,1fr); gap: 0; border-top: 1px solid #e3e6e9; padding: 4px; }
+ .home-sidebar-links a { display: flex; min-height: 36px; padding: 7px 6px; color: #102b49; border: 0; border-radius: 2px; text-decoration: none; font: 400 .8rem/1.4 Arial, Helvetica, sans-serif; }
+ .home-sidebar-links p { margin: 0; padding: 7px 6px; color: #536372; font: 400 .75rem/1.4 Arial, Helvetica, sans-serif; }
+ .home-sidebar summary:hover, .home-sidebar-links a:hover { background: #faf8f2; }
+ .home-sidebar summary:focus-visible, .home-sidebar-links a:focus-visible { outline: 2px solid #bd963e; outline-offset: -2px; }
+}
