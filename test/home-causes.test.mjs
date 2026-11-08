@@ -24,7 +24,7 @@ test('homepage cause menus reuse all four existing destinations in the approved 
  for(const asset of ['home-causes.css','home-causes.js','What%20We%20Stand%20For_%20Four%20Causes.png','donation-cause.js','donation-cause.css'])assert.equal((await fetch(base+'/'+asset)).status,200);
  const tmp=await mkdtemp(join(tmpdir(),'home-causes-'));t.after(()=>rm(tmp,{recursive:true,force:true}));await preparePages(join(tmp,'site'));
  const artifact=await readFile(join(tmp,'site/index.html'),'utf8');assert.match(artifact,/script-src 'self'/);
- assert.match(artifact,/<script src="home-causes.js" defer>/);
+ assert.match(artifact,/<script src="home-causes\.js(?:\?v=[a-f0-9]{16})?" defer>/);
 });
 
 test('donation cause selection accepts only registered IDs and leaves hosted checkout handling untouched',async()=>{

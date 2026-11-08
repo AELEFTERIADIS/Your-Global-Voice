@@ -100,10 +100,10 @@ for (const [path, title, file] of outputPages) {
   });
   // Projects CSS URLs change only when their bytes change, independently of page queries.
   if (path === '/projects' || path === '/') {
-    for (const asset of path === '/' ? ['home-hero.css', 'home-causes.css'] : ['styles.css', 'projects.css']) {
+    for (const asset of path === '/' ? ['home-hero.css', 'home-causes.css', 'home-causes.js'] : ['styles.css', 'projects.css']) {
       const bytes = await readFile(new URL(`../public/${asset}`, import.meta.url));
       const version = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
-      portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`);
+      portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`).replace(`src="${asset}"`, `src="${asset}?v=${version}"`);
     }
   }
   await writeFile(new URL(`../public/${file}`, import.meta.url), portableHtml);

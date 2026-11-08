@@ -19,7 +19,7 @@ test('homepage, assets, and preview security boundaries', async (t) => {
   assert.match(html, /<main id="main"/);
   assert.match(html, /href="#main"/);
   assert.doesNotMatch(html, /<form\b/);
-  assert.match(html, /<script src="home-causes.js" defer>/);
+  assert.match(html, /<script src="home-causes\.js(?:\?v=[a-f0-9]{16})?" defer>/);
 
   const css = await fetch(`${base}/styles.css`);
   assert.equal(css.status, 200);
