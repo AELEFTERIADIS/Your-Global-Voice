@@ -9,9 +9,9 @@ const icons={
 };
 const items=[
  ['Get Involved','people',[['get-involved.html','Explore opportunities'],['get-involved.html#application','Apply to get involved']]],
- ['Latest News','news',null,'Ask about updates'],
- ['Our Projects','projects',[['projects.html#project-initiatives-heading','Explore our projects']]],
  ['Share Your Ideas','ideas',[['contact.html#message-heading','Send your ideas']]],
+ ['Our Projects','projects',[['projects.html#project-initiatives-heading','Explore our projects']]],
+ ['Latest News','news',null,'Ask about updates'],
  ['Events & Activities','calendar',null,'Ask about activities'],
  ['Media Gallery','media',null,'Contact our team'],
  ['Community Voices','voices',null,'Share your voice']
