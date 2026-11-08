@@ -1,0 +1,8 @@
+/* Approved homepage desktop branding; preserve all compact header layouts. */
+@media (min-width: 75rem) {
+ .site-header .wordmark { font-size: 1.875rem; }
+}
+@media (min-width: 108rem) and (min-width: 1728px) {
+ /* Center the existing 5.5rem logo above the 180px sidebar, across its 28px gap. */
+ .site-header .header-brand { transform: translateX(calc(-28px - 90px - 2.75rem)); }
+}
