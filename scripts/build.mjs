@@ -1,3 +1,4 @@
+import { renderDesktopHome, renderDesktopHomeFooter } from './desktop-home.mjs';
 import { renderHomeSidebar } from './home-sidebar.mjs';
 import { renderHomeCauses } from './home-causes.mjs';
 import { createHash } from 'node:crypto';
@@ -87,7 +88,7 @@ for (const [path, title, file] of outputPages) {
   <link rel="icon" type="image/png" href="603250A8-B1C4-4533-848C-4028A6E0AD49.png">
   <link rel="stylesheet" href="styles.css">${path === "/" ? '\n  <link rel="stylesheet" href="home-hero.css">\n  <link rel="stylesheet" href="home-causes.css">\n  <script src="home-causes.js" defer></script>\n  <link rel="stylesheet" href="home-sidebar.css">\n  <script src="home-sidebar.js" defer></script>\n  <link rel="stylesheet" href="home-brand.css">' : ""}${path === "/coming-soon" ? '\n  <link rel="stylesheet" href="coming-soon.css">\n  <script src="coming-soon.js" defer></script>' : ""}${path === "/contact" ? '\n  <link rel="stylesheet" href="contact.css">\n  <script src="contact.js" defer></script>' : path === "/donate" ? '\n  <link rel="stylesheet" href="donate.css">\n  <script src="donate.js" defer></script>\n  <link rel="stylesheet" href="donation-cause.css">\n  <script src="donation-cause.js" defer></script>' : (path === "/mission" || path === "/about" || path === "/get-involved") ? '\n  <link rel="stylesheet" href="mission.css">' : ""}${path === "/get-involved" ? '\n  <link rel="stylesheet" href="get-involved-hero.css">\n  <link rel="stylesheet" href="application.css">\n  <script src="application.js" defer></script>\n  <script src="contact.js" defer></script>' : ""}${path === "/projects" ? '\n  <link rel="stylesheet" href="projects.css">\n  <script src="projects.js" defer></script>\n  <script src="projects-hero.js" defer></script>' : ""}${path === "/about" ? '\n  <link rel="stylesheet" href="about.css">\n  <script src="about.js" defer></script>' : ""}
   ${path!=='/'?'<link rel="stylesheet" href="home-sidebar.css">\n  <script src="home-sidebar.js" defer></script>':''}
-  <link rel="stylesheet" href="desktop-header.css">
+  ${path==='/'?'<link rel="stylesheet" href="desktop-home.css">\n  ':''}<link rel="stylesheet" href="desktop-header.css">
   <script src="desktop-header.js" defer></script>
 </head>
 <body>
@@ -96,7 +97,7 @@ for (const [path, title, file] of outputPages) {
     <div class="header-brand"><img class="header-logo" src="603250A8-B1C4-4533-848C-4028A6E0AD49.png" alt="Your Global Voice official logo" width="1254" height="1254"><a class="wordmark" href="/"><span class="desktop-brand-name">Your Global Voice</span><span class="desktop-brand-caption">A NONPROFIT ORGANIZATION</span></a></div>
     <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">${navigation}</nav></details><nav class="desktop-nav" aria-label="Main navigation">${navigation}</nav><nav class="desktop-reference-nav" aria-label="Main navigation">${desktopNavigation}</nav>${path!=='/'?`<div class="desktop-header-extra-sidebar">${renderHomeSidebar()}</div>`:''}
   </div></header>
-  <main id="main" tabindex="-1">${path === "/" ? renderHomeSidebar() : ""}${bodies[path]}</main>
+  <main id="main" tabindex="-1">${path === "/" ? renderHomeSidebar() : ""}${path==='/'?renderDesktopHome()+`<div class="home-compact-preserved">${bodies[path]}</div>`:bodies[path]}</main>${path==='/'?'\n  '+renderDesktopHomeFooter(contact):''}
   <footer class="site-footer"><div class="footer-inner"><p class="footer-name">YOUR GLOBAL VOICE</p><p class="footer-slogan">Where Every Voice Matters</p><nav class="footer-navigation" aria-label="Footer navigation">${footerNavigation}</nav><p class="footer-copyright">© 2026 Your Global Voice, Inc. All rights reserved.</p></div></footer>
 </body>
 </html>
@@ -107,7 +108,7 @@ for (const [path, title, file] of outputPages) {
   });
   // Projects CSS URLs change only when their bytes change, independently of page queries.
   if (path === '/projects' || path === '/') {
-    for (const asset of path === '/' ? ['home-hero.css', 'home-causes.css', 'home-causes.js', 'home-sidebar.css', 'home-sidebar.js', 'home-brand.css'] : ['styles.css', 'projects.css']) {
+    for (const asset of path === '/' ? ['home-hero.css', 'home-causes.css', 'home-causes.js', 'home-sidebar.css', 'home-sidebar.js', 'home-brand.css', 'desktop-home.css'] : ['styles.css', 'projects.css']) {
       const bytes = await readFile(new URL(`../public/${asset}`, import.meta.url));
       const version = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
       portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`).replace(`src="${asset}"`, `src="${asset}?v=${version}"`);

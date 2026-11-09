@@ -1,0 +1,74 @@
+.desktop-home-redesign, .desktop-home-footer { display: none; }
+.home-compact-preserved { display: contents; }
+@media(min-width:80rem) {
+ .home-compact-preserved { display: none; }
+ main:has(> .desktop-home-redesign) { padding-bottom: 0; }
+ body:has(.desktop-home-redesign) > .site-footer { display: none; }
+ .desktop-home-redesign { display: block; container-type: inline-size; color: #061440; }
+ .desktop-home-redesign h1, .desktop-home-redesign h2, .desktop-home-footer h2 { color: #061440; font-family: Georgia, 'Times New Roman', serif; font-weight: 700; overflow-wrap: normal; }
+ .desktop-home-crop { display: block; width: 100%; height: auto; }
+ .desktop-home-accessible { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+ .desktop-home-hero { position: relative; height: 30.697cqw; overflow: hidden; background: linear-gradient(165deg,#bcdcff 0%,white 33%,#fff 60%); }
+ .desktop-home-globe { position: absolute; inset: 0 0 0 auto; width: 54.426%; height: 100%; mask-image: linear-gradient(to right,transparent,#000 7%); }
+ .desktop-home-hero-copy { position: absolute; top: 2.5cqw; left: 4.5cqw; width: 45%; }
+ .desktop-home-hero h1 { margin: 0; font-size: 5.4cqw; line-height: .96; letter-spacing: -.025em; white-space: nowrap; }
+ .desktop-home-hero h1 em { color: #b8810c; font-size: 4.9cqw; }
+ .desktop-home-hero-copy > p { max-width: 41cqw; margin: 1.3cqw 0 0; color: #061440; font: 600 1.95cqw/1.22 Arial,sans-serif; text-wrap: balance; }
+ .desktop-home-hero-actions { display: flex; gap: 1.5cqw; align-items: center; margin-top: 1.2cqw; }
+ .desktop-home-action { display: inline-flex; align-items: center; justify-content: center; gap: .8cqw; min-height: 4.5cqw; padding: .45cqw 2.1cqw; border: 2px solid #d99b02; border-radius: 99px; background: #fff; color: #061440; font: 700 2.2cqw/1.1 'Header Condensed',Arial,sans-serif; text-decoration: none; white-space: nowrap; }
+ .desktop-home-action > span[aria-hidden] { font-family: Arial,sans-serif; font-weight: 400; font-size: 1.3em; }
+ .desktop-home-hero-actions .desktop-home-action { min-height: 4.2cqw; }
+ .desktop-home-gold { color: #fff; background: linear-gradient(#ffd848,#d79903 65%,#a76800); border-color: #e7b124; }
+ .desktop-home-action > svg { width: 2.6cqw; height: 2.6cqw; flex: none; }
+ .desktop-home-action:hover { filter: brightness(1.07); }
+ .desktop-home-redesign a:focus-visible, .desktop-home-footer a:focus-visible { outline: 3px solid #b17b00; outline-offset: 3px; }
+ .desktop-home-hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 3.578cqw; }
+ .desktop-home-causes { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); height: 15.443cqw; align-items: center; background: white; }
+ .desktop-home-cause { position: relative; display: flex; align-items: center; flex-direction: column; justify-content: center; height: 100%; padding: .2cqw 1cqw .8cqw; text-decoration: none; }
+ .desktop-home-cause + .desktop-home-cause::before { content: ''; position: absolute; top: 8%; bottom: 12%; left: 0; width: 2px; background: #e4a900; }
+ .desktop-home-cause-icon { width: 7.5cqw; height: 5.8cqw; }
+ .desktop-home-cause h2 { font-size: 2.65cqw; line-height: 1; margin: .25cqw 0 0; text-align: center; }
+ .desktop-home-purple { color: #8705a5; }.desktop-home-red { color: #ed171c; }.desktop-home-brown { color: #995a04; }.desktop-home-green { color: #008b0f; }
+ .desktop-home-cause-accent { margin-top: .4cqw; width: 88%; height: 2cqw; }
+ .desktop-home-purpose { position: relative; height: 16.572cqw; color: white; background: #052e56; overflow: hidden; }
+ .desktop-home-purpose-map { position: absolute; right: 0; top: 0; width: 38.795%; height: 82.4%; mask-image: linear-gradient(to right,transparent,#000 9%); }
+ .desktop-home-purpose-copy { position: absolute; top: 1.2cqw; left: 4.9cqw; width: 56%; border-left: .8cqw solid #f1b500; padding-left: 2.5cqw; }
+ .desktop-home-purpose h2 { color: white; font-size: 4.1cqw; line-height: 1; margin: 0 0 .35cqw; }
+ .desktop-home-purpose p { margin: 0; font: 400 1.85cqw/1.15 Arial,sans-serif; }
+ .desktop-home-purpose p > span, .desktop-home-difference p > span { display: block; white-space: nowrap; }
+ .desktop-home-purpose > .desktop-home-action { position: absolute; top: 4.9cqw; right: 6.1cqw; width: 20.5cqw; min-height: 4.8cqw; padding: .4cqw 1cqw; color: white; border: 3px solid #f8cb00; background: #06274d; font-family: Arial,sans-serif; font-size: 2.1cqw; }
+ .desktop-home-purpose-wave { position: absolute; bottom: 0; height: 4.425cqw; }
+ .desktop-home-difference { display: grid; grid-template-columns: 64% minmax(0,1fr); align-items: center; gap: 2cqw; margin-top: .659cqw; }
+ .desktop-home-sunset { border-radius: .7cqw; }
+ .desktop-home-difference-copy { padding-right: 1.8cqw; }
+ .desktop-home-difference-copy > div { border-left: .45cqw solid #d89800; padding-left: 1.7cqw; }
+ .desktop-home-difference h2 { margin: 0 0 .6cqw; font-size: 3.5cqw; line-height: 1.05; white-space: nowrap; }
+ .desktop-home-difference p { margin: 0; font: 600 1.75cqw/1.25 Arial,sans-serif; }
+ .desktop-home-difference .desktop-home-action { margin: .9cqw 0 0 2.1cqw; width: 28cqw; min-height: 4.7cqw; padding-inline: 1.8cqw; font-size: 2.45cqw; }
+ .desktop-home-involved { display: grid; grid-template-columns: 28% 16.4% 17.7% 17.7% 20.2%; align-items: center; min-height: 12.15cqw; padding-block: .8cqw 1.4cqw; }
+ .desktop-home-involved-intro { padding-inline: 3cqw 1cqw; }
+ .desktop-home-involved h2 { margin: 0 0 .7cqw; font-size: 3.5cqw; line-height: 1; white-space: nowrap; }
+ .desktop-home-involved h2::after { content: ''; display: block; width: 14cqw; height: 1px; background: #e1b220; margin-top: .5cqw; }
+ .desktop-home-involved p { margin: 0; font: 600 1.8cqw/1.1 Arial,sans-serif; }
+ .desktop-home-participate { display: flex; align-items: center; flex-direction: column; justify-content: center; min-height: 7.8cqw; border-left: 2px solid #e5a800; color: #061440; text-decoration: none; font: 700 2cqw/1.15 'Header Condensed',Arial,sans-serif; white-space: nowrap; }
+ .desktop-home-participation-icon { width: 7.2cqw; height: 5.3cqw; margin-bottom: .3cqw; }
+ .desktop-home-join { border-left: 2px solid #e5a800; min-height: 7.8cqw; display: flex; align-items: center; justify-content: center; }
+ .desktop-home-join .desktop-home-action { min-height: 4.2cqw; padding-inline: 2.5cqw; font-size: 2.2cqw; }
+ .desktop-home-closing { overflow: hidden; }
+ .desktop-home-footer { position: relative; display: block; width: min(100% - 3rem,78rem); margin-inline: auto; container-type: inline-size; background: #FAF8F3; color: #061440; }
+ .desktop-home-footer-columns { display: grid; grid-template-columns: 28% 21% 23% 28%; padding: 1.5cqw 2.3cqw 8cqw; }
+ .desktop-home-footer-columns > * { min-width: 0; padding-inline: 1.5cqw; }
+ .desktop-home-footer-columns > * + * { border-left: 2px solid #e4a600; }
+ .desktop-home-footer h2 { font-size: 2.3cqw; line-height: 1.1; margin: 0 0 .7cqw; white-space: nowrap; }
+ .desktop-home-social h2 { text-align: center; }
+ .desktop-home-social h2::after { content: ''; display: block; width: 10cqw; height: 2px; margin: .6cqw auto 1.5cqw; background: #ec1019; border-radius: 50%; }
+ .desktop-home-social-icons { display: flex; justify-content: center; gap: .9cqw; }
+ .desktop-home-social-icons > span { width: 4.2cqw; height: 4.2cqw; flex: none; }
+ .desktop-home-social-icons svg { display: block; width: 100%; height: 100%; }
+ .desktop-home-footer-nav { display: flex; flex-direction: column; gap: .15cqw; align-items: flex-start; }
+ .desktop-home-footer-nav a { color: #061440; border: 0; min-height: 0; font: 600 1.7cqw/1.25 Arial,sans-serif; text-decoration: none; }
+ .desktop-home-footer-contact > a, .desktop-home-footer-contact > p { display: flex; align-items: flex-start; gap: .8cqw; margin: 0 0 .6cqw; color: #061440; font: 600 1.55cqw/1.22 Arial,sans-serif; text-decoration: none; }
+ .desktop-home-footer-contact svg { width: 2.3cqw; height: 2.3cqw; flex: none; }
+ .desktop-home-footer-contact > p { font-size: 1.35cqw; }
+ .desktop-home-footer-wave { position: absolute; bottom: 0; height: 7.156cqw; mix-blend-mode: multiply; }
+}
