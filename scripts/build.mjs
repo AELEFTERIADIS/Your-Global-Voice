@@ -72,6 +72,9 @@ const pageFiles = new Map(outputPages.map(([path, , file]) => [path, file]));
 for (const [path, title, file] of outputPages) {
   const navigationLinks = pages.map(([url, label]) => `<a href="${url}"${url === path ? ' aria-current="page"' : ''}>${url === "/purposes" ? "Our Causes" : label}</a>`);
   const navigation = navigationLinks.join('');
+  const desktopLabels = new Map([['/','Home'],['/about','About'],['/mission','Mission'],['/purposes','Causes'],['/projects','Projects'],['/get-involved','Get Involved'],['/contact','Contact'],['/donate','Donate']]);
+  const desktopNavigation = ['/', '/about', '/mission', '/purposes', '/projects', '/get-involved', '/contact', '/donate'].map(url => `<a href="${url}"${url===path?' aria-current="page"':''}${url==='/donate'?' class="desktop-reference-donate"':''}>${url==='/donate'?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>':''}${desktopLabels.get(url)}</a>`).join('');
+
   const footerNavigation = navigationLinks.slice(0, 5).join('') + '<span class="footer-navigation-break" aria-hidden="true"></span>' + navigationLinks.slice(5).join('');
   const html = `<!doctype html>
 <html lang="en">
@@ -83,12 +86,15 @@ for (const [path, title, file] of outputPages) {
   <meta name="description" content="Your Global Voice, Inc. — human dignity, humanitarian assistance, animal welfare, and environmental protection. Explore our purposes and future ways to participate.">
   <link rel="icon" type="image/png" href="603250A8-B1C4-4533-848C-4028A6E0AD49.png">
   <link rel="stylesheet" href="styles.css">${path === "/" ? '\n  <link rel="stylesheet" href="home-hero.css">\n  <link rel="stylesheet" href="home-causes.css">\n  <script src="home-causes.js" defer></script>\n  <link rel="stylesheet" href="home-sidebar.css">\n  <script src="home-sidebar.js" defer></script>\n  <link rel="stylesheet" href="home-brand.css">' : ""}${path === "/coming-soon" ? '\n  <link rel="stylesheet" href="coming-soon.css">\n  <script src="coming-soon.js" defer></script>' : ""}${path === "/contact" ? '\n  <link rel="stylesheet" href="contact.css">\n  <script src="contact.js" defer></script>' : path === "/donate" ? '\n  <link rel="stylesheet" href="donate.css">\n  <script src="donate.js" defer></script>\n  <link rel="stylesheet" href="donation-cause.css">\n  <script src="donation-cause.js" defer></script>' : (path === "/mission" || path === "/about" || path === "/get-involved") ? '\n  <link rel="stylesheet" href="mission.css">' : ""}${path === "/get-involved" ? '\n  <link rel="stylesheet" href="get-involved-hero.css">\n  <link rel="stylesheet" href="application.css">\n  <script src="application.js" defer></script>\n  <script src="contact.js" defer></script>' : ""}${path === "/projects" ? '\n  <link rel="stylesheet" href="projects.css">\n  <script src="projects.js" defer></script>\n  <script src="projects-hero.js" defer></script>' : ""}${path === "/about" ? '\n  <link rel="stylesheet" href="about.css">\n  <script src="about.js" defer></script>' : ""}
+  ${path!=='/'?'<link rel="stylesheet" href="home-sidebar.css">\n  <script src="home-sidebar.js" defer></script>':''}
+  <link rel="stylesheet" href="desktop-header.css">
+  <script src="desktop-header.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header"><div class="header-inner">
-    <div class="header-brand"><img class="header-logo" src="603250A8-B1C4-4533-848C-4028A6E0AD49.png" alt="Your Global Voice official logo" width="1254" height="1254"><a class="wordmark" href="/">Your Global Voice</a></div>
-    <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">${navigation}</nav></details><nav class="desktop-nav" aria-label="Main navigation">${navigation}</nav>
+  <header class="site-header"><div class="header-inner"><div class="desktop-header-column"><button type="button" class="desktop-sidebar-toggle" aria-label="Toggle sidebar" aria-controls="desktop-quick-links" aria-expanded="${path==='/'?'true':'false'}"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 6h22M3 14h22M3 22h22"/></svg></button></div>
+    <div class="header-brand"><img class="header-logo" src="603250A8-B1C4-4533-848C-4028A6E0AD49.png" alt="Your Global Voice official logo" width="1254" height="1254"><a class="wordmark" href="/"><span class="desktop-brand-name">Your Global Voice</span><span class="desktop-brand-caption">A NONPROFIT ORGANIZATION</span></a></div>
+    <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">${navigation}</nav></details><nav class="desktop-nav" aria-label="Main navigation">${navigation}</nav><nav class="desktop-reference-nav" aria-label="Main navigation">${desktopNavigation}</nav>${path!=='/'?`<div class="desktop-header-extra-sidebar">${renderHomeSidebar()}</div>`:''}
   </div></header>
   <main id="main" tabindex="-1">${path === "/" ? renderHomeSidebar() : ""}${bodies[path]}</main>
   <footer class="site-footer"><div class="footer-inner"><p class="footer-name">YOUR GLOBAL VOICE</p><p class="footer-slogan">Where Every Voice Matters</p><nav class="footer-navigation" aria-label="Footer navigation">${footerNavigation}</nav><p class="footer-copyright">© 2026 Your Global Voice, Inc. All rights reserved.</p></div></footer>
@@ -106,6 +112,10 @@ for (const [path, title, file] of outputPages) {
       const version = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
       portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`).replace(`src="${asset}"`, `src="${asset}?v=${version}"`);
     }
+  }
+  for (const asset of ['desktop-header.css', 'desktop-header.js', 'home-sidebar.css', 'home-sidebar.js']) {
+    const version = createHash('sha256').update(await readFile(new URL(`../public/${asset}`, import.meta.url))).digest('hex').slice(0,16);
+    portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`).replace(`src="${asset}"`, `src="${asset}?v=${version}"`);
   }
   await writeFile(new URL(`../public/${file}`, import.meta.url), portableHtml);
 }

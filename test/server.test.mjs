@@ -71,7 +71,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.match(html, /Where Every Voice Matters/);
     assert.ok(html.includes(`href="${route === "/" ? "index" : route.slice(1)}.html" aria-current="page"`));
     assert.doesNotMatch(html, /<iframe\b/);
-    if (!['/', '/contact', '/get-involved', '/donate', '/about', '/projects'].includes(route)) assert.doesNotMatch(html, /<script\b/);
+    assert.match(html, /<script src="desktop-header\.js\?v=[a-f0-9]{16}" defer>/);
     if (route === '/about') {
       assert.match(response.headers.get('content-security-policy'), /script-src 'self'/);
       assert.match(html, /<script src="about.js" defer><\/script>/);

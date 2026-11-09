@@ -7,6 +7,10 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+ ['/desktop-header-condensed-bold.woff', ['../public/desktop-header-condensed-bold.woff', 'font/woff']],
+ ['/desktop-header-font-license.txt', ['../public/desktop-header-font-license.txt', 'text/plain; charset=utf-8']],
+ ['/desktop-header.css', ['../public/desktop-header.css', 'text/css; charset=utf-8']],
+ ['/desktop-header.js', ['../public/desktop-header.js', 'text/javascript; charset=utf-8']],
  ['/home-brand.css', ['../public/home-brand.css', 'text/css; charset=utf-8']],
  ['/home-sidebar.css', ['../public/home-sidebar.css', 'text/css; charset=utf-8']],
  ['/home-sidebar.js', ['../public/home-sidebar.js', 'text/javascript; charset=utf-8']],
@@ -86,10 +90,7 @@ export function createPreviewServer(contactOptions) {
   const handleContact = createContactHandler(contactOptions);
   return createServer(async (request, response) => {
     const contactRoute = /^\/(?:contact|get-involved)(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    const donateRoute = /^\/donate(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    const projectsRoute = /^\/projects(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    const aboutRoute = /^\/about(?:\.html|\/)?(?:\?|$)/.test(request.url);
-    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : (donateRoute || aboutRoute || projectsRoute || /^\/(?:index\.html)?(?:\?|$)/.test(request.url) || /^\/coming-soon(?:\.html|\/)?(?:\?|$)/.test(request.url)) ? "script-src 'self'; form-action 'none'" : "form-action 'none'"}; frame-ancestors 'none'`);
+    response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : "script-src 'self'; form-action 'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
     response.setHeader('Referrer-Policy', 'no-referrer');

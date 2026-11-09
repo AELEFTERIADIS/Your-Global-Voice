@@ -1,0 +1,38 @@
+@font-face { font-family: 'Header Condensed'; src: url('desktop-header-condensed-bold.woff') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
+/* Reference header is desktop-only. Compact markup and layouts retain their styles. */
+.desktop-reference-nav, .desktop-header-column, .desktop-header-extra-sidebar { display: none; }
+.wordmark .desktop-brand-name { display: inline; font: inherit; letter-spacing: inherit; text-transform: none; margin: 0; }
+.wordmark .desktop-brand-caption { display: none; }
+@media (min-width: 80rem) {
+ .site-header { background: #FAF8F3; border-top-color: transparent; border-bottom-color: transparent; }
+ .site-header .header-inner { position: relative; height: 8.5rem; padding-block: .75rem; gap: 1rem; flex-wrap: nowrap; }
+ .site-header .header-brand { transform: none; gap: 14px; }
+ .site-header .header-logo { width: 7rem; height: 7rem; transform: none; }
+ .site-header .wordmark { display: flex; flex-direction: column; align-items: stretch; gap: .35rem; padding: 0; color: #102B49; font: 700 clamp(1.5rem,2.25vw,2rem)/1.1 Georgia, 'Times New Roman', serif; }
+ .site-header .desktop-brand-name { white-space: nowrap; text-transform: uppercase; }
+ .site-header .desktop-brand-caption { display: flex; align-items: center; gap: 7px; margin: 0; font: 700 clamp(.65rem,.75vw,.8125rem)/1.2 Arial, Helvetica, sans-serif; letter-spacing: .025em; color: #102B49; white-space: nowrap; }
+ .desktop-brand-caption::before, .desktop-brand-caption::after { content: ''; flex: 1; height: 1px; background: #bf942f; }
+ .site-header .desktop-nav { display: none; }
+ .site-header .desktop-reference-nav { display: flex; flex: 1; min-width: 0; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: clamp(.4rem,.6vw,.75rem); padding-left: 20px; border-left: 1px solid #c49a3d; }
+ .site-header .desktop-reference-nav a { position: relative; display: inline-flex; justify-content: center; align-items: center; flex: none; min-height: 44px; border: 0; padding: 0; color: #102B49; font: 700 clamp(1rem,1.25vw,1.25rem)/1.25 'Header Condensed', 'Arial Narrow', Arial, sans-serif; white-space: nowrap; }
+ .site-header .desktop-reference-nav a[aria-current="page"]::after { content: ''; position: absolute; height: 5px; border-radius: 99px; background: #c99b36; left: 0; right: 0; bottom: 0; }
+ .site-header .desktop-reference-nav .desktop-reference-donate { gap: 5px; margin-left: 15px; padding: 9px 12px; border: 1px solid #d5af58; border-radius: 999px; color: #fff; background: linear-gradient(#d9b569,#c99b32); font-size: clamp(1.1rem,1.375vw,1.375rem); }
+ .desktop-reference-donate svg { width: 22px; height: 22px; flex: none; }
+ .desktop-reference-donate::before { content: ''; position: absolute; left: -16px; width: 1px; height: 40px; top: 50%; transform: translateY(-50%); background: #c49a3d; }
+ .site-header .desktop-reference-donate[aria-current="page"]::after { display: none; }
+ .site-header .desktop-reference-nav a:hover { color: #8c6519; }
+ .site-header .desktop-reference-nav .desktop-reference-donate:hover { color: #fff; background: #bd8b26; }
+ .site-header a:focus-visible, .site-header button:focus-visible { outline: 2px solid #a67d26; outline-offset: 4px; }
+}
+@media (min-width: 108rem) and (min-width: 1728px) {
+ .desktop-header-column { position: absolute; display: flex; align-items: center; justify-content: center; width: 180px; right: calc(100% + 28px); top: 0; bottom: 0; }
+ .desktop-header-column::after { content: ''; position: absolute; top: -4px; bottom: -1px; right: -14px; width: 1px; background: #d8d7d2; }
+ .desktop-sidebar-toggle { display: grid; place-items: center; width: 48px; height: 48px; border: 0; padding: 8px; color: #102B49; background: transparent; cursor: pointer; }
+ .desktop-sidebar-toggle svg { width: 28px; height: 28px; }
+ .home-sidebar[hidden] { display: none; }
+ .desktop-header-extra-sidebar { display: block; position: absolute; top: calc(100% + var(--header-content-gap) + 1px); right: calc(100% + 28px); width: 180px; }
+ .desktop-header-extra-sidebar > .home-sidebar { position: static; width: 180px; }
+}
+@media (min-width: 108rem) and (min-width: 1728px) {
+ .desktop-header-extra-sidebar .home-sidebar-links a { color: #102B49; }
+}
