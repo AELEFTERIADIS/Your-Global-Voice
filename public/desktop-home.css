@@ -57,6 +57,9 @@
  .desktop-home-participation-icon { width: 7.2cqw; height: 5.3cqw; margin-bottom: .3cqw; }
  .desktop-home-join { border-left: 2px solid #e5a800; min-height: 7.8cqw; display: flex; align-items: center; justify-content: center; }
  .desktop-home-join .desktop-home-action { min-height: 4.2cqw; padding-inline: 2.5cqw; font-size: 2.2cqw; }
+ .desktop-home-difference .desktop-home-action, .desktop-home-join .desktop-home-action { font-family: Georgia, 'Times New Roman', serif; }
+ .desktop-home-difference .desktop-home-action { height: max(4.7cqw, calc(4.4035cqw + 4px)); }
+ .desktop-home-join .desktop-home-action { width: calc(14.56cqw + 4px); height: max(4.2cqw, calc(4.046cqw + 4px)); padding-inline: 1.5cqw; color: #102B49; background: #FAF8F3; }
  .desktop-home-closing { overflow: hidden; }
  .desktop-home-footer { position: relative; display: block; width: min(100% - 3rem,78rem); margin-inline: auto; container-type: inline-size; background: #FAF8F3; color: #061440; }
  .desktop-home-footer-columns { display: grid; grid-template-columns: 28% 21% 23% 28%; padding: 1.5cqw 2.3cqw 8cqw; }
