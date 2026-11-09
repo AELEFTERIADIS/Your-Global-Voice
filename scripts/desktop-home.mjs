@@ -1,6 +1,6 @@
 const reference='BC7678D3-851B-4549-BF8C-D4BE0B43E533.png';
 const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
-const crop=(x,y,w,h,label,cls='')=>`<svg class="desktop-home-crop ${cls}" viewBox="${x} ${y} ${w} ${h}" ${label?`role="img" aria-label="${escape(label)}"`:'aria-hidden="true"'} focusable="false"><image href="${reference}" width="1062" height="1481"/></svg>`;
+const crop=(x,y,w,h,label,cls='')=>`<svg class="desktop-home-crop ${cls}" viewBox="${x} ${y} ${w} ${h}" ${label?`role="img" aria-label="${escape(label)}"`:'aria-hidden="true"'} focusable="false"><defs><clipPath id="desktop-crop-${x}-${y}-${w}-${h}"><rect x="${x}" y="${y}" width="${w}" height="${h}"/></clipPath></defs><image href="${reference}" width="1062" height="1481" clip-path="url(#desktop-crop-${x}-${y}-${w}-${h})"/></svg>`;
 const heart='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>';
 const arrow='<span aria-hidden="true">&rarr;</span>';
 const action=(href,label,gold=false)=>`<a class="desktop-home-action${gold?' desktop-home-gold':''}" href="${href}">${gold?heart:''}<span>${label}</span>${arrow}</a>`;
