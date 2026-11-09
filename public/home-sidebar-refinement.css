@@ -1,0 +1,11 @@
+/* Home-only desktop margin refinement. All right anchors stay unchanged. */
+@media (min-width: 108rem) and (min-width: 1728px) {
+ :root { --home-sidebar-refined-width: max(180px, min(280px, calc((100vw - 78rem) / 2 - 52px))); }
+ main > .home-sidebar { width: var(--home-sidebar-refined-width); background: #FAF8F3; }
+ main > .home-sidebar .home-sidebar-item { background: #FAF8F3; }
+ main > .home-sidebar .home-sidebar-links p { max-width: 170px; }
+ main > .home-sidebar summary:hover, main > .home-sidebar .home-sidebar-links a:hover { background: #FAF8F3; }
+ .site-header .desktop-header-column { width: var(--home-sidebar-refined-width); }
+ .site-header .desktop-sidebar-toggle { display: flex; align-items: center; justify-content: center; align-self: center; justify-self: center; }
+ .site-header .desktop-sidebar-toggle svg { width: 33px; height: 33px; flex-shrink: 0; }
+}
