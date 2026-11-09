@@ -43,8 +43,9 @@
  .desktop-home-difference { display: grid; grid-template-columns: 64% minmax(0,1fr); align-items: center; gap: 2cqw; margin-top: .659cqw; }
  .desktop-home-sunset { border-radius: .7cqw; }
  .desktop-home-difference-copy { padding-right: 1.8cqw; }
- .desktop-home-difference-copy > div { border-left: .45cqw solid #d89800; padding-left: 1.7cqw; }
- .desktop-home-difference h2 { margin: 0 0 .6cqw; font-size: 3.5cqw; line-height: 1.05; white-space: nowrap; }
+ .desktop-home-difference-copy > div { position: relative; border-left: .45cqw solid #d89800; padding-left: 1.7cqw; }
+ .desktop-home-difference-copy > div::after { content: ""; position: absolute; top: 0; bottom: 0; right: -1.8cqw; width: 0; border-right: .45cqw solid #d89800; background: #d89800; }
+ .desktop-home-difference h2 { margin: 0 0 .6cqw; font-size: 3.15cqw; line-height: 3.675cqw; white-space: nowrap; }
  .desktop-home-difference p { margin: 0; font: 600 1.75cqw/1.25 Arial,sans-serif; }
  .desktop-home-difference .desktop-home-action { margin: .9cqw 0 0 2.1cqw; width: 28cqw; min-height: 4.7cqw; padding-inline: 1.8cqw; font-size: 2.45cqw; }
  .desktop-home-involved { display: grid; grid-template-columns: 28% 16.4% 17.7% 17.7% 20.2%; align-items: center; min-height: 12.15cqw; padding-block: .8cqw 1.4cqw; }
