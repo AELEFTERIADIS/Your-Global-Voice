@@ -32,11 +32,11 @@
  .desktop-home-cause h2 { font-size: 2.65cqw; line-height: 1; margin: .25cqw 0 0; text-align: center; }
  .desktop-home-purple { color: #8705a5; }.desktop-home-red { color: #ed171c; }.desktop-home-brown { color: #995a04; }.desktop-home-green { color: #008b0f; }
  .desktop-home-cause-accent { margin-top: .4cqw; width: 88%; height: 2cqw; }
- .desktop-home-purpose { position: relative; height: 16.572cqw; color: white; background: #052e56; overflow: hidden; }
- .desktop-home-purpose-map { position: absolute; right: 0; top: 0; width: 38.795%; height: 82.4%; mask-image: linear-gradient(to right,transparent,#000 9%); }
- .desktop-home-purpose-copy { position: absolute; top: 1.2cqw; left: 4.9cqw; width: 56%; border-left: .8cqw solid #f1b500; padding-left: 2.5cqw; }
- .desktop-home-purpose h2 { color: white; font-size: 4.1cqw; line-height: 1; margin: 0 0 .35cqw; }
- .desktop-home-purpose p { margin: 0; font: 400 1.85cqw/1.15 Arial,sans-serif; }
+ .desktop-home-purpose { position: relative; height: calc(16.572cqw + 15px); color: white; background: #052e56; overflow: hidden; }
+ .desktop-home-purpose-map { position: absolute; right: 0; top: 0; width: 38.795%; height: 13.655328cqw; clip-path: inset(0 0 1.508328cqw 0); mask-image: linear-gradient(to right,transparent,#000 9%); }
+ .desktop-home-purpose-copy { position: absolute; top: 1.2cqw; left: 4.9cqw; width: 56%; height: 10.8325cqw; border-left: .8cqw solid #f1b500; padding-left: 2.5cqw; }
+ .desktop-home-purpose h2 { color: white; font-size: 4.1cqw; line-height: 1; margin: 0 0 .55cqw; }
+ .desktop-home-purpose p { margin: 0; font: 400 1.85cqw/1.3225 Arial,sans-serif; }
  .desktop-home-purpose p > span, .desktop-home-difference p > span { display: block; white-space: nowrap; }
  .desktop-home-purpose > .desktop-home-action { position: absolute; top: 4.9cqw; right: 6.1cqw; width: 20.5cqw; min-height: 4.8cqw; padding: .4cqw 1cqw; color: white; border: 3px solid #f8cb00; background: #06274d; font-family: Arial,sans-serif; font-size: 2.1cqw; }
  .desktop-home-purpose-wave { position: absolute; bottom: 0; height: 4.425cqw; }
