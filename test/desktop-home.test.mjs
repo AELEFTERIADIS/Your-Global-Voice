@@ -11,7 +11,7 @@ test('complete desktop Home page preserves reference section order, wording and 
  const base=`http://127.0.0.1:${server.address().port}`,html=await (await fetch(base)).text();
  const content=renderDesktopHome();
  assert.deepEqual([...content.matchAll(/<section class="([^"]+)"/g)].map(m=>m[1]),['desktop-home-hero','desktop-home-causes','desktop-home-purpose','desktop-home-difference','desktop-home-involved','desktop-home-closing']);
- assert.match(content,/Advancing human dignity, providing humanitarian assistance, protecting animals, and preserving our environment\./);
+ assert.match(content.replaceAll('<br>',''),/Advancing human dignity, supporting those in need, protecting animals, and preserving our planet\./);
  const hero=content.match(/<section class="desktop-home-hero"[\s\S]*?<\/section>/)[0];
  assert.deepEqual([...hero.matchAll(/<a[^>]*href="([^"]+)"/g)].map(m=>m[1]),['#desktop-home-causes','donate.html#donation-payment']);
  assert.equal((content.match(/class="desktop-home-cause desktop-home-/g)||[]).length,4);
