@@ -2,12 +2,12 @@
 .about-hero-compact { margin-top:0; }
 @media (min-width:80rem) {
  .about-hero-compact { display:none; }
- .desktop-about-hero { display:block; position:relative; container-type:inline-size; width:100%; aspect-ratio:1015 / 222; overflow:hidden; background:radial-gradient(ellipse at 22% 40%,#fffdf8,#fbf4e9 65%,#fff); color:#061440; margin:0; }
+ .desktop-about-hero { display:block; position:relative; container-type:inline-size; width:100%; aspect-ratio:1017 / 254; overflow:hidden; background:#fff; color:#061440; margin:0; }
  .desktop-about-hero-art { position:absolute; inset:0; width:100%; height:100%; }
- .desktop-about-hero-copy { position:absolute; top:.5cqw; left:2.8cqw; width:39%; }
- .desktop-about-hero h1 { position:static; width:100%; margin:0; padding:0; border:0; color:#061440; font:700 clamp(3rem,5.9cqw,4.75rem)/1 'Times New Roman',Georgia,serif; letter-spacing:-.02em; }
- .desktop-about-hero h1::after { content:none; }
- .desktop-about-hero .desktop-about-hero-identity { position:static; margin:1.25cqw 0 0; color:#061440; font:700 clamp(.75rem,1.45cqw,1.15rem)/1.15 'Times New Roman',Georgia,serif; white-space:nowrap; }
+ .desktop-about-hero-copy { position:absolute; top:1cqw; left:1.3cqw; width:35.5%; }
+ .desktop-about-hero h1 { position:static; width:100%; margin:0; padding:0; border:0; color:#061440; font:600 clamp(3.25rem,6.3cqw,5rem)/1 'Times New Roman',Georgia,serif; letter-spacing:-.02em; }
+ .desktop-about-hero h1::after { content:''; display:block; width:12.1cqw; height:2px; margin-top:.7cqw; background:#c79725; }
+ .desktop-about-hero .desktop-about-hero-identity { position:static; margin:1cqw 0 0; color:#061440; font:600 clamp(.75rem,1.3cqw,1.05rem)/1.3 Arial,sans-serif; white-space:nowrap; }
  .desktop-about-hero-identity>span { color:#c48b08; padding-inline:.15cqw; }
- .desktop-about-hero .desktop-about-hero-description { position:static; margin:.8cqw 0 0; color:#061440; font:italic 700 clamp(1rem,1.95cqw,1.55rem)/1.22 'Times New Roman',Georgia,serif; }
+ .desktop-about-hero .desktop-about-hero-description { position:static; margin:1.15cqw 0 0; color:#061440; font:400 clamp(1rem,1.85cqw,1.5rem)/1.3 Arial,sans-serif; }
 }

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {renderDesktopHomeClosing,renderDesktopHomeFooter} from '../scripts/desktop-home.mjs';
 const html=await readFile(new URL('../public/about.html',import.meta.url),'utf8');
-const desktop=html.split('<div class="desktop-about-page">')[1].split('<div class="about-compact-preserved">')[0];
+const desktop=html.split('<div class="desktop-about-page desktop-about-current-reference">')[1].split('<div class="about-compact-preserved">')[0];
 const escape=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 test('desktop About preserves complete source biographies and original portrait identities',async()=>{
  const source=await readFile(new URL('../scripts/build.mjs',import.meta.url),'utf8');
@@ -12,11 +12,12 @@ test('desktop About preserves complete source biographies and original portrait 
   for(const paragraph of paragraphs)assert(desktop.includes(`<p>${escape(paragraph)}</p>`));
  }
  for(const photo of ['E7F71712-32D1-43FE-BA18-618193E48BA8.png','C877690E-4E12-4A62-BCE4-47A36456254D.png','Elderly Cleric in Embroidered Hat.png'])assert(desktop.includes(`src="${photo}"`));
- assert(desktop.includes('479BC5DC-EFA1-48F7-849F-E25CB71E542D.png'));
+ assert(desktop.includes('Your Global Voice About Us.png'));
  assert.equal((desktop.match(/class="desktop-about-profile-info"/g)||[]).length,3);
- assert.equal((desktop.match(/data-about-toggle/g)||[]).length,4);
+ assert.equal((desktop.match(/data-about-toggle/g)||[]).length,3);
  for(const [,id] of desktop.matchAll(/aria-controls="([^"]+)"/g))assert(desktop.includes(`id="${id}" class="desktop-about-expanded" hidden`));
- assert.doesNotMatch(desktop,/desktop-home-cause desktop-home-/);
+ assert.doesNotMatch(desktop,/desktop-home-cause desktop-home-|desktop-about-dove|desktop-about-who/);
+ assert(!desktop.includes('font:italic')); 
 });
 test('desktop About uses the actual Home closing and footer without creating another system',async()=>{
  assert(desktop.includes(renderDesktopHomeClosing()));
