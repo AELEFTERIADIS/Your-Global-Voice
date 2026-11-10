@@ -22,6 +22,8 @@ test('Mission uses existing participation, donation, and shared footer component
  const contact=JSON.parse(await readFile(new URL('../content/contact.json',import.meta.url),'utf8'));
  assert(html.includes(renderDesktopHomeFooter(contact)));
  assert.equal((html.match(/<footer class="desktop-home-footer"/g)||[]).length,1);
- assert.equal((desktop.match(/class="[^\"]*desktop-mission-photo-pending"/g)||[]).length,2);
+ assert.equal((desktop.match(/class="[^\"]*desktop-mission-photo-pending"/g)||[]).length,0);
+ assert(desktop.includes('class="desktop-mission-hero-art"'));
+ assert(desktop.includes('class="desktop-mission-closing-art"'));
  assert.doesNotMatch(desktop,/<form|(?:href|src)="https?:\/\//);
 });
