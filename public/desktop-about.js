@@ -4,7 +4,7 @@ document.querySelectorAll('[data-about-toggle]').forEach(button=>{
  button.addEventListener('click',()=>{
   const open=button.getAttribute('aria-expanded')!=='true';
   button.setAttribute('aria-expanded',String(open));
-  button.textContent=open?'Read Less':'Read More';
+  button.textContent=button.dataset.aboutLabel?(open?'Close Our Story':'Our Story →'):(open?'Read Less':'Read More');
   panel.hidden=!open;
  });
 });

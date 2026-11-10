@@ -12,9 +12,9 @@ test('desktop About preserves complete source biographies and original portrait 
   for(const paragraph of paragraphs)assert(desktop.includes(`<p>${escape(paragraph)}</p>`));
  }
  for(const photo of ['E7F71712-32D1-43FE-BA18-618193E48BA8.png','C877690E-4E12-4A62-BCE4-47A36456254D.png','Elderly Cleric in Embroidered Hat.png'])assert(desktop.includes(`src="${photo}"`));
- assert(desktop.includes('Your Global Voice About Us.png'));
+ assert(desktop.includes('Your Global Voice — About Us123.png'));
  assert.equal((desktop.match(/class="desktop-about-profile-info"/g)||[]).length,3);
- assert.equal((desktop.match(/data-about-toggle/g)||[]).length,3);
+ assert.equal((desktop.match(/data-about-toggle/g)||[]).length,4);
  for(const [,id] of desktop.matchAll(/aria-controls="([^"]+)"/g))assert(desktop.includes(`id="${id}" class="desktop-about-expanded" hidden`));
  assert.doesNotMatch(desktop,/desktop-home-cause desktop-home-|desktop-about-dove|desktop-about-who/);
  assert(!desktop.includes('font:italic')); 
@@ -28,4 +28,15 @@ test('desktop About uses the actual Home closing and footer without creating ano
  assert.equal((html.match(/<footer class="desktop-home-footer"/g)||[]).length,1);
  assert(desktop.includes('href="donate.html#donation-payment"'));
  assert(desktop.includes('href="get-involved.html#application"'));
+});
+
+test('desktop About follows the new reference section order and keeps its hero concise',()=>{
+ const hero=desktop.split('</section>')[0];
+ assert.doesNotMatch(hero,/desktop-about-hero-description|<a |<button/);
+ const sections=['desktop-about-hero','desktop-about-foundation','desktop-about-team','desktop-about-commitment','desktop-about-story','desktop-about-closing'];
+ const positions=sections.map(c=>desktop.indexOf('class="'+c+'"'));
+ assert(positions.every(p=>p>=0));
+ assert.deepEqual(positions,[...positions].sort((a,b)=>a-b));
+ assert(desktop.includes('data-about-label="Our Story"'));
+ assert(desktop.includes('desktop-about-volunteers'));
 });
