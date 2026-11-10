@@ -13,6 +13,7 @@ test('desktop About preserves complete source biographies and original portrait 
  }
  for(const photo of ['E7F71712-32D1-43FE-BA18-618193E48BA8.png','C877690E-4E12-4A62-BCE4-47A36456254D.png','Elderly Cleric in Embroidered Hat.png'])assert(desktop.includes(`src="${photo}"`));
  assert(desktop.includes('Your Global Voice — About Us123.png'));
+ assert(desktop.includes('About Us_ Unity in Diversity (1).png'));
  assert.equal((desktop.match(/class="desktop-about-profile-info"/g)||[]).length,3);
  assert.equal((desktop.match(/data-about-toggle/g)||[]).length,4);
  for(const [,id] of desktop.matchAll(/aria-controls="([^"]+)"/g))assert(desktop.includes(`id="${id}" class="desktop-about-expanded" hidden`));
