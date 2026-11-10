@@ -7,6 +7,12 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+ ...['andreas-elefteriadis','maximos-weimar','robert-shillenn'].flatMap(page=>[
+   [`/${page}.html`,[`../public/${page}.html`,'text/html; charset=utf-8']],
+   [`/${page}`, [`../public/${page}.html`,'text/html; charset=utf-8']],
+   [`/${page}/`, [`../public/${page}.html`,'text/html; charset=utf-8']],
+ ]),
+ ['/leadership-biography.css',['../public/leadership-biography.css','text/css; charset=utf-8']],
  ['/About%20Us_%20Unity%20in%20Diversity%20(1).png', ['../public/About Us_ Unity in Diversity (1).png', 'image/png']],
  ['/Your%20Global%20Voice%20%E2%80%94%20About%20Us123.png', ['../public/Your Global Voice — About Us123.png', 'image/png']],
  ['/Your%20Global%20Voice%20About%20Us.png', ['../public/Your Global Voice About Us.png', 'image/png']],

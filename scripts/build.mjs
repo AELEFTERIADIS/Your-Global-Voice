@@ -1,3 +1,4 @@
+import { writeLeadershipPages } from './leadership-pages.mjs';
 import { renderDesktopAboutPage } from './desktop-about.mjs';
 import { renderDesktopHome, renderDesktopHomeFooter } from './desktop-home.mjs';
 import { renderHomeSidebar } from './home-sidebar.mjs';
@@ -121,4 +122,5 @@ for (const [path, title, file] of outputPages) {
   }
   await writeFile(new URL(`../public/${file}`, import.meta.url), portableHtml);
 }
+await writeLeadershipPages({andreasBiography,maximosBiography,robertBiography});
 console.log(`Built all ${outputPages.length} pages from shared layout and official purposes.`);
