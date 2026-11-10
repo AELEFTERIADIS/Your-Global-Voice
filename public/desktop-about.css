@@ -31,10 +31,10 @@ main:has(>.desktop-about-page) { --about-transition-desktop-above:16px; --about-
  .desktop-about-profile { display:grid; grid-template-columns:12.7cqw minmax(0,1fr); align-items:center; gap:1.2cqw; height:17.5cqw; min-width:0; padding:.9cqw; border:1px solid #d9ba7b; border-bottom:5px solid #8705a5; border-radius:1.8cqw; background:#faf8f0; }
  .desktop-about-profile:nth-child(2) { border-bottom-color:#dc090c; }.desktop-about-profile:nth-child(3) { border-bottom-color:#087b20; }
  .desktop-about-profile>img { display:block; width:100%; height:auto; max-height:100%; object-fit:contain; border-radius:.8cqw; margin:0; }
- .desktop-about-profile-info { min-width:0; height:100%; display:grid; grid-template-rows:minmax(0,1fr) 2.5em 34px; gap:.6cqw; align-items:start; }
+ .desktop-about-profile-info { min-width:0; height:100%; display:grid; grid-template-rows:auto auto minmax(34px,1fr); gap:.6cqw; align-items:start; }
  .desktop-about-profile h3 { width:100%; margin:0; font-size:clamp(1.05rem,1.82cqw,1.45rem); line-height:1.12; }
  .desktop-about-role { width:100%; color:#8e410b; font:500 clamp(1rem,1.65cqw,1.3rem)/1.2 'Times New Roman',Georgia,serif; }
- .desktop-about-read { display:inline-flex; align-items:center; justify-content:center; height:34px; width:100%; padding:.25cqw .35cqw; border:1px solid #d69a0a; border-radius:2cqw; background:linear-gradient(#fff5c4,#ffda69); box-shadow:0 2px 2px #0002; color:#061440; font:600 clamp(.95rem,1.45cqw,1.15rem)/1.1 Arial,sans-serif; cursor:pointer; white-space:nowrap; text-decoration:none; align-self:end; }
+ .desktop-about-read { display:inline-flex; align-items:center; justify-content:center; height:34px; width:100%; padding:.25cqw .35cqw; border:1px solid #d69a0a; border-radius:.65cqw; background:linear-gradient(#fff5c4,#ffda69); box-shadow:0 2px 2px #0002; color:#061440; font:600 clamp(.95rem,1.45cqw,1.15rem)/1.1 Arial,sans-serif; cursor:pointer; white-space:nowrap; text-decoration:none; align-self:end; }
  .desktop-about-expanded { width:100%; grid-column:1/-1; text-align:left; color:#102b49; font:400 clamp(1rem,1.4cqw,1.125rem)/1.6 Arial,sans-serif; padding:1cqw 0; }
  .desktop-about-expanded p+p { margin-top:1cqw; }
  .desktop-about-expanded[hidden] { display:none; }

@@ -45,7 +45,7 @@ test('desktop About follows the new reference section order and keeps its hero c
 
 test('desktop leadership links open individual biographies with a return to the team',async()=>{
  for(const [name,file] of [['Andreas Elefteriadis','andreas-elefteriadis.html'],['Archimandrite Maximos Weimar','maximos-weimar.html'],['Robert Shillenn','robert-shillenn.html']]){
-  assert(desktop.includes(`href="${file}" aria-label="Read more about ${name}"`));
+  assert(desktop.includes(`href="${file}" aria-label="Learn more about ${name}">Learn More</a>`));
   const biography=await readFile(new URL('../public/'+file,import.meta.url),'utf8');
   assert(biography.includes(`id="biography-name">${name}</h1>`));
   assert(biography.includes('href="about.html#desktop-about-team-heading"'));
