@@ -7,6 +7,10 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+ ['/desktop-about.css', ['../public/desktop-about.css', 'text/css; charset=utf-8']],
+ ['/desktop-about.js', ['../public/desktop-about.js', 'text/javascript; charset=utf-8']],
+ ['/desktop-about-hero.css', ['../public/desktop-about-hero.css', 'text/css; charset=utf-8']],
+ ['/C74456AF-F38B-4398-AAD8-0F5E2803FC34.png', ['../public/C74456AF-F38B-4398-AAD8-0F5E2803FC34.png', 'image/png']],
  ['/home-sidebar-refinement.css', ['../public/home-sidebar-refinement.css', 'text/css; charset=utf-8']],
  ['/desktop-home.css', ['../public/desktop-home.css', 'text/css; charset=utf-8']],
  ['/BC7678D3-851B-4549-BF8C-D4BE0B43E533.png', ['../public/BC7678D3-851B-4549-BF8C-D4BE0B43E533.png', 'image/png']],
@@ -60,6 +64,7 @@ const routes = new Map([
   ['/YGV-Humanitarian-Aid.jpeg', ['../public/YGV-Humanitarian-Aid.jpeg', 'image/jpeg']],
   ['/8C534551-DFAE-4F96-B226-14203E48BE5D.jpeg', ['../public/8C534551-DFAE-4F96-B226-14203E48BE5D.jpeg', 'image/jpeg']],
   ['/011A7EA4-9734-4150-A3F7-7694CB94F46D.jpeg', ['../public/011A7EA4-9734-4150-A3F7-7694CB94F46D.jpeg', 'image/jpeg']],
+  ...['E7F71712-32D1-43FE-BA18-618193E48BA8.png','C877690E-4E12-4A62-BCE4-47A36456254D.png','Elderly Cleric in Embroidered Hat.png'].map(file=>['/'+encodeURI(file),['../public/'+file,'image/png']]),
   ['/about.js', ['../public/about.js', 'text/javascript; charset=utf-8']],
   ['/about.css', ['../public/about.css', 'text/css; charset=utf-8']],
   ['/3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', ['../public/3F43F73B-C751-448D-AE01-2EFD16DF9F87.png', 'image/png']],
