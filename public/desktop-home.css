@@ -78,3 +78,8 @@
  .desktop-home-footer-contact > p { font-size: 1.35cqw; }
  .desktop-home-footer-wave { position: absolute; bottom: 0; height: 7.156cqw; mix-blend-mode: multiply; }
 }
+
+@media (min-width:80rem) {
+ .desktop-home-redesign { position:relative; }
+ .desktop-home-redesign::after { content:''; position:absolute; inset:0; z-index:2; border:2px solid #e3a019; border-radius:1.5rem; box-sizing:border-box; pointer-events:none; }
+}
