@@ -55,3 +55,10 @@ test('desktop leadership links open individual biographies with a return to the 
   assert.doesNotMatch(biography,/about-compact-preserved|desktop-about-page|data-about-toggle/);
  }
 });
+
+test('About volunteer image uses the uploaded original directly instead of the design composite',async()=>{
+ assert.match(desktop,/<img class="desktop-about-volunteers" src="41251AE2-36C7-4CCA-87DD-16804E860189.jpeg" width="3840" height="2558"/);
+ assert.doesNotMatch(desktop,/<svg class="desktop-about-volunteers"/);
+ const css=await readFile(new URL('../public/desktop-about.css',import.meta.url),'utf8');
+ assert(css.includes('aspect-ratio:561/177; object-fit:cover;'));
+});
