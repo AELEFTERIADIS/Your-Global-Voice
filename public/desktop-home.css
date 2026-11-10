@@ -83,3 +83,7 @@
  .desktop-home-redesign { position:relative; border-radius:1.5rem; overflow:hidden; }
  .desktop-home-redesign::after { content:''; position:absolute; inset:0; z-index:2; border:2px solid #e3a019; border-radius:1.5rem; box-sizing:border-box; pointer-events:none; }
 }
+
+@media (min-width:80rem) {
+ .desktop-home-hero-divider { position:absolute; top:.9cqw; left:43.2%; width:7.4%; height:26cqw; pointer-events:none; }
+}
