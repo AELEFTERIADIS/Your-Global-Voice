@@ -7,6 +7,7 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+ ['/home-hero-approved-divider.svg',['../public/home-hero-approved-divider.svg','image/svg+xml']],
  ...['andreas-elefteriadis','maximos-weimar','robert-shillenn'].flatMap(page=>[
    [`/${page}.html`,[`../public/${page}.html`,'text/html; charset=utf-8']],
    [`/${page}`, [`../public/${page}.html`,'text/html; charset=utf-8']],

@@ -12,7 +12,7 @@
  .desktop-home-globe { position: absolute; inset: 0 0 0 auto; width: 54.426%; height: 100%; mask-image: linear-gradient(to right,transparent,#000 7%); }
  .desktop-home-hero-copy { position: absolute; top: 2.5cqw; left: 4.5cqw; width: 45%; }
  .desktop-home-hero h1 { margin: 0; font-size: 5.4cqw; line-height: .96; letter-spacing: -.025em; white-space: nowrap; }
- .desktop-home-hero h1 em { color: #b8810c; font-size: 4.9cqw; }
+ .desktop-home-hero h1 em { color: #b8810c; font-size: 4.45cqw; }
  .desktop-home-hero-copy > p { max-width: 41cqw; margin: 1.3cqw 0 0; color: #061440; font: 600 1.95cqw/1.22 Arial,sans-serif; text-wrap: balance; }
  .desktop-home-hero-actions { display: flex; gap: 1.5cqw; align-items: center; margin-top: 1.2cqw; }
  .desktop-home-action { display: inline-flex; align-items: center; justify-content: center; gap: .8cqw; min-height: 4.5cqw; padding: .45cqw 2.1cqw; border: 2px solid #d99b02; border-radius: 99px; background: #fff; color: #061440; font: 700 2.2cqw/1.1 'Header Condensed',Arial,sans-serif; text-decoration: none; white-space: nowrap; }
@@ -85,5 +85,5 @@
 }
 
 @media (min-width:80rem) {
- .desktop-home-hero-divider { position:absolute; top:.9cqw; left:42%; width:9.3%; height:26cqw; pointer-events:none; }
+ .desktop-home-hero-divider { position:absolute; top:.9cqw; left:42.75%; width:7.665cqw; height:26.2cqw; pointer-events:none; }
 }
