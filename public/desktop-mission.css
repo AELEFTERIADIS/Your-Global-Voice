@@ -19,7 +19,8 @@
  .desktop-mission-hero-copy { position:relative; width:44%; padding:5.7cqw 0 0 3.8cqw; display:flex; flex-direction:column; align-items:flex-start; }
  .desktop-mission-hero-title-group { display:grid; justify-items:center; width:max-content; max-width:100%; }
  .desktop-mission-hero h1 { font-size:7.8cqw; line-height:1.06; margin:0; white-space:nowrap; }
- .desktop-mission-motto { font:600 1.95cqw/2.52cqw 'Times New Roman',Georgia,serif; white-space:nowrap; margin:.5cqw 0 0!important; letter-spacing:-.06cqw; }
+ /* Align to the requested O/u-to-o/n span; retain the line box so the curve and button stay fixed. */
+ .desktop-mission-motto { font:600 1.54cqw/2.52cqw 'Times New Roman',Georgia,serif; white-space:nowrap; margin:.5cqw 0 0!important; letter-spacing:-.04cqw; transform:translateX(.865cqw); }
  .desktop-mission-motto>span:nth-child(1) { color:#8006ca; }.desktop-mission-motto>span:nth-child(2) { color:#d50810; }.desktop-mission-motto>span:nth-child(3) { color:#117c22; }
  .desktop-mission-accent { display:block; width:100%; height:2.5cqw; }
  .desktop-mission-hero-copy>.desktop-mission-accent { width:34cqw; margin:1.4cqw 0 1.7cqw .5cqw; }
