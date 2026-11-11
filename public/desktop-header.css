@@ -16,8 +16,8 @@
  .site-header .desktop-reference-nav { display: flex; flex: 1; min-width: 0; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: clamp(.4rem,.6vw,.75rem); padding-left: 20px; border-left: 1px solid transparent; }
  .site-header .desktop-reference-nav a { position: relative; display: inline-flex; justify-content: center; align-items: center; flex: none; min-height: 44px; border: 0; padding: 0; color: #102B49; font: 700 clamp(1rem,1.25vw,1.25rem)/1.25 'Header Condensed', 'Arial Narrow', Arial, sans-serif; white-space: nowrap; }
  .site-header .desktop-reference-nav a[aria-current="page"]::after { content: ''; position: absolute; height: 5px; border-radius: 99px; background: #c99b36; left: 0; right: 0; bottom: 0; }
- .site-header .desktop-reference-nav .desktop-reference-donate { gap: 5px; margin-left: 15px; padding: 9px 12px; border: 1px solid #d5af58; border-radius: 999px; color: #102B49; background: linear-gradient(180deg,#ffe891 0%,#f7c637 48%,#e8a900 100%); font-size: clamp(1.1rem,1.375vw,1.375rem); }
- .desktop-reference-donate svg { width: 20px; height: 20px; flex: none; color: #B65B60; }
+ .site-header .desktop-reference-nav .desktop-reference-donate { gap: 5px; margin-left: 0; padding: 9px 12px; border: 1px solid #d5af58; border-radius: 999px; color: #102B49; background: linear-gradient(180deg,#ffe891 0%,#f7c637 48%,#e8a900 100%); font-size: clamp(1.1rem,1.375vw,1.375rem); }
+ .desktop-reference-donate svg { width: 20px; height: 20px; flex: none; color: #B51F32; }
  .desktop-reference-donate::before { display: none; }
  .site-header .desktop-reference-donate[aria-current="page"]::after { display: none; }
  .site-header .desktop-reference-nav a:hover { color: #8c6519; }
