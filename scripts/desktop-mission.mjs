@@ -23,9 +23,9 @@ const icons=[
 ];
 const cards=[
  {lines:'Hope for<br>Every Life',text:'Compassion in Action',color:'red'},
- {lines:'Dignity<br>for All',text:'Justice Without<br>Discrimination',color:'purple'},
- {lines:'Every Life<br>Matters',text:'Compassion Beyond<br>Humanity',color:'brown'},
- {lines:'A Greener<br>Tomorrow',text:'Protect Nature,<br>Preserve Our Future',color:'green'}
+ {lines:'Dignity<br>for All',text:'Justice Without Discrimination',color:'purple'},
+ {lines:'Every Life<br>Matters',text:'Compassion Beyond Humanity',color:'brown'},
+ {lines:'A Greener<br>Tomorrow',text:'Protect Nature, Preserve Our Future',color:'green'}
 ];
 export function renderDesktopMission(mission,images){return `<div class="desktop-mission-page">
 <section class="desktop-mission-hero" aria-labelledby="desktop-mission-title">${heroArtwork()}<div class="desktop-mission-hero-copy"><h1 id="desktop-mission-title">Our Mission</h1><p class="desktop-mission-motto"><span>MY VOICE</span> + <span>YOUR VOICE</span> = <span>OUR VOICE</span></p>${accent}<a class="desktop-mission-action" href="donate.html#donation-payment">${heart}<span>Support Our Mission</span></a></div></section>
