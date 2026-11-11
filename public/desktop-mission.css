@@ -4,9 +4,14 @@
 @media (min-width:80rem) {
  .mission-compact-preserved { display:none; }
  body:has(.desktop-mission-page)>.site-footer { display:none; }
- body:has(.desktop-mission-page)>.desktop-home-footer { margin-block:0; }
+ body:has(.desktop-mission-page)>.desktop-home-footer { margin-block:0; border:3px solid #e8ad0a; border-top:0; border-radius:0 0 2.2rem 2.2rem; overflow:hidden; background:linear-gradient(#fff,#faf8f3); }
+ body:has(.desktop-mission-page)>.desktop-home-footer .desktop-home-footer-wave { mix-blend-mode:normal; width:100%; left:0; display:block; }
+ body:has(.desktop-mission-page)>.desktop-home-footer .desktop-home-social h2::after { background:#d8a11a; }
+ body:has(.desktop-mission-page)>.desktop-home-footer .desktop-home-footer-contact h2 { position:relative; }
+ body:has(.desktop-mission-page)>.desktop-home-footer .desktop-home-footer-contact h2::after { content:""; position:absolute; left:0; bottom:-.4cqw; width:12cqw; height:2px; border-radius:50%; background:#d8a11a; }
+ body:has(.desktop-mission-page)>.desktop-home-footer .desktop-home-footer-columns { padding-top:2cqw; }
  main:has(>.desktop-mission-page) { flex:0 0 auto; padding-bottom:0; margin-bottom:0; }
- .desktop-mission-page { display:block; container-type:inline-size; overflow:hidden; color:#071b3e; background:#fff; border:3px solid #e8ad0a; border-radius:2.2rem; }
+ .desktop-mission-page { display:block; container-type:inline-size; overflow:hidden; color:#071b3e; background:#fff; border:3px solid #e8ad0a; border-bottom:0; border-radius:2.2rem 2.2rem 0 0; }
  .desktop-mission-page h1,.desktop-mission-page h2,.desktop-mission-page h3 { color:#071b3e; font-family:'Times New Roman',Georgia,serif; font-weight:600; overflow-wrap:normal; }
  .desktop-mission-page p { margin:0; }
  .desktop-mission-hero { position:relative; aspect-ratio:1100/370; background:#fff; }
@@ -48,13 +53,13 @@
  .desktop-mission-full { padding:1.5cqw 2.5cqw 2cqw; border-top:1px solid #e3bf69; font:400 1.5cqw/1.65 Arial,sans-serif; }
  .desktop-mission-guides .desktop-mission-full h2,.desktop-mission-guides .desktop-mission-full h3 { color:#fff; }
  .desktop-mission-full h2 { margin:0 0 1cqw; font-size:2.7cqw; }.desktop-mission-full h3 { margin:1.3cqw 0 .5cqw; font-size:2cqw; }.desktop-mission-full p+p { margin-top:1cqw; }
- .desktop-mission-invitation { position:relative; aspect-ratio:1100/385; margin:0; }
- .desktop-mission-invitation-copy { position:relative; margin-left:45%; width:54%; padding-top:1.7cqw; }
+ .desktop-mission-invitation { position:relative; aspect-ratio:1100/490; margin:0; }
+ .desktop-mission-invitation-copy { position:relative; margin-left:45%; width:54%; padding-top:3.8cqw; }
  .desktop-mission-invitation h2 { font-size:2.95cqw; font-style:italic; line-height:1.15; margin:0; letter-spacing:-.065cqw; white-space:nowrap; }
  .desktop-mission-invitation h2 span { color:#db9c05; padding-inline:.15cqw; }
- .desktop-mission-invitation-copy>.desktop-mission-accent { width:92%; margin:.8cqw 0 .7cqw; }
+ .desktop-mission-invitation-copy>.desktop-mission-accent { width:92%; margin:1.4cqw 0 3cqw; }
  .desktop-mission-invitation p { color:#071b3e; font:500 1.85cqw/1.3 Arial,sans-serif; }
- .desktop-mission-invitation .desktop-mission-action { margin:1.8cqw 0 0 5.9cqw; min-width:35cqw; }
+ .desktop-mission-invitation .desktop-mission-action { margin:0 0 0 4.9cqw; min-width:39.5cqw; }
  .desktop-mission-page a:hover { filter:brightness(1.05); }
  .desktop-mission-page a:focus-visible,.desktop-mission-guides>summary:focus-visible { outline:3px solid #e3b54b; outline-offset:4px; }
 }

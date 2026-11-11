@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {missionImages} from '../scripts/mission-images.mjs';
 import {renderDesktopHomeFooter} from '../scripts/desktop-home.mjs';
+import {renderDesktopMissionFooter} from '../scripts/desktop-mission.mjs';
 const html=await readFile(new URL('../public/mission.html',import.meta.url),'utf8');
 const desktop=html.split('<div class="desktop-mission-page">')[1].split('<div class="mission-compact-preserved">')[0];
 const escape=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
@@ -20,7 +21,8 @@ test('Mission uses existing participation, donation, and shared footer component
  assert(desktop.includes('href="donate.html#donation-payment"'));
  assert(desktop.includes('href="get-involved.html#application"'));
  const contact=JSON.parse(await readFile(new URL('../content/contact.json',import.meta.url),'utf8'));
- assert(html.includes(renderDesktopHomeFooter(contact)));
+ assert(html.includes(renderDesktopMissionFooter(contact)));
+ assert.equal(renderDesktopMissionFooter(contact).split('</section></div>')[0],renderDesktopHomeFooter(contact).split('</section></div>')[0]);
  assert.equal((html.match(/<footer class="desktop-home-footer"/g)||[]).length,1);
  assert.equal((desktop.match(/class="[^\"]*desktop-mission-photo-pending"/g)||[]).length,0);
  assert(desktop.includes('class="desktop-mission-hero-art"'));
@@ -51,4 +53,14 @@ test('Issue 1 decorations use only the approved Mission reference and preserve i
  assert(!decoration.includes('stroke-dasharray'));
  assert(!decoration.includes('About Us'));
  assert(!decoration.includes('home-approved'));
+});
+
+test('Mission closing uses the new 123456789 reference, omits the invitation paragraph, and integrates the actual footer',async()=>{
+ const source=await readFile(new URL('../scripts/desktop-mission.mjs',import.meta.url),'utf8');
+ const closing=desktop.split('<section class="desktop-mission-invitation"')[1];
+ assert(closing.includes('123456789.png'));
+ assert(!closing.includes('Join us in building'));
+ assert(closing.includes('Be Part of Our Mission'));
+ assert(html.includes('desktop-mission-footer-wave'));
+ assert(source.includes("renderDesktopHomeFooter(contact).replace"));
 });

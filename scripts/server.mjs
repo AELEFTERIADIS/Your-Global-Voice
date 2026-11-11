@@ -9,6 +9,7 @@ import { resolve } from 'node:path';
 const routes = new Map([
  ['/2D800A7B-B42F-453F-9FEA-E8615115523D.jpeg', ['../public/2D800A7B-B42F-453F-9FEA-E8615115523D.jpeg','image/jpeg']],
  ['/C84CC7A1-DA96-47CA-B88D-67E57851C8D0.png', ['../public/C84CC7A1-DA96-47CA-B88D-67E57851C8D0.png','image/png']],
+ ['/123456789.png', ['../public/123456789.png','image/png']],
  ['/desktop-mission.css',['../public/desktop-mission.css','text/css; charset=utf-8']],
  ['/585C5709-9F99-450A-BC75-FF3237495E19.png',['../public/585C5709-9F99-450A-BC75-FF3237495E19.png','image/png']],
  ['/41251AE2-36C7-4CCA-87DD-16804E860189.jpeg',['../public/41251AE2-36C7-4CCA-87DD-16804E860189.jpeg','image/jpeg']],

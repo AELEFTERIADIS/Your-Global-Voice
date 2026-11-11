@@ -1,4 +1,4 @@
-import { renderDesktopMission } from './desktop-mission.mjs';
+import { renderDesktopMission, renderDesktopMissionFooter } from './desktop-mission.mjs';
 import { writeLeadershipPages } from './leadership-pages.mjs';
 import { renderDesktopAboutPage } from './desktop-about.mjs';
 import { renderDesktopHome, renderDesktopHomeFooter } from './desktop-home.mjs';
@@ -100,7 +100,7 @@ for (const [path, title, file] of outputPages) {
     <div class="header-brand"><img class="header-logo" src="603250A8-B1C4-4533-848C-4028A6E0AD49.png" alt="Your Global Voice official logo" width="1254" height="1254"><a class="wordmark" href="/"><span class="desktop-brand-name">Your Global Voice</span><span class="desktop-brand-caption">A NONPROFIT ORGANIZATION</span></a></div>
     <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">${navigation}</nav></details><nav class="desktop-nav" aria-label="Main navigation">${navigation}</nav><nav class="desktop-reference-nav" aria-label="Main navigation">${desktopNavigation}</nav>${path!=='/'?`<div class="desktop-header-extra-sidebar">${renderHomeSidebar()}</div>`:''}
   </div></header>
-  <main id="main" tabindex="-1">${path === "/" ? renderHomeSidebar() : ""}${path==='/'?renderDesktopHome()+`<div class="home-compact-preserved">${bodies[path]}</div>`:path==='/about'?renderDesktopAboutPage({aboutWho,andreasBiography,maximosBiography,robertBiography})+`<div class="about-compact-preserved">${bodies[path]}</div>`:path==='/mission'?renderDesktopMission(mission,missionImages)+`<div class="mission-compact-preserved">${bodies[path]}</div>`:bodies[path]}</main>${path==='/'||path==='/about'||path==='/mission'?'\n  '+renderDesktopHomeFooter(contact):''}
+  <main id="main" tabindex="-1">${path === "/" ? renderHomeSidebar() : ""}${path==='/'?renderDesktopHome()+`<div class="home-compact-preserved">${bodies[path]}</div>`:path==='/about'?renderDesktopAboutPage({aboutWho,andreasBiography,maximosBiography,robertBiography})+`<div class="about-compact-preserved">${bodies[path]}</div>`:path==='/mission'?renderDesktopMission(mission,missionImages)+`<div class="mission-compact-preserved">${bodies[path]}</div>`:bodies[path]}</main>${path==='/'||path==='/about'||path==='/mission'?'\n  '+(path==='/mission'?renderDesktopMissionFooter(contact):renderDesktopHomeFooter(contact)):''}
   <footer class="site-footer"><div class="footer-inner"><p class="footer-name">YOUR GLOBAL VOICE</p><p class="footer-slogan">Where Every Voice Matters</p><nav class="footer-navigation" aria-label="Footer navigation">${footerNavigation}</nav><p class="footer-copyright">© 2026 Your Global Voice, Inc. All rights reserved.</p></div></footer>
 </body>
 </html>
