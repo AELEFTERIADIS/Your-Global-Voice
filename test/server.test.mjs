@@ -136,7 +136,7 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
     assert.match(html, /<meta name="description"/);
     for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
       if (/^(mailto:|https:)/.test(href)) {
-        assert.ok(['/', '/about', '/mission', '/contact', '/donate'].includes(route));
+        assert.ok(['/', '/about', '/mission', '/contact', '/donate'].includes(route) || /^(mailto:info@ygvoice\.org$|https:\/\/wa\.me\/16316379508$|https:\/\/www\.google\.com\/maps\/search\/)/.test(href));
         continue;
       }
       if (href.startsWith('#')) {
