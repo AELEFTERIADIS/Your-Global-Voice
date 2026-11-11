@@ -41,7 +41,7 @@
  .desktop-mission-guides { margin:0 .65cqw 2.8cqw; border:3px solid #f0b50a; border-radius:2cqw; background:#061d39; color:#fff; }
  .desktop-mission-guides>summary { display:grid; grid-template-columns:40% minmax(0,1fr) auto; gap:1.8cqw; align-items:center; min-height:9.7cqw; padding:.9cqw 1.7cqw; list-style:none; cursor:pointer; }
  .desktop-mission-guides>summary::-webkit-details-marker { display:none; }
- .desktop-mission-guides .desktop-mission-guides-title,.desktop-mission-guides .desktop-mission-full p { color:#fff; }
+ .desktop-mission-guides .desktop-mission-guides-title { color:#fff; }
  .desktop-mission-guides-title { display:block; padding-right:1.5cqw; border-right:2px solid #efbd21; font:600 3.05cqw/1.1 'Times New Roman',Georgia,serif; white-space:nowrap; }
  .desktop-mission-guides-title>.desktop-mission-accent { width:95%; height:1.8cqw; margin-top:.8cqw; }
  .desktop-mission-guides-copy { display:block; text-align:center; font-family:'Times New Roman',Georgia,serif; white-space:nowrap; }
@@ -50,10 +50,26 @@
  .desktop-mission-read { display:inline-flex; align-items:center; justify-content:center; gap:.8cqw; border:3px solid #f2bc18; border-radius:2cqw; padding:.5cqw 1.4cqw; color:#fff; font:600 1.9cqw/1 'Times New Roman',Georgia,serif; white-space:nowrap; }
  .desktop-mission-read svg { width:2cqw; height:1.5cqw; color:#f3bf21; }
  .desktop-mission-less { display:none; }
- .desktop-mission-guides[open] .desktop-mission-more { display:none; }.desktop-mission-guides[open] .desktop-mission-less { display:inline; }.desktop-mission-guides[open] .desktop-mission-read svg { transform:rotate(90deg); }
- .desktop-mission-full { padding:1.5cqw 2.5cqw 2cqw; border-top:1px solid #e3bf69; font:400 1.5cqw/1.65 Arial,sans-serif; }
- .desktop-mission-guides .desktop-mission-full h2,.desktop-mission-guides .desktop-mission-full h3 { color:#fff; }
- .desktop-mission-full h2 { margin:0 0 1cqw; font-size:2.7cqw; }.desktop-mission-full h3 { margin:1.3cqw 0 .5cqw; font-size:2cqw; }.desktop-mission-full p+p { margin-top:1cqw; }
+ .desktop-mission-guides[open] .desktop-mission-more { display:none; }.desktop-mission-guides[open] .desktop-mission-less { display:inline; }.desktop-mission-guides[open] .desktop-mission-read svg { color:#fff; }
+ .mission-read-expanded-arrow { display:none; }.desktop-mission-guides[open] .mission-read-collapsed-arrow { display:none; }.desktop-mission-guides[open] .mission-read-expanded-arrow { display:inline; }
+ .desktop-mission-guides[open] { border:0; background:transparent; }
+ .desktop-mission-guides[open]>summary { border:3px solid #f0b50a; border-radius:2cqw; min-height:calc(9.7cqw + 6px); background:#061d39; }
+ .desktop-mission-full { margin-top:2cqw; padding:2.2cqw 2.5cqw 2.5cqw; border:1.5px solid #dba316; border-radius:1.8cqw; background:#fdfbf5; color:#102b49; font:400 1.55cqw/1.5 Georgia,'Times New Roman',serif; }
+ .desktop-mission-guides .desktop-mission-full h2,.desktop-mission-guides .desktop-mission-full h3 { color:#102b49; }
+ .desktop-mission-full h2 { margin:0; font-size:4.3cqw; font-style:italic; line-height:1.12; }
+ .desktop-mission-full>.desktop-mission-accent { width:65%; height:2cqw; margin:.5cqw 0 1.1cqw; }
+ .mission-principles-intro p+p { margin-top:.8cqw; }
+ .mission-principle-rows { margin-top:1.6cqw; border-top:1px solid #d6a448; }
+ .mission-principle-row { display:grid; grid-template-columns:10cqw 22cqw minmax(0,1fr); gap:1.8cqw; align-items:center; padding:1.5cqw 0; }
+ .mission-principle-row+.mission-principle-row { border-top:1px solid #ddba6a; }
+ .mission-principle-icon { display:block; width:8cqw; height:8cqw; margin-inline:auto; color:var(--principle-color); }
+ .mission-principle-red { --principle-color:#c7182b; }.mission-principle-purple { --principle-color:#790bb7; }.mission-principle-brown { --principle-color:#85380d; }.mission-principle-green { --principle-color:#0d7629; }
+ .desktop-mission-full .mission-principle-row h3 { align-self:stretch; display:flex; align-items:center; margin:0; padding-right:1.5cqw; border-right:2px solid #dca116; color:var(--principle-color); font-size:2.65cqw; line-height:1.12; }
+ .mission-principle-row p { margin:0; }
+ .mission-shared-commitment { display:grid; grid-template-columns:13cqw minmax(0,1fr); gap:2cqw; align-items:center; margin-top:1.8cqw; padding:1.5cqw; border:1.5px solid #dba316; border-radius:1.4cqw; }
+ .mission-shared-icon { display:block; width:11cqw; height:11cqw; padding-right:1.3cqw; border-right:2px solid #dca116; }
+ .desktop-mission-full .mission-shared-commitment h3 { margin:0 0 .5cqw; font-size:3.4cqw; font-style:italic; line-height:1.1; }
+ .mission-principles-support { display:flex; width:fit-content; min-width:32cqw; margin:2.3cqw auto 0; color:#102b49; font-weight:600; }
  .desktop-mission-invitation { position:relative; aspect-ratio:1100/490; margin:0; }
  .desktop-mission-invitation-copy { position:relative; margin-left:45%; width:54%; padding-top:3.8cqw; }
  .desktop-mission-invitation h2 { font-size:2.95cqw; font-style:italic; line-height:1.15; margin:0; letter-spacing:-.065cqw; white-space:nowrap; }

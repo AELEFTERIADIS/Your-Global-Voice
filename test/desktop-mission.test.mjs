@@ -75,3 +75,12 @@ test('desktop Mission cards use the four approved italic unboxed slogans while f
  assert(!cards.includes('Provide humanitarian assistance'));
  assert(desktop.includes('Our Full Mission Statement'));
 });
+
+test('expanded Mission principles preserve the full source statement, four cause rows and existing donation destination',()=>{
+ assert(desktop.includes('The Principles That Guide Us'));
+ assert.equal((desktop.match(/class="mission-principle-row /g)||[]).length,4);
+ assert(desktop.includes('Our Shared Commitment'));
+ assert(desktop.includes('Show Less'));
+ assert(desktop.includes('class="desktop-mission-action mission-principles-support" href="donate.html#donation-payment"'));
+ assert(!desktop.includes('<details class="desktop-mission-guides" open'));
+});
