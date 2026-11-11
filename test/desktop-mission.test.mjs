@@ -40,3 +40,15 @@ test('new Mission desktop reference keeps original community photo, cause order,
  assert(closing.includes('One World <span>|</span> One Shared Responsibility'));
  assert(!desktop.includes('2D800A7B-B42F-453F-9FEA-E8615115523D.jpeg'));
 });
+
+test('Issue 1 decorations use only the approved Mission reference and preserve individual tapered color contours',async()=>{
+ const source=await readFile(new URL('../scripts/desktop-mission.mjs',import.meta.url),'utf8');
+ const decoration=source.slice(source.indexOf('const waves='),source.indexOf('const heroArtwork='));
+ assert(decoration.includes('mission-reference-hero-wave'));
+ assert(decoration.includes('mission-reference-closing-wave'));
+ assert(decoration.includes('mission-reference-hero-divider'));
+ assert(decoration.includes('mission-reference-closing-divider'));
+ assert(!decoration.includes('stroke-dasharray'));
+ assert(!decoration.includes('About Us'));
+ assert(!decoration.includes('home-approved'));
+});
