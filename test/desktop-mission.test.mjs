@@ -84,3 +84,12 @@ test('expanded Mission principles preserve the full source statement, four cause
  assert(desktop.includes('class="desktop-mission-action mission-principles-support" href="donate.html#donation-payment"'));
  assert(!desktop.includes('<details class="desktop-mission-guides" open'));
 });
+
+test('Mission values toggle labels preserve native inline expansion and the Show Less state',()=>{
+ assert(desktop.includes('<span class="desktop-mission-more">Explore Our Values</span>'));
+ assert(desktop.includes('<span class="desktop-mission-less">Show Less</span>'));
+ assert(!desktop.includes('<span class="desktop-mission-more">Read More</span>'));
+ assert(desktop.includes('class="mission-read-collapsed-arrow"'));
+ assert(desktop.includes('class="mission-read-expanded-arrow"'));
+ assert(desktop.includes('<details class="desktop-mission-guides">'));
+});

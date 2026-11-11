@@ -51,6 +51,8 @@
  .desktop-mission-guides-copy em { display:block; color:#fff; font-size:2.3cqw; margin-top:.7cqw; }
  .desktop-mission-read { display:inline-flex; align-items:center; justify-content:center; gap:.8cqw; border:3px solid #f2bc18; border-radius:2cqw; padding:.5cqw 1.4cqw; color:#fff; font:600 1.9cqw/1 'Times New Roman',Georgia,serif; white-space:nowrap; }
  .desktop-mission-read svg { width:2cqw; height:1.5cqw; color:#f3bf21; }
+ .desktop-mission-guides:not([open]) .desktop-mission-read { width:calc(14.68cqw + 6px); padding-inline:.55cqw; gap:.35cqw; font-size:1.4cqw; line-height:1.9cqw; letter-spacing:-.01cqw; }
+ .desktop-mission-guides:not([open]) .desktop-mission-read svg { width:1.2cqw; height:1.1cqw; }
  .desktop-mission-less { display:none; }
  .desktop-mission-guides[open] .desktop-mission-more { display:none; }.desktop-mission-guides[open] .desktop-mission-less { display:inline; }.desktop-mission-guides[open] .desktop-mission-read svg { color:#fff; }
  .mission-read-expanded-arrow { display:none; }.desktop-mission-guides[open] .mission-read-collapsed-arrow { display:none; }.desktop-mission-guides[open] .mission-read-expanded-arrow { display:inline; }
