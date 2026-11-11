@@ -65,7 +65,7 @@ test('Mission closing uses the new 123456789 reference, omits the invitation par
  assert(source.includes("renderDesktopHomeFooter(contact).replace"));
 });
 
-test('desktop Mission cards use the four approved upright unboxed slogans while full statements remain available',()=>{
+test('desktop Mission cards use the four approved italic unboxed slogans while full statements remain available',()=>{
  const cards=desktop.split('<section class="desktop-mission-cards"')[1].split('</section>')[0];
  assert.equal((cards.match(/class="desktop-mission-slogan"/g)||[]).length,4);
  const slogans=['Compassion in Action','Justice Without Discrimination','Compassion Beyond Humanity','Protect Nature, Preserve Our Future'];
