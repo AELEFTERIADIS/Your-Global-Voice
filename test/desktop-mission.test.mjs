@@ -27,3 +27,16 @@ test('Mission uses existing participation, donation, and shared footer component
  assert(desktop.includes('class="desktop-mission-closing-art"'));
  assert.doesNotMatch(desktop,/<form|(?:href|src)="https?:\/\//);
 });
+
+test('new Mission desktop reference keeps original community photo, cause order, navy motto and a single-line closing',()=>{
+ assert(desktop.includes('href="get involved 111.JPEG"'));
+ assert(desktop.includes('preserveAspectRatio="xMidYMid slice"'));
+ const colors=[...desktop.matchAll(/<article class="desktop-mission-card desktop-mission-([^\"]+)/g)].map(m=>m[1]);
+ assert.deepEqual(colors,['red','purple','brown','green']);
+ assert(desktop.includes('Compassion | Dignity | Responsibility'));
+ assert(desktop.includes('for a more just and caring world'));
+ const closing=desktop.match(/<h2 id="desktop-mission-invitation-title">(.*?)<\/h2>/)[1];
+ assert(!closing.includes('<br'));
+ assert(closing.includes('One World <span>|</span> One Shared Responsibility'));
+ assert(!desktop.includes('2D800A7B-B42F-453F-9FEA-E8615115523D.jpeg'));
+});
