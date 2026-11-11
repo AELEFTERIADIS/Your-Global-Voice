@@ -95,7 +95,7 @@
  .desktop-home-footer .footer-contact-links > a { color:#102B49; }
  .desktop-home-footer .footer-contact-email svg { color:#c69723; }
  .desktop-home-footer .footer-contact-links > .footer-contact-whatsapp { width:fit-content; min-height:calc(2.8cqw + 2px); padding:0; border:0; border-radius:0; background:transparent; color:#16773e; }
- .desktop-home-footer .footer-contact-links > .footer-contact-whatsapp span { text-decoration:underline; text-underline-offset:.16em; }
+ .desktop-home-footer .footer-contact-links > .footer-contact-whatsapp span { text-decoration:none; text-underline-offset:.16em; }
  .desktop-home-footer .footer-contact-links > .footer-contact-whatsapp:hover { background:transparent; color:#105e30; }
  .desktop-home-footer .footer-contact-links > .footer-contact-address { padding:0; border:0; border-radius:0; background:transparent; font-size:1.35cqw; line-height:1.35; }
  .desktop-home-footer .footer-contact-links > .footer-contact-address span { text-decoration:underline; text-underline-offset:.16em; }
