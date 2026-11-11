@@ -36,7 +36,7 @@
  .desktop-mission-icon { display:block; flex:none; width:5.2cqw; height:5.2cqw; }
  .desktop-mission-card h2 { margin:0; padding-left:.8cqw; border-left:2px solid #e7b527; color:var(--mission-accent); font-size:2.85cqw; line-height:.98; letter-spacing:-.07cqw; }
  .desktop-mission-card-copy>.desktop-mission-accent { width:66%; height:.8cqw; margin:.3cqw 0 .6cqw auto; }
- .desktop-mission-card p { color:#101820; font:500 1.82cqw/1.23 Arial,sans-serif; }
+ .desktop-mission-card .desktop-mission-slogan { display:flex; align-items:center; justify-content:center; width:100%; min-height:6.8cqw; padding:.8cqw .7cqw; margin-top:.65cqw; border:1px solid #d8b45a; border-radius:.85cqw; background:#faf8f2; color:#102b49; text-align:center; font:400 1.75cqw/1.3 Georgia,'Times New Roman',serif; font-style:normal; }
  .desktop-mission-guides { margin:0 .65cqw 2.8cqw; border:3px solid #f0b50a; border-radius:2cqw; background:#061d39; color:#fff; }
  .desktop-mission-guides>summary { display:grid; grid-template-columns:40% minmax(0,1fr) auto; gap:1.8cqw; align-items:center; min-height:9.7cqw; padding:.9cqw 1.7cqw; list-style:none; cursor:pointer; }
  .desktop-mission-guides>summary::-webkit-details-marker { display:none; }
