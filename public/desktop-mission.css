@@ -11,7 +11,7 @@
  body:has(.desktop-mission-page)>.desktop-home-footer .desktop-home-footer-contact h2::after { content:""; position:absolute; left:0; bottom:-.4cqw; width:12cqw; height:2px; border-radius:50%; background:#d8a11a; }
  body:has(.desktop-mission-page)>.desktop-home-footer .desktop-home-footer-columns { padding-top:2cqw; }
  main:has(>.desktop-mission-page) { flex:0 0 auto; padding-bottom:0; margin-bottom:0; }
- .desktop-mission-page { display:block; container-type:inline-size; overflow:hidden; color:#071b3e; background:#fff; border:3px solid #e8ad0a; border-bottom:0; border-radius:2.2rem 2.2rem 0 0; }
+ .desktop-mission-page { --mission-page-background:#fff; display:block; container-type:inline-size; overflow:hidden; color:#071b3e; background:var(--mission-page-background); border:3px solid #e8ad0a; border-bottom:0; border-radius:2.2rem 2.2rem 0 0; }
  .desktop-mission-page h1,.desktop-mission-page h2,.desktop-mission-page h3 { color:#071b3e; font-family:'Times New Roman',Georgia,serif; font-weight:600; overflow-wrap:normal; }
  .desktop-mission-page p { margin:0; }
  .desktop-mission-hero { position:relative; aspect-ratio:1100/370; background:#fff; }
@@ -56,7 +56,7 @@
  .mission-read-expanded-arrow { display:none; }.desktop-mission-guides[open] .mission-read-collapsed-arrow { display:none; }.desktop-mission-guides[open] .mission-read-expanded-arrow { display:inline; }
  .desktop-mission-guides[open] { border:0; background:transparent; }
  .desktop-mission-guides[open]>summary { border:3px solid #f0b50a; border-radius:2cqw; min-height:calc(9.7cqw + 6px); background:#061d39; }
- .desktop-mission-full { margin-top:2cqw; padding:2.2cqw 2.5cqw 2.5cqw; border:1.5px solid #dba316; border-radius:1.8cqw; background:#fdfbf5; color:#102b49; font:400 1.55cqw/1.5 Georgia,'Times New Roman',serif; }
+ .desktop-mission-full { margin-top:2cqw; padding:2.2cqw 2.5cqw 2.5cqw; border:1.5px solid #dba316; border-radius:1.8cqw; background:var(--mission-page-background); color:#102b49; font:400 1.55cqw/1.5 Georgia,'Times New Roman',serif; }
  .desktop-mission-guides .desktop-mission-full h2,.desktop-mission-guides .desktop-mission-full h3 { color:#102b49; }
  .desktop-mission-full h2 { margin:0; font-size:4.3cqw; font-style:italic; line-height:1.12; }
  .desktop-mission-full>.desktop-mission-accent { width:65%; height:2cqw; margin:.5cqw 0 1.1cqw; }
@@ -71,7 +71,8 @@
  .mission-shared-commitment { display:grid; grid-template-columns:13cqw minmax(0,1fr); gap:2cqw; align-items:center; margin-top:1.8cqw; padding:1.5cqw; border:1.5px solid #dba316; border-radius:1.4cqw; }
  .mission-shared-icon { display:block; width:11cqw; height:11cqw; padding-right:1.3cqw; border-right:2px solid #dca116; }
  .desktop-mission-full .mission-shared-commitment h3 { margin:0 0 .5cqw; font-size:3.4cqw; font-style:italic; line-height:1.1; }
- .mission-principles-support { display:flex; width:fit-content; min-width:32cqw; margin:2.3cqw auto 0; color:#102b49; font-weight:600; }
+ /* Closing button center: 45cqw + 4.9cqw + 39.5cqw/2; move only from the panel center. */
+ .mission-principles-support { transform:translateX(19.65cqw); display:flex; width:fit-content; min-width:32cqw; margin:2.3cqw auto 0; color:#102b49; font-weight:600; }
  .desktop-mission-invitation { position:relative; aspect-ratio:1100/490; margin:0; }
  .desktop-mission-invitation-copy { position:relative; margin-left:45%; width:54%; padding-top:3.8cqw; }
  .desktop-mission-invitation h2 { font-size:2.95cqw; font-style:italic; line-height:1.15; margin:0; letter-spacing:-.065cqw; white-space:nowrap; }
