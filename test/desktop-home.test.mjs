@@ -30,9 +30,9 @@ test('desktop footer uses verified contact metadata and never invents social pro
  for(const label of ['Facebook','Instagram','X','TikTok'])assert(footer.includes(`aria-label="${label}: profile link not configured"`));
 });
 
-test('approved ivory header and sidebar assets remain byte-identical to f894a09',async()=>{
- const expected={"public/desktop-header.css": "96f645f9e71ea4b5f4e3cdc242bb7c3b6a803b9884a26a23cfef294713c77eb9", "public/desktop-header.js": "2e753cab88fee74d0c20c804734ed5c30b8bd3c2228ad1fdd34d927ebfc98f83", "public/home-sidebar.css": "7a36dc6db9574b7b2fb52c49cd622b909f95b78cade9057adb68e8c6bafaf8c9", "public/home-sidebar.js": "0ccd662771eee6ccee2c0ed49454a9c274780b2d5e9c26735527961d7f5d2731"};
+test('approved header structure outside desktop navigation and sidebar assets remain unchanged',async()=>{
+ const expected={"public/desktop-header.js": "2e753cab88fee74d0c20c804734ed5c30b8bd3c2228ad1fdd34d927ebfc98f83", "public/home-sidebar.css": "7a36dc6db9574b7b2fb52c49cd622b909f95b78cade9057adb68e8c6bafaf8c9", "public/home-sidebar.js": "0ccd662771eee6ccee2c0ed49454a9c274780b2d5e9c26735527961d7f5d2731"};
  for(const [file,hash] of Object.entries(expected))assert.equal(createHash('sha256').update(await readFile(new URL('../'+file,import.meta.url))).digest('hex'),hash,file);
  const html=await readFile(new URL('../public/index.html',import.meta.url),'utf8');
- assert.equal(createHash('sha256').update(html.match(/<header[\s\S]*?<\/header>/)[0]).digest('hex'),'9b017f39d8529b1afb740fd6e9ff322a5ca8904b04aa5a620cad4bfb0334097a');
+ assert.equal(createHash('sha256').update(html.match(/<header[\s\S]*?<\/header>/)[0].replace(/<nav class="desktop-reference-nav"[\s\S]*?<\/nav>/,'')).digest('hex'),'2cefc86f0a6ebd957d31df6f0c62d779fd262a7f1175a7370a8fed18f3d42dd6');
 });

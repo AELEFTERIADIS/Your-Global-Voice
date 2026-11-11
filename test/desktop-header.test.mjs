@@ -18,7 +18,7 @@ test('reference desktop header reuses the official logo, existing destinations a
   assert.equal((html.match(/id="desktop-quick-links"/g)||[]).length,1);assert.match(header,/aria-controls="desktop-quick-links"/);
   const nav=header.match(/<nav class="desktop-reference-nav"[^>]*>([\s\S]*?)<\/nav>/)[1];
   const links=[...nav.matchAll(/<a href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)].map(m=>[m[1],m[2].replace(/<svg[\s\S]*?<\/svg>/,'')]);
-  assert.deepEqual(links,[['index.html','Home'],['about.html','About'],['mission.html','Mission'],['purposes.html','Causes'],['projects.html','Projects'],['get-involved.html','Get Involved'],['contact.html','Contact'],['donate.html','Donate']]);
+  assert.deepEqual(links,[['index.html','Home'],['about.html','About'],['mission.html','Mission'],['purposes.html','Causes'],['projects.html','Projects'],['get-involved.html','Get Involved'],['donate.html','Donate'],['contact.html','Contact']]);
   assert.match(html,/<link rel="stylesheet" href="desktop-header.css\?v=[a-f0-9]{16}">/);assert.match(html,/<script src="desktop-header.js\?v=[a-f0-9]{16}" defer>/);
  }
  for(const asset of ['desktop-header.css','desktop-header.js','desktop-header-condensed-bold.woff','desktop-header-font-license.txt'])assert.equal((await fetch(base+'/'+asset)).status,200);
