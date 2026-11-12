@@ -26,6 +26,8 @@ test('garden reference draft uses the original volunteer photo, shows the upload
  assert(closing.includes('src="FB4FACEC-5020-4449-8B9B-A6A524186EE3.JPEG"'));
  assert(closing.includes('href="donate.html#donation-payment"'));
  assert(closing.includes('Make a Difference'));
+ assert(!closing.includes('class="causes-closing-involved"'));
+ assert(!closing.includes('→'));
  assert(!closing.includes('href="contact.html#message-heading"'));
  assert(closing.includes('causes-closing-upper-wave'));
  assert.equal((closing.match(/class="causes-closing-donate"/g)||[]).length,1);

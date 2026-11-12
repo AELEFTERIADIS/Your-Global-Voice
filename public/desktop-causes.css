@@ -172,3 +172,28 @@
  .causes-closing-upper-wave,.causes-garden-closing-waves{width:calc(100% + 6.4cqw);height:auto;margin-inline:-3.2cqw;}
  .causes-garden-closing-waves{margin-top:.3cqw;}
 }
+
+/* Closing-only preview: center the text group and align its action to the right. */
+@media(min-width:80rem){
+ .causes-closing-copy{align-self:center;padding-top:0;}
+ .causes-closing-actions{justify-content:flex-end;align-items:center;flex-wrap:nowrap;gap:1.2cqw;}
+ .causes-closing-actions::before{content:'';flex:0 0 17.3cqw;height:.4cqw;background:#df9700;}
+}
+
+/* Closing-only preview: two balanced, equal-height actions. */
+@media(min-width:80rem){
+ .causes-closing-actions{justify-content:space-between;gap:1.8cqw;padding-block:.35cqw;}
+ .causes-closing-actions::before{content:none;}
+ .causes-closing-copy .causes-closing-involved{width:auto;height:3.675cqw;min-height:0;margin:0;padding:0 1.25cqw;gap:.65cqw;border-color:#102B49;background:#102B49;color:#fff;font-size:1.8cqw;white-space:nowrap;}
+ .causes-closing-copy .causes-closing-involved svg{width:1.8cqw;height:1.8cqw;color:inherit;}
+}
+
+/* Closing-only preview: retain the compact action at the text column's right edge. */
+@media(min-width:80rem){
+ .causes-closing-actions{justify-content:flex-end;}
+ .causes-closing-copy .causes-closing-donate svg{color:#c62828;}
+}
+
+@media(min-width:80rem){
+ .causes-closing-actions{justify-content:center;padding-right:0;}
+}
