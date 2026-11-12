@@ -118,3 +118,12 @@
  .causes-hero-copy p span{white-space:nowrap;}
  .causes-hero-copy .causes-support{margin-left:2.7cqw;margin-right:0;}
 }
+
+/* Hero-only review: intrinsic centered content and a compact donation action. */
+@media(min-width:80rem){
+ .causes-hero-copy{display:flex;flex-direction:column;align-items:center;gap:1.4cqw;padding-top:2.8cqw;}
+ .causes-hero-copy h1{width:100%;text-align:center;font-size:5.65cqw;line-height:1.1;}
+ .causes-hero-copy p{width:100%;min-height:0;line-height:1.45;}
+ .causes-hero-copy .causes-support{width:23.25cqw;height:3.675cqw;min-height:0;margin:0;padding:0 1.2cqw;font-size:1.65cqw;gap:.75cqw;}
+ .causes-hero-copy .causes-support svg{width:1.95cqw;height:1.95cqw;}
+}
