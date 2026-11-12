@@ -150,3 +150,25 @@
  .causes-closing-copy .causes-closing-donate{width:auto;height:3.675cqw;margin:0;padding:0 1.25cqw;gap:.65cqw;border-color:#bd7a00;background:linear-gradient(#ffd83b,#d89000 75%,#a65f02);color:#fff;font-size:1.8cqw;white-space:nowrap;}
  .causes-closing-copy .causes-closing-donate svg{width:1.8cqw;height:1.8cqw;color:inherit;}
 }
+
+/* Closing-only review: continuous waves in normal grid flow. */
+@media(min-width:80rem){
+ .causes-desktop-closing{row-gap:1.6cqw;column-gap:2.4cqw;padding-block:0;}
+ .causes-closing-copy{grid-column:1;grid-row:2;align-self:center;}
+ .causes-closing-photo{grid-column:2;grid-row:2;}
+ .causes-closing-upper-wave,.causes-garden-closing-waves{position:static;inset:auto;grid-column:1/-1;width:calc(100% + 3.6cqw);max-width:none;height:4.2cqw;margin-inline:-1.8cqw;pointer-events:none;}
+ .causes-closing-upper-wave{grid-row:1;}
+ .causes-garden-closing-waves{grid-row:3;}
+}
+
+/* Closing reference: From Purpose to Action.png; preserve the original photo. */
+@media(min-width:80rem){
+ .causes-desktop-closing{overflow:visible;row-gap:2cqw;}
+ .causes-closing-copy{align-self:start;padding-top:1.5cqw;}
+ .causes-closing-copy h2{font-family:'Times New Roman',Georgia,serif;font-size:4.5cqw;line-height:1.1;font-weight:700;margin:0;}
+ .causes-closing-copy h2::after{content:'';display:block;width:17.3cqw;height:.4cqw;margin-top:.2cqw;background:#df9700;}
+ .causes-closing-copy p{font-family:'Times New Roman',Georgia,serif;font-weight:600;font-size:1.8cqw;line-height:1.25;margin-top:1.85cqw;margin-bottom:1.8cqw;}
+ .causes-closing-photo{outline:1px solid #e3a019;outline-offset:0;}
+ .causes-closing-upper-wave,.causes-garden-closing-waves{width:calc(100% + 6.4cqw);height:auto;margin-inline:-3.2cqw;}
+ .causes-garden-closing-waves{margin-top:.3cqw;}
+}
