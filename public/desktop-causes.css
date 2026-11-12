@@ -109,3 +109,12 @@
  .causes-hero-copy p{font-size:1.75cqw;min-height:5.8025cqw;}
  .causes-hero-copy p span:nth-of-type(3){font-size:1.95cqw;}
 }
+
+/* Preview only: reserve a safe text column before the inward S-curve. */
+@media(min-width:80rem){
+ .causes-hero-copy{width:40%;padding-inline:3.8cqw 1.4cqw;}
+ .causes-hero-copy h1{font-family:'Times New Roman',Georgia,serif;font-weight:600;font-size:6.1cqw;letter-spacing:-.01em;}
+ .causes-hero-copy p{white-space:normal;}
+ .causes-hero-copy p span{white-space:nowrap;}
+ .causes-hero-copy .causes-support{margin-left:2.7cqw;margin-right:0;}
+}
