@@ -101,3 +101,11 @@
  .causes-approved-page .purpose-grid>li>p{grid-row:3;align-self:start;}
  .causes-approved-page .human-rights-more{grid-row:4;}
 }
+
+/* Keep desktop text comfortably inside the narrowest part of the S-divider.
+   Preserve the existing text-block heights so the button does not move. */
+@media(min-width:80rem){
+ .causes-hero-copy h1{font-size:6.1cqw;line-height:6.6cqw;}
+ .causes-hero-copy p{font-size:1.75cqw;min-height:5.8025cqw;}
+ .causes-hero-copy p span:nth-of-type(3){font-size:1.95cqw;}
+}
