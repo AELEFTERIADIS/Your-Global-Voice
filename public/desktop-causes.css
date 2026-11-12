@@ -140,3 +140,13 @@
  .causes-approved-page .animal-welfare-photo{object-position:center 45%;}
  .causes-approved-page .environmental-photo{object-position:center 50%;}
 }
+
+/* Closing-only review: show the complete original at its natural aspect ratio. */
+@media(min-width:80rem){
+ .causes-desktop-closing{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2.4cqw;align-items:center;min-height:0;padding:0 1.8cqw 6.2cqw;}
+ .causes-closing-copy{width:auto;min-width:0;padding:0;}
+ .causes-closing-photo{display:block;width:100%;height:auto;object-fit:contain;border-radius:1.1cqw;}
+ .causes-closing-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1cqw;}
+ .causes-closing-copy .causes-closing-donate{width:auto;height:3.675cqw;margin:0;padding:0 1.25cqw;gap:.65cqw;border-color:#bd7a00;background:linear-gradient(#ffd83b,#d89000 75%,#a65f02);color:#fff;font-size:1.8cqw;white-space:nowrap;}
+ .causes-closing-copy .causes-closing-donate svg{width:1.8cqw;height:1.8cqw;color:inherit;}
+}

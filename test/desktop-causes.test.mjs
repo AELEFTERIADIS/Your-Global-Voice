@@ -15,13 +15,18 @@ test('desktop Causes keeps original photos, full inline disclosures, wording and
  assert(css.includes('@media(min-width:80rem)'));assert(css.includes('grid-template-columns:repeat(2,minmax(0,1fr))'));
 });
 
-test('garden reference draft uses the original volunteer photo, keeps planting pending and reuses the approved shared footer',async()=>{
+test('garden reference draft uses the original volunteer photo, shows the uploaded closing original and reuses the approved shared footer',async()=>{
  const html=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
  assert(html.includes('<div class="causes-page-shell"><main'));
  assert(html.includes('<h3 class="causes-desktop-environmental">Environmental Protection</h3>'));
  assert(html.includes('href="41251AE2-36C7-4CCA-87DD-16804E860189.jpeg"'));
  assert(!html.includes('Original volunteer-garden photograph pending'));
- assert(html.includes('Original planting photograph pending'));
+ assert(!html.includes('Original planting photograph pending'));
+ const closing=html.match(/<section class="causes-desktop-closing"[\s\S]*?<\/section>/)[0];
+ assert(closing.includes('src="FB4FACEC-5020-4449-8B9B-A6A524186EE3.JPEG"'));
+ assert(closing.includes('href="donate.html#donation-payment"'));
+ assert(closing.includes('Make a Difference'));
+ assert(closing.includes('href="contact.html#message-heading"'));
 
  assert(!html.includes('href="xxxxxxxxxxxxxx.png"'));
 
