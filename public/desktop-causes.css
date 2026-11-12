@@ -127,3 +127,7 @@
  .causes-hero-copy .causes-support{width:23.25cqw;height:3.675cqw;min-height:0;margin:0;padding:0 1.2cqw;font-size:1.65cqw;gap:.75cqw;}
  .causes-hero-copy .causes-support svg{width:1.95cqw;height:1.95cqw;}
 }
+
+@media(min-width:80rem){
+ .causes-page-shell{margin-block-start:var(--header-content-gap);}
+}
