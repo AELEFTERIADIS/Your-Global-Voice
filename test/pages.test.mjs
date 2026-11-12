@@ -11,7 +11,8 @@ test('Pages artifact preserves all pages, excludes private files, and works unde
   t.after(() => rm(temp, { recursive: true, force: true }));
   const destination = join(temp, 'Your-Global-Voice');
   await preparePages(destination);
-  assert.deepEqual((await readdir(destination)).sort(), [...pagesFiles, ...assets, '.nojekyll'].sort());
+  assert.deepEqual((await readdir(destination)).sort(), [...pagesFiles, ...assets, 'causes.html', '.nojekyll'].sort());
+  assert.equal(await readFile(join(destination, 'causes.html'),'utf8'),await readFile(join(destination, 'purposes.html'),'utf8'));
   for (const file of pagesFiles) {
     const html = await readFile(join(destination, file), 'utf8');
     const source = await readFile(new URL(`../public/${file}`, import.meta.url), 'utf8');

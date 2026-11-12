@@ -50,3 +50,54 @@
  body:has(.causes-approved-page)>.desktop-home-footer{border:3px solid #e7a116;border-top:0;border-radius:0 0 2rem 2rem;overflow:hidden;}
  .causes-approved-page a:focus-visible,.causes-approved-page summary:focus-visible{outline:3px solid #af7710;outline-offset:4px;}
 }
+
+/* qqqqqqq.png revision: desktop only; exact originals are intentionally pending. */
+.causes-page-shell{display:contents;}
+.causes-desktop-environmental{display:none;}
+@media(min-width:80rem){
+ .causes-page-shell{display:block;width:min(100% - 3rem,78rem);margin-inline:auto;border:2px solid #e3a019;border-radius:1.5rem;overflow:hidden;background:#fff;}
+ .causes-page-shell>main{width:100%;max-width:none;margin:0;padding:0;}
+ .causes-approved-page{border:0;border-radius:0;background:#fff;}
+ body:has(.causes-page-shell)>.site-footer{display:none;}
+ .causes-desktop-hero{height:30cqw;}
+ .causes-hero-copy{width:44%;padding:2.5cqw 3.8cqw 0;}
+ .causes-hero-copy h1{font-size:6.6cqw;white-space:nowrap;}
+ .causes-hero-rule{width:17cqw;margin:.8cqw 0 1cqw;}
+ .causes-hero-copy p{text-align:center;font-size:2cqw;line-height:1.35;white-space:nowrap;margin:0;}
+ .causes-hero-copy p span:nth-of-type(3){display:block;margin-top:.2cqw;font-size:2.15cqw;}
+ .causes-hero-copy p b:last-of-type{display:none;}
+ .causes-support{display:flex;margin:1.6cqw auto 0;width:31cqw;height:4.9cqw;font-family:Georgia,'Times New Roman',serif;font-weight:700;}
+ .causes-garden-hero-waves{position:absolute;left:0;bottom:0;height:7.05cqw;}
+ .causes-desktop-intro{padding:1.2cqw 3.4cqw 2.4cqw;}
+ .causes-desktop-intro h2{font-size:4.5cqw;}
+ .causes-approved-page .purpose-section{padding:0 1.4cqw;}
+ .causes-approved-page .purpose-grid{gap:1.4cqw 1.6cqw;}
+ .causes-approved-page .purpose-grid>li{grid-template-rows:auto auto 1fr auto;row-gap:.45cqw;min-height:0;border-width:1px;border-radius:2cqw;background:#FAF8F3;}
+ .causes-approved-page .human-rights-photo{width:calc(100% + 4cqw);height:auto;aspect-ratio:3.3/1;margin:.6cqw -2cqw .3cqw;border-radius:1.1cqw;object-position:center 20%;}
+ .causes-approved-page .humanitarian-photo{object-position:center 35%;}
+ .causes-approved-page .animal-welfare-photo{object-position:center 35%;}
+ .causes-approved-page .environmental-photo{object-position:center 10%;}
+ .causes-approved-page .causes-card-wave{display:none;}
+ .causes-approved-page .purpose-grid h3{line-height:1.08;font-size:2.6cqw;}
+ .causes-approved-page .humanitarian-card h3{max-width:27cqw;}
+ .causes-approved-page .environmental-card h3{font-size:2.5cqw;}
+ .causes-approved-page .purpose-grid>li>p{font-size:1.7cqw;line-height:1.25;margin:.2cqw 0 .6cqw;}
+ .causes-approved-page .causes-desktop-environmental{display:block;}
+ .causes-approved-page .causes-compact-environmental{display:none;}
+ .causes-desktop-closing{margin:1.5cqw 1.4cqw 0;min-height:20cqw;border:0;border-radius:0;background:#fff;}
+ .causes-closing-copy{width:55%;padding:0 1.8cqw 6.2cqw;}
+ .causes-closing-copy h2{border:0;padding:0;font-size:4.2cqw;margin:0 0 .6cqw;}
+ .causes-closing-copy p{padding:0;max-width:none;font-size:1.6cqw;line-height:1.3;margin-bottom:1.1cqw;}
+ .causes-closing-copy a{margin-left:1cqw;width:24cqw;height:3.7cqw;font-family:Georgia,'Times New Roman',serif;font-size:2cqw;}
+ .causes-planting{inset:0 0 auto auto;width:45%;height:15cqw;}
+ .causes-asset-pending{display:grid;place-items:center;background:repeating-linear-gradient(135deg,transparent 0 10px,#ddd 10px 11px);border:1px dashed #999;color:#102B49;font:400 1.3cqw/1.3 Arial,sans-serif;text-align:center;padding:1cqw;}
+ .causes-garden-closing-waves{position:absolute;bottom:0;left:0;height:5.1cqw;}
+ .causes-page-shell>.desktop-home-footer{width:100%;margin:0;border:0;border-radius:0;}
+}
+
+/* Share intrinsic rows across each desktop card pair. */
+@media(min-width:80rem){
+ .causes-approved-page .purpose-grid>li{grid-row:span 4;grid-template-rows:subgrid;}
+ .causes-approved-page .purpose-grid>li>p{grid-row:3;align-self:start;}
+ .causes-approved-page .human-rights-more{grid-row:4;}
+}

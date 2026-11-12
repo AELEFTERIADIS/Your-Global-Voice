@@ -14,3 +14,26 @@ test('desktop Causes keeps original photos, full inline disclosures, wording and
  const css=await readFile(new URL('../public/desktop-causes.css',import.meta.url),'utf8');
  assert(css.includes('@media(min-width:80rem)'));assert(css.includes('grid-template-columns:repeat(2,minmax(0,1fr))'));
 });
+
+test('garden reference draft uses the original volunteer photo, keeps planting pending and reuses the approved shared footer',async()=>{
+ const html=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
+ assert(html.includes('<div class="causes-page-shell"><main'));
+ assert(html.includes('<h3 class="causes-desktop-environmental">Environmental Protection</h3>'));
+ assert(html.includes('href="41251AE2-36C7-4CCA-87DD-16804E860189.jpeg"'));
+ assert(!html.includes('Original volunteer-garden photograph pending'));
+ assert(html.includes('Original planting photograph pending'));
+
+ assert(!html.includes('href="xxxxxxxxxxxxxx.png"'));
+
+ const footer=html.match(/<footer class="desktop-home-footer"[\s\S]*?<\/footer>/)[0];
+ assert(!footer.includes('class="causes-footer-logo"'));
+ assert(footer.includes('aria-disabled="true" title="No published destination available">Media Gallery'));
+ assert.equal((html.match(/class="desktop-home-footer"/g)||[]).length,1);
+});
+
+test('Causes footer is byte-identical to the actual approved Home footer',async()=>{
+ const causes=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
+ const home=await readFile(new URL('../public/index.html',import.meta.url),'utf8');
+ const footer=html=>html.match(/<footer class="desktop-home-footer"[\s\S]*?<\/footer>/)[0];
+ assert.equal(footer(causes),footer(home));
+});

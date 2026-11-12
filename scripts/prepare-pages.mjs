@@ -26,6 +26,8 @@ export async function preparePages(destination, apiOrigin = process.env.CONTACT_
       await copyFile(source, resolve(destination, file));
     }
   }
+  // Publish the same Causes page at the explicitly requested URL as well.
+  await copyFile(resolve(destination, 'purposes.html'), resolve(destination, 'causes.html'));
   await writeFile(resolve(destination, '.nojekyll'), '');
 }
 
