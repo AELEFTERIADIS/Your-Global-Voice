@@ -20,7 +20,7 @@
  .causes-desktop-intro p{font:600 1.75cqw/1.25 Arial,sans-serif;margin:0;}
  .causes-approved-page .purpose-section{padding:0 1.9cqw;margin:0;border:0;}
  .causes-approved-page .purpose-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.7cqw 1.8cqw;margin:0;padding:0;list-style:none;}
- .causes-approved-page .purpose-grid>li{--cause:#7c0ac5;position:relative;display:grid;grid-template-columns:7.7cqw minmax(0,1fr);grid-template-rows:18cqw 5.5cqw minmax(5.8cqw,1fr) auto;align-content:start;gap:0;min-height:34cqw;padding:0 2.6cqw 1cqw;border:2px solid #e7a000;border-radius:2.2cqw;overflow:hidden;background:linear-gradient(110deg,#fff,#fffaf0);color:#061440;}
+ .causes-approved-page .purpose-grid>li{--cause:#7c0ac5;position:relative;display:grid;grid-template-columns:7.7cqw minmax(0,1fr);grid-template-rows:18cqw auto 1fr auto;align-content:start;column-gap:0;row-gap:.9cqw;min-height:0;padding:0 2.6cqw 1cqw;border:2px solid #e7a000;border-radius:2.2cqw;overflow:hidden;background:linear-gradient(110deg,#fff,#fffaf0);color:#061440;}
  .causes-approved-page .purpose-grid>.humanitarian-card{--cause:#ee0920;}.causes-approved-page .purpose-grid>.animal-welfare-card{--cause:#782719;}.causes-approved-page .purpose-grid>.environmental-card{--cause:#086a25;}
  .causes-approved-page .human-rights-photo{grid-column:1/-1;position:relative;inset:auto;width:calc(100% + 5.2cqw);max-width:none;height:18cqw;margin:0 -2.6cqw;object-fit:cover;object-position:center 40%;border:0;border-radius:0;display:block;}
  .causes-approved-page .humanitarian-photo{object-position:center 30%;}.causes-approved-page .animal-welfare-photo{object-position:center 30%;}.causes-approved-page .environmental-photo{object-position:center 20%;}
@@ -28,7 +28,7 @@
  .causes-approved-page .human-rights-icon:not(.causes-reference-icon){display:none;}
  .causes-approved-page .causes-reference-icon{display:block;}
  .causes-approved-page .human-rights-icon{position:static;grid-column:1;grid-row:2;width:6.2cqw;height:4.8cqw;margin:0;padding-right:1.4cqw;border-right:.4cqw solid #e7a100;color:var(--cause);align-self:center;}
- .causes-approved-page .purpose-grid h3{grid-column:2;grid-row:2;align-self:center;margin:0;padding:0;font-size:2.65cqw;line-height:.98;}
+ .causes-approved-page .purpose-grid h3{grid-column:2;grid-row:2;align-self:center;min-width:0;margin:0;padding:0;font-size:2.65cqw;line-height:1.12;}
  .causes-approved-page .purpose-grid>li>p{grid-column:1/-1;margin:.25cqw 0 .45cqw;padding:0;max-width:none;font:600 1.7cqw/1.17 Arial,sans-serif;color:#061440;}
  .causes-card-desktop-summary{display:inline;}
  .causes-desktop-break{display:inline;}
