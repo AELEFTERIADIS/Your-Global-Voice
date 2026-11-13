@@ -110,3 +110,11 @@ body:has(.animal-page-shell)>.site-footer{display:none;}
  .animal-expanded-invitation{gap:1.8cqw;padding:1.6cqw 1.3cqw;min-height:11cqw;}
  .animal-expanded-invitation>p{min-width:0;text-wrap:balance;line-height:1.4;}
 }
+/* Desktop-only alignment with the established three-unit content gutters. */
+@media(min-width:64.001rem){
+ .animal-hero-copy>.animal-slogan{text-align:center;padding-inline:0;}
+ .animal-commitment-copy{position:relative;border-left-color:transparent;}
+ .animal-commitment-copy::before{content:"";position:absolute;left:calc(-1.7cqw - 3px);top:0;width:3px;height:16cqw;background:#E6A100;}
+ .animal-commitment:has(.animal-more[open])>.animal-commitment-copy{background:none;}
+ .animal-more .animal-expanded-panel{margin-left:calc(-3.8cqw - 3px);}
+}
