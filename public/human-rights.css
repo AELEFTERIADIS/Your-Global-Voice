@@ -1,0 +1,67 @@
+.human-rights-page-shell{width:min(100% - 3rem,78rem);margin:var(--header-content-gap) auto 0;border:2px solid #e3a019;border-radius:1.5rem;overflow:hidden;background:#FAF8F3;color:#061440;container-type:inline-size;}
+.human-rights-page-shell>main{width:100%;max-width:none;margin:0;padding:0;}
+.human-rights-page-shell>.desktop-home-footer{width:100%;margin:0;}
+body:has(.human-rights-page-shell)>.site-footer{display:none;}
+.rights-page{background:#FAF8F3;}
+.rights-page h1,.rights-page h2,.rights-page h3{font-family:'Times New Roman',Georgia,serif;color:#061440;letter-spacing:normal;}
+.rights-page p{font-family:Arial,Helvetica,sans-serif;color:#061440;}
+.rights-page svg{display:block;}
+.rights-hero{position:relative;height:24.8cqw;overflow:hidden;border-bottom:1px solid #df9e13;border-radius:0 0 1.2cqw 1.2cqw;background:linear-gradient(110deg,#fff9ed,#f7eadc);}
+.rights-hero-photo{position:absolute;inset:0;width:100%;height:100%;}
+.rights-hero-copy{position:relative;width:49cqw;padding:2.8cqw 0 0 3.7cqw;}
+.rights-title-row{display:grid;grid-template-columns:9cqw .5cqw minmax(0,1fr);gap:1.5cqw;align-items:center;}
+.rights-title-row>.rights-users{width:9cqw;height:8cqw;color:#6d0d88;}
+.rights-title-rule{height:7.8cqw;background:#d28b06;}
+.rights-hero h1{margin:0;font-size:4.3cqw;line-height:.93;font-weight:700;white-space:nowrap;}
+.rights-slogan{margin:2.25cqw 0 0;font:italic 700 2.9cqw/1.05 'Times New Roman',Georgia,serif!important;color:#7c1135!important;white-space:nowrap;}
+.rights-hero-wave{position:absolute;left:0;bottom:.2cqw;width:42cqw;height:5.4cqw;}
+.rights-commitment{position:relative;padding:2.9cqw 5.3cqw 2.5cqw;text-align:center;}
+.rights-commitment>.rights-branch{position:absolute;top:.2cqw;left:calc(50% - 2.75cqw);width:5.5cqw;height:3.4cqw;color:#617c0a;transform:rotate(15deg);}
+.rights-commitment h2{display:flex;align-items:center;gap:1.5cqw;margin:0 3cqw;font-size:4.4cqw;line-height:1.05;font-weight:700;white-space:nowrap;}
+.rights-commitment h2::before,.rights-commitment h2::after{content:'';height:.3cqw;flex:1;background:linear-gradient(90deg,#b87b04,#f5ac0b);}
+.rights-commitment>p{max-width:84cqw;margin:.5cqw auto 0;font-size:1.8cqw;line-height:1.15;font-weight:600;}
+.rights-commitment-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.3cqw;margin-top:1.9cqw;}
+.rights-commitment-card{display:flex;flex-direction:column;align-items:center;justify-content:center;height:12.4cqw;padding:.6cqw;border:1px solid #e7a000;border-radius:1.5cqw;background:linear-gradient(120deg,#fff8ec,#fffaf2);}
+.rights-commitment-card>svg{width:7cqw;height:5.6cqw;margin:0 0 .3cqw;flex:none;}
+.rights-commitment-card h3{margin:0;font-size:2.2cqw;line-height:1.04;font-weight:700;}
+.rights-purple{color:#7b0ca4;}.rights-burgundy{color:#820f2a;}.rights-gold{color:#c18b08;}.rights-green{color:#496a0d;}
+.rights-invitation{display:grid;grid-template-columns:40% minmax(0,1fr);gap:2.2cqw;align-items:center;padding:0 5.3cqw;}
+.rights-justice-photo{width:100%;height:auto;aspect-ratio:434/205;border:2px solid #e6a00d;border-radius:1.8cqw;overflow:hidden;}
+.rights-invitation-copy{position:relative;min-width:0;padding-left:1.8cqw;border-left:.5cqw solid #d7a02e;}
+.rights-invitation-copy h2{margin:0;max-width:calc(100% - 7cqw);font-size:3.45cqw;line-height:.98;color:#7c1035;font-weight:700;white-space:nowrap;}
+.rights-invitation-copy>.rights-branch{position:absolute;right:0;top:1.1cqw;width:7cqw;height:7cqw;color:#657b0b;}
+.rights-invitation-copy p{margin:1cqw 0 .7cqw;font-size:1.85cqw;line-height:1.16;font-weight:600;}
+.rights-actions{display:flex;justify-content:center;gap:2.8cqw;margin:1.8cqw 5.3cqw 0;}
+.rights-action{display:flex;align-items:center;justify-content:center;gap:1.4cqw;height:4.9cqw;border:1px solid transparent;border-radius:5cqw;color:white;font:700 2.2cqw/1.1 'Times New Roman',Georgia,serif;text-decoration:none;white-space:nowrap;}
+.rights-action>svg{width:3.8cqw;height:3.8cqw;flex:none;}
+.rights-action>.rights-chevron{width:1.6cqw;height:2cqw;}
+.rights-involve{width:28cqw;background:linear-gradient(#b22cbd,#741082 55%,#47065a);}
+.rights-support{width:30cqw;background:linear-gradient(#ffd83b,#d89000 75%,#a65f02);border-color:#bd7a00;}
+.rights-action:hover{filter:brightness(1.06);}
+.rights-return{text-align:center;margin:1.2cqw 0 .4cqw;font:700 2.1cqw/1.2 'Times New Roman',Georgia,serif;color:#6d0b91;}
+.rights-return a{text-decoration:underline;text-underline-offset:.35cqw;}
+.rights-bottom-wave{width:100%;height:5cqw;}
+.rights-page a:focus-visible{outline:3px solid #8b5b00;outline-offset:4px;}
+@media(max-width:79.999rem){
+ .human-rights-page-shell>.desktop-home-footer{display:block;}
+ .human-rights-page-shell>.desktop-home-footer .desktop-home-footer-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;padding:1.5rem;}
+ .human-rights-page-shell>.desktop-home-footer .desktop-home-social-icons{display:flex;gap:.5rem;}
+ .human-rights-page-shell>.desktop-home-footer .desktop-home-social-icons>span{width:2.2rem;height:2.2rem;}
+ .human-rights-page-shell>.desktop-home-footer .desktop-home-footer-nav{display:flex;flex-direction:column;align-items:flex-start;}
+ .human-rights-page-shell>.desktop-home-footer h2{font-family:Georgia,serif;font-size:1.2rem;}
+ .human-rights-page-shell>.desktop-home-footer .desktop-home-footer-wave{width:100%;}
+}
+@media(max-width:40rem){
+ .human-rights-page-shell{width:calc(100% - 2rem);border-radius:1rem;}
+ .rights-commitment-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:3cqw;}
+ .rights-commitment-card{height:25cqw;}
+ .rights-commitment-card>svg{width:12cqw;height:11cqw;}
+ .rights-commitment-card h3{font-size:4.2cqw;}
+ .rights-commitment>p,.rights-invitation-copy p{font-size:4cqw;line-height:1.35;}
+ .rights-invitation{grid-template-columns:1fr;gap:4cqw;}
+ .rights-invitation-copy h2{font-size:6.2cqw;}
+ .rights-action{font-size:3.2cqw;height:9cqw;gap:1.5cqw;}
+ .rights-involve{width:39cqw;}.rights-support{width:42cqw;}
+ .rights-return{font-size:4cqw;margin-block:3cqw;}
+ .human-rights-page-shell>.desktop-home-footer .desktop-home-footer-columns{grid-template-columns:1fr;}
+}
