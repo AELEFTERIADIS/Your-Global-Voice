@@ -112,3 +112,13 @@ body:has(.humanitarian-page-shell)>.site-footer{display:none;}
  .relief-closing-copy .relief-official-motto{margin:0;}
 }
 @media(max-width:40rem){.relief-closing-copy .relief-official-motto{font-size:3.8cqw;}}
+
+/* Centered closing invitation, isolated from the shared footer. */
+.relief-closing-gold-line{display:block;width:42%;height:1px;background:#C18C20;margin:1rem auto;}
+@media(min-width:64.001rem){
+ .relief-closing-copy{align-items:center;text-align:center;gap:1.65cqw;padding-block:1.3cqw;}
+ .relief-closing h2{color:#841C2A;font-size:2.65cqw;line-height:1.16;}
+ .relief-closing-gold-line{margin:0;width:45%;}
+ .relief-closing-actions{width:100%;grid-template-columns:1fr 1fr;gap:1.9cqw;}
+ .relief-closing-actions .relief-involve{background:#fff;}
+}

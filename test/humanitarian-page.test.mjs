@@ -28,7 +28,7 @@ test('Humanitarian has one initially collapsed inline statement, existing action
  assert.match(html,/relief-read-more">Read More/);assert.match(html,/relief-read-less">Read Less/);
  assert(html.includes('Beyond emergency response, we support preparedness, self-reliance, and sustainable solutions to help communities recover with strength and dignity and better face future challenges.'));
  assert.equal((html.match(/href="donate.html\?cause=humanitarian-assistance#donation-payment"/g)||[]).length,2);
- assert.match(html,/class="relief-action relief-involve" href="get-involved.html"/);
+ assert.match(html,/class="relief-action relief-involve" href="coming-soon.html\?cause=humanitarian-assistance"/);
  assert.match(html,/class="cause-footer-return" href="causes.html"/);
  const causes=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
  assert.match(causes,/<li id="humanitarian-assistance"[\s\S]*?href="humanitarian.html">Explore More/);
