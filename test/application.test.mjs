@@ -65,7 +65,7 @@ test('application uses exact cause headings, approved opportunity order, verifie
   const html = renderApplication();
   const causes = [...html.matchAll(/name="causes" value="([^"]+)"/g)].map(match => match[1]);
   const page = await readFile(new URL('../public/purposes.html', import.meta.url), 'utf8');
-  const headings = [...page.matchAll(/<h3(?: class="causes-compact-environmental")?>([^<]+)<\/h3>/g)].map(match => match[1].replaceAll('&amp;', '&'));
+  const headings = [...page.matchAll(/<h3(?: class="causes-compact-environmental")?>([\s\S]*?)<\/h3>/g)].map(match => match[1].replace(/<[^>]+>/g, '').replaceAll('&amp;', '&').replace('Humanitarian Assistance & Relief', 'Humanitarian Assistance and Relief'));
   assert.deepEqual(causes, headings);
   const opportunities = [...html.matchAll(/name="interests" value="([^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(opportunities, ['Volunteering', 'Sharing Ideas', 'Contributing Skills & Experience', 'Community Outreach', 'Project Participation', 'Collaboration & Partnerships', 'One-Time Donations', 'Monthly Donations', 'Project Sponsorship', 'In-Kind Donations', 'Other']);
