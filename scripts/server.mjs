@@ -7,6 +7,8 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+ ['/contact-modal.js',['../public/contact-modal.js','text/javascript; charset=utf-8']],
+ ['/contact-modal.css',['../public/contact-modal.css','text/css; charset=utf-8']],
  ...['/animal-welfare','/animal-welfare/','/animal-welfare.html'].map(path=>[path,['../public/animal-welfare.html','text/html; charset=utf-8']]),
  ['/animal-welfare.css',['../public/animal-welfare.css','text/css; charset=utf-8']],
  ['/Animal%20Welfare_%20Compassion%20in%20Action.png',['../public/Animal Welfare_ Compassion in Action.png','image/png']],
@@ -131,7 +133,7 @@ const routes = new Map([
 export function createPreviewServer(contactOptions) {
   const handleContact = createContactHandler(contactOptions);
   return createServer(async (request, response) => {
-    const contactRoute = /^\/(?:contact|get-involved)(?:\.html|\/)?(?:\?|$)/.test(request.url);
+    const contactRoute = /^\/(?:contact|get-involved|animal-welfare)(?:\.html|\/)?(?:\?|$)/.test(request.url);
     response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : "script-src 'self'; form-action 'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');

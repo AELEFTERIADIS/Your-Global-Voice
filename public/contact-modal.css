@@ -1,0 +1,7 @@
+.shared-contact-modal{box-sizing:border-box;width:min(48rem,calc(100% - 2rem));max-height:90dvh;overflow:auto;padding:1.5rem;border:1px solid #C18C20;border-radius:1rem;background:#FAF8F3;color:#102B49;}
+.shared-contact-modal::backdrop{background:#102B4980;}
+.shared-contact-modal .contact-message{margin:0;padding:1rem 0 0;background:none;border:0;}
+.shared-contact-modal .contact-message h2{font:700 2rem/1.2 Georgia,serif;color:#102B49;margin:0 0 1rem;}
+.shared-contact-modal .contact-message>p{line-height:1.5;}
+.shared-contact-close{display:block;margin-left:auto;border:1px solid #C18C20;border-radius:999px;padding:.4rem .8rem;background:#F7EFD9;color:#102B49;font:inherit;cursor:pointer;}
+.shared-contact-modal :focus-visible{outline:2px solid #C18C20;outline-offset:3px;}

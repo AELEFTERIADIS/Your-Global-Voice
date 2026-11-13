@@ -69,7 +69,7 @@ test('Worker rejects honeypots, missing consent, oversized bodies and expired to
   assert.equal((await post({ ...base, token })).status, 400);
 });
 
-test('Pages workflow connects the confirmed production Worker and isolates its permission to Contact, Get Involved and Projects', async () => {
+test('Pages workflow connects the confirmed production Worker and isolates its permission to Contact, Get Involved, Projects and the Animal Welfare contact modal', async () => {
   const workflow = await readFile(new URL('../.github/workflows/pages.yml', import.meta.url), 'utf8');
   const origin = workflow.match(/^\s+CONTACT_API_ORIGIN: (https:\/\/\S+)$/m)?.[1];
   assert.equal(origin, 'https://ygvoice-contact.andyelft.workers.dev');
@@ -85,8 +85,11 @@ test('Pages workflow connects the confirmed production Worker and isolates its p
     const projects = await readFile(join(temp, 'pages/projects.html'), 'utf8');
     assert.ok(projects.includes(`connect-src 'self' ${origin}`));
     assert.ok(projects.includes(`name="ygv-contact-api" content="${origin}"`));
+    const animal = await readFile(join(temp, 'pages/animal-welfare.html'), 'utf8');
+    assert.ok(animal.includes(`connect-src 'self' ${origin}`));
+    assert.ok(animal.includes(`name="ygv-contact-api" content="${origin}"`));
     const { pagesFiles } = await import('../scripts/prepare-pages.mjs');
-    for (const file of pagesFiles.filter(file => !['contact.html', 'get-involved.html', 'projects.html'].includes(file))) {
+    for (const file of pagesFiles.filter(file => !['contact.html', 'get-involved.html', 'projects.html', 'animal-welfare.html'].includes(file))) {
       assert.ok(!(await readFile(join(temp, 'pages', file), 'utf8')).includes(origin));
     }
   } finally { await rm(temp, { recursive: true, force: true }); }
