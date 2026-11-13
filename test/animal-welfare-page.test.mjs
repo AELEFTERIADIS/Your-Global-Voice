@@ -62,3 +62,15 @@ test('main Causes card opens the published Animal Welfare page while its project
  const animal=await readFile(new URL('../public/animal-welfare.html',import.meta.url),'utf8');
  assert.match(animal,/class="animal-button animal-explore" href="coming-soon.html\?cause=animal-welfare"/);
 });
+
+test('Animal Welfare hero and closing use the uploaded originals directly without altering the veterinarian photograph',async()=>{
+ const html=await readFile(new URL('../public/animal-welfare.html',import.meta.url),'utf8');
+ const hero=html.match(/<div class="animal-hero-photo">[\s\S]*?<\/div>/)[0];
+ const closing=html.match(/<div class="animal-closing-photo">[\s\S]*?<\/div>/)[0];
+ assert.match(hero,/<image href="F3DD0B89-7B89-49E6-9ABE-704FBE41D499.JPEG" width="550" height="360" y="-80" preserveAspectRatio="xMidYMid slice"/);
+ assert.match(closing,/<image href="FF41928C-E0E7-46E8-9976-1B6857351736.PNG" width="500" height="240" preserveAspectRatio="xMidYMid slice"/);
+ assert.doesNotMatch(hero+closing,/(?:filter|opacity|mix-blend-mode)=/);
+ assert.match(html,/<svg class="animal-commitment-photo" viewBox="677 324 478 168"[\s\S]*?<image href="Animal Welfare_ Compassion in Action.png" width="1199" height="1312"\//);
+ const server=createPreviewServer();await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ try{const base='http://127.0.0.1:'+server.address().port;for(const [file,mime] of [['F3DD0B89-7B89-49E6-9ABE-704FBE41D499.JPEG','image/jpeg'],['FF41928C-E0E7-46E8-9976-1B6857351736.PNG','image/png']]){const response=await fetch(base+'/'+file);assert.equal(response.status,200);assert.equal(response.headers.get('content-type'),mime);assert.deepEqual(Buffer.from(await response.arrayBuffer()),await readFile(new URL('../public/'+file,import.meta.url)));}}finally{await new Promise(r=>server.close(r));}
+});
