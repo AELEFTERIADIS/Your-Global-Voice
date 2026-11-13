@@ -6,7 +6,7 @@ import {pagesFiles} from '../scripts/prepare-pages.mjs';
 test('return navigation appears only beneath social icons on individual cause pages',async()=>{
  for(const file of pagesFiles){
   const html=await readFile(new URL('../public/'+file,import.meta.url),'utf8');
-  const individual=['human-rights.html','humanitarian.html'].includes(file);
+  const individual=['human-rights.html','humanitarian.html','animal-welfare.html'].includes(file);
   assert.equal((html.match(/class="cause-footer-return"/g)||[]).length,individual?1:0,file);
   if(individual){
    const social=html.match(/<section class="desktop-home-social">[\s\S]*?<\/section>/)[0];
