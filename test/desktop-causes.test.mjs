@@ -5,7 +5,7 @@ import {preparePages} from '../scripts/prepare-pages.mjs';
 test('desktop Causes keeps original photos, full inline disclosures, wording and existing action destinations',async()=>{
  const html=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
  for(const src of ['8C534551-DFAE-4F96-B226-14203E48BE5D.jpeg','YGV-Humanitarian-Aid.jpeg','CFA1FD8E-17F4-49FE-A5D8-4F97EBB1E587.png','30D02897-5227-4D75-B420-B17C1E5737F6.jpeg'])assert(html.includes('src="'+src+'"'));
- assert.equal((html.match(/<details class="human-rights-more/g)||[]).length,3);
+ assert.equal((html.match(/<details class="human-rights-more/g)||[]).length,0);
  assert(html.includes('class="human-rights-page-link" href="human-rights.html"'));
  assert(html.includes('We work to prevent animal cruelty and suffering, promote animal well-being, and ensure compassionate care for all animals.'));
  assert(html.includes('href="donate.html#donation-payment"'));

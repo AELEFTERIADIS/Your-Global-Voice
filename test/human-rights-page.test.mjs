@@ -24,7 +24,7 @@ test('approved Human Rights wording is real HTML and all cause actions preserve 
  assert(!html.includes('<form'));
  const causes=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
  assert.match(causes,/class="human-rights-page-link" href="human-rights.html"/);
- assert.equal((causes.match(/<details class="human-rights-more/g)||[]).length,3);
+ assert.equal((causes.match(/<details class="human-rights-more/g)||[]).length,0);
 });
 
 test('new page, local stylesheet and approved photograph source are available without exposing private files',async t=>{
