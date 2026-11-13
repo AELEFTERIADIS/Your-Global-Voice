@@ -1,3 +1,4 @@
+import {writeHumanitarianPage} from './humanitarian-page.mjs';
 import {writeHumanRightsPage} from './human-rights-page.mjs';
 import {renderDesktopCauses} from './desktop-causes.mjs';
 import { renderDesktopMission, renderDesktopMissionFooter } from './desktop-mission.mjs';
@@ -127,4 +128,5 @@ for (const [path, title, file] of outputPages) {
 }
 await writeLeadershipPages({andreasBiography,maximosBiography,robertBiography});
 await writeHumanRightsPage();
+await writeHumanitarianPage();
 console.log(`Built all ${outputPages.length} pages from shared layout and official purposes.`);
