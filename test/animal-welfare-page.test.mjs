@@ -46,3 +46,10 @@ test('Animal Welfare modal reuses the exact shared message form and existing del
  const js=await readFile(new URL('../public/contact-modal.js',import.meta.url),'utf8');
  assert.match(js,/script.src='contact.js'/);assert.doesNotMatch(js,/fetch\(/);
 });
+
+test('Animal Welfare subtitle and four focus descriptions omit only ending periods',async()=>{
+ const html=await readFile(new URL('../public/animal-welfare.html',import.meta.url),'utf8');
+ assert.match(html,/class="animal-slogan">Protection, care, and dignity for all animals<\/p>/);
+ const descriptions=[...html.matchAll(/<article class="animal-focus-card">[\s\S]*?<p>([^<]+)<\/p>/g)].map(m=>m[1]);
+ assert.deepEqual(descriptions,['Helping animals facing abandonment, harm, and danger','Supporting food, shelter, and essential care','Promoting humane treatment and protection','Encouraging responsible care and sustainable animal welfare']);
+});

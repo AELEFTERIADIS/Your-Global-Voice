@@ -104,3 +104,9 @@ body:has(.animal-page-shell)>.site-footer{display:none;}
  .animal-commitment:has(.animal-more[open])>.animal-commitment-photo{margin-top:.8cqw;}
  .animal-commitment:has(.animal-more[open])>.animal-commitment-copy{border-left-color:transparent;background:linear-gradient(#E6A100,#E6A100) left top/3px 16cqw no-repeat;background-origin:border-box;}
 }
+
+/* Balance only the expanded invitation copy beside its existing action. */
+@media(min-width:64.001rem){
+ .animal-expanded-invitation{gap:1.8cqw;padding:1.6cqw 1.3cqw;min-height:11cqw;}
+ .animal-expanded-invitation>p{min-width:0;text-wrap:balance;line-height:1.4;}
+}
