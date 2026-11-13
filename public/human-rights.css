@@ -89,3 +89,9 @@ body:has(.human-rights-page-shell)>.site-footer{display:none;}
 .rights-official-motto>span:nth-child(2){color:#d50810;}
 .rights-official-motto>span:nth-child(3){color:#117c22;}
 @media(max-width:40rem){.rights-invitation-copy .rights-official-motto{font-size:3.8cqw;}}
+
+/* Contextual return navigation is exclusive to independent cause-page footers. */
+.cause-footer-return{display:flex;align-items:center;justify-content:center;gap:.45rem;box-sizing:border-box;width:fit-content;max-width:100%;margin:1.25rem auto .65rem;padding:.45rem .85rem;border:1px solid #C18C20;border-radius:999px;background:#F7EFD9;color:#102B49;font:600 1.2rem/1.25 'Times New Roman',Georgia,serif;text-align:center;text-decoration:none;white-space:nowrap;}
+.cause-footer-return>span{color:#C18C20;font-weight:400;}
+.cause-footer-return:hover{text-decoration:underline;text-underline-offset:.2em;}
+.cause-footer-return:focus-visible{outline:2px solid #C18C20;outline-offset:4px;}

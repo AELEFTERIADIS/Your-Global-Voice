@@ -8,7 +8,7 @@ test('Humanitarian page preserves the actual Causes header/footer and has four a
  const causes=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
  for(const tag of ['header','footer']){
   const pattern=tag==='header'?/<header class="site-header">[\s\S]*?<\/header>/:/<footer class="desktop-home-footer"[\s\S]*?<\/footer>/;
-  assert.equal(html.match(pattern)[0],causes.match(pattern)[0]);
+  assert.equal(html.match(pattern)[0].replace(/<a class="cause-footer-return"[\s\S]*?<\/a>/,''),causes.match(pattern)[0]);
  }
  assert.equal((html.match(/<header\b/g)||[]).length,1);
  assert.equal((html.match(/<h1\b/g)||[]).length,1);
@@ -29,7 +29,7 @@ test('Humanitarian has one initially collapsed inline statement, existing action
  assert(html.includes('Beyond emergency response, we support preparedness, self-reliance, and sustainable solutions to help communities recover with strength and dignity and better face future challenges.'));
  assert.equal((html.match(/href="donate.html\?cause=humanitarian-assistance#donation-payment"/g)||[]).length,2);
  assert.match(html,/class="relief-action relief-involve" href="get-involved.html"/);
- assert.match(html,/href="causes.html">← Back to Our Causes/);
+ assert.match(html,/class="cause-footer-return" href="causes.html"/);
  const causes=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
  assert.match(causes,/<li id="humanitarian-assistance"[\s\S]*?href="humanitarian.html">Explore More/);
 });

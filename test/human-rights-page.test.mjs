@@ -8,7 +8,7 @@ test('independent Human Rights page reuses the actual shared header and Causes f
  const causes=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
  const header=s=>s.match(/<header class="site-header">[\s\S]*?<\/header>/)[0];
  const footer=s=>s.match(/<footer class="desktop-home-footer"[\s\S]*?<\/footer>/)[0];
- assert.equal(header(page),header(causes));assert.equal(footer(page),footer(causes));
+ assert.equal(header(page),header(causes));assert.equal(footer(page).replace(/<a class="cause-footer-return"[\s\S]*?<\/a>/,''),footer(causes));
  assert.equal((page.match(/<header\b/g)||[]).length,1);
  assert.equal((page.match(/<h1\b/g)||[]).length,1);
  assert.match(page,/<div class="human-rights-page-shell"><main/);
