@@ -62,3 +62,19 @@ body:has(.humanitarian-page-shell)>.site-footer{display:none;}
 
 /* Exact reference contours occupy only the existing decorative layers. */
 .relief-hero-wave{inset:0;width:100%;height:100%;pointer-events:none;}
+
+/* Approved-scope hero action and introductory commitment typography refinement. */
+@media(min-width:80rem){
+ .relief-hero-copy>.relief-action{width:18cqw;min-height:2.9cqw;padding:.25cqw .9cqw;font-size:1.7cqw;}
+ .relief-commitment-copy{min-height:18.835cqw;}
+ .relief-commitment-copy>p{max-width:calc(100% - 1cqw);font-size:1.65cqw;line-height:1.35;font-weight:400;text-wrap:pretty;}
+ .relief-more{width:calc(100% + 2.8cqw);}
+ .relief-expanded{max-width:calc(100% - 2.8cqw);}
+}
+
+@media(min-width:80rem){
+ /* Use the hero action's measured column center: 3.2 + (47 - 3.2) / 2 = 25.1cqw. */
+ .relief-more>summary{position:relative;left:calc(25.1cqw - 3.7cqw);transform:translateX(-50%);margin-inline:0;}
+ .relief-hero-copy>.relief-action{gap:.85cqw;}
+ .relief-give-arrow{width:1em;height:1em;flex:none;}
+}
