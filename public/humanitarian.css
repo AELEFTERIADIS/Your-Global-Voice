@@ -98,3 +98,17 @@ body:has(.humanitarian-page-shell)>.site-footer{display:none;}
 .cause-footer-return>span{color:#C18C20;font-weight:400;}
 .cause-footer-return:hover{text-decoration:underline;text-underline-offset:.2em;}
 .cause-footer-return:focus-visible{outline:2px solid #C18C20;outline-offset:4px;}
+
+/* Balanced desktop closing invitation; preserve the photograph and divider. */
+.relief-closing-copy .relief-official-motto{color:#C18C20;font:600 2.05cqw/1.4 'Times New Roman',Georgia,serif;white-space:nowrap;}
+.relief-official-motto>span:nth-of-type(1){color:#8006ca;}
+.relief-official-motto>span:nth-of-type(2){color:#d50810;}
+.relief-official-motto>span:nth-of-type(3){color:#117c22;}
+.relief-official-motto>b{font-weight:inherit;}
+@media(min-width:64.001rem){
+ .relief-closing{padding-top:1.5cqw;padding-bottom:2.2cqw;}
+ .relief-closing-copy{display:flex;flex-direction:column;gap:1.8cqw;padding-block:1cqw;}
+ .relief-closing h2{margin:0;font-size:2.8cqw;line-height:1.12;}
+ .relief-closing-copy .relief-official-motto{margin:0;}
+}
+@media(max-width:40rem){.relief-closing-copy .relief-official-motto{font-size:3.8cqw;}}
