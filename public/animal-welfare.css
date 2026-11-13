@@ -118,3 +118,7 @@ body:has(.animal-page-shell)>.site-footer{display:none;}
  .animal-commitment:has(.animal-more[open])>.animal-commitment-copy{background:none;}
  .animal-more .animal-expanded-panel{margin-left:calc(-3.8cqw - 3px);}
 }
+/* Compact, centered invitation group with a comfortable text-to-action gap. */
+@media(min-width:64.001rem){
+ .animal-expanded-invitation{grid-template-columns:minmax(0,54cqw) auto;justify-content:center;gap:1.3cqw;min-height:9cqw;padding-block:1.2cqw;}
+}
