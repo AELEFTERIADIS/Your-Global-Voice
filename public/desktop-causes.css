@@ -217,3 +217,11 @@
  .causes-approved-page .human-rights-more{padding-top:.65cqw;padding-bottom:.5cqw;}
  .causes-approved-page .human-rights-page-link{width:19cqw;min-height:3.9cqw;padding:.55cqw 1.6cqw;margin-right:.4cqw;}
 }
+
+/* Cause-heading colors only; retain the approved desktop typography and layout. */
+@media(min-width:80rem){
+ .causes-approved-page .human-rights-card h3{color:var(--cause);}
+ .causes-approved-page .humanitarian-card h3{color:var(--cause);}
+ .causes-approved-page .animal-welfare-card h3{color:var(--cause);}
+ .causes-approved-page .environmental-card h3{color:var(--cause);}
+}
