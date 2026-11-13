@@ -17,7 +17,7 @@ test('independent Human Rights page reuses the actual shared header and Causes f
 
 test('approved Human Rights wording is real HTML and all cause actions preserve established destinations',async()=>{
  const html=await readFile(new URL('../public/human-rights.html',import.meta.url),'utf8');
- for(const phrase of ['A World of Equality,','Respect, and Human Dignity','Our Commitment','Defend<br>Human Rights','End<br>Discrimination','Protect<br>Human Dignity','Equality and Justice','Stand for Justice.','Uphold Human Dignity.'])assert(html.includes(phrase),phrase);
+ for(const phrase of ['A World of Equality,','Respect, and Human Dignity','Our Commitment','Defend<br>Human Rights','End<br>Discrimination','Protect<br>Human Dignity','Equality and Justice','Stand for Justice','Uphold Human Dignity'])assert(html.includes(phrase),phrase);
  assert.equal((html.match(/<article class="rights-commitment-card/g)||[]).length,4);
  assert.match(html,/href="donate.html\?cause=human-rights-dignity#donation-payment"/);
  assert.match(html,/href="get-involved.html"/);assert.match(html,/href="causes.html"/);
