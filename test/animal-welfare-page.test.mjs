@@ -53,3 +53,12 @@ test('Animal Welfare subtitle and four focus descriptions omit only ending perio
  const descriptions=[...html.matchAll(/<article class="animal-focus-card">[\s\S]*?<p>([^<]+)<\/p>/g)].map(m=>m[1]);
  assert.deepEqual(descriptions,['Helping animals facing abandonment, harm, and danger','Supporting food, shelter, and essential care','Promoting humane treatment and protection','Encouraging responsible care and sustainable animal welfare']);
 });
+
+test('main Causes card opens the published Animal Welfare page while its project action remains Coming Soon',async()=>{
+ const causes=await readFile(new URL('../public/purposes.html',import.meta.url),'utf8');
+ const card=causes.match(/<li id="animal-welfare"[\s\S]*?<\/li>/)[0];
+ assert.match(card,/class="human-rights-page-link" href="animal-welfare.html"/);
+ assert.doesNotMatch(card,/coming-soon/);
+ const animal=await readFile(new URL('../public/animal-welfare.html',import.meta.url),'utf8');
+ assert.match(animal,/class="animal-button animal-explore" href="coming-soon.html\?cause=animal-welfare"/);
+});
