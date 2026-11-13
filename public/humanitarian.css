@@ -78,3 +78,17 @@ body:has(.humanitarian-page-shell)>.site-footer{display:none;}
  .relief-hero-copy>.relief-action{gap:.85cqw;}
  .relief-give-arrow{width:1em;height:1em;flex:none;}
 }
+
+/* Full-width approved commitment expansion; introductory columns stay unchanged. */
+.relief-more .relief-expanded-panel{box-sizing:border-box;width:95.8cqw;max-width:none;margin:1.5cqw 0 0 -1.6cqw;padding:.2cqw 1.9cqw 1.2cqw;border:1.5px solid #CB0013;border-radius:1.6cqw;background:linear-gradient(105deg,#FCE5E2,#FFF9F4 52%,#FCE6E3);box-shadow:0 2px 3px #692b1620;}
+.relief-detail-row{display:grid;grid-template-columns:10.2cqw 22.8cqw minmax(0,1fr);gap:1.6cqw;align-items:center;padding:1.1cqw 0;border-bottom:1px solid #E8ACAA;}
+.relief-detail-row:last-of-type{border-bottom:0;}
+.relief-detail-row>svg{width:7.4cqw;height:6.4cqw;justify-self:center;}
+.relief-detail-row h3{margin:0;color:#A30009;font-size:2.1cqw;line-height:1.02;font-weight:700;}
+.relief-detail-row>p{margin:0;padding-left:2.3cqw;border-left:3px solid #E8A300;font-size:1.6cqw;line-height:1.16;font-weight:600;text-align:left;}
+.relief-expanded-wave{width:100%;height:2.8cqw;}
+.relief-expanded-invitation{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.7cqw;align-items:center;margin:.3cqw .6cqw 0;}
+.relief-expanded-invitation>p{margin:0;text-align:center;font-size:1.65cqw;line-height:1.15;font-weight:700;font-style:italic;}
+.relief-expanded-invitation>.relief-message{min-height:3.6cqw;padding:.3cqw 1.6cqw;font-size:1.8cqw;gap:1cqw;}
+.relief-message>svg{width:2.1cqw;height:2.1cqw;flex:none;}
+@media(max-width:64rem){.relief-detail-row{grid-template-columns:3.5rem minmax(0,1fr);gap:1rem;padding:1rem 0;}.relief-detail-row>svg{width:3.5rem;height:3.5rem;}.relief-detail-row h3{font-size:1.25rem;}.relief-detail-row>p{grid-column:1/-1;font-size:1rem;line-height:1.5;padding-left:1rem;}.relief-expanded-invitation{grid-template-columns:1fr;gap:1rem;}.relief-expanded-invitation>p{font-size:1rem;line-height:1.4;}.relief-expanded-invitation>.relief-message{justify-self:center;font-size:1rem;min-height:44px;gap:.6rem;}.relief-message>svg{width:1.3rem;height:1.3rem;}}

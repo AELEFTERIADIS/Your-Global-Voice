@@ -26,7 +26,7 @@ test('Humanitarian has one initially collapsed inline statement, existing action
  assert.match(html,/<details class="relief-more"><summary>/);
  assert.doesNotMatch(html,/<details class="relief-more" open/);
  assert.match(html,/relief-read-more">Read More/);assert.match(html,/relief-read-less">Read Less/);
- assert(html.includes('Through compassion and practical action, we hope to ease suffering, inspire hope, and help communities build a stronger future.'));
+ assert(html.includes('Beyond emergency response, we support preparedness, self-reliance, and sustainable solutions to help communities recover with strength and dignity and better face future challenges.'));
  assert.equal((html.match(/href="donate.html\?cause=humanitarian-assistance#donation-payment"/g)||[]).length,2);
  assert.match(html,/class="relief-action relief-involve" href="get-involved.html"/);
  assert.match(html,/href="causes.html">← Back to Our Causes/);
@@ -40,4 +40,23 @@ test('Humanitarian routes and photograph assets resolve under the existing secur
  for(const path of ['/humanitarian','/humanitarian/','/humanitarian.html','/humanitarian.css','/Compassion%20Beyond%20Borders_%20Humanitarian%20Relief.png','/5008A87A-3C8C-4B00-A61F-FECAB730B2A7.PNG'])assert.equal((await fetch(base+path)).status,200,path);
  assert.match((await fetch(base+'/humanitarian.html')).headers.get('content-security-policy'),/default-src 'none'/);
  assert.equal((await fetch(base+'/content/purposes.json')).status,404);
+});
+
+
+test('expanded humanitarian commitment preserves all four reference explanations and reuses the shared message form',async()=>{
+ const html=await readFile(new URL('../public/humanitarian.html',import.meta.url),'utf8');
+ const rows=[...html.matchAll(/<section class="relief-detail-row">([\s\S]*?)<\/section>/g)];
+ assert.equal(rows.length,4);
+ const headings=['A Commitment to<br>Human Dignity','A Comprehensive<br>Humanitarian Approach','Collaboration for<br>Greater Impact','Building Lasting<br>Resilience'];
+ const paragraphs=[
+ 'We stand beside individuals and communities facing hardship, poverty, displacement, and the effects of natural disasters. Our humanitarian work is guided by compassion, respect, and support for the essential needs that protect life, health, and well-being.',
+ 'We focus on immediate relief, short-term assistance, and long-term recovery. Our goal is to ease suffering, restore essential services, support the rebuilding of homes and livelihoods, and strengthen community resilience.',
+ 'We work with volunteers, local communities, and humanitarian partner organizations in the United States and abroad. Through shared resources, knowledge, and coordinated action, we seek to reach individuals in need more effectively, respond with care, and create lasting, positive change.',
+ 'Beyond emergency response, we support preparedness, self-reliance, and sustainable solutions to help communities recover with strength and dignity and better face future challenges.'
+ ];
+ rows.forEach(([,row],i)=>{assert(row.includes('<h3>'+headings[i]+'</h3>'));assert(row.includes('<p>'+paragraphs[i]+'</p>'));assert(row.includes('<svg'));});
+ assert.match(html,/class="relief-action relief-support relief-message" href="contact.html#message-heading"/);
+ assert.doesNotMatch(html,/<form\b/);
+ const contact=await readFile(new URL('../public/contact.html',import.meta.url),'utf8');
+ assert(contact.includes('id="message-heading"'));
 });
