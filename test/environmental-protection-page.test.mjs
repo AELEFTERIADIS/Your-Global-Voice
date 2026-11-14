@@ -48,3 +48,22 @@ test('expanded commitment preserves all five approved explanations and reuses th
  assert.equal((html.match(/class="contact-form"/g)||[]).length,1);
  assert.doesNotMatch(html,/Environmental Protection Commitment Page.png/);
 });
+
+test('desktop focus cards preserve the exact approved slogans and two-line descriptions',async()=>{
+ const html=await readFile(new URL('../public/environmental-protection.html',import.meta.url),'utf8');
+ const cards=[...html.matchAll(/<article class="environment-focus-card">([\s\S]*?)<\/article>/g)];
+ const expected=[
+  ['Every Habitat Matters','Protect • Preserve • Restore','Our Natural World'],
+  ['Every Drop Matters','Cleaner Waters • Healthier Oceans','A More Sustainable Future'],
+  ['Less Waste, More Future','Reduce • Reuse • Recycle','For a Cleaner Planet'],
+  ['A Stronger Tomorrow','Stronger Communities','A More Resilient World']
+ ];
+ assert.equal(cards.length,4);
+ cards.forEach(([,card],i)=>{
+  assert(card.includes('<p class="environment-focus-slogan">'+expected[i][0]+'</p>'));
+  const description=card.match(/<p class="environment-focus-description">([\s\S]*?)<\/p>/)[1];
+  assert.deepEqual([...description.matchAll(/<span>(.*?)<\/span>/g)].map(m=>m[1]),expected[i].slice(1));
+  assert.doesNotMatch(description,/\./);
+  assert(card.includes('Your Global Voice_ Environmental Protection.png'));
+ });
+});

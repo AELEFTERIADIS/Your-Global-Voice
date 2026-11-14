@@ -42,3 +42,23 @@
 .environment-ideas>p{font-size:1.5cqw;line-height:1.15;font-weight:600;margin:0;padding-left:1.8cqw;border-left:3px solid #E3A019;}
 .environment-ideas>.environment-message{font-size:1.9cqw;min-height:3.6cqw;padding:.4cqw 1.7cqw;border:2px solid #174A16;color:#103B10;background:linear-gradient(#fffefa,#F1F5DF);box-shadow:0 2px #234521;}
 @media(max-width:64rem){.environment-more>.environment-expanded-panel{width:100%;margin:1.5rem 0 0;padding:1rem;}.environment-detail-row{grid-template-columns:3.5rem minmax(0,1fr);gap:1rem;padding:1rem 0;}.environment-detail-row>svg{width:3.5rem;height:3.5rem;}.environment-detail-row h3{font-size:1.35rem;}.environment-detail-row>p{grid-column:1/-1;font-size:1rem;line-height:1.5;padding-left:1rem;}.environment-ideas{grid-template-columns:2.5rem minmax(0,1fr);gap:.8rem;padding:1rem;}.environment-ideas-icon{width:2.5rem;height:2.5rem;}.environment-ideas h3{font-size:1.25rem;}.environment-ideas>p{grid-column:1/-1;font-size:1rem;line-height:1.5;padding-left:1rem;}.environment-ideas>.environment-message{grid-column:1/-1;justify-self:center;min-height:44px;font-size:1rem;padding:.5rem 1.2rem;}}
+
+/* Approved desktop focus cards; compact layouts retain their existing presentation. */
+.environment-page .environment-focus-photo-desktop,.environment-focus-details{display:none;}
+@media(min-width:80rem){
+ .environment-focus-heading{margin-bottom:2.5cqw;}
+ .environment-focus-heading h2{font-style:italic;}
+ .environment-focus-grid{grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;}
+ .environment-focus-card{border:1px solid #183D29;border-radius:1.7cqw;padding-bottom:0;}
+ .environment-page .environment-focus-photo{display:none;}
+ .environment-page .environment-focus-photo-desktop{display:block;width:100%;height:10.85cqw;}
+ .environment-focus-title{grid-template-columns:5.6cqw minmax(0,1fr);gap:.7cqw;align-items:center;margin:.7cqw .8cqw .6cqw;}
+ .environment-focus-icon{width:5.6cqw;height:5.6cqw;margin:0;padding:0;border:0;border-radius:0;background:transparent;}
+ .environment-focus-title h3{font-family:'Times New Roman',Georgia,serif;font-size:2.1cqw;line-height:1.12;font-weight:700;font-style:italic;color:#103B10;padding:.35cqw 0 .35cqw .8cqw;border-left:1px solid #DFA000;}
+ .environment-focus-details{display:block;}
+ .environment-focus-card>.environment-focus-legacy-description{display:none;}
+ .environment-focus-slogan{margin:0 .85cqw;padding:.48cqw .3cqw;border-radius:999px;background:#FFF0BF;color:#103B10;font-family:'Times New Roman',Georgia,serif;font-size:1.8cqw;line-height:1.15;font-weight:700;font-style:italic;white-space:nowrap;text-align:center;}
+ .environment-focus-description-rule{display:block;height:1px;margin:.8cqw 1cqw .7cqw;background:#DFA000;}
+ .environment-focus-description{margin:0;padding:0 .8cqw 1cqw;color:#103B10;font-family:'Times New Roman',Georgia,serif;font-size:1.5cqw;line-height:1.25;font-weight:400;text-align:center;}
+ .environment-focus-description>span{display:block;white-space:nowrap;}
+}
