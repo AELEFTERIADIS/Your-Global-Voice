@@ -51,7 +51,7 @@
  .environment-focus-grid{grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;}
  .environment-focus-card{border:1px solid #183D29;border-radius:1.7cqw;padding-bottom:0;}
  .environment-page .environment-focus-photo{display:none;}
- .environment-page .environment-focus-photo-desktop{display:block;width:100%;height:10.85cqw;object-fit:contain;object-position:center;background:inherit;}
+ .environment-page .environment-focus-photo-desktop{display:block;width:100%;height:auto;aspect-ratio:1256 / 860;object-fit:cover;object-position:center;background:inherit;}
  .environment-focus-title{grid-template-columns:5.6cqw minmax(0,1fr);gap:.7cqw;align-items:center;margin:.7cqw .8cqw .6cqw;}
  .environment-focus-icon{width:5.6cqw;height:5.6cqw;margin:0;padding:0;border:0;border-radius:0;background:transparent;}
  .environment-focus-title h3{font-family:'Times New Roman',Georgia,serif;font-size:2.1cqw;line-height:1.12;font-weight:700;font-style:italic;color:#103B10;padding:.35cqw 0 .35cqw .8cqw;border-left:1px solid #DFA000;}
