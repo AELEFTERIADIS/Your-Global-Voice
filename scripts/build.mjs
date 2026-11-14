@@ -1,3 +1,4 @@
+import {writeEnvironmentalProtectionPage} from './environmental-protection-page.mjs';
 import {writeAnimalWelfarePage} from './animal-welfare-page.mjs';
 import {writeHumanitarianPage} from './humanitarian-page.mjs';
 import {writeHumanRightsPage} from './human-rights-page.mjs';
@@ -131,4 +132,5 @@ await writeLeadershipPages({andreasBiography,maximosBiography,robertBiography});
 await writeHumanRightsPage();
 await writeHumanitarianPage();
 await writeAnimalWelfarePage();
+await writeEnvironmentalProtectionPage();
 console.log(`Built all ${outputPages.length} pages from shared layout and official purposes.`);

@@ -99,7 +99,7 @@ test('all pages share working navigation and preserve the approved purposes', as
         if (title === expected[0][0]) assert.match(html, /class="human-rights-page-link" href="human-rights.html"/);
         else if(title===expected[1][0]) assert.ok(html.includes('href="humanitarian.html"'), title);
         else if(title===expected[2][0]) assert.ok(html.includes('href="animal-welfare.html"'), title);
-        else assert.ok(html.includes('href="coming-soon.html?cause=environmental-conservation"'), title);
+        else assert.ok(html.includes('href="environmental-protection.html"'), title);
       }
     }
     if (route === '/donate') {
