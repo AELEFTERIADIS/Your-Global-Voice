@@ -96,7 +96,7 @@ for (const [path, title, file] of outputPages) {
   <link rel="stylesheet" href="styles.css">${path === "/" ? '\n  <link rel="stylesheet" href="home-hero.css">\n  <link rel="stylesheet" href="home-causes.css">\n  <script src="home-causes.js" defer></script>\n  <link rel="stylesheet" href="home-sidebar.css">\n  <script src="home-sidebar.js" defer></script>\n  <link rel="stylesheet" href="home-brand.css">' : ""}${path === "/coming-soon" ? '\n  <link rel="stylesheet" href="coming-soon.css">\n  <script src="coming-soon.js" defer></script>' : ""}${path === "/contact" ? '\n  <link rel="stylesheet" href="contact.css">\n  <script src="contact.js" defer></script>' : path === "/donate" ? '\n  <link rel="stylesheet" href="donate.css">\n  <script src="donate.js" defer></script>\n  <link rel="stylesheet" href="donation-cause.css">\n  <script src="donation-cause.js" defer></script>' : (path === "/mission" || path === "/about" || path === "/get-involved") ? '\n  <link rel="stylesheet" href="mission.css">' : ""}${path === "/get-involved" ? '\n  <link rel="stylesheet" href="get-involved-hero.css">\n  <link rel="stylesheet" href="application.css">\n  <script src="application.js" defer></script>\n  <script src="contact.js" defer></script>' : ""}${path === "/projects" ? '\n  <link rel="stylesheet" href="projects.css">\n  <script src="projects.js" defer></script>\n  <script src="projects-hero.js" defer></script>' : ""}${path === "/about" ? '\n  <link rel="stylesheet" href="about.css">\n  <link rel="stylesheet" href="desktop-about-hero.css">\n  <link rel="stylesheet" href="desktop-about.css">\n  <script src="desktop-about.js" defer></script>\n  <script src="about.js" defer></script>' : ""}
   ${path==='/mission'?'<link rel="stylesheet" href="desktop-mission.css">\n  ':''}${path!=='/'?'<link rel="stylesheet" href="home-sidebar.css">\n  <script src="home-sidebar.js" defer></script>':''}
   ${path==='/purposes'?'<link rel="stylesheet" href="desktop-causes.css">':''}<link rel="stylesheet" href="desktop-home.css"><link rel="stylesheet" href="desktop-header.css">
-  <script src="desktop-header.js" defer></script>${path==='/'?'\n  <link rel="stylesheet" href="home-sidebar-refinement.css">':''}
+  <script src="desktop-header.js" defer></script>${path==='/'?'\n  <link rel="stylesheet" href="home-sidebar-refinement.css">\n  <link rel="stylesheet" href="home-frame.css">':''}
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -115,7 +115,7 @@ for (const [path, title, file] of outputPages) {
   });
   // Projects CSS URLs change only when their bytes change, independently of page queries.
   if (path === '/projects' || path === '/') {
-    for (const asset of path === '/' ? ['home-hero.css', 'home-causes.css', 'home-causes.js', 'home-sidebar.css', 'home-sidebar.js', 'home-brand.css', 'desktop-home.css', 'home-sidebar-refinement.css'] : ['styles.css', 'projects.css']) {
+    for (const asset of path === '/' ? ['home-frame.css','home-hero.css', 'home-causes.css', 'home-causes.js', 'home-sidebar.css', 'home-sidebar.js', 'home-brand.css', 'desktop-home.css', 'home-sidebar-refinement.css'] : ['styles.css', 'projects.css']) {
       const bytes = await readFile(new URL(`../public/${asset}`, import.meta.url));
       const version = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
       portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`).replace(`src="${asset}"`, `src="${asset}?v=${version}"`);
