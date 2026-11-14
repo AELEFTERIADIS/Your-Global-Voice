@@ -72,3 +72,10 @@
  .environment-project-copy>p{font-size:1.8cqw;line-height:1.22;margin:.65cqw 0 1cqw;text-wrap:balance;}
  .environment-project-button{margin-inline:auto;}
 }
+
+/* Approved original Projects photograph, desktop only; retain the existing frame. */
+.environment-project-photo-original{display:none;}
+@media(min-width:80rem){
+ .environment-projects>.environment-project-photo{display:none;}
+ .environment-projects>.environment-project-photo-original{display:block;width:100%;height:13.6cqw;object-fit:cover;object-position:center 50%;border-radius:1.5cqw;}
+}
