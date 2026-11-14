@@ -101,3 +101,7 @@
  .desktop-home-footer .footer-contact-links > .footer-contact-address span { text-decoration:underline; text-underline-offset:.16em; }
  .desktop-home-footer .footer-contact-links > .footer-contact-address svg { color:#B63842; }
 }
+/* Match the visible row gaps by compensating for WhatsApp’s extra minimum height. */
+@media(min-width:80rem){
+ .desktop-home-footer .footer-contact-links>.footer-contact-address{position:relative;top:calc(-.5cqw - 2px);}
+}
