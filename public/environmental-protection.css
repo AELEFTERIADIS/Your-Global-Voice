@@ -17,7 +17,14 @@
 /* Desktop typography and controls follow the approved Animal Welfare treatment. */
 @media(min-width:64.001rem){
  .environment-commitment-copy>p{font-family:'Times New Roman',Georgia,serif;font-size:2cqw;line-height:2.255cqw;font-weight:600;font-style:italic;color:#302D2B;margin:0;text-wrap:balance;}
- .environment-hero-copy>.environment-support{gap:.8cqw;padding:.55cqw 1.8cqw;min-height:4.3cqw;border:2px solid #B67404;border-radius:999px;font-size:2cqw;line-height:1.05;font-weight:700;}
+ .environment-hero-action-group>.environment-support{gap:.8cqw;padding:.55cqw 1.8cqw;min-height:4.3cqw;border:2px solid #B67404;border-radius:999px;font-size:2cqw;line-height:1.05;font-weight:700;}
  .environment-more{margin:.9cqw 0 .2cqw;}
  .environment-more>summary{border:2px solid #EDA300;border-radius:999px;background:linear-gradient(#fffefa,#FFF3D3);box-shadow:0 2px #9A5909;color:#103B10;font-size:2.2cqw;font-weight:700;line-height:1.1;width:fit-content;min-width:20cqw;padding:.4cqw 1.5cqw;margin:0 auto;text-align:center;}
+}
+
+/* Use the commitment column's exact centerline for the desktop hero actions. */
+.environment-hero-action-group{display:contents;}
+@media(min-width:64.001rem){
+ .environment-hero-action-group{display:block;width:calc(8cqw + (100cqw - 9.2cqw) * .49);}
+ .environment-hero-action-group>.environment-slogan{margin-bottom:2cqw;}
 }
