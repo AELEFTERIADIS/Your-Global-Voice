@@ -62,3 +62,13 @@
  .environment-focus-description{margin:0;padding:0 .8cqw 1cqw;color:#103B10;font-family:'Times New Roman',Georgia,serif;font-size:1.5cqw;line-height:1.25;font-weight:400;text-align:center;}
  .environment-focus-description>span{display:block;white-space:nowrap;}
 }
+
+/* Desktop-only Projects copy and shared center alignment. */
+.environment-project-desktop-copy{display:none;}
+@media(min-width:80rem){
+ .environment-project-copy{text-align:center;}
+ .environment-project-copy .environment-project-compact-copy{display:none;}
+ .environment-project-copy .environment-project-desktop-copy{display:inline;}
+ .environment-project-copy>p{font-size:1.8cqw;line-height:1.22;margin:.65cqw 0 1cqw;text-wrap:balance;}
+ .environment-project-button{margin-inline:auto;}
+}
