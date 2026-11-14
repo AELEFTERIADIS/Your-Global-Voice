@@ -122,3 +122,16 @@ body:has(.animal-page-shell)>.site-footer{display:none;}
 @media(min-width:64.001rem){
  .animal-expanded-invitation{grid-template-columns:minmax(0,54cqw) auto;justify-content:center;gap:1.3cqw;min-height:9cqw;padding-block:1.2cqw;}
 }
+
+/* Desktop repairs: paragraph treatment, joined hero curve, and continuous photo edge. */
+@media(min-width:64.001rem){
+ .animal-commitment-copy>p{font-style:italic;color:#302D2B;}
+ .animal-hero-photo,.animal-hero-photo>.animal-photo{overflow:visible;}
+ .animal-commitment-photo{margin-left:calc(2.3cqw + 3px);width:calc(100% - 2.3cqw - 3px);padding-left:0;border-left:0;box-shadow:0 0 0 1.5px #E6A100;overflow:hidden;}
+}
+
+.animal-hero-divider-repaired{display:none;}
+@media(min-width:64.001rem){.animal-hero-divider-original{display:none;}.animal-hero-divider-repaired{display:initial;}}
+
+.animal-hero-wave-join-underlay{display:none;}
+@media(min-width:64.001rem){.animal-hero-wave-join-underlay{display:initial;}}
