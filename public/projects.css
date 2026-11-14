@@ -250,3 +250,11 @@
  .projects-page-shell .projects-approach{margin:0;}
  .projects-page-shell .desktop-home-footer-columns{padding-top:1.5cqw;}
 }
+
+/* Reference-traced, tapered waves in the three approved desktop gaps. */
+@media(min-width:80rem){
+ .projects-page-shell .project-engagement-panels::before{background-image:url("projects-cards-wave.svg");}
+ .projects-page-shell .projects-approach::before{display:none;}
+ .projects-page-shell .project-engagement-motto{position:relative;padding-top:calc(.625rem + 44px);}
+ .projects-page-shell .project-engagement-motto::before{content:'';display:block;position:absolute;top:4px;left:0;right:0;width:auto;max-width:none;height:36px;transform:none;border-radius:0;background:url("projects-motto-wave.svg") center/100% 100% no-repeat;}
+}
