@@ -258,3 +258,11 @@
  .projects-page-shell .project-engagement-motto{position:relative;padding-top:calc(.625rem + 44px);}
  .projects-page-shell .project-engagement-motto::before{content:'';display:block;position:absolute;top:4px;left:0;right:0;width:auto;max-width:none;height:36px;transform:none;border-radius:0;background:url("projects-motto-wave.svg") center/100% 100% no-repeat;}
 }
+
+/* Desktop hero refinement; retain compact artwork and native geometry. */
+.projects-hero-slogan-desktop,.projects-hero-curve-finish{display:none;}
+@media(min-width:80rem){
+ .projects-hero-slogan-compact{display:none;}
+ .projects-hero-slogan-desktop{display:inline;}
+ .projects-hero-curve-finish{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+}

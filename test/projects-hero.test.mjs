@@ -12,7 +12,7 @@ test('Projects hero displays the vertically recomposed artwork at its native asp
   const hero = html.match(/<section class="page-intro projects-hero">([\s\S]*?)<\/section>/)[1];
   assert.equal((hero.match(/<h1\b/g) || []).length, 1);
   assert.match(hero, /<h1 class="projects-hero-title">Our Projects<\/h1>/);
-  assert.doesNotMatch(hero, /projects-artwork|<ul|<li|Nature &amp; Environment/);
+  assert.doesNotMatch(hero, /projects-artwork|<(?:ul|li)\b|Nature &amp; Environment/);
   const causeLinks=[...hero.matchAll(/<a class="projects-hero-cause"[^>]*>/g)].map(match=>match[0]);
   assert.equal(causeLinks.length,4);
   for(const [index,label] of ['Protection','Compassion','Nature','Justice'].entries())assert(causeLinks[index].includes(`aria-label="${label} projects"`));
