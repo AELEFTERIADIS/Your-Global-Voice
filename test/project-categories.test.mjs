@@ -82,5 +82,5 @@ test('approved cause copy, two card actions and unified contact action use exist
  assert.match(cards,/href="donate.html#donation-payment">Donate Now <span/);
  assert.match(cards,/class="project-engagement-action" href="contact.html#message-heading">Send a Message <span/);
  const donate=await readFile(new URL('../public/donate.html',import.meta.url),'utf8');assert(donate.includes('id="donation-payment"'));
- const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');assert(cards.includes('class="project-engagement-motto">My Voice + Your Voice = Our Voice</p>'));assert.match(css,/@media \(min-width: 64\.0625rem\)/);
+ const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');assert(cards.includes('class="projects-motto-compact">My Voice + Your Voice = Our Voice</span>')); const motto=cards.match(/<span class="projects-motto-desktop">([\s\S]*?)<\/p>/)[1].replace(/<[^>]*>/g,'').trim(); assert.equal(motto,'My Voice + Your Voice = Our Voice');assert.match(css,/@media \(min-width: 64\.0625rem\)/);
  });

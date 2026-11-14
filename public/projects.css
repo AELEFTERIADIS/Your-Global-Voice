@@ -220,3 +220,33 @@
 @media (min-width: 64.0625rem) {
  .project-cause-support { background: #A5C39F; color: #183D28; }
 }
+
+/* Approved desktop Projects framing and section transitions. */
+.projects-page-shell{display:contents;}
+.projects-motto-desktop{display:none;}
+@media(min-width:80rem){
+ .projects-page-shell{display:block;position:relative;width:min(100% - 3rem,78rem);margin:0 auto; padding:12px 12px 0;border-radius:1.5rem;overflow:hidden;background:#FAF8F3;}
+ .projects-page-shell::after{content:'';position:absolute;inset:0;z-index:3;border:2px solid #e3a019;border-radius:1.5rem;pointer-events:none;}
+ .projects-page-shell>main{width:100%;padding:0;margin:0;}
+ .projects-page-shell>.desktop-home-footer{width:calc(100% + 24px);margin:0 -12px;}
+ body:has(.projects-page-shell)>.site-footer{display:none;}
+ .projects-page-shell .projects-hero{margin:0;padding:0;}
+ .projects-page-shell .project-initiatives{margin:0 0 1.25rem;}
+ .projects-page-shell .project-initiatives::before,
+ .projects-page-shell .project-engagement-panels::before,
+ .projects-page-shell .projects-approach::before{content:'';display:block;height:36px;background:url("projects-structure-wave.svg") center/100% 100% no-repeat;}
+ .projects-page-shell .project-initiatives::before{margin:.25rem 0 .5rem;}
+ .projects-page-shell .project-engagement-panels{position:relative;overflow:visible;margin-top:3.25rem;}
+ .projects-page-shell .project-engagement-panels::before{position:absolute;top:-42px;left:0;right:0;}
+ .projects-page-shell .project-engagement-motto{background:#FAF8F3;gap:.3em;font-style:italic;}
+ .projects-page-shell .project-engagement-motto::before,.projects-page-shell .project-engagement-motto::after{display:none;}
+ .projects-page-shell .projects-motto-compact{display:none;}
+ .projects-page-shell .projects-motto-desktop{display:inline;}
+ .projects-page-shell .projects-motto-my{color:#245B32;}
+ .projects-page-shell .projects-motto-symbol{color:#B57C13;}
+ .projects-page-shell .projects-motto-your{color:#B1273B;}
+ .projects-page-shell .projects-motto-our{color:#102B49;}
+ .projects-page-shell .projects-approach::before{margin:0 0 .5rem;}
+ .projects-page-shell .projects-approach{margin:0;}
+ .projects-page-shell .desktop-home-footer-columns{padding-top:1.5cqw;}
+}
