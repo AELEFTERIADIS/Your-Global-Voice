@@ -17,7 +17,7 @@ export async function preparePages(destination, apiOrigin = process.env.CONTACT_
     const source = new URL(`../public/${file}`, import.meta.url);
     if (file.endsWith('.html')) {
       let html = await readFile(source, 'utf8');
-      const contact = ['contact.html', 'get-involved.html','animal-welfare.html'].includes(file);
+      const contact = ['contact.html', 'get-involved.html','animal-welfare.html','environmental-protection.html'].includes(file);
       const projects = file === 'projects.html';
       const csp = `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; script-src 'self'${(contact || projects) ? `; connect-src 'self'${apiOrigin ? " " + apiOrigin : ""}` : ''}`;
       html = html.replace('<head>', `<head>\n  <meta http-equiv="Content-Security-Policy" content="${csp}">${(contact || projects) ? `\n  <meta name="ygv-hosting" content="static">${apiOrigin ? '\n  <meta name="ygv-contact-api" content="' + apiOrigin + '">' : ''}` : ''}`);

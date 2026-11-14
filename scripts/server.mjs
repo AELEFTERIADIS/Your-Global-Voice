@@ -139,7 +139,7 @@ const routes = new Map([
 export function createPreviewServer(contactOptions) {
   const handleContact = createContactHandler(contactOptions);
   return createServer(async (request, response) => {
-    const contactRoute = /^\/(?:contact|get-involved|animal-welfare)(?:\.html|\/)?(?:\?|$)/.test(request.url);
+    const contactRoute = /^\/(?:contact|get-involved|animal-welfare|environmental-protection)(?:\.html|\/)?(?:\?|$)/.test(request.url);
     response.setHeader('Content-Security-Policy', `default-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'; base-uri 'none'; ${contactRoute ? "script-src 'self'; connect-src 'self'; form-action 'self'" : "script-src 'self'; form-action 'none'"}; frame-ancestors 'none'`);
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
