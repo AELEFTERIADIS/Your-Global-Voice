@@ -266,3 +266,117 @@
  .projects-hero-slogan-desktop{display:inline;}
  .projects-hero-curve-finish{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 }
+
+.projects-original-photo-panels{display:none;}
+@media(min-width:80rem){.projects-original-photo-panels{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}}
+
+/* Complete approved desktop composition; compact layouts keep their existing content. */
+.projects-approved-heading,.projects-approved-introduction,.projects-approved-engagement,.projects-approved-closing{display:none;}
+@media(min-width:80rem){
+ .projects-page-shell{container-type:inline-size;background:#FFF9EB;}
+ .projects-page-shell .projects-current-heading,.projects-page-shell .projects-compact-engagement{display:none;}
+ .projects-page-shell .projects-approved-heading,.projects-page-shell .projects-approved-engagement{display:inline;}
+ .projects-page-shell .projects-approved-introduction{display:block;max-width:89%;margin:.5rem auto 1.25rem;font:600 1.65cqw/1.22 Georgia,'Times New Roman',serif;text-align:center;color:#0B1D50;text-wrap:balance;}
+ .projects-page-shell .project-initiatives>h2{display:block;margin:0;text-align:center;font:700 3.25cqw/1.15 Georgia,'Times New Roman',serif;color:#0B1D50;letter-spacing:-.035em;}
+ .projects-page-shell .project-initiatives>h2::after{display:none;}
+ .projects-page-shell .project-cause-panels{gap:1rem;}
+ .projects-page-shell .project-cause-panel{--project-tone:#6B139C;border:1px solid var(--project-tone);box-shadow:none;border-radius:1.1rem;display:grid;grid-template-columns:37% minmax(0,1fr);grid-template-rows:1fr auto;min-height:255px;}
+ .projects-page-shell #projects-humanitarian-assistance{--project-tone:#BC151D;}
+ .projects-page-shell #projects-animal-welfare{--project-tone:#874718;}
+ .projects-page-shell #projects-environmental-conservation{--project-tone:#276C22;}
+ .projects-page-shell .project-cause-overview{display:contents;}
+ .projects-page-shell .project-cause-photo{grid-column:1;grid-row:1/3;margin:.5rem;border-radius:.8rem;min-height:0;}
+ .projects-page-shell .project-cause-copy{grid-column:2;grid-row:1;padding:.6rem .65rem .2rem .25rem;}
+ .projects-page-shell .project-cause-heading{align-items:center;gap:.6rem;}
+ .projects-page-shell .project-cause-icon{width:3.3cqw;height:3.3cqw;flex:none;color:var(--project-tone);}
+ .projects-page-shell .project-cause-panel h3{font-size:2.05cqw;line-height:1.03;color:var(--project-tone);text-align:left;}
+ .projects-page-shell .project-cause-accent{display:none;}
+ .projects-page-shell .project-cause-description{font-size:1.45cqw;line-height:1.13;margin:.4rem 0 0;color:#111;font-weight:600;}
+ .projects-page-shell .project-cause-actions{grid-column:2;grid-row:2;display:grid;grid-template-columns:1.4fr 1fr;gap:.7rem;padding:.3rem .7rem .55rem .25rem;}
+ .projects-page-shell .project-cause-action{min-height:34px;padding:.25rem .4rem;border-radius:.65rem;font:700 1.35cqw/1.1 Georgia,'Times New Roman',serif;}
+ .projects-page-shell .project-cause-explore{background:linear-gradient(color-mix(in srgb,var(--project-tone) 75%,white),var(--project-tone) 60%,color-mix(in srgb,var(--project-tone) 70%,black));border:1px solid var(--project-tone);color:white;}
+ .projects-page-shell .project-cause-support{color:var(--project-tone);background:#FFFBF1;border:1px solid var(--project-tone);}
+ .projects-page-shell .project-cause-support>svg{width:1.9cqw;height:1.9cqw;}
+ .projects-page-shell .project-engagement-panels{background:none;padding:0;box-shadow:none;gap:1.5rem;overflow:visible;margin-top:3.25rem;}
+ .projects-page-shell .project-engagement-panel{border:1px solid #E2A219;border-radius:1.25rem;padding:.75rem 1.1rem;}
+ .projects-page-shell .project-engagement-message{background:#FFFBF1;}
+ .projects-page-shell .project-engagement-heading{gap:1rem;}
+ .projects-page-shell .project-engagement-heading>h3{font-size:2.65cqw;}
+ .projects-page-shell .project-engagement-heading>svg{width:5.3cqw;height:5.3cqw;padding-right:.7rem;}
+ .projects-page-shell .project-engagement-accent{display:none;}
+ .projects-page-shell .project-engagement-panel>p{font:600 1.55cqw/1.13 Georgia,'Times New Roman',serif;text-align:left;max-width:74%;align-self:flex-end;margin:.2rem 0 .7rem;}
+ .projects-page-shell .project-engagement-action{min-height:35px;padding:.25rem .8rem;border-radius:.7rem;font-size:1.7cqw;width:65%;}
+ .projects-page-shell .project-engagement-action.projects-compact-engagement{display:none;}
+ .projects-page-shell .project-engagement-action.projects-approved-engagement{display:flex;}
+ .projects-page-shell .project-engagement-motto{display:none;}
+ .projects-page-shell .project-engagement-panel{position:relative;}
+ .projects-page-shell .project-engagement-message .project-engagement-heading>svg{stroke:#0B3872;fill:#0B3872;}
+ .projects-page-shell .projects-approach{display:none;}
+ .projects-page-shell .projects-approved-closing{display:block;position:relative;margin-top:3.25rem;overflow:visible;background:linear-gradient(#FDEBD8,#F5D9CA);}
+ .projects-page-shell .projects-approved-closing::before{content:'';position:absolute;left:0;right:0;top:-44px;height:44px;background:url('projects-motto-wave.svg') center/100% 100% no-repeat;}
+ .projects-page-shell .projects-approved-closing h2{position:relative;z-index:1;margin:0;padding:.5rem .7rem;font-family:'Garamond',Georgia,'Times New Roman',serif;font-size:5.5cqw;font-weight:500;font-style:italic;line-height:1.1;letter-spacing:-.03em;text-align:center;color:#102B49;}
+ .projects-page-shell .projects-approved-sunset{display:block;width:100%;height:18cqw;}
+ .projects-page-shell>.desktop-home-footer{margin-top:0;}
+}
+
+@media(min-width:80rem){
+ .projects-page-shell .project-initiatives::before{height:44px;}
+ .projects-page-shell .project-engagement-panels::before{height:44px;top:-48px;}
+}
+.project-approved-photo,.project-approved-card-icon,.project-approved-copy,.projects-approved-people{display:none;}
+@media(min-width:80rem){
+ .projects-page-shell .project-cause-photo,.projects-page-shell .project-current-copy{display:none;}
+ .projects-page-shell .project-approved-copy{display:inline;}
+ .projects-page-shell .project-approved-photo{display:block;grid-column:1;grid-row:1/3;width:calc(100% - 1rem);height:calc(100% - 1rem);min-height:0;margin:.5rem;border-radius:.8rem;overflow:hidden;}
+ .projects-page-shell .project-cause-panel{min-height:205px;}
+ .projects-page-shell .project-cause-heading:has(.project-approved-card-icon)>.project-cause-icon{display:none;}
+ .projects-page-shell .project-approved-card-icon{display:block;width:3.3cqw;height:3.3cqw;flex:none;color:var(--project-tone);}
+ .projects-page-shell .project-cause-actions{grid-template-columns:1fr 1fr;}
+ .projects-page-shell .project-cause-action{font-size:1.2cqw;gap:.4rem;white-space:nowrap;}
+ .projects-page-shell .project-cause-support>svg{width:18px;height:18px;}
+ .projects-page-shell .project-cause-support>span{white-space:nowrap;}
+ .projects-page-shell #projects-humanitarian-assistance .project-cause-heart{fill:none;stroke:var(--project-tone);}
+ .projects-page-shell .project-engagement-message .project-engagement-heading>svg:not(.projects-approved-people){display:none;}
+ .projects-page-shell .project-engagement-message .projects-approved-people{display:block;fill:#0B3872;stroke:none;}
+}
+.projects-approved-hero-ornaments{display:none;}
+@media(min-width:80rem){.projects-approved-hero-ornaments{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}}
+.projects-intro-sprig,.project-approved-gold-leaf{display:none;}
+@media(min-width:80rem){
+ .projects-page-shell .project-initiatives>h2{display:flex;justify-content:center;align-items:center;gap:.5rem;font-size:3.7cqw;letter-spacing:-.04em;}
+ .projects-page-shell .projects-intro-sprig{display:block;width:4.5cqw;height:4.5cqw;flex:none;}
+ .projects-page-shell .projects-intro-sprig:last-child{transform:scaleX(-1);}
+ .projects-page-shell .project-cause-copy{position:relative;}
+ .projects-page-shell .project-approved-gold-leaf{display:block;position:absolute;right:.55rem;top:.5rem;width:2.1cqw;height:2.1cqw;}
+ .projects-page-shell .project-cause-panel h3{padding-right:1.7cqw;}
+ .projects-page-shell .project-cause-description{font-family:Georgia,'Times New Roman',serif;font-weight:600;}
+}
+.project-approved-support-heart{display:none;}
+@media(min-width:80rem){
+ .projects-page-shell .project-cause-support>svg:not(.project-approved-support-heart){display:none;}
+ .projects-page-shell .project-cause-support>.project-approved-support-heart{display:block;}
+}
+@font-face{font-family:'Projects Allura';src:url('projects-closing-allura.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap;}
+@media(min-width:80rem){
+ .projects-page-shell .project-initiatives>h2{font-size:4.1cqw;}
+ .projects-page-shell .project-cause-description{font-size:1.65cqw;line-height:1.16;}
+ .projects-page-shell .project-cause-action{font-size:1.35cqw;min-height:35px;}
+ .projects-page-shell .projects-approved-closing h2{display:flex;align-items:center;justify-content:center;gap:.6cqw;font-family:'Projects Allura',Georgia,serif;font-style:normal;font-size:6.3cqw;line-height:1;padding:.65rem .7rem;white-space:nowrap;}
+ .projects-page-shell .projects-closing-flourish{width:11cqw;height:3cqw;flex:none;}
+ .projects-page-shell .projects-closing-flourish-right{transform:scaleX(-1);}
+}
+
+/* Targeted participation-box correction: shared icon and text columns. */
+@media(min-width:80rem){
+ .projects-page-shell .project-engagement-panel{display:grid;grid-template-columns:7.5cqw minmax(0,1fr);grid-template-rows:auto 1fr auto;column-gap:1.15cqw;row-gap:.35cqw;height:13.5cqw;padding:1cqw 1.25cqw;align-items:start;}
+ .projects-page-shell .project-engagement-heading{display:contents;}
+ .projects-page-shell .project-engagement-heading>svg{grid-column:1;grid-row:1/3;box-sizing:border-box;width:7.5cqw;height:7.1cqw;padding:0 1.1cqw 0 0;border-right:1px solid #D9AB3B;margin:0;align-self:center;}
+ .projects-page-shell .project-engagement-heading>h3{grid-column:2;grid-row:1;font-size:2.5cqw;line-height:1.08;margin:0;}
+ .projects-page-shell .project-engagement-panel>p{grid-column:2;grid-row:2;max-width:none;width:100%;align-self:start;margin:0;font-size:1.5cqw;line-height:1.2;text-align:left;}
+ .projects-page-shell .project-engagement-action{grid-column:2;grid-row:3;justify-self:center;align-self:end;width:min(100%,20cqw);min-height:35px;margin:0;}
+ .projects-page-shell .project-engagement-message .projects-approved-people{border-right:1px solid;border-image:linear-gradient(#1E4775,#C8AC4F,#2D662C) 1;}
+}
+@media(min-width:80rem){
+ .projects-page-shell .project-engagement-heading>h3{font-size:2.65cqw;}
+ .projects-page-shell .project-engagement-panel>p{font-size:1.55cqw;}
+}

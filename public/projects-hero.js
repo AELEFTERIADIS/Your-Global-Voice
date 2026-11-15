@@ -34,3 +34,19 @@ if(causeNotice) {
   }
  });
 }
+
+// Align the desktop globe with the actual separator after the browser resolves its fonts.
+function alignProjectsHeroGlobe() {
+ const subtitle=document.querySelector('.projects-hero-slogan-desktop');
+ const globe=document.querySelector('.projects-hero-mini-globe');
+ const lines=document.querySelector('.projects-hero-globe-lines');
+ if(!subtitle||!globe||!lines||typeof subtitle.getStartPositionOfChar!=='function'||getComputedStyle(subtitle).display==='none')return;
+ const index=subtitle.textContent.indexOf('|');
+ if(index<0)return;
+ const center=(subtitle.getStartPositionOfChar(index).x+subtitle.getEndPositionOfChar(index).x)/2;
+ globe.setAttribute('transform',`translate(${center} 619)`);
+ lines.setAttribute('d',`M225 610Q540 592 ${center-33} 619M${center+33} 619Q1234 592 1549 610`);
+}
+alignProjectsHeroGlobe();
+document.fonts?.ready.then(alignProjectsHeroGlobe);
+globalThis.addEventListener?.('resize',alignProjectsHeroGlobe,{passive:true});

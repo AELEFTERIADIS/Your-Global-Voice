@@ -46,3 +46,14 @@ test('existing category targets become native fragment links and modified clicks
  assert.equal(pending.dialog.open,false);
  const fallback=setup({dialogs:false});assert.equal(fallback.events.click,undefined);assert.equal(fallback.attributes.href,'#project-initiatives-heading');
 });
+
+test('desktop globe tracks the actual subtitle separator after font and viewport changes',()=>{
+ let center=905,display='inline';const attrs={},events={};
+ const subtitle={textContent:'Compassion in Action | Hope for Every Life',getStartPositionOfChar:()=>({x:center-5}),getEndPositionOfChar:()=>({x:center+5})};
+ const globe={setAttribute:(name,value)=>attrs[name]=value};const lines={setAttribute:(name,value)=>attrs.path=value};
+ const document={querySelector:s=>s==='.projects-hero-slogan-desktop'?subtitle:s==='.projects-hero-mini-globe'?globe:s==='.projects-hero-globe-lines'?lines:null,querySelectorAll:()=>[],fonts:{ready:{then:fn=>fn()}}};
+ vm.runInNewContext(script,{document,getComputedStyle:()=>({display}),addEventListener:(name,fn)=>events[name]=fn});
+ assert.equal(attrs.transform,'translate(905 619)');assert.match(attrs.path,/872 619M938 619/);
+ center=925;events.resize();assert.equal(attrs.transform,'translate(925 619)');
+ display='none';center=945;events.resize();assert.equal(attrs.transform,'translate(925 619)');
+});

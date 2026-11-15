@@ -8,7 +8,7 @@ const html=await readFile(new URL('../public/projects.html',import.meta.url),'ut
 test('four unique cause panels follow Explore Our Projects and precede the approved closing section',()=>{
  assert.deepEqual(projectCategories.map(c=>c.id),approvedCauseIds);
  assert.deepEqual(projectCategories.map(c=>c.label),['Human Rights & Dignity','Humanitarian Assistance & Relief','Animal Welfare','Environmental Protection']);
- assert.match(html,/<h2 id="project-initiatives-heading"><span>Explore Our Projects<\/span><\/h2>\s*<div class="project-cause-panels">/);
+ assert.match(html,/<h2 id="project-initiatives-heading">[\s\S]*?Explore Our Projects[\s\S]*?Making a Difference Where It Matters Most[\s\S]*?<div class="project-cause-panels">/);
  assert.equal((html.match(/class="project-cause-panel"/g)||[]).length,4);
  assert.equal((html.match(/class="project-dignity-layout"/g)||[]).length,0);
  assert.equal((html.match(/class="projects-future"/g)||[]).length,0);
@@ -54,9 +54,10 @@ test('approved cause copy, two card actions and unified contact action use exist
  assert.equal((cards.match(/href="donate.html#giving-heading"/g)||[]).length,4);
  assert.equal((cards.match(/>Support This Cause<\/span>/g)||[]).length,4);
  assert.equal((cards.match(/>Send a Message <span/g)||[]).length,1);
- assert.match(cards, /class="project-engagement-action" href="contact.html#message-heading"/);
+ assert.match(cards, /class="project-engagement-action projects-compact-engagement" href="contact.html#message-heading"/);
  for(const card of cards.matchAll(/<article\b[\s\S]*?<\/article>/g))assert.doesNotMatch(card[0], /project-cause-message|Send a Message/);
- assert.equal((cards.match(/role="img" aria-label="[^"]+"/g)||[]).length,4);
+ assert.equal((cards.match(/class="project-cause-photo" role="img"/g)||[]).length,4);
+ assert.equal((cards.match(/class="project-approved-photo"/g)||[]).length,4);
  assert.equal((cards.match(/class="project-cause-accent"/g)||[]).length,4);
  assert.doesNotMatch(cards,/https?:|test-checkout|data-payment|<form|<input|<button/i);
  for(const [page,id] of [['donate','giving-heading'],['contact','message-heading']]) {
@@ -80,7 +81,21 @@ test('approved cause copy, two card actions and unified contact action use exist
  assert(cards.includes('Your generosity helps bring hope and lasting change to those in need.'));
  assert(cards.includes('Your voice matters. Share your thoughts, questions, or ideas with us.'));
  assert.match(cards,/href="donate.html#donation-payment">Donate Now <span/);
- assert.match(cards,/class="project-engagement-action" href="contact.html#message-heading">Send a Message <span/);
+ assert.match(cards,/class="project-engagement-action projects-compact-engagement" href="contact.html#message-heading">Send a Message <span/);
  const donate=await readFile(new URL('../public/donate.html',import.meta.url),'utf8');assert(donate.includes('id="donation-payment"'));
  const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');assert(cards.includes('class="projects-motto-compact">My Voice + Your Voice = Our Voice</span>')); const motto=cards.match(/<span class="projects-motto-desktop">([\s\S]*?)<\/p>/)[1].replace(/<[^>]*>/g,'').trim(); assert.equal(motto,'My Voice + Your Voice = Our Voice');assert.match(css,/@media \(min-width: 64\.0625rem\)/);
  });
+
+test('approved desktop Projects page keeps four action pairs, shared real footer, and a button-free closing',async()=>{
+ const page=await readFile(new URL('../public/projects.html',import.meta.url),'utf8');
+ const cards=[...page.matchAll(/<article class="project-cause-panel"[\s\S]*?<\/article>/g)];
+ assert.equal(cards.length,4);
+ for(const [card] of cards){assert.equal((card.match(/class="project-cause-action /g)||[]).length,2);assert(card.includes('Explore Projects'));assert(card.includes('Support This Cause'));assert(card.includes('class="project-approved-photo"'));}
+ assert.match(page,/class="project-engagement-action projects-approved-engagement" href="get-involved.html">Join Us Today/);
+ const closing=page.match(/<section class="projects-approved-closing"[\s\S]*?<\/section>/)[0];
+ assert(closing.includes('Our Voice Creates Change'));assert.doesNotMatch(closing,/<(?:button|a)\b/);
+ const home=await readFile(new URL('../public/index.html',import.meta.url),'utf8');
+ const footer=/<footer class="desktop-home-footer"[\s\S]*?<\/footer>/;
+ assert.equal(page.match(footer)[0],home.match(footer)[0]);
+ assert.doesNotMatch(page.match(footer)[0],/<img|header-logo|123 Harmony|123-4567|info@yourglobalvoice/);
+});
