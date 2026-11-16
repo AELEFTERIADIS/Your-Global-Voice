@@ -21,11 +21,11 @@
  .projects-page-shell .project-engagement-accent,
  .projects-page-shell .project-engagement-motto{display:none;}
 
- /* Approved hero: preserve its viewport, scale, image content, and hit areas. */
+ /* Approved artwork retains its horizontal scale; only vertical whitespace grows. */
  .projects-hero{max-width:none;margin:0;padding:0;border:0;outline:0;box-shadow:none;}
  .projects-hero-frame>img,.projects-hero-frame>svg{display:none;}
  .projects-hero-frame>.projects-reference-hero{display:block;position:static;width:100%;height:auto;}
- .projects-hero-cause{top:75%;height:17%;}
+ .projects-hero-cause{top:72.4%;height:17.5%;}
  .projects-hero-cause[data-cause-label="Protection"]{left:5%;width:20%;}
  .projects-hero-cause[data-cause-label="Compassion"]{left:29%;width:21%;}
  .projects-hero-cause[data-cause-label="Justice"]{left:53%;width:20%;}
@@ -34,9 +34,9 @@
  /* The hero's embedded wave is the only divider above this introduction. */
  .project-initiatives{margin:0;}
  .project-initiatives>h2{display:flex;align-items:center;justify-content:center;gap:.5rem;margin:18px 0 8px;font:700 3.65cqw/1.12 Georgia,'Times New Roman',serif;letter-spacing:-.04em;color:#0B1D50;text-align:center;}
- .projects-approved-heading{display:inline;}
- .projects-intro-sprig{display:block;width:5cqw;height:4cqw;flex:none;}
- .projects-intro-sprig:last-child{transform:scaleX(-1);}
+ .projects-approved-heading{display:inline;transform:scaleX(1.05);transform-origin:center;}
+ .projects-intro-sprig{display:block;width:5cqw;height:4cqw;flex:none;transform:translateX(-24px);}
+ .projects-intro-sprig:last-child{transform:translateX(24px) scaleX(-1);}
  .projects-approved-introduction{max-width:88%;margin:0 auto 8px;color:#0B1D50;text-align:center;font:600 1.7cqw/1.3 Georgia,'Times New Roman',serif;text-wrap:balance;}
  .projects-intro-cards-wave,.projects-cards-invitation-wave,.projects-invitation-closing-wave{display:block;width:100%;height:auto;}
  .projects-intro-cards-wave{margin:8px 0 18px;}
