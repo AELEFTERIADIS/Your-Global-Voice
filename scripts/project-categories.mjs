@@ -30,10 +30,10 @@ function renderPhoto(category) {
 }
 const smallIcon=kind=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${kind==='heart'?'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>':'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m3 6 9 7 9-7M3 18l6-6m12 6-6-6"/>'}</svg>`;
 const approvedProjectCards={
- 'human-rights-dignity':{box:'30 70 298 328',title:'Human Rights<br>&amp; Dignity',copy:'Advancing justice,<br>protecting fundamental<br>rights, and standing against<br>discrimination.',icon:'<circle cx="24" cy="10" r="7" fill="currentColor"/><circle cx="9" cy="16" r="5" fill="currentColor"/><circle cx="39" cy="16" r="5" fill="currentColor"/><path d="M13 43V32c0-14 22-14 22 0v11ZM1 41V31c0-9 10-12 14-6M47 41V31c0-9-10-12-14-6" fill="currentColor"/>'},
- 'humanitarian-assistance':{box:'789 70 347 337',title:'Humanitarian<br>Assistance',copy:'Bringing hope, providing<br>essential assistance, and<br>supporting communities<br>in need.'},
- 'animal-welfare':{box:'28 486 322 355',title:'Animal Welfare',copy:'Protecting animals<br>from cruelty, supporting<br>rescue, and promoting<br>compassionate care.'},
- 'environmental-conservation':{box:'788 486 328 355',title:'Environmental<br>Protection',copy:'Preserving natural habitats,<br>protecting ecosystems, and<br>building a sustainable<br>future.'}
+ 'human-rights-dignity':{box:'30 70 298 328',title:'Human Rights<br>&amp; Dignity',copy:'Advancing justice, protecting fundamental rights, and standing against discrimination.',icon:'<circle cx="24" cy="10" r="7" fill="currentColor"/><circle cx="9" cy="16" r="5" fill="currentColor"/><circle cx="39" cy="16" r="5" fill="currentColor"/><path d="M13 43V32c0-14 22-14 22 0v11ZM1 41V31c0-9 10-12 14-6M47 41V31c0-9-10-12-14-6" fill="currentColor"/>'},
+ 'humanitarian-assistance':{box:'789 70 347 337',title:'Humanitarian<br>Assistance',copy:'Bringing hope, providing essential assistance, and supporting communities in need.'},
+ 'animal-welfare':{box:'28 486 322 355',title:'Animal Welfare',copy:'Protecting animals from cruelty, supporting rescue, and promoting compassionate care.'},
+ 'environmental-conservation':{box:'788 486 328 355',title:'Environmental<br>Protection',copy:'Preserving natural habitats, protecting ecosystems, and building a sustainable future.'}
 };
 const approvedProjectPhoto=c=>`<svg class="project-approved-photo" viewBox="${approvedProjectCards[c.id].box}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${escape(c.label)} project photograph from the approved design"><image href="Compassion in Action_ Four Causes.png" width="1536" height="1024"/></svg>`;
 export function renderProjectCategories() {
