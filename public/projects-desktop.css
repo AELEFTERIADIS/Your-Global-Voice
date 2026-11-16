@@ -1,0 +1,134 @@
+/* Desktop Projects layout from the approved full-page reference.
+   Legacy projects.css is loaded only below this breakpoint. */
+.projects-reference-artwork,.projects-invitation-background,.project-invitation-button-icon,.projects-invitation-approved-icon{display:none;}
+.projects-approved-upper-page{display:contents;}
+@font-face{font-family:'Projects Allura';src:url('projects-closing-allura.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap;}
+@media(min-width:80rem){
+ .projects-page-shell{display:block;position:relative;container-type:inline-size;width:min(100% - 3rem,78rem);margin:0 auto;padding:8px 8px 0;border-radius:1.5rem;overflow:hidden;background:#FFF9ED;}
+ .projects-page-shell::after{display:none;}
+ .projects-approved-upper-page{display:block;position:relative;}
+ .projects-approved-upper-page::after{content:'';position:absolute;inset:-8px -8px 0;z-index:3;border:2px solid #e3a019;border-bottom:0;border-radius:1.5rem 1.5rem 0 0;pointer-events:none;}
+ .projects-page-shell>main{width:100%;max-width:none;margin:0;padding:0;}
+ .projects-page-shell>.desktop-home-footer{width:calc(100% + 16px);margin:0 -8px;}
+ body:has(.projects-page-shell)>.site-footer{display:none;}
+ .projects-page-shell .projects-approach,
+ .projects-page-shell .projects-current-heading,
+ .projects-page-shell .project-current-copy,
+ .projects-page-shell .projects-compact-engagement,
+ .projects-page-shell .project-cause-photo,
+ .projects-page-shell .project-approved-gold-leaf,
+ .projects-page-shell .project-cause-accent,
+ .projects-page-shell .project-engagement-accent,
+ .projects-page-shell .project-engagement-motto{display:none;}
+
+ /* Approved hero: preserve its viewport, scale, image content, and hit areas. */
+ .projects-hero{max-width:none;margin:0;padding:0;border:0;outline:0;box-shadow:none;}
+ .projects-hero-frame>img,.projects-hero-frame>svg{display:none;}
+ .projects-hero-frame>.projects-reference-hero{display:block;position:static;width:100%;height:auto;}
+ .projects-hero-cause{top:75%;height:17%;}
+ .projects-hero-cause[data-cause-label="Protection"]{left:5%;width:20%;}
+ .projects-hero-cause[data-cause-label="Compassion"]{left:29%;width:21%;}
+ .projects-hero-cause[data-cause-label="Justice"]{left:53%;width:20%;}
+ .projects-hero-cause[data-cause-label="Nature"]{left:76%;width:20%;}
+
+ /* The hero's embedded wave is the only divider above this introduction. */
+ .project-initiatives{margin:0;}
+ .project-initiatives>h2{display:flex;align-items:center;justify-content:center;gap:.5rem;margin:18px 0 8px;font:700 3.65cqw/1.12 Georgia,'Times New Roman',serif;letter-spacing:-.04em;color:#0B1D50;text-align:center;}
+ .projects-approved-heading{display:inline;}
+ .projects-intro-sprig{display:block;width:5cqw;height:4cqw;flex:none;}
+ .projects-intro-sprig:last-child{transform:scaleX(-1);}
+ .projects-approved-introduction{max-width:88%;margin:0 auto 8px;color:#0B1D50;text-align:center;font:600 1.7cqw/1.3 Georgia,'Times New Roman',serif;text-wrap:balance;}
+ .projects-intro-cards-wave,.projects-cards-invitation-wave,.projects-invitation-closing-wave{display:block;width:100%;height:auto;}
+ .projects-intro-cards-wave{margin:8px 0 18px;}
+
+ /* Intrinsic grid sizing: content sets row height; all four cards share it. */
+ .project-cause-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:22px 18px;}
+ .project-cause-panel{--project-tone:#6B00CB;display:grid;grid-template-columns:42% minmax(0,1fr);grid-template-rows:1fr auto;gap:0 16px;min-width:0;min-height:330px;padding:16px;border:1px solid #D89A24;border-radius:22px;background:#FFFDF8;color:#0B1D50;scroll-margin-top:12rem;}
+ #projects-humanitarian-assistance{--project-tone:#B50B16;grid-template-columns:46% minmax(0,1fr);}
+ #projects-animal-welfare{--project-tone:#87420F;grid-template-columns:44% minmax(0,1fr);}
+ #projects-environmental-conservation{--project-tone:#10701F;grid-template-columns:44% minmax(0,1fr);}
+ .project-cause-overview{display:contents;}
+ .project-approved-photo{display:block;grid-column:1;grid-row:1/3;align-self:center;width:100%;height:auto;border-radius:16px;overflow:hidden;}
+ .project-cause-copy{grid-column:2;grid-row:1;min-width:0;padding:0;}
+ .project-cause-heading{display:flex;align-items:flex-start;gap:10px;min-height:68px;}
+ .project-cause-icon,.project-approved-card-icon{display:block;flex:none;width:45px;height:45px;color:var(--project-tone);}
+ .project-cause-heading:has(.project-approved-card-icon)>.project-cause-icon{display:none;}
+ .project-cause-heart{fill:none;stroke:currentColor;}
+ .project-cause-panel h3{min-width:0;margin:0;color:var(--project-tone);font:700 30px/1.12 Georgia,'Times New Roman',serif;text-wrap:balance;}
+ .project-approved-copy{display:inline;}
+ .project-cause-description{margin:12px 0 0;padding:0;font:600 21px/1.35 Georgia,'Times New Roman',serif;color:#0B1D50;text-wrap:pretty;}
+ .project-cause-actions{grid-column:2;grid-row:2;display:grid;grid-template-columns:1.15fr 1fr;gap:10px;align-self:end;padding-top:18px;}
+ .project-cause-action{display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;min-height:44px;padding:7px 6px;border:1px solid var(--project-tone);border-radius:10px;font:700 16px/1.12 Georgia,'Times New Roman',serif;text-align:center;text-decoration:none;white-space:nowrap;}
+ .project-cause-explore{color:white;background:linear-gradient(color-mix(in srgb,var(--project-tone) 75%,white),var(--project-tone) 60%,color-mix(in srgb,var(--project-tone) 70%,black));}
+ .project-cause-support{color:var(--project-tone);border-color:var(--project-tone);background:#FFFBF1;}
+ .project-cause-support>svg{display:none;}
+ .project-cause-support>.project-approved-support-heart{display:block;width:18px;height:18px;flex:none;}
+ .project-cause-action:hover{filter:brightness(.96);text-decoration:underline;text-underline-offset:.18em;}
+ .project-cause-action:focus-visible,.project-cause-panel:focus-visible{outline:3px solid #986000;outline-offset:3px;}
+
+ /* One wave separates the complete card grid from the invitation boxes. */
+ .projects-cards-invitation-wave{margin:20px 0 16px;}
+ .project-engagement-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0;}
+ .project-engagement-panel{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto;justify-items:center;align-content:start;row-gap:0;min-width:0;min-height:335px;padding:10px 20px 24px;border:2px solid #CFA039;border-radius:28px;color:#0B245B;text-align:center;}
+ .project-engagement-giving{background:linear-gradient(#FDDCD1 15%,#80A5F2 28%,#4D94EF 44%,#1585E3 65%,#267BC2 88%,#17649B 100%) no-repeat calc(50% + 24px) 234px / 330px 86px,linear-gradient(180deg,#D6EDFB 0%,#FFFDFA 48%,#FFF1D1 76%,#F8CC5F 100%);}
+ .project-engagement-message{background:#FCF9F0;}
+ .projects-invitation-background{display:block;position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:fill;object-position:center;pointer-events:none;}
+ .project-engagement-giving .projects-invitation-background{mask-image:url("projects-invitation-background-mask.svg");mask-size:100% 100%;}
+ .project-engagement-heading{display:contents;}
+ .project-engagement-heading>svg{display:none;position:relative;z-index:1;grid-column:1;grid-row:1;box-sizing:border-box;width:80px;height:80px;padding:0;border:0;color:#0B2C66;}
+ .project-engagement-giving .project-engagement-heading>svg>path:last-child{fill:#FFD000;stroke:#FFD000;}
+ .project-engagement-message .project-engagement-heading>svg:not(.projects-approved-people){display:none;}
+ .project-engagement-message .projects-approved-people{display:none;fill:#0452A3;stroke:none;}
+ .projects-invitation-approved-icon{display:block;position:relative;z-index:1;grid-column:1;grid-row:1;object-fit:contain;width:102px;height:88px;}
+ .project-engagement-heading>h3{position:relative;z-index:1;grid-column:1;grid-row:2;margin:4px 0 0;color:inherit;font:700 52px/1.12 Georgia,'Times New Roman',serif;white-space:nowrap;}
+ .project-engagement-panel>p{position:relative;z-index:1;grid-column:1;grid-row:3;width:100%;margin:12px 0 0;color:#08175B;font:700 26px/1.12 'Times New Roman',Times,serif;text-align:center;text-wrap:balance;}
+ .projects-approved-engagement{display:inline;}
+ .project-engagement-action{position:relative;z-index:1;grid-column:1;grid-row:4;justify-self:center;display:flex;align-items:center;justify-content:center;gap:12px;width:280px;height:54px;min-height:54px;margin:16px 0 0;padding:5px 14px;border:1px solid #D9AD4F;border-radius:999px;font:700 26px/1.15 Georgia,'Times New Roman',serif;text-align:center;text-decoration:none;}
+ .project-engagement-giving>.project-engagement-action{color:#0B245B;background:linear-gradient(#FFE334,#FFB900);}
+ .project-engagement-message>.project-engagement-action{color:white;border-color:#086BCB;background:linear-gradient(#087EFF,#0444A3);box-shadow:inset 0 2px 3px #FFFFFF55;}
+ .project-engagement-message>.project-engagement-action.projects-compact-engagement{display:none;}
+ .project-invitation-button-icon{display:block;width:30px;height:30px;flex:none;}
+ .project-engagement-giving .project-invitation-button-icon{color:#B65B60;fill:currentColor;stroke:currentColor;}
+ .project-engagement-message .project-invitation-button-icon{color:#FFF;}
+ .project-engagement-action>span[aria-hidden="true"]{display:none;}
+ .project-engagement-action:hover{filter:brightness(1.04);text-decoration:underline;}
+ .project-engagement-action:focus-visible{outline:3px solid #C18A17;outline-offset:3px;}
+
+ /* One wave into the closing; its photograph contains the closing/footer wave. */
+ .projects-invitation-closing-wave{margin:18px 0 0;}
+ .projects-approved-closing{display:block;margin:0;background:linear-gradient(#FFF9ED,#F9DCC4);}
+ .projects-approved-closing h2{display:flex;align-items:center;justify-content:center;gap:.6cqw;margin:0;padding:0 10px 12px;color:#102B49;font:400 4.7cqw/1.15 'Projects Allura',Georgia,serif;white-space:nowrap;}
+ .projects-closing-flourish{width:11cqw;height:3cqw;flex:none;}
+ .projects-closing-flourish-right{transform:scaleX(-1);}
+ .projects-approved-sunset{display:block;width:100%;height:auto;}
+ /* Approved Projects closing/footer: no outer frame around this composition. */
+ [data-projects-reference-closing]{margin:0;background:#FFF9ED;}
+ [data-projects-reference-closing]>h2{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;}
+ .projects-approved-closing-scene{display:block;width:100%;height:auto;}
+ .projects-page-shell>[data-projects-approved-footer]{width:100%;margin:0;background:#FFF9ED;border:0;border-radius:0;}
+ [data-projects-approved-footer]::before,[data-projects-approved-footer]::after{display:none;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-footer-columns{grid-template-columns:27.95% 20.7% 22.65% 28.7%;padding:1.2cqw 0 .2cqw;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-footer-columns>*{padding-inline:1.5cqw;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-footer-columns>*+*{border-left:2px solid #D49A16;}
+ .projects-page-shell [data-projects-approved-footer] h2{font:700 2.3cqw/1.1 Georgia,'Times New Roman',serif;margin:0 0 .7cqw;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-footer-nav{gap:.16cqw;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-footer-nav a{font:700 1.8cqw/1.2 Georgia,'Times New Roman',serif;color:#061440;}
+ .projects-page-shell [data-projects-approved-footer] .footer-contact-links>a{font:700 1.75cqw/1.15 Georgia,'Times New Roman',serif;gap:1.1cqw;margin:0 0 .45cqw;color:#061440;}
+ .projects-page-shell [data-projects-approved-footer] .footer-contact-links>.footer-contact-whatsapp{min-height:0;color:#058A12;}
+ .projects-page-shell [data-projects-approved-footer] .footer-contact-links>.footer-contact-whatsapp span{text-decoration:underline;}
+ .projects-page-shell [data-projects-approved-footer] .footer-contact-whatsapp svg{color:white;background:#07A51E;border-radius:4px;padding:2px;}
+ .projects-page-shell [data-projects-approved-footer] .footer-contact-links>.footer-contact-address{position:static;font-size:1.65cqw;line-height:1.15;margin-bottom:0;}
+ .projects-page-shell [data-projects-approved-footer] .footer-contact-address svg>path{fill:#D71420;stroke:#D71420;}
+ .projects-page-shell [data-projects-approved-footer] .footer-contact-address svg>circle{fill:white;stroke:none;}
+ .projects-approved-footer-wave{display:block;width:100%;height:auto;margin:0;}
+
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-footer-columns>.desktop-home-footer-nav[aria-label="Quick Links"]{padding-left:2.9cqw;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-footer-columns>.desktop-home-footer-nav[aria-label="Explore More"]{padding-left:2.6cqw;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-footer-columns>.footer-contact-links{padding-left:2.5cqw;border-left-color:#D49A16;}
+ .projects-page-shell [data-projects-approved-footer] .footer-contact-links>a{padding-left:.5cqw;font-style:normal;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-social h2{text-align:left;margin-left:6.6cqw;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-social h2::after{margin-left:0;margin-right:0;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-social-icons{padding-left:2cqw;}
+ .projects-page-shell [data-projects-approved-footer] .desktop-home-social-icons>span{width:4cqw;height:4cqw;}
+
+}

@@ -80,7 +80,7 @@ test('approved cause copy, two card actions and unified contact action use exist
  assert.match(cards,/class="project-engagement-panels"/);
  assert(cards.includes('Your generosity helps bring hope and lasting change to those in need.'));
  assert(cards.includes('Your voice matters. Share your thoughts, questions, or ideas with us.'));
- assert.match(cards,/href="donate.html#donation-payment">Donate Now <span/);
+ assert.match(cards,/href="donate.html#donation-payment"><svg class="project-invitation-button-icon"[\s\S]*?<\/svg>Donate Now <span/);
  assert.match(cards,/class="project-engagement-action projects-compact-engagement" href="contact.html#message-heading">Send a Message <span/);
  const donate=await readFile(new URL('../public/donate.html',import.meta.url),'utf8');assert(donate.includes('id="donation-payment"'));
  const css=await readFile(new URL('../public/projects.css',import.meta.url),'utf8');assert(cards.includes('class="projects-motto-compact">My Voice + Your Voice = Our Voice</span>')); const motto=cards.match(/<span class="projects-motto-desktop">([\s\S]*?)<\/p>/)[1].replace(/<[^>]*>/g,'').trim(); assert.equal(motto,'My Voice + Your Voice = Our Voice');assert.match(css,/@media \(min-width: 64\.0625rem\)/);
@@ -91,11 +91,13 @@ test('approved desktop Projects page keeps four action pairs, shared real footer
  const cards=[...page.matchAll(/<article class="project-cause-panel"[\s\S]*?<\/article>/g)];
  assert.equal(cards.length,4);
  for(const [card] of cards){assert.equal((card.match(/class="project-cause-action /g)||[]).length,2);assert(card.includes('Explore Projects'));assert(card.includes('Support This Cause'));assert(card.includes('class="project-approved-photo"'));}
- assert.match(page,/class="project-engagement-action projects-approved-engagement" href="get-involved.html">Join Us Today/);
+ assert.match(page,/class="project-engagement-action projects-approved-engagement" href="get-involved.html"><svg class="project-invitation-button-icon"[\s\S]*?<\/svg>Join Us Today/);
  const closing=page.match(/<section class="projects-approved-closing"[\s\S]*?<\/section>/)[0];
  assert(closing.includes('Our Voice Creates Change'));assert.doesNotMatch(closing,/<(?:button|a)\b/);
  const home=await readFile(new URL('../public/index.html',import.meta.url),'utf8');
  const footer=/<footer class="desktop-home-footer"[\s\S]*?<\/footer>/;
- assert.equal(page.match(footer)[0],home.match(footer)[0]);
+ const columns=html=>html.match(/<div class="desktop-home-footer-columns">([\s\S]*?)<\/div>(?=<svg)/)[1];
+ assert.equal(columns(page.match(footer)[0]),columns(home.match(footer)[0]));
+ assert.match(closing,/Our Voice Creates Change Footer\.png/);
  assert.doesNotMatch(page.match(footer)[0],/<img|header-logo|123 Harmony|123-4567|info@yourglobalvoice/);
 });
