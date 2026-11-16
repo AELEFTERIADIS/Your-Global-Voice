@@ -49,14 +49,17 @@
  #projects-environmental-conservation{--project-tone:#10701F;grid-template-columns:44% minmax(0,1fr);}
  .project-cause-overview{display:contents;}
  .project-approved-photo{display:block;grid-column:1;grid-row:1/3;align-self:center;width:100%;height:auto;border-radius:16px;overflow:hidden;}
- .project-cause-copy{grid-column:2;grid-row:1;min-width:0;padding:0;}
+ .project-cause-copy{grid-column:2;grid-row:1/3;display:grid;grid-template-rows:auto minmax(0,1fr) 44px;min-width:0;padding:0;}
  .project-cause-heading{display:flex;align-items:flex-start;gap:10px;min-height:68px;}
  .project-cause-icon,.project-approved-card-icon{display:block;flex:none;width:45px;height:45px;color:var(--project-tone);}
  .project-cause-heading:has(.project-approved-card-icon)>.project-cause-icon{display:none;}
  .project-cause-heart{fill:none;stroke:currentColor;}
  .project-cause-panel h3{min-width:0;margin:0;color:var(--project-tone);font:700 30px/1.12 Georgia,'Times New Roman',serif;text-wrap:balance;}
  .project-approved-copy{display:inline;}
- .project-cause-description{margin:12px 0 0;padding:0;font:600 21px/1.35 Georgia,'Times New Roman',serif;color:#0B1D50;text-wrap:pretty;}
+ .project-cause-description{grid-row:2;display:flex;align-items:center;justify-content:center;justify-self:center;width:calc(100% + 20px);max-width:none;margin:0;padding:0 0 10px;font:italic 700 26px/1.12 Georgia,'Times New Roman',serif;color:#101B35;text-align:center;letter-spacing:normal;word-spacing:normal;text-wrap:balance;}
+ /* Compensate only the statement for the single-line Animal Welfare title;
+    the approved heading row, icon, photograph, and buttons remain unchanged. */
+ #projects-animal-welfare .project-cause-description{padding-bottom:calc(10px + 68px - 45px);}
  .project-cause-actions{grid-column:2;grid-row:2;display:grid;grid-template-columns:1.15fr 1fr;gap:10px;align-self:end;padding-top:18px;}
  .project-cause-action{display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;min-height:44px;padding:7px 6px;border:1px solid var(--project-tone);border-radius:10px;font:700 16px/1.12 Georgia,'Times New Roman',serif;text-align:center;text-decoration:none;white-space:nowrap;}
  .project-cause-explore{color:white;background:linear-gradient(color-mix(in srgb,var(--project-tone) 75%,white),var(--project-tone) 60%,color-mix(in srgb,var(--project-tone) 70%,black));}
