@@ -7,6 +7,13 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+ ['/'+encodeURIComponent('Our Voice Creates Change Footer.png'),['../public/Our Voice Creates Change Footer.png','image/png']],
+ ...['projects-invitation-sunrise.png','projects-invitation-leaves.png','projects-invitation-giving-icon.png','projects-invitation-giving-soft-red.png','projects-invitation-community-icon.png','ccccccc.PNG'].map(name=>['/'+name,['../public/'+name,'image/png']]),
+ ['/projects-invitation-background-mask.svg',['../public/projects-invitation-background-mask.svg','image/svg+xml']],
+ ['/zzzzzzzzpng.png',['../public/zzzzzzzzpng.png','image/png']],
+ ['/'+encodeURIComponent('Compassion in Action_ Four Causes.png'),['../public/Compassion in Action_ Four Causes.png','image/png']],
+ ['/projects-desktop.css',['../public/projects-desktop.css','text/css; charset=utf-8']],
+ ['/'+encodeURIComponent('Our Projects_ Compassion in Action (2).png'),['../public/Our Projects_ Compassion in Action (2).png','image/png']],
  ...['/environmental-protection','/environmental-protection/','/environmental-protection.html'].map(path=>[path,['../public/environmental-protection.html','text/html; charset=utf-8']]),
  ...[1,2,3,4].map(n=>['/box%20'+n+'.JPEG',['../public/box '+n+'.JPEG','image/jpeg']]),
  ['/environment-projects-panorama.png',['../public/environment-projects-panorama.png','image/png']],
