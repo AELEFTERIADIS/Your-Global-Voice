@@ -56,9 +56,11 @@
  .project-cause-heart{fill:none;stroke:currentColor;}
  .project-cause-panel h3{min-width:0;margin:0;color:var(--project-tone);font:700 30px/1.12 Georgia,'Times New Roman',serif;text-wrap:balance;}
  .project-approved-copy{display:inline;}
- .project-cause-description{grid-row:2;display:flex;align-items:center;justify-content:center;justify-self:center;width:100%;max-width:270px;margin:0;padding:12px 0;font:italic 700 23px/1.25 Georgia,'Times New Roman',serif;color:#101B35;text-align:center;letter-spacing:normal;word-spacing:normal;text-wrap:wrap;}
- #projects-humanitarian-assistance .project-cause-description{max-width:248px;}
- #projects-animal-welfare .project-cause-description{max-width:231px;}
+ .project-cause-description{grid-row:2;display:flex;align-items:center;justify-content:center;justify-self:center;width:100%;max-width:100%;min-width:0;margin:0;padding:12px 0;font:italic 700 23px/1.25 Georgia,'Times New Roman',serif;color:#101B35;text-align:center;letter-spacing:normal;word-spacing:normal;text-wrap:wrap;font-size:var(--project-paragraph-fit,23px);}
+ #projects-environmental-conservation .project-cause-description{max-width:270px;}
+ .project-cause-description>.project-approved-copy{display:block;width:100%;min-width:0;}
+ .project-cause-description .project-paragraph-line{white-space:nowrap;}
+ .project-cause-description .project-paragraph-break{display:initial;}
  .project-cause-actions{grid-column:2;grid-row:2;display:grid;grid-template-columns:166px 128px;gap:10px;justify-self:center;align-self:end;padding-top:18px;}
  .project-cause-action{display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;min-height:48px;padding:9px 8px;border:1px solid var(--project-tone);border-radius:10px;font:700 15px/1.2 Georgia,'Times New Roman',serif;text-align:center;text-decoration:none;white-space:nowrap;}
  .project-cause-explore>span{flex:none;}

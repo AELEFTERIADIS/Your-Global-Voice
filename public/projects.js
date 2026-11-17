@@ -124,3 +124,42 @@ for (const details of document.querySelectorAll('.project-read-more')) {
   projectPhoneLayout.addEventListener('change', syncProjectDescription);
   syncProjectDescription();
 }
+
+// Keep the approved desktop paragraph lines intact with the font actually loaded.
+// The 23px design size changes only when a measured line exceeds its own column.
+(() => {
+  const paragraphs = [...document.querySelectorAll('.project-cause-description')]
+    .filter(p => p.querySelector('.project-paragraph-line'));
+  if (!paragraphs.length) return;
+  const desktop = window.matchMedia('(min-width: 80rem)');
+  let frame = 0;
+  function fitParagraphs() {
+    frame = 0;
+    for (const paragraph of paragraphs) {
+      paragraph.style.removeProperty('--project-paragraph-fit');
+      if (!desktop.matches || !paragraph.clientWidth) continue;
+      const base = parseFloat(getComputedStyle(paragraph).fontSize);
+      let widest = 0;
+      for (const line of paragraph.querySelectorAll('.project-paragraph-line')) {
+        const range = document.createRange();
+        range.selectNodeContents(line);
+        widest = Math.max(widest, range.getBoundingClientRect().width);
+      }
+      const available = paragraph.clientWidth - 1;
+      if (widest > available) {
+        const fitted = Math.floor(base * available / widest * 100) / 100;
+        paragraph.style.setProperty('--project-paragraph-fit', `${fitted}px`);
+      }
+    }
+  }
+  function scheduleFit() {
+    if (!frame) frame = requestAnimationFrame(fitParagraphs);
+  }
+  desktop.addEventListener('change', scheduleFit);
+  window.addEventListener('resize', scheduleFit, {passive: true});
+  if (document.fonts) {
+    document.fonts.ready.then(scheduleFit);
+    document.fonts.addEventListener('loadingdone', scheduleFit);
+  }
+  scheduleFit();
+})();
