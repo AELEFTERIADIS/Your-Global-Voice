@@ -177,7 +177,7 @@ for (const details of document.querySelectorAll('.project-read-more')) {
       const headingBottom = Math.max(...heading.map(e => e.getBoundingClientRect().bottom));
       const buttonTop = Math.min(...[...card.querySelectorAll('.project-cause-action')].map(e => e.getBoundingClientRect().top));
       const text = paragraph.querySelector('.project-approved-copy').getBoundingClientRect();
-      const offset = (headingBottom + buttonTop - text.top - text.bottom) / 2;
+      const offset = (headingBottom + buttonTop - text.top - text.bottom) / 2 - 8;
       paragraph.style.setProperty('--project-paragraph-shift', `${offset}px`);
     }
   }
