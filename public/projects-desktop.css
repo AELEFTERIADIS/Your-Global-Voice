@@ -57,7 +57,9 @@
  .project-cause-panel h3{min-width:0;margin:0;color:var(--project-tone);font:700 30px/1.12 Georgia,'Times New Roman',serif;text-wrap:balance;}
  .project-approved-copy{display:inline;}
  .project-cause-description{grid-row:2;display:flex;align-items:center;justify-content:center;justify-self:center;width:100%;max-width:100%;min-width:0;margin:0;padding:12px 0;font:italic 700 23px/1.25 Georgia,'Times New Roman',serif;color:#101B35;text-align:center;letter-spacing:normal;word-spacing:normal;text-wrap:wrap;font-size:var(--project-paragraph-fit,23px);}
- #projects-environmental-conservation .project-cause-description{max-width:270px;}
+ #projects-environmental-conservation .project-cause-description{max-width:none;width:var(--project-paragraph-width,100%);}
+ #projects-animal-welfare .project-cause-description,
+ #projects-environmental-conservation .project-cause-description{transform:translateY(var(--project-paragraph-shift,0px));}
  .project-cause-description>.project-approved-copy{display:block;width:100%;min-width:0;}
  .project-cause-description .project-paragraph-line{white-space:nowrap;}
  .project-cause-description .project-paragraph-break{display:initial;}

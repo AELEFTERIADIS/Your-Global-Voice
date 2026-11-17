@@ -136,6 +136,10 @@ for (const details of document.querySelectorAll('.project-read-more')) {
   function fitParagraphs() {
     frame = 0;
     for (const paragraph of paragraphs) {
+      if (paragraph.closest('#projects-animal-welfare,#projects-environmental-conservation')) {
+        paragraph.style.removeProperty('--project-paragraph-shift');
+        paragraph.style.removeProperty('--project-paragraph-width');
+      }
       paragraph.style.removeProperty('--project-paragraph-fit');
       if (!desktop.matches || !paragraph.clientWidth) continue;
       const base = parseFloat(getComputedStyle(paragraph).fontSize);
@@ -150,6 +154,31 @@ for (const details of document.querySelectorAll('.project-read-more')) {
         const fitted = Math.floor(base * available / widest * 100) / 100;
         paragraph.style.setProperty('--project-paragraph-fit', `${fitted}px`);
       }
+    }
+    if (!desktop.matches) return;
+    const reference = paragraphs.find(p => p.closest('#projects-human-rights-dignity'));
+    const environmental = paragraphs.find(p => p.closest('#projects-environmental-conservation'));
+    if (reference && environmental) {
+      environmental.style.setProperty('--project-paragraph-fit', getComputedStyle(reference).fontSize);
+      let widest = 0;
+      for (const line of environmental.querySelectorAll('.project-paragraph-line')) {
+        const range = document.createRange();
+        range.selectNodeContents(line);
+        widest = Math.max(widest, range.getBoundingClientRect().width);
+      }
+      if (widest > environmental.clientWidth - 1) {
+        environmental.style.setProperty('--project-paragraph-width', `${Math.ceil(widest + 1)}px`);
+      }
+    }
+    for (const paragraph of paragraphs.filter(p => p.closest('#projects-animal-welfare,#projects-environmental-conservation'))) {
+      const card = paragraph.closest('.project-cause-panel');
+      const heading = [...card.querySelector('.project-cause-heading').children]
+        .filter(e => getComputedStyle(e).display !== 'none');
+      const headingBottom = Math.max(...heading.map(e => e.getBoundingClientRect().bottom));
+      const buttonTop = Math.min(...[...card.querySelectorAll('.project-cause-action')].map(e => e.getBoundingClientRect().top));
+      const text = paragraph.querySelector('.project-approved-copy').getBoundingClientRect();
+      const offset = (headingBottom + buttonTop - text.top - text.bottom) / 2;
+      paragraph.style.setProperty('--project-paragraph-shift', `${offset}px`);
     }
   }
   function scheduleFit() {
