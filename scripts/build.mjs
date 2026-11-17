@@ -118,7 +118,7 @@ for (const [path, title, file] of outputPages) {
   });
   // Projects CSS URLs change only when their bytes change, independently of page queries.
   if (path === '/projects' || path === '/') {
-    for (const asset of path === '/' ? ['home-frame.css','home-hero.css', 'home-causes.css', 'home-causes.js', 'home-sidebar.css', 'home-sidebar.js', 'home-brand.css', 'desktop-home.css', 'home-sidebar-refinement.css'] : ['styles.css', 'projects.css', 'projects-desktop.css', 'projects-hero.js', 'projects-invitation-sunrise.png', 'projects-invitation-leaves.png', 'projects-invitation-giving-icon.png','projects-invitation-giving-soft-red.png', 'projects-invitation-community-icon.png']) {
+    for (const asset of path === '/' ? ['home-frame.css','home-hero.css', 'home-causes.css', 'home-causes.js', 'home-sidebar.css', 'home-sidebar.js', 'home-brand.css', 'desktop-home.css', 'home-sidebar-refinement.css'] : ['styles.css', 'projects.css', 'projects-desktop.css', 'projects.js', 'projects-hero.js', 'projects-invitation-sunrise.png', 'projects-invitation-leaves.png', 'projects-invitation-giving-icon.png','projects-invitation-giving-soft-red.png', 'projects-invitation-community-icon.png']) {
       const bytes = await readFile(new URL(`../public/${asset}`, import.meta.url));
       const version = createHash('sha256').update(bytes).digest('hex').slice(0, 16);
       portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`).replace(`src="${asset}"`, `src="${asset}?v=${version}"`);
