@@ -184,3 +184,8 @@ body:has(.contact-reference-shell)>.site-footer{display:none}
  .contact-design-message button[type=submit]{min-width:263px;min-height:48px;margin-top:12px;font-size:26px}
  .contact-send-plane{width:27px;height:27px}
 }
+
+/* Align all three card headers; retain the existing WhatsApp text column. */
+.contact-reach .contact-design-whatsapp{align-items:flex-start}
+.contact-reach .contact-design-whatsapp>div.contact-whatsapp-content-group{align-self:flex-start}
+@media(min-width:80rem){.contact-reach{padding-bottom:52px}}
