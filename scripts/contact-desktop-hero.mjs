@@ -9,11 +9,11 @@ export function renderContactHero(body,config){
  const envelope=icon('<rect x="3" y="6" width="26" height="20" rx="2"/><path d="m4 8 12 10L28 8M4 25l9-9m15 9-9-9"/>');
  const whatsapp=body.match(/<svg class="contact-whatsapp-logo"[\s\S]*?<\/svg>/)?.[0]||'';
  const pin=icon('<path d="M16 29S6 19 6 12a10 10 0 0 1 20 0c0 7-10 17-10 17Z"/><circle cx="16" cy="12" r="3"/>');
- const bubble=icon('<path d="M28 14c0 7-7 12-15 11L3 29l3-8C-3 9 8 1 18 4c6 1 10 5 10 10Z"/>');
+ const bubble=icon('<path d="M28 14c0 7-7 12-15 11L3 29l3-8C-3 9 8 1 18 4c6 1 10 5 10 10Z"/><g fill="currentColor" stroke="none"><circle cx="9" cy="14" r="1.4"/><circle cx="15" cy="14" r="1.4"/><circle cx="21" cy="14" r="1.4"/></g>');
  const number=config.whatsappNumber.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, '+1 ($1) $2-$3');
  const address=config.mailingAddress.slice(1);
  let form=body.match(/<form class="contact-form"[\s\S]*?<\/form>/)[0];
- form=form.replace('disabled>Send Message</button>','disabled><svg class="contact-send-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 10 22 2l-7 20-4-8-9-4Zm10 2 3 6 4-12-7 6Z"/></svg>Send Message</button>');
+ form=form.replace('disabled>Send Message</button>','disabled><svg class="contact-send-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 10 22 2l-7 20-4-8-9-4Zm10 2 3 6 4-12-7 6Z"/></svg>Send</button>');
  const country=`<div class="contact-country-field"><label for="contact-country">Country</label><input id="contact-country" name="country" list="contact-countries" autocomplete="country-name" placeholder="Search or select a country" maxlength="120"><datalist id="contact-countries">${countries.map(c=>`<option value="${esc(c)}"></option>`).join('')}</datalist></div>`;
  form=form.replace('Subject / Inquiry Category <span>(required)</span>','Subject <span>(required)</span>');
  form=form.replace('<label for="contact-topic">','<div class="contact-topic-country"><div><label for="contact-topic">').replace('</select>','</select></div>'+country+'</div>');
