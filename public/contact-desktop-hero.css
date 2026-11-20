@@ -202,3 +202,6 @@ body:has(.contact-reference-shell)>.site-footer{display:none}
 /* Reach Out typography only; preserve existing sizes and geometry. */
 .contact-reach>h1{font-style:normal}
 .contact-reach>p{font-style:italic;color:#303030}
+
+/* Keep the number button on the same left edge as the heading and copy. */
+.contact-reach .contact-design-whatsapp a{align-self:flex-start;margin-left:0;margin-right:0;transform:translateX(-22px)}
