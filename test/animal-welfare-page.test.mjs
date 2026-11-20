@@ -1,3 +1,4 @@
+import {renderContact as renderCanonicalContact} from '../scripts/contact.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -38,7 +39,7 @@ test('Animal Welfare expansion preserves the infographic wording as four accessi
 
 test('Animal Welfare modal reuses the exact shared message form and existing delivery script',async()=>{
  const page=await readFile(new URL('../public/animal-welfare.html',import.meta.url),'utf8');
- const contact=await readFile(new URL('../public/contact.html',import.meta.url),'utf8');
+ const contact=renderCanonicalContact(JSON.parse(await readFile(new URL('../content/contact.json',import.meta.url),'utf8')));
  const section=/<section class="card content-panel contact-message"[\s\S]*?<\/section>/;
  assert.equal(page.match(section)[0],contact.match(section)[0]);
  assert.match(page,/<dialog class="shared-contact-modal" aria-labelledby="message-heading">/);

@@ -1,0 +1,186 @@
+@font-face{font-family:'Contact Serif';src:url('giv-serif-regular.ttf');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Contact Serif';src:url('giv-serif-bold.ttf');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Contact Serif';src:url('giv-serif-bold-italic.ttf');font-weight:700;font-style:italic;font-display:swap}
+.contact-reference-shell{width:min(calc(100% - 3rem),78rem);margin:24px auto 0;background:#FAF8F3;color:#09143d}
+.contact-reference-shell #main{width:100%;max-width:none;margin:0;padding:0}
+.contact-reference-hero{display:block;width:100%;margin:0;padding:0;background:#FAF8F3;overflow:hidden}
+.contact-reference-hero>svg{display:block;width:100%;height:auto;aspect-ratio:1024/430}
+.contact-reference-shell h1,.contact-reference-shell h2{font-family:'Contact Serif',serif;text-transform:none;letter-spacing:normal;color:#09143d}
+.contact-reach{padding:0 38px 30px;text-align:center}
+.contact-reach>h1{font:italic 700 56px/1.1 'Contact Serif',serif;margin:0 0 8px;display:flex;align-items:center;justify-content:center;gap:20px}
+.contact-reach>h1::before,.contact-reach>h1::after{content:'';display:block;width:135px;height:10px;border-top:5px solid #d69b18;border-radius:50%;transform:rotate(-4deg)}
+.contact-reach>h1::after{transform:rotate(4deg)}
+.contact-reach>p{font:700 24px/1.3 'Contact Serif',serif;margin:0 0 24px;color:#09143d}
+.contact-design-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;text-align:left}
+.contact-design-card{border:1px solid var(--contact-color);border-radius:20px;padding:20px 18px;display:grid;grid-template-columns:76px minmax(0,1fr);gap:14px;min-width:0}
+.contact-design-email{--contact-color:#8f2ebc;background:linear-gradient(120deg,#f7effb,#efe5f5)}
+.contact-design-whatsapp{--contact-color:#149c35;background:linear-gradient(120deg,#f2faed,#edf3e5)}
+.contact-design-address{--contact-color:#a36b13;background:linear-gradient(120deg,#fff6e6,#fbefdf)}
+.contact-card-symbol{display:flex;align-items:center;justify-content:center;width:76px;height:76px;border-radius:50%;background:var(--contact-color);color:#fff}
+.contact-card-symbol svg{width:48px;height:48px;flex:none}
+.contact-card-symbol .contact-whatsapp-logo{fill:white;stroke:none;margin:0}
+.contact-design-card h2{font:700 32px/1.1 'Contact Serif',serif;margin:0 0 8px;white-space:nowrap}
+.contact-design-card p{font:400 18px/1.3 Arial,sans-serif;color:#09143d;margin:0 0 14px}
+.contact-design-card a{display:block;color:#09143d;font:700 19px/1.3 Arial,sans-serif;text-decoration:none;overflow-wrap:anywhere}
+.contact-design-card address{font-style:normal}
+.contact-design-address a{font-size:17px}
+.contact-design-message{border:2px solid #67328b;border-radius:22px;margin:0 38px;padding:0 34px 26px;overflow:hidden;background:linear-gradient(130deg,#fffdf8,#fff8ee)}
+.contact-message-title{display:flex;align-items:center;gap:18px;background:linear-gradient(100deg,#ede1f2,#f8f1f7);margin:0 -34px;padding:10px 34px}
+.contact-message-title>svg:first-child{width:70px;height:58px;flex:none}
+.contact-message-title h2{font:italic 700 48px/1.1 'Contact Serif',serif;margin:0;white-space:nowrap}
+.contact-message-title .contact-design-wave{flex:1;width:200px;height:35px;margin:0 0 0 28px}
+.contact-message-intro{font:400 19px/1.4 Arial,sans-serif;text-align:center;color:#09143d;margin:12px 0 0}
+.contact-design-message #contact-status:empty{display:none}
+.contact-design-message #contact-status{font:400 16px/1.4 Arial,sans-serif}
+.contact-design-message .contact-form{margin:12px 0 0;display:flow-root}
+.contact-design-message .contact-fields,.contact-topic-country{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.contact-design-message .contact-form label{font:700 20px/1.3 'Contact Serif',serif;margin:12px 0 7px;color:#09143d}
+.contact-design-message .contact-form label span{font:inherit}
+.contact-design-message .contact-form input:not([type=checkbox]),.contact-design-message .contact-form select,.contact-design-message .contact-form textarea{min-height:44px;padding:9px 12px;border:1px solid #8ea3c0;border-radius:6px;background:#fff;color:#202020;font:400 17px/1.4 Arial,sans-serif;width:100%}
+.contact-design-message .contact-form textarea{height:150px;resize:vertical}
+.contact-design-message .contact-form .contact-consent{float:left;width:calc(100% - 280px);font:400 16px/1.4 Arial,sans-serif;display:flex;align-items:center;gap:12px;margin:14px 0 0;color:#09143d}
+.contact-design-message .contact-form .contact-consent span{font:inherit}
+.contact-design-message .contact-form .contact-consent input{width:24px;height:24px;flex:none}
+.contact-design-message .contact-note{font:400 13px/1.4 Arial,sans-serif;color:#242424;margin:10px 0}
+.contact-design-message button[type=submit]{float:right;display:flex;align-items:center;justify-content:center;background:#102B49;color:#fff;font:700 26px/1.2 'Contact Serif',serif;border:0;border-radius:9px;min-width:245px;min-height:48px;padding:10px 22px;margin-top:12px}
+.contact-design-message button[type=submit]::before{content:'➤';font-size:28px;margin-right:15px;transform:rotate(-20deg)}
+.contact-design-message button[type=submit]:disabled{background:#102B49;color:#fff;opacity:1;cursor:not-allowed;border:1px dashed #a4b5c5}
+.contact-design-closing{padding:20px 60px 22px;text-align:center}
+.contact-design-wave{display:block;width:100%;height:48px;overflow:visible}
+.contact-design-closing p{font:italic 700 37px/1.3 'Contact Serif',serif;margin:0;color:#09143d;white-space:nowrap}
+.contact-design-closing p span:nth-of-type(1){color:#8324af}.contact-design-closing p span:nth-of-type(2){color:#d7192f}.contact-design-closing p span:nth-of-type(3){color:#247e2e}
+.contact-reference-shell .desktop-home-footer{width:100%;max-width:none;margin:0}
+body:has(.contact-reference-shell)>.site-footer{display:none}
+@media(max-width:79.999rem){.contact-reference-shell .desktop-home-footer{display:block}.contact-design-cards{grid-template-columns:1fr}.contact-design-card h2{white-space:normal}.contact-message-title h2{font-size:34px}.contact-message-title .contact-design-wave{display:none}.contact-reach>h1{font-size:40px}.contact-reach>h1::before,.contact-reach>h1::after{width:50px}.contact-design-closing p{font-size:clamp(17px,3vw,34px)}.contact-reference-shell .desktop-home-footer-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}}
+@media(max-width:42rem){.contact-reference-shell{width:calc(100% - 24px)}.contact-reach{padding:12px 16px 24px}.contact-reach>p{font-size:21px}.contact-design-message{margin:0 16px;padding:0 18px 22px}.contact-message-title{margin:0 -18px;padding:12px 18px;gap:10px}.contact-message-title>svg:first-child{width:40px}.contact-message-title h2{font-size:30px;white-space:normal}.contact-design-message .contact-fields,.contact-topic-country{grid-template-columns:1fr;gap:0}.contact-design-message .contact-form .contact-consent{float:none;width:100%}.contact-design-message button[type=submit]{float:none;margin:20px auto 0;min-width:0;width:100%}.contact-design-closing{padding:16px}.contact-reference-shell .desktop-home-footer-columns{grid-template-columns:1fr}}
+
+.contact-reference-hero{border-radius:22px 22px 0 0;overflow:hidden}
+.contact-reference-hero>img{display:block;width:100%;height:auto}
+
+/* Reach Out review: local spacing and contact-card refinements only. */
+@media(min-width:80rem){
+ .contact-reach{padding:14px 38px 36px}
+ .contact-reach>h1{margin-bottom:12px}
+ .contact-reach>p{margin-bottom:30px;line-height:1.4}
+ .contact-reach .contact-design-cards{gap:20px;align-items:stretch}
+ .contact-reach .contact-design-card{min-height:228px;padding:24px 18px;align-items:start;box-shadow:0 3px 10px #102b4908}
+ .contact-reach .contact-design-card h2{margin-bottom:10px;line-height:1.15}
+ .contact-reach .contact-design-card p{font-size:18px;line-height:1.4;margin-bottom:16px;color:#303030}
+ .contact-reach .contact-design-email{background:linear-gradient(120deg,#faf5fc,#f1eaf6)}
+ .contact-reach .contact-design-whatsapp{background:linear-gradient(120deg,#f6faf1,#eff5e9)}
+ .contact-reach .contact-design-address{background:linear-gradient(120deg,#fff9ee,#faf1e4)}
+ .contact-reach .contact-design-card a{line-height:1.45}
+ .contact-reach .contact-design-card a:hover{text-decoration:underline}
+ .contact-reach .contact-design-card a:focus-visible{outline:2px solid var(--contact-color);outline-offset:4px;border-radius:2px}
+}
+
+/* Section 2: neutral cards and consistently aligned contact information. */
+.contact-reach .contact-design-card{background:#FCF9F2;border:1px solid #d9d5cc}
+.contact-reach .contact-design-email{--contact-color:#2563A6}
+.contact-reach .contact-design-whatsapp{--contact-color:#25D366}
+.contact-reach .contact-design-address{--contact-color:#D64545}
+.contact-reach .contact-card-symbol{background:transparent;color:var(--contact-color);width:56px;height:56px}
+.contact-reach .contact-card-symbol svg{width:46px;height:46px}
+.contact-reach .contact-card-symbol .contact-whatsapp-logo{fill:#25D366}
+.contact-reach .contact-design-card{grid-template-columns:56px minmax(0,1fr);gap:12px}
+.contact-reach .contact-design-card p{color:#303030;font-size:18px;line-height:1.45}
+.contact-email-group h3{font:700 22px/1.25 'Contact Serif',serif;color:#102B49;margin:0 0 7px}
+.contact-email-group p{margin:0 0 8px!important}
+.contact-email-group+.contact-email-group{border-top:1px solid #ddd7ca;margin-top:18px;padding-top:18px}
+@media(min-width:80rem){
+ .contact-reach{padding-left:16px;padding-right:16px}
+ .contact-reach .contact-design-cards{gap:18px}
+ .contact-reach .contact-design-card{padding:24px 20px;min-height:360px}
+ .contact-reach .contact-design-card h2{font-size:31px;margin-top:7px;margin-bottom:22px}
+ .contact-reach .contact-design-card a{font-size:19px;line-height:1.45}
+ .contact-reach .contact-design-address a{font-size:18px}
+}
+
+@media(min-width:80rem){
+ .contact-reach .contact-design-card{min-height:260px;padding:24px 20px}
+ .contact-reach .contact-design-card h2{margin-bottom:20px}
+ .contact-reach .contact-email-group h3{font-size:21px;margin:0 0 6px;line-height:1.3}
+ .contact-reach .contact-email-group+.contact-email-group{margin-top:16px;padding-top:14px}
+}
+
+.contact-reach .contact-design-whatsapp a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border-radius:20px;background:#25D366;color:#fff;font:700 18px/1.3 Arial,sans-serif;text-decoration:none;white-space:nowrap;box-sizing:border-box}
+.contact-reach .contact-design-whatsapp a:hover{background:#21bf5c;text-decoration:none}
+.contact-reach .contact-design-whatsapp a:focus-visible{outline:2px solid #102B49;outline-offset:3px}
+
+.contact-reach .contact-design-whatsapp a{display:flex;width:fit-content;max-width:100%;padding-left:22px;padding-right:22px;margin-inline:0}
+
+/* Center the number across both grid columns, without moving the text column. */
+.contact-reach .contact-design-whatsapp{--contact-icon-column:56px;--contact-column-gap:12px;grid-template-columns:var(--contact-icon-column) minmax(0,1fr);gap:var(--contact-column-gap)}
+
+/* Share the remaining column space equally above and below the number. */
+.contact-reach .contact-design-whatsapp>div:last-child{align-self:stretch;display:flex;flex-direction:column}
+.contact-reach .contact-design-whatsapp a{flex:none;margin-top:auto;margin-bottom:auto}
+
+.contact-reach .contact-design-whatsapp p{margin-bottom:0}
+
+@font-face{font-family:'Contact Serif';src:url('giv-serif-italic.ttf');font-weight:400;font-style:italic;font-display:swap}
+.contact-reach .contact-design-card p{font-family:'Contact Serif',serif;font-style:italic;font-weight:400;font-size:18px;line-height:1.45;color:#303030;min-height:2lh;text-wrap:balance}
+
+/* Center the full WhatsApp group, rather than distributing its parts. */
+.contact-reach .contact-design-whatsapp{display:flex;align-items:center}
+.contact-reach .contact-design-whatsapp>div.contact-whatsapp-content-group{display:grid;grid-template-columns:var(--contact-icon-column) minmax(0,1fr);gap:var(--contact-column-gap);align-items:start;width:100%;align-self:center}
+.contact-reach .contact-whatsapp-content-group>div:last-child{display:flex;flex-direction:column;min-width:0}
+.contact-reach .contact-design-whatsapp a{margin-top:24px;margin-bottom:0}
+
+.contact-reach .contact-design-address p{min-height:0}
+
+.contact-reach .contact-design-email a,.contact-reach .contact-design-address a{text-decoration-line:underline;text-decoration-style:solid;text-decoration-thickness:1px;text-underline-offset:3px}
+.contact-reach .contact-design-email a:hover,.contact-reach .contact-design-address a:hover{color:#355778}
+
+/* Message form review: warm neutral framing and consistent field rhythm. */
+.contact-design-message{border:1px solid #d5cbb7;background:#FCF9F2}
+.contact-message-title{background:#FCF9F2}
+.contact-message-intro{font:italic 400 23px/1.45 'Contact Serif',serif;color:#303030;margin-top:18px;margin-bottom:4px}
+.contact-design-message .contact-form label{margin-top:16px;margin-bottom:8px}
+.contact-design-message .contact-form{margin-top:14px}
+.contact-design-message .contact-fields,.contact-topic-country{gap:24px}
+.contact-design-message button[type=submit],.contact-design-message button[type=submit]:disabled{background:#102B49;color:#fff;border-radius:9px;gap:10px}
+.contact-design-message button[type=submit]::before{content:none;display:none}
+.contact-send-plane{display:block;width:21px;height:21px;flex:none}
+@media(max-width:42rem){.contact-design-message .contact-fields,.contact-topic-country{gap:0}}
+
+@media(min-width:80rem){.contact-design-message{margin-left:16px;margin-right:16px}}
+.contact-message-title{border-bottom:1px solid #d5cbb7}
+
+/* Section 3: larger heading, generous fields and restrained input icons. */
+.contact-message-title h2{font-size:52px}
+.contact-message-title>svg:first-child{width:72px;height:62px}
+.contact-message-title{padding-top:14px;padding-bottom:14px;border-bottom:1px solid #d5cbb7}
+.contact-message-intro{margin-top:20px;margin-bottom:8px}
+.contact-design-message .contact-form label{margin-top:19px;margin-bottom:9px}
+.contact-design-message .contact-form input:not([type=checkbox]),.contact-design-message .contact-form select{min-height:48px}
+.contact-design-message .contact-form textarea{height:175px}
+.contact-field-with-icon{position:relative}
+.contact-field-symbol{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:21px;height:21px;color:#102B49;pointer-events:none}
+.contact-field-symbol svg{display:block;width:100%;height:100%}
+.contact-design-message .contact-field-with-icon input,.contact-design-message .contact-field-with-icon textarea{padding-left:44px!important}
+.contact-textarea-with-icon .contact-field-symbol{top:14px;transform:none}
+@media(max-width:42rem){.contact-message-title h2{font-size:30px}.contact-message-title>svg:first-child{width:40px;height:40px}}
+
+.contact-message-title{position:relative;border-bottom-color:transparent}
+.contact-message-title::after{content:'';position:absolute;left:18px;right:18px;bottom:-1px;height:1px;background:#d5cbb7;pointer-events:none}
+
+/* Supplied close-up: compact field proportions and fine inset gold rule. */
+@media(min-width:80rem){
+ .contact-design-message{border-color:#c58b25;padding-bottom:22px;background:#FCF9F2}
+ .contact-message-title{padding-top:10px;padding-bottom:10px}
+ .contact-message-title h2{font-size:48px;line-height:1.1}
+ .contact-message-title>svg:first-child{width:62px;height:55px}
+ .contact-message-title::after{left:34px;right:34px;background:#d6a326;height:1px}
+ .contact-message-intro{font-size:23px;line-height:1.35;margin:12px 0 8px}
+ .contact-design-message .contact-form{margin-top:6px}
+ .contact-design-message .contact-form label{font-size:20px;line-height:1.2;margin-top:12px;margin-bottom:5px}
+ .contact-design-message .contact-form input:not([type=checkbox]),.contact-design-message .contact-form select{min-height:36px;height:36px;padding-top:5px;padding-bottom:5px}
+ .contact-design-message .contact-form textarea{height:84px;min-height:84px;padding-top:9px}
+ .contact-design-message .contact-field-symbol{width:23px;height:23px}
+ .contact-textarea-with-icon .contact-field-symbol{top:12px}
+ .contact-design-message .contact-note{font-size:13px;margin:8px 0;line-height:1.3}
+ .contact-design-message .contact-form .contact-consent{margin-top:16px;font-family:'Contact Serif',serif;font-size:19px;line-height:1.3;width:calc(100% - 290px)}
+ .contact-design-message button[type=submit]{min-width:263px;min-height:48px;margin-top:12px;font-size:26px}
+ .contact-send-plane{width:27px;height:27px}
+}

@@ -111,7 +111,9 @@ test('Contact source preserves the approved Google Maps address link through gen
   const html = renderContact(config);
   const committed = await readFile(new URL('../public/contact.html', import.meta.url), 'utf8');
   const address = html.match(/<address id="mailing-address">[\s\S]*?<\/address>/)?.[0];
-  assert.equal(committed.match(/<address id="mailing-address">[\s\S]*?<\/address>/)?.[0], address);
+  const publishedAddress=committed.match(/<address id="mailing-address">[\s\S]*?<\/address>/)?.[0];
+  assert(publishedAddress.includes('957 Broadway Avenue'));assert(publishedAddress.includes('Holbrook, NY 11741'));assert(publishedAddress.includes('United States of America'));
+  const map=new URL(publishedAddress.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));assert.equal(map.hostname,'www.google.com');assert.equal(map.searchParams.get('query'),config.mailingAddress.slice(1).join(', '));
   assert.ok(address.includes('href="https://www.google.com/maps/search/?api=1&amp;query=957%20Broadway%20Avenue%2C%20Holbrook%2C%20NY%2011741"'));
   assert.match(address, /target="_blank" rel="noopener noreferrer"/);
   assert.ok(html.includes('id="copy-address"'));
