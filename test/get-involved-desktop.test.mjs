@@ -10,6 +10,6 @@ test('Get Involved desktop retains one exact application form, unique field IDs 
  const ids=[...forms[0].matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
  const desktop=html.split('<div class="get-involved-compact">')[0].split('<div class="get-involved-desktop">')[1];
  const photos=[...desktop.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]);assert.deepEqual(photos,['Get involved 2.png','get involved 111.JPEG']);
- assert(!desktop.includes('33333333.png'));assert(!desktop.includes('wwwwwwwww.png'));assert(desktop.includes('class="giv-full-hero"'));assert(desktop.includes('class="giv-intro-more"'));assert(desktop.includes('Read Less'));assert(desktop.includes('Your Voice Can Make a Difference'));assert(desktop.includes('Explore More'));assert(desktop.includes('Return Back'));assert.match(desktop,/href="donate.html#donation-payment"/);
+ assert(!desktop.includes('33333333.png'));assert(!desktop.includes('wwwwwwwww.png'));assert(desktop.includes('class="giv-full-hero"'));assert(desktop.includes('class="giv-intro-more"'));assert(desktop.includes('Read Less'));assert(desktop.includes('Your Voice Can Make a Difference'));assert(desktop.includes('Explore More'));assert(desktop.includes('class="giv-return-back"'));assert(!desktop.includes('Return Back'));assert.match(desktop,/href="donate.html#donation-payment"/);
  for(const title of ['Support','Participate','Contribute','Connect'])assert(desktop.includes(`<h3>${title}</h3>`));
 });
