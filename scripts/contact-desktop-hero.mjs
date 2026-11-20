@@ -1,0 +1,32 @@
+import {readFileSync} from 'node:fs';
+const countries=JSON.parse(readFileSync(new URL('../content/countries.json',import.meta.url),'utf8')).sort(new Intl.Collator('en').compare).concat('Other');
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const icon=(path)=>`<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
+const waveArtwork=readFileSync(new URL('./get-involved-approved-projects-wave.svg',import.meta.url),'utf8').replace(/^<svg[^>]*>/,'').replace(/<\/svg>\s*$/,'');
+const wave=()=>`<svg class="contact-design-wave" viewBox="0 0 1000 76" preserveAspectRatio="none" aria-hidden="true">${waveArtwork}</svg>`;
+export function renderContactHero(body,config){
+ const hero=`<section class="contact-reference-hero" aria-label="Contact Us — Every Voice Deserves to Be Heard"><img src="contact-hero-refined.png" width="1934" height="813" alt="Contact Us. Every Voice Deserves to Be Heard. Human Rights and Dignity, Humanitarian Assistance, Animal Welfare, Environmental Protection. Sunrise over natural mountain scenery, with four colored cause icons and a multicolored curved bottom boundary." fetchpriority="high"></section>`;
+ const envelope=icon('<rect x="3" y="6" width="26" height="20" rx="2"/><path d="m4 8 12 10L28 8M4 25l9-9m15 9-9-9"/>');
+ const whatsapp=body.match(/<svg class="contact-whatsapp-logo"[\s\S]*?<\/svg>/)?.[0]||'';
+ const pin=icon('<path d="M16 29S6 19 6 12a10 10 0 0 1 20 0c0 7-10 17-10 17Z"/><circle cx="16" cy="12" r="3"/>');
+ const bubble=icon('<path d="M28 14c0 7-7 12-15 11L3 29l3-8C-3 9 8 1 18 4c6 1 10 5 10 10Z"/>');
+ const number=config.whatsappNumber.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, '+1 ($1) $2-$3');
+ const address=config.mailingAddress.slice(1);
+ let form=body.match(/<form class="contact-form"[\s\S]*?<\/form>/)[0];
+ form=form.replace('disabled>Send Message</button>','disabled><svg class="contact-send-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 10 22 2l-7 20-4-8-9-4Zm10 2 3 6 4-12-7 6Z"/></svg>Send Message</button>');
+ const country=`<div class="contact-country-field"><label for="contact-country">Country</label><input id="contact-country" name="country" list="contact-countries" autocomplete="country-name" placeholder="Search or select a country" maxlength="120"><datalist id="contact-countries">${countries.map(c=>`<option value="${esc(c)}"></option>`).join('')}</datalist></div>`;
+ form=form.replace('Subject / Inquiry Category <span>(required)</span>','Subject <span>(required)</span>');
+ form=form.replace('<label for="contact-topic">','<div class="contact-topic-country"><div><label for="contact-topic">').replace('</select>','</select></div>'+country+'</div>');
+ const fieldIcons={
+ 'contact-name':'<circle cx="16" cy="10" r="5"/><path d="M5 28v-4a11 11 0 0 1 22 0v4"/>',
+ 'contact-email':'<rect x="3" y="6" width="26" height="20" rx="2"/><path d="m4 8 12 10L28 8"/>',
+ 'contact-country':'<circle cx="16" cy="16" r="13"/><ellipse cx="16" cy="16" rx="6" ry="13"/><path d="M3 16h26M6 9h20M6 23h20"/>',
+ 'contact-message':'<path d="m5 27 2-8L23 3l6 6-16 16-8 2ZM7 19l6 6M20 6l6 6M5 27l5-5"/>'
+ };
+ for(const [id,path] of Object.entries(fieldIcons)){
+  const expression=new RegExp(id==='contact-message'?`<textarea id="${id}"[^>]*>[\\s\\S]*?<\\/textarea>`:`<input id="${id}"[^>]*>`);
+  form=form.replace(expression,field=>`<div class="contact-field-with-icon ${id==='contact-message'?'contact-textarea-with-icon':''}"><span class="contact-field-symbol">${icon(path)}</span>${field}</div>`);
+ }
+
+ return hero+`<section class="contact-reach" aria-labelledby="contact-reach-heading"><h1 id="contact-reach-heading">Reach Out to Us</h1><p>We welcome your questions, ideas, partnership proposals, and support inquiries<br>We look forward to hearing from you</p><div class="contact-design-cards"><article class="contact-design-card contact-design-email"><div class="contact-card-symbol">${envelope}</div><div><h2>Email Us</h2><div class="contact-email-group"><h3>For General Inquiries</h3><a href="mailto:${esc(config.emails.find(e=>e.label==='General Inquiries').address)}">${esc(config.emails.find(e=>e.label==='General Inquiries').address)}</a></div><div class="contact-email-group"><h3>For Support &amp; Assistance</h3><a href="mailto:${esc(config.emails.find(e=>e.label==='Donations & Support').address)}">${esc(config.emails.find(e=>e.label==='Donations & Support').address)}</a></div></div></article><article class="contact-design-card contact-design-whatsapp"><div class="contact-whatsapp-content-group"><div class="contact-card-symbol">${whatsapp}</div><div><h2>WhatsApp</h2><p>For Quick Questions &amp; Direct Communication</p><a href="https://wa.me/${config.whatsappNumber.slice(1)}" target="_blank" rel="noopener noreferrer">${esc(number)}</a></div></div></article><article class="contact-design-card contact-design-address"><div class="contact-card-symbol">${pin}</div><div><h2>Mailing Address</h2><p>For Correspondence &amp; Documents</p><address id="mailing-address"><a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(address.join(', '))}" target="_blank" rel="noopener noreferrer">${address.map(esc).join('<br>')}</a></address></div></article></div></section><section class="contact-design-message" aria-labelledby="message-heading"><div class="contact-message-title">${bubble}<h2 id="message-heading">Send Us a Message</h2>${wave()}</div><p class="contact-message-intro">Whether you have a question, an idea, or a proposal, we welcome your message</p><p id="contact-status" role="status"></p>${form}<p id="contact-result" role="status" aria-live="polite" aria-atomic="true"></p></section><section class="contact-design-closing" aria-label="Our shared voice">${wave()}<p><span>MY VOICE</span> + <span>YOUR VOICE</span> = <span>OUR VOICE</span></p>${wave()}</section>`;
+}

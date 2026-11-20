@@ -1,3 +1,4 @@
+import {renderContact as renderCanonicalContact} from '../scripts/contact.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -41,7 +42,7 @@ test('expanded commitment preserves all five approved explanations and reuses th
  assert.match(html,/Your Ideas Matter/);
  assert(html.includes('Have an environmental concern, a project proposal, or a desire to contribute? We welcome your ideas and participation as we develop meaningful ways to protect our shared planet.'));
  assert.match(html,/data-contact-modal href="contact.html#message-heading"/);
- const contact=await readFile(new URL('../public/contact.html',import.meta.url),'utf8');
+ const contact=renderCanonicalContact(JSON.parse(await readFile(new URL('../content/contact.json',import.meta.url),'utf8')));
  const form=/<section class="card content-panel contact-message"[\s\S]*?<\/section>/;
  assert.equal(html.match(form)[0],contact.match(form)[0]);
  assert.match(html,/<dialog class="shared-contact-modal" aria-labelledby="message-heading">/);
