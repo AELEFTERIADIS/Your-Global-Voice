@@ -192,3 +192,9 @@ body:has(.contact-reference-shell)>.site-footer{display:none}
 
 .contact-reference-hero{position:relative}
 .contact-reference-hero>.contact-title-upright-patch{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;pointer-events:none}
+
+/* Gold emphasis on the horizontal top edges only; no layout changes. */
+.contact-reach .contact-design-card,.contact-design-message{position:relative}
+.contact-reach .contact-design-card::before,.contact-design-message::before{content:'';position:absolute;top:-1px;height:3px;background:#C49A45;border-radius:1px;pointer-events:none;z-index:1}
+.contact-reach .contact-design-card::before{left:20px;right:20px}
+.contact-design-message::before{left:22px;right:22px}
