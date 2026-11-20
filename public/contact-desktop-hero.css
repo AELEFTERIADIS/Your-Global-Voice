@@ -189,3 +189,6 @@ body:has(.contact-reference-shell)>.site-footer{display:none}
 .contact-reach .contact-design-whatsapp{align-items:flex-start}
 .contact-reach .contact-design-whatsapp>div.contact-whatsapp-content-group{align-self:flex-start}
 @media(min-width:80rem){.contact-reach{padding-bottom:52px}}
+
+.contact-reference-hero{position:relative}
+.contact-reference-hero>.contact-title-upright-patch{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;pointer-events:none}

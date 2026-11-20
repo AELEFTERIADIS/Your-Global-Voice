@@ -147,6 +147,7 @@ const routes = new Map([
   ['/donate.css', ['../public/donate.css', 'text/css; charset=utf-8']],
   ['/contact.js', ['../public/contact.js', 'text/javascript; charset=utf-8']],
   ['/mission.css', ['../public/mission.css', 'text/css; charset=utf-8']],
+  ['/contact-title-upright.png', ['../public/contact-title-upright.png', 'image/png']],
   ['/contact-hero-refined.png', ['../public/contact-hero-refined.png', 'image/png']],
   ['/contact-country.js', ['../public/contact-country.js', 'text/javascript; charset=utf-8']],
   ['/contact-desktop-hero.css', ['../public/contact-desktop-hero.css', 'text/css; charset=utf-8']],
