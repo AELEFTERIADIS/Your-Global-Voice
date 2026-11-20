@@ -55,7 +55,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     const response = await fetch(base + route);
     assert.equal(response.status, 200, route);
     const html = await response.text();
-    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 8 : route === '/mission' ? 11 : route === '/about' ? 9 : route === '/purposes' ? 6 : route === '/get-involved' ? 3 : route === '/projects' ? 7 : route === '/' ? 2 : 1);
+    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 8 : route === '/mission' ? 11 : route === '/about' ? 9 : route === '/purposes' ? 6 : route === '/get-involved' ? 5 : route === '/projects' ? 7 : route === '/' ? 2 : 1);
     assert.match(html, /class="header-logo"[^>]*alt="Your Global Voice official logo"/);
     const logoPath = html.match(/class="header-logo" src="([^"]+)"/)[1];
     const logo = await fetch(new URL(logoPath, response.url));
@@ -63,7 +63,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.equal(logo.headers.get('content-type'), 'image/png');
     assert.match(response.headers.get('content-security-policy'), /img-src 'self'/);
     assert.deepEqual(new Uint8Array((await logo.arrayBuffer()).slice(0, 8)), new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]));
-    assert.equal((html.match(/<h1[ >]/g) ?? []).length, route === '/' ? 3 : ['/about','/mission','/purposes'].includes(route) ? 2 : 1);
+    assert.equal((html.match(/<h1[ >]/g) ?? []).length, route === '/' ? 3 : ['/about','/mission','/purposes','/get-involved'].includes(route) ? 2 : 1);
     assert.match(html, /<link rel="stylesheet" href="styles\.css(?:\?v=[a-f0-9]{16})?">/);
     const stylesheet = await fetch(new URL('styles.css', response.url));
     assert.equal(stylesheet.status, 200);
@@ -170,9 +170,9 @@ test('every generated page link resolves to an existing sibling file', async () 
       await access(target);
     }
     const anchoredLinks = [...html.matchAll(/href="donate.html#donation-payment"/g)];
-    assert.equal(anchoredLinks.length, name === 'index' ? 3 : name === 'mission' ? 3 : name === 'purposes' ? 2 : ['about', 'mission', 'get-involved', 'projects', 'purposes'].includes(name) ? 1 : 0);
-    if (name === 'get-involved') assert.match(html, /Your Generosity, Their Hope[\s\S]*?href="donate.html#donation-payment">Donate Now/);
-    if (name === 'get-involved') { assert.match(html, /href="#application">Get Started &rarr;/); assert.match(html, /id="application"/); }
+    assert.equal(anchoredLinks.length, name === 'index' ? 3 : name === 'mission' ? 3 : ['purposes','get-involved'].includes(name) ? 2 : ['about', 'mission', 'get-involved', 'projects', 'purposes'].includes(name) ? 1 : 0);
+    if (name === 'get-involved') assert.match(html, /href="donate.html#donation-payment">Give Hope/);
+    if (name === 'get-involved') { assert.match(html, /Explore More/); assert.match(html, /id="application"/); }
     if (name === 'mission') assert.match(html, /class="mission-box mission-invitation mission-support"[\s\S]*?href="donate.html#donation-payment">Donate Now/);
     for (const destination of files) {
       assert.ok(html.includes(`href="${destination}.html"`));

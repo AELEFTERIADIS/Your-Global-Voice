@@ -114,6 +114,7 @@ const routes = new Map([
   ['/Get%20involved%202.png', ['../public/Get involved 2.png', 'image/png']],
   ['/Get%20involve%20Hero%20PNG.PNG', ['../public/Get involve Hero PNG.PNG', 'image/png']],
   ['/get-involved-hero.css', ['../public/get-involved-hero.css', 'text/css; charset=utf-8']],
+  ['/get-involved-expansion.js', ['../public/get-involved-expansion.js', 'text/javascript; charset=utf-8']],
   ['/application.js', ['../public/application.js', 'text/javascript; charset=utf-8']],
   ['/application.css', ['../public/application.css', 'text/css; charset=utf-8']],
   ['/get%20involved%20111.JPEG', ['../public/get involved 111.JPEG', 'image/jpeg']],
@@ -150,6 +151,8 @@ const routes = new Map([
   ['/cinzel-regular.woff', ['../public/cinzel-regular.woff', 'font/woff']],
   ['/garamond-regular.woff2', ['../public/garamond-regular.woff2', 'font/woff2']],
   ['/footer-font-licenses.txt', ['../public/footer-font-licenses.txt', 'text/plain; charset=utf-8']],
+  ['/get-involved-desktop.css', ['../public/get-involved-desktop.css', 'text/css; charset=utf-8']],
+  ...['regular.ttf','bold.ttf','bold-italic.ttf','italic.ttf'].map(file=>['/giv-serif-'+file,['../public/giv-serif-'+file,'font/ttf']]),
   ['/styles.css', ['../public/styles.css', 'text/css; charset=utf-8']],
 ]);
 
