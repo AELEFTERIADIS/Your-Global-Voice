@@ -40,10 +40,10 @@ async function prepare(enableSubmit = true) {
     const errors = {
       403: 'The message service could not authorize this website. Please use our email or WhatsApp contact.',
       429: 'Too many attempts. Please wait 15 minutes before trying again, or contact us by email.',
-      503: 'The message service is not configured. Please use our email or WhatsApp contact.',
+      503: form.hasAttribute?.('data-application') ? '' : 'The message service is not configured. Please use our email or WhatsApp contact.',
       502: 'The message service could not initialize. Please use our email or WhatsApp contact.'
     };
-    unavailableMessage = errors[response.status] || unavailableMessage;
+    unavailableMessage = errors[response.status] ?? unavailableMessage;
     const result = await response.json();
     if (!response.ok || result.available !== true || typeof result.token !== 'string' || !result.token) throw new Error();
     token = result.token; submit.disabled = !enableSubmit;
