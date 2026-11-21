@@ -13,7 +13,7 @@ export function renderContactHero(body,config){
  const number=config.whatsappNumber.replace(/^\+1(\d{3})(\d{3})(\d{4})$/, '+1 ($1) $2-$3');
  const address=config.mailingAddress.slice(1);
  let form=body.match(/<form class="contact-form"[\s\S]*?<\/form>/)[0];
- form=form.replace('disabled>Send Message</button>','disabled><svg class="contact-send-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 10 22 2l-7 20-4-8-9-4Zm10 2 3 6 4-12-7 6Z"/></svg>Send</button>');
+ form=form.replace('disabled>Send Message</button>','disabled><svg class="contact-send-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 10 22 2l-7 20-4-8-9-4Zm10 2 3 6 4-12-7 6Z"/></svg>Send Your Message</button>');
  const country=`<div class="contact-country-field"><label for="contact-country">Country</label><input id="contact-country" name="country" list="contact-countries" autocomplete="country-name" placeholder="Search or select a country" maxlength="120"><datalist id="contact-countries">${countries.map(c=>`<option value="${esc(c)}"></option>`).join('')}</datalist></div>`;
  form=form.replace('Subject / Inquiry Category <span>(required)</span>','Subject <span>(required)</span>');
  form=form.replace('<label for="contact-topic">','<div class="contact-topic-country"><div><label for="contact-topic">').replace('</select>','</select></div>'+country+'</div>');
