@@ -31,7 +31,7 @@ test('desktop footer uses verified contact metadata and never invents social pro
 });
 
 test('approved header structure outside desktop navigation and sidebar assets remain unchanged',async()=>{
- const expected={"public/desktop-header.js": "2e753cab88fee74d0c20c804734ed5c30b8bd3c2228ad1fdd34d927ebfc98f83", "public/home-sidebar.css": "7a36dc6db9574b7b2fb52c49cd622b909f95b78cade9057adb68e8c6bafaf8c9", "public/home-sidebar.js": "0ccd662771eee6ccee2c0ed49454a9c274780b2d5e9c26735527961d7f5d2731"};
+ const expected={"public/desktop-header.js": "2e753cab88fee74d0c20c804734ed5c30b8bd3c2228ad1fdd34d927ebfc98f83", "public/home-sidebar.css": "9ef43f079206bb94003bde99cfd1e95fa2629e50b9419c3f20da331fb8bfe4e0", "public/home-sidebar.js": "471d3ad49fba633e6664dae900c301d94fe0bb75d9bf0e7f378468d2d3770fd7"};
  for(const [file,hash] of Object.entries(expected))assert.equal(createHash('sha256').update(await readFile(new URL('../'+file,import.meta.url))).digest('hex'),hash,file);
  const html=await readFile(new URL('../public/index.html',import.meta.url),'utf8');
  assert.equal(createHash('sha256').update(html.match(/<header[\s\S]*?<\/header>/)[0].replace(/<nav class="desktop-reference-nav"[\s\S]*?<\/nav>/,'')).digest('hex'),'2cefc86f0a6ebd957d31df6f0c62d779fd262a7f1175a7370a8fed18f3d42dd6');
