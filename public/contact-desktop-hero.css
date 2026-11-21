@@ -205,3 +205,11 @@ body:has(.contact-reference-shell)>.site-footer{display:none}
 
 /* Keep the number button on the same left edge as the heading and copy. */
 .contact-reach .contact-design-whatsapp a{align-self:flex-start;margin-left:0;margin-right:0;transform:translateX(-22px)}
+
+@media(min-width:80rem){
+ .contact-design-message button[type=submit]{width:max-content;min-width:0;padding-left:22px;padding-right:22px;white-space:nowrap}
+}
+
+@media(min-width:80rem){
+ .contact-design-message .contact-form .contact-consent{width:calc(100% - 320px)}
+}
