@@ -7,7 +7,8 @@ test('reference donation page retains hosted checkout safeguards and real design
  assert.match(html,/id="give-payment-options"/);assert.doesNotMatch(html,/id="give-payment-options" hidden/);
  assert.ok(html.includes('https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00'));
  for(const amount of [10,25,50,100,250,500])assert.ok(html.includes(`name="giving-amount" value="${amount}"`));
- assert.match(html,/Enter Amount \(USD\)/);assert.match(html,/name="giving-method" value="paypal"/);assert.doesNotMatch(html,/receipt by email|Your information is protected|visa-logo|mastercard-logo/);
+ assert.match(html,/Enter Amount \(USD\)/);assert.match(html,/name="giving-method" value="paypal"/);assert.doesNotMatch(html,/receipt by email|Your information is protected/);
+ for(const file of ['visa','mastercard','amex','discover','link','paypal'])assert.ok(html.includes(`${file}-logo.svg`));
  assert.match(html,/Your choices here are not carried over/);
  assert.match(html,/Hosted checkout does not receive your cause or project selection/);
  for(const id of ['human-rights-dignity','humanitarian-assistance','animal-welfare','environmental-conservation'])assert.ok(html.includes(`value="${id}"`));
