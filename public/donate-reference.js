@@ -2,7 +2,9 @@
 (() => {
  const desktopTemplate=document.querySelector('#donate-desktop-content');
  // Use the established 1280px desktop boundary; retain the original DOM below it.
- if(!matchMedia('(min-width: 80rem)').matches){desktopTemplate?.remove();return;}
+ const desktopMedia=matchMedia('(min-width: 80rem)');
+ desktopMedia.addEventListener('change',()=>location.reload());
+ if(!desktopMedia.matches){desktopTemplate?.remove();return;}
  if(desktopTemplate)document.querySelector('#main').replaceChildren(desktopTemplate.content.cloneNode(true));
  const root=document.querySelector('.give-page');if(!root)return;
  const action=root.querySelector('.give-hope-action');
