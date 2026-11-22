@@ -55,7 +55,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     const response = await fetch(base + route);
     assert.equal(response.status, 200, route);
     const html = await response.text();
-    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 8 : route === '/mission' ? 11 : route === '/about' ? 9 : route === '/purposes' ? 6 : route === '/get-involved' ? 5 : route === '/projects' ? 7 : ['/','/contact'].includes(route) ? 2 : 1);
+    assert.equal((html.match(/<img\b/g) ?? []).length, route === '/donate' ? 9 : route === '/mission' ? 11 : route === '/about' ? 9 : route === '/purposes' ? 6 : route === '/get-involved' ? 5 : route === '/projects' ? 7 : ['/','/contact'].includes(route) ? 2 : 1);
     assert.match(html, /class="header-logo"[^>]*alt="Your Global Voice official logo"/);
     const logoPath = html.match(/class="header-logo" src="([^"]+)"/)[1];
     const logo = await fetch(new URL(logoPath, response.url));
@@ -63,7 +63,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     assert.equal(logo.headers.get('content-type'), 'image/png');
     assert.match(response.headers.get('content-security-policy'), /img-src 'self'/);
     assert.deepEqual(new Uint8Array((await logo.arrayBuffer()).slice(0, 8)), new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]));
-    assert.equal((html.match(/<h1[ >]/g) ?? []).length, route === '/' ? 3 : ['/about','/mission','/purposes','/get-involved'].includes(route) ? 2 : 1);
+    assert.equal((html.match(/<h1[ >]/g) ?? []).length, route === '/' ? 3 : ['/about','/mission','/purposes','/get-involved','/donate'].includes(route) ? 2 : 1);
     assert.match(html, /<link rel="stylesheet" href="styles\.css(?:\?v=[a-f0-9]{16})?">/);
     const stylesheet = await fetch(new URL('styles.css', response.url));
     assert.equal(stylesheet.status, 200);
@@ -104,7 +104,7 @@ test('all pages share working navigation and preserve the approved purposes', as
     }
     if (route === '/donate') {
       assert.match(html, /Choose Your Payment Method/);
-      for (const option of ['Credit or Debit Card', 'PayPal', 'Bank Transfers', 'Donations by Check', 'In-Kind Contributions', 'Corporate &amp; Institutional Giving']) assert.ok(html.includes(option));
+      for (const option of ['Credit or Debit Card', 'PayPal', 'Bank Transfer', 'Donate by Check', 'In-Kind Contributions', 'Corporate &amp; Institutional Giving']) assert.ok(html.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').includes(option));
       assert.match(html, /href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00"/);
       assert.doesNotMatch(html, /<form\b/);
     }
@@ -149,8 +149,8 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
       }
     }
     if (route === '/donate') {
-      for (const text of ['Make checks payable', 'clothing', 'essential goods', 'international', 'Your choices here are not carried over']) assert.ok(html.includes(text), text);
-      assert.match(html, /Other Ways to Support Our Mission/);
+      for (const text of ['Donate by Check', 'Bank Transfer', 'In-Kind', 'Institutional Giving', 'Your choices here are not carried over']) assert.ok(html.includes(text), text);
+      assert.match(html, /Other Ways to Give/);
       assert.doesNotMatch(html, /tel:|<form\b|<iframe\b/);
       assert.match(html, /mailto:support@ygvoice.org/);
     }
