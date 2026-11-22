@@ -7,6 +7,10 @@ import { resolve } from 'node:path';
 
 // Explicit public routes prevent exposing source files, secrets, or arbitrary paths.
 const routes = new Map([
+ ['/'+encodeURIComponent('Together We Create Hope.png'),['../public/Together We Create Hope.png','image/png']],
+ ['/'+encodeURIComponent('Give Hope_ A World of Change.png'),['../public/Give Hope_ A World of Change.png','image/png']],
+ ['/donate-reference.css',['../public/donate-reference.css','text/css; charset=utf-8']],
+ ['/donate-reference.js',['../public/donate-reference.js','text/javascript; charset=utf-8']],
  ['/projects-grocery-background-extension.png',['../public/projects-grocery-background-extension.png','image/png']],
  ['/'+encodeURIComponent('Warm Grocery Delivery at the Door.png'),['../public/Warm Grocery Delivery at the Door.png','image/png']],
  ['/'+encodeURIComponent('Our Voice Creates Change Footer.png'),['../public/Our Voice Creates Change Footer.png','image/png']],

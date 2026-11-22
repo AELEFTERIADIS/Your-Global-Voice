@@ -15,11 +15,14 @@ test('donation page delegates payment to the authorized hosted checkout without 
   const csp = response.headers.get('content-security-policy');
   assert.match(csp, /default-src 'none'/); assert.match(csp, /script-src 'self'/); assert.match(csp, /form-action 'none'/); assert.doesNotMatch(csp, /connect-src/);
   const html = await response.text();
-  assert.match(html, /class="donation-method-choice" href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00" target="_blank" rel="noopener noreferrer"/);
+  assert.match(html, /class="give-hope-action" href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00" target="_blank" rel="noopener noreferrer"/);
   assert.doesNotMatch(html, /<form\b|<iframe\b|type="(?:email|password)"/);
   assert.match(html, /Your choices here are not carried over/);
   assert.deepEqual([...new Set([...html.match(/<main[\s\S]*?<\/main>/)[0].matchAll(/href="(https:[^"]+)"/g)].map(match => match[1]))], ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00', 'https://www.paypal.com/ncp/payment/PVJ5JKDKZW8VQ']);
-  assert.match(html, /class="donation-method-choice donation-paypal" href="https:\/\/www.paypal.com\/ncp\/payment\/PVJ5JKDKZW8VQ" target="_blank" rel="noopener noreferrer"/);
+  assert.match(html, /name="giving-method" value="paypal"/);
+  const presentation = await readFile(new URL('../public/donate-reference.js', import.meta.url),'utf8');
+  for(const url of ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00','https://www.paypal.com/ncp/payment/PVJ5JKDKZW8VQ'])assert.ok(presentation.includes(url));
+  assert.doesNotMatch(presentation,/\bfetch\s*\(|XMLHttpRequest/);
   assert.doesNotMatch(html, /Please confirm accepted goods and delivery arrangements|No tax-deductibility claim is made/);
   assert.doesNotMatch(html, /IRS|501\(c\)/);
   assert.equal((await fetch(base + '/donate.html', { method: 'POST', body: 'simulated' })).status, 405);
