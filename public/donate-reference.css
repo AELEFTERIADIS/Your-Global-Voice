@@ -181,3 +181,25 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 /* Photograph fitting only: retain the complete reference composition. */
 .give-together .give-together-photo{width:56%;height:auto;aspect-ratio:1011/522;mask-image:none}
 @media(max-width:650px){.give-together .give-together-photo{width:100%;height:auto;aspect-ratio:1011/522}}
+/* Desktop donation-panel spacing refinement; stylesheet remains desktop-only. */
+.give-platform.give-central{padding-bottom:10px}
+.give-central .give-section-title{padding-bottom:18px}
+.give-central .give-controls fieldset{margin-bottom:10px}
+.give-central .give-controls legend,.give-central .give-project-label{margin-bottom:8px}
+.give-central .give-scope{margin-bottom:12px!important}
+.give-central .give-cause{min-height:132px;padding-top:8px;padding-bottom:8px}
+.give-central #give-project{margin-bottom:12px}
+.give-central .give-controls #giving-custom-note{margin-top:4px}
+.give-central .give-controls .donation-frequency .donation-choice{min-height:36px}
+.give-central .central-payment-choice{min-height:90px;padding-top:12px;padding-bottom:12px}
+.give-central .central-hosted-note{margin-top:12px;margin-bottom:12px}
+.give-central .give-hope-action{margin-bottom:10px}
+.give-central .give-controls .donation-summary{margin-bottom:8px}
+.give-central .give-controls #payment-status{margin-bottom:18px}
+.give-central .central-trust{padding-top:16px;padding-bottom:16px;margin-bottom:8px}
+
+/* Existing payment branding reused in the desktop-only platform. */
+.give-central .central-payment-branding{display:flex;align-items:center;justify-content:center;gap:24px;margin:18px auto 12px;max-width:100%;flex-wrap:wrap}
+.give-central .central-payment-branding img{display:block;object-fit:contain;flex:0 0 auto;width:54px;height:32px;margin:0}
+.give-central .central-payment-branding img[alt="Link"]{width:70px;height:27px}
+.give-central .central-payment-branding img[alt="PayPal"]{width:91px;height:29px}

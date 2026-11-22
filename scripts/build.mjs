@@ -132,6 +132,10 @@ for (const [path, title, file] of outputPages) {
     const version = createHash('sha256').update(await readFile(new URL(`../public/${asset}`, import.meta.url))).digest('hex').slice(0,16);
     portableHtml = portableHtml.replace(`href="${asset}"`, `href="${asset}?v=${version}"`).replace(`src="${asset}"`, `src="${asset}?v=${version}"`);
   }
+  if(path==='/donate')for(const asset of ['donate-reference.css','donate-reference.js']){
+    const version=createHash('sha256').update(await readFile(new URL(`../public/${asset}`,import.meta.url))).digest('hex').slice(0,16);
+    portableHtml=portableHtml.replace(`href="${asset}"`,`href="${asset}?v=${version}"`).replace(`src="${asset}"`,`src="${asset}?v=${version}"`);
+  }
   await writeFile(new URL(`../public/${file}`, import.meta.url), portableHtml);
 }
 await writeLeadershipPages({andreasBiography,maximosBiography,robertBiography});
