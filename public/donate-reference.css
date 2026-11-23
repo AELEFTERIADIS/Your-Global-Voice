@@ -203,3 +203,75 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 .give-central .central-payment-branding img{display:block;object-fit:contain;flex:0 0 auto;width:54px;height:32px;margin:0}
 .give-central .central-payment-branding img[alt="Link"]{width:70px;height:27px}
 .give-central .central-payment-branding img[alt="PayPal"]{width:91px;height:29px}
+/* Desktop-only selection and compact checkout refinement. */
+.give-central .give-scope{max-width:100%;margin-bottom:12px!important}
+.give-central .give-scope label{justify-content:flex-start;font-size:21px;padding-left:20px}
+.give-central .give-project-choice[hidden]{display:none}
+.give-central .central-payment-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.give-central .central-payment-choice{padding:14px 16px;gap:12px;min-height:108px;flex-wrap:wrap;align-content:center}
+.give-central .central-payment-choice>svg{width:42px;height:42px}
+.give-central .central-payment-choice>img{width:76px}
+.give-central .central-payment-choice>span{flex:1 1 140px}
+.give-central .central-payment-choice strong{font-size:23px;line-height:1.2}
+.give-central .central-payment-choice small{font-size:17px;line-height:1.3}
+.give-central .central-ach{cursor:not-allowed;background:#f0ede7;border-style:dashed;color:#746f66;box-shadow:none}
+.give-central .central-ach strong,.give-central .central-ach small{color:#68635a}
+.give-central .central-ach small{font-weight:700}
+.give-central .central-designation-summary{font:400 17px/1.45 Georgia,serif;color:#303030;text-align:center;text-wrap:balance;margin:0 0 10px}
+.give-central .give-hope-action{width:300px;min-height:54px;font-size:29px;padding:10px 24px;gap:10px}
+.give-central .give-hope-action>svg{width:30px;height:30px;margin:0}
+/* Approved five-card donation box; desktop-only stylesheet. */
+.give-central .give-section-title{padding:8px 0 6px}
+.give-central .give-section-title h2{font-size:62px}
+.give-central .give-section-title p{font-size:28px}
+.give-central .give-controls legend,.give-central .give-project-label{font-size:25px;margin-bottom:8px}
+.give-central .give-causes{grid-template-columns:repeat(5,minmax(0,1fr));gap:13px;margin-bottom:12px}
+.give-central .give-cause{min-height:164px;padding:8px 6px 10px;border-width:1.5px;gap:3px;border-radius:19px}
+.give-central .give-cause svg{width:58px;height:54px;flex:none;order:0}
+.give-central .give-cause>span{font-size:23px;line-height:1.12;order:1;flex:1;display:flex;align-items:center;justify-content:center}
+.give-central .give-cause>input{position:static;opacity:1;width:22px;height:22px;margin:3px 0 0;order:2}
+.give-central .give-cause:has([value="general-support"]){--cause-color:#ce3049;background:#fffaf0;border-color:#d49a28}
+.give-central .give-cause:has([value="human-rights-dignity"]){--cause-color:#7834a6;background:#f3eafa;border-color:#a54ed1}
+.give-central .give-cause:has([value="humanitarian-assistance"]){--cause-color:#ce3049;background:#fff0ed;border-color:#de5964}
+.give-central .give-cause:has([value="animal-welfare"]){--cause-color:#935321;background:#fff8e9;border-color:#d5a246}
+.give-central .give-cause:has([value="environmental-conservation"]){--cause-color:#238044;background:#edf9ec;border-color:#55a551}
+.give-central .give-cause:has(:checked){background:linear-gradient(135deg,#fff2bc,#ffdb70);border-color:#e39c20;box-shadow:inset 0 0 0 1px #e9b749}
+.give-central #give-project{margin-bottom:12px;height:46px}
+.give-central .give-controls .donation-amounts{gap:12px}
+.give-central .give-controls .donation-amounts .donation-choice span{height:44px;min-height:44px;font-size:26px}
+.give-central .give-controls .donation-amounts .donation-choice:last-child span{font-size:20px}
+.give-central .give-custom-entry{display:grid;grid-template-columns:44% minmax(0,1fr);align-items:center;gap:16px;padding:9px 12px;border:1px solid #dab660;border-radius:17px;background:#fff4d5;margin-top:10px}
+.give-central .give-custom-entry[hidden]{display:none}
+.give-central .give-controls .donation-custom-label{margin:0;padding-left:10px;font:700 23px/1.2 Georgia,serif}
+.give-central .give-custom-input{position:relative;min-width:0}
+.give-central .give-custom-input>span{position:absolute;left:0;top:0;bottom:0;width:52px;display:flex;align-items:center;justify-content:center;border-right:1px solid #adb0b8;font:700 25px Georgia,serif;color:#101b35;z-index:1}
+.give-central .give-controls #giving-custom{padding-left:68px;height:45px;font:400 22px/1.2 Georgia,serif;background:#fff;border-color:#9fa5b1}
+.give-central .give-controls fieldset{margin-bottom:10px}
+.give-central .central-payment-grid{gap:13px}
+.give-central .central-payment-choice{min-height:90px;padding:10px 13px;border:1px solid #d39b32;background:#fffaf0;gap:12px;flex-wrap:nowrap}
+.give-central .central-payment-choice>svg{width:54px;height:48px;color:#123fb6}
+.give-central .central-payment-choice>img{width:76px}
+.give-central .central-payment-choice>span{flex:1 1 auto}
+.give-central .central-payment-choice strong{font-size:24px}
+.give-central .central-payment-choice small{font-size:18px;line-height:1.16}
+.give-central .central-ach{background:#f5f1e8;cursor:not-allowed}
+.give-central .central-ach>svg{color:#102b49}
+.give-central .central-ach small{border-radius:20px;background:#ffe48e;padding:3px 12px;display:inline-block;font-weight:700;color:#5b4b23}
+.give-central .central-payment-branding{margin:13px auto 16px;gap:24px}
+.give-central .central-payment-branding>img+img{box-sizing:content-box;border-left:1px solid #d4ae68;padding-left:22px}
+.give-central .give-hope-action{width:500px;min-height:66px;font-size:38px;border-radius:40px;margin:0 auto 10px}
+.give-central .give-hope-action>svg{width:40px;height:40px;margin-right:8px}
+.give-central .give-checkout-security{display:flex;justify-content:center;align-items:center;gap:10px;font:700 20px/1.4 Georgia,serif;margin:0 0 8px;text-align:center;color:#102b49}
+.give-central .give-checkout-security svg{width:26px;height:28px;flex:none}
+.give-central .give-controls #payment-status{font-size:15px;line-height:1.4;margin:0 auto 16px}
+.give-central .give-donation-summary{border:1.5px solid #dca431;border-radius:22px;padding:10px 20px 16px;margin:0 0 12px;background:#fffdf7}
+.give-central .give-donation-summary h3{display:flex;align-items:center;gap:14px;font:700 29px/1.2 'Give Serif',Georgia,serif;margin:0 0 12px;color:#101b35}
+.give-central .give-donation-summary h3 svg{width:30px;height:34px;flex:none}
+.give-central .give-donation-summary dl{display:grid;grid-template-columns:1.05fr 1.25fr .7fr .65fr;margin:0;gap:18px}
+.give-central .give-donation-summary dl>div{min-width:0;text-align:center}
+.give-central .give-donation-summary dl>div+div{border-left:1px solid #cf9b43;padding-left:18px}
+.give-central .give-donation-summary dt{font:700 20px/1.2 Georgia,serif;margin:0 0 7px;color:#102b49}
+.give-central .give-donation-summary dd{font:700 22px/1.25 Georgia,serif;margin:0;color:#202020;overflow-wrap:anywhere;text-wrap:balance}
+
+.give-central .give-review-status{font:400 16px/1.5 Georgia,serif;color:#303030;text-align:center;margin:0 auto 12px;max-width:900px}
+.give-central .give-review-status[hidden]{display:none}
