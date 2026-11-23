@@ -313,3 +313,17 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 .give-central .give-controls .donation-frequency .donation-choice{height:44px;min-height:44px;border:1px solid #bd8c2e;border-radius:14px;background:#fffdf7;padding:0 14px;display:flex;align-items:center;justify-content:center}
 .give-central .give-controls .donation-frequency .donation-choice:has(:checked){background:#fff2d2;border-color:#ac791c}
 }
+
+/* Desktop review payment selections, with clear native radio indicators. */
+@media (min-width:80rem){
+.give-central .central-payment-choice{flex-direction:row;justify-content:flex-start;text-align:left;height:90px;min-height:90px;padding:10px 38px 10px 13px;gap:12px}
+.give-central .central-payment-choice>input{opacity:1;position:absolute;right:13px;top:13px;width:21px;height:21px}
+.give-central .central-payment-choice>span{flex:1 1 auto}
+.give-central .central-payment-choice>img{width:76px;height:48px;object-fit:contain;transform:scale(1.06);transform-origin:center;opacity:1}
+.give-central .central-payment-branding img{transform:scale(1.08);transform-origin:center;opacity:1}
+.give-central .central-payment-choice:has(:checked){background:#fff2d2;border-color:#ac791c;box-shadow:inset 0 0 0 1px #ac791c}
+.give-central .central-ach{opacity:1;color:inherit;background:#fffaf0;cursor:pointer}
+.give-central .central-payment-choice>svg{color:#102b49;stroke-width:2.6;transform:scale(1.08);transform-origin:center}
+.give-central .central-payment-choice strong{color:#102b49;font-size:23px;opacity:1}
+.give-central .central-payment-choice small{background:transparent;color:#252525;padding:0;font-weight:400;font-size:18px;opacity:1}
+}
