@@ -4,7 +4,7 @@ const iconPaths={heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5
 // Matching 48-unit vector family used only in the donation platform.
 const causeArtwork={
  rights:`<path d="M24 7v31M17 41h14M20 38h8M10 14c8-5 20-5 28 0M24 5v2"/><circle cx="24" cy="10" r="2.5" fill="currentColor" stroke="none"/><path d="m11 14-7 14h14l-7-14Zm26 0-7 14h14l-7-14Z"/><path d="M4 28c0 5 14 5 14 0m12 0c0 5 14 5 14 0"/>`,
- aid:`<path d="M24 24c-2.8-2.2-10-6.9-10-12a5.7 5.7 0 0 1 10-3.5A5.7 5.7 0 0 1 34 12c0 5.1-7.2 9.8-10 12Z"/><path d="m4 28 4-2 9 5c2 1.1 3.3 2.8 3.5 4.8M44 28l-4-2-9 5c-2 1.1-3.3 2.8-3.5 4.8M5 27v10l11 6h16l11-6V27M11 31l7 5h12l7-5"/>`,
+ aid:`<path d="M30 22c-3-2.4-10-6.9-10-12a5.6 5.6 0 0 1 10-3.4A5.6 5.6 0 0 1 40 10c0 5.1-7 9.6-10 12Z"/><path d="M6 30l10-9c1.2-1.1 2.8-1.7 4.4-1.7H26a3.7 3.7 0 0 1 0 7.4h-6M12 36l4.8 4H29c1.5 0 2.9-.5 4-1.5l9-8a3 3 0 0 0-3.9-4.6L29 32H20M3 29l11 13"/>`,
  paw:`<ellipse cx="9.5" cy="19" rx="3.7" ry="5.3" transform="rotate(-24 9.5 19)" fill="currentColor" stroke="none"/><ellipse cx="18.5" cy="10.5" rx="3.9" ry="5.8" transform="rotate(-9 18.5 10.5)" fill="currentColor" stroke="none"/><ellipse cx="29.5" cy="10.5" rx="3.9" ry="5.8" transform="rotate(9 29.5 10.5)" fill="currentColor" stroke="none"/><ellipse cx="38.5" cy="19" rx="3.7" ry="5.3" transform="rotate(24 38.5 19)" fill="currentColor" stroke="none"/><path d="M24 22c-5.1 0-6.6 4.7-10.2 8.8-4.9 5.6-1.2 12 5.2 10.4 3.6-.9 6.4-.9 10 0 6.4 1.6 10.1-4.8 5.2-10.4C30.6 26.7 29.1 22 24 22Z" fill="currentColor" stroke="none"/>`,
  leaf:`<path d="M24 43V24M24 30C11 30 5 20 6 9c12-1 20 5 18 17M24 24C23 12 30 5 42 5c1 12-5 21-18 21"/><path d="M12 15c6 4 9 8 12 15m12-18c-5 4-9 8-12 15M18 43h12"/>`
 };

@@ -275,3 +275,14 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 
 .give-central .give-review-status{font:400 16px/1.5 Georgia,serif;color:#303030;text-align:center;margin:0 auto 12px;max-width:900px}
 .give-central .give-review-status[hidden]{display:none}
+/* Five desktop purpose cards: reduced height, subtle tones, cause-colored selection. */
+@media (min-width: 80rem){
+.give-central .give-cause{min-height:148px;padding-top:4px;padding-bottom:4px}
+.give-central .give-cause:has([value="general-support"]){--selection-border:#ba861f;--card-tint:#fffaf0}
+.give-central .give-cause:has([value="human-rights-dignity"]){--selection-border:#7834a6;--card-tint:#f3eafa}
+.give-central .give-cause:has([value="humanitarian-assistance"]){--cause-color:#c72943;--selection-border:#c72943;--card-tint:#fff0ed;background:var(--card-tint);border-color:#d88c94}
+.give-central .give-cause:has([value="animal-welfare"]){--selection-border:#935321;--card-tint:#fcf3e5;background:var(--card-tint);border-color:#cba773}
+.give-central .give-cause:has([value="environmental-conservation"]){--selection-border:#238044;--card-tint:#edf9ec}
+.give-central .give-cause:has(:checked){border-color:var(--selection-border);box-shadow:inset 0 0 0 1px var(--selection-border);background:var(--card-tint)}
+.give-central .give-cause:has([value="general-support"]:checked){background:linear-gradient(135deg,#fff2bc,#ffdb70)}
+}
