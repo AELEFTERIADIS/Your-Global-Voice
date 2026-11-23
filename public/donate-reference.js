@@ -32,7 +32,7 @@
   const custom=root.querySelector('#giving-custom');
   if(root.querySelector('[name=giving-amount]:checked').value==='custom'&&(!custom.value||!custom.checkValidity())){custom.focus();custom.reportValidity();return;}
   updateSummary();const status=root.querySelector('#give-review-status');
-  const method=root.querySelector('[name=giving-method]:checked').value==='paypal'?'PayPal':'Credit or Debit Card';
+  const method={card:'Credit or Debit Card',paypal:'PayPal',ach:'Bank Account (ACH)'}[root.querySelector('[name=giving-method]:checked').value];
   status.textContent=`Review mode: ${method} selected. No payment was processed or opened. Review your choices in Your Donation Summary.`;status.hidden=false;
  });
  const params=new URLSearchParams(location.search);

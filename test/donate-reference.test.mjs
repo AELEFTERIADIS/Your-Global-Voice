@@ -8,13 +8,13 @@ test('reference donation page retains hosted checkout safeguards and real design
  assert.doesNotMatch(html,/https:\/\/buy\.stripe\.com|https:\/\/www\.paypal\.com\/ncp\/payment/);
  for(const amount of [10,25,50,100,250,500])assert.ok(html.includes(`name="giving-amount" value="${amount}"`));
  assert.match(html,/Custom Donation Amount \(USD\)/);assert.match(html,/name="giving-method" value="paypal"/);assert.doesNotMatch(html,/receipt by email|Your information is protected/);
- assert.ok(html.includes('paypal-logo.svg'));
+ assert.equal((html.match(/src="paypal-logo.svg"/g)||[]).length,1);
  for(const file of ['visa','mastercard','amex','discover','link'])assert.ok(html.includes(`${file}-logo.svg`));
  assert.match(html,/name="give-cause" value="general-support" checked/);
  assert.doesNotMatch(html,/name="give-scope"/);
  assert.match(html,/class="give-project-choice" hidden/);
  assert.match(html,/value="voices-for-dignity" data-cause="human-rights-dignity"/);
- assert.match(html,/value="ach" disabled/);
+ assert.match(html,/name="giving-method" value="ach"/);assert.doesNotMatch(html,/value="ach" disabled/);
  assert.match(html,/Donate Now<\/button>/);
  assert.match(html,/Your Donation Summary/);assert.match(html,/Project or Purpose/);assert.doesNotMatch(html,/Project or Specific Purpose|Project \/ Support Option/);
  assert.match(html,/Your choices here are not carried over/);
