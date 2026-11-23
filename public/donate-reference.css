@@ -344,3 +344,7 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 .give-central .give-donation-summary h3 svg{width:24px;height:26px}
 .give-central .give-donation-summary dt{margin-bottom:5px}
 }
+/* Inset frame preserves the approved container and content geometry. */
+@media (min-width:80rem){
+.give-platform.give-central{border-color:#102b49;outline:3px solid #102b49;outline-offset:-3px;box-shadow:0 3px 12px rgba(16,43,73,.08)}
+}
