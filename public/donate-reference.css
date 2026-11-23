@@ -286,3 +286,11 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 .give-central .give-cause:has(:checked){border-color:var(--selection-border);box-shadow:inset 0 0 0 1px var(--selection-border);background:var(--card-tint)}
 .give-central .give-cause:has([value="general-support"]:checked){background:linear-gradient(135deg,#fff2bc,#ffdb70)}
 }
+/* Project dropdown only; existing desktop boundary and native select behavior. */
+@media (min-width: 80rem){
+.give-central #give-project{height:54px;background-color:#fff;color:#102b49;border:1.5px solid #8193ac;appearance:none;-webkit-appearance:none;padding-right:48px}
+.give-central .give-project-choice{position:relative}
+.give-central .give-project-choice::after{content:"";position:absolute;right:19px;bottom:37.5px;width:10px;height:10px;border-right:2.3px solid #102b49;border-bottom:2.3px solid #102b49;transform:rotate(45deg);pointer-events:none}
+.give-central #give-project option{background:#fff;color:#102b49}
+.give-central #give-project:focus-visible{outline:2px solid #102b49;outline-offset:3px}
+}

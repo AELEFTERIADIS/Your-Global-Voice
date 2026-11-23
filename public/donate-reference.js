@@ -9,12 +9,12 @@
  const action=root.querySelector('.give-hope-action');
  // Review-only desktop draft: no provider navigation or payment requests.
  const purpose=root.querySelector('#give-project'),purposeGroup=root.querySelector('.give-project-choice'),note=root.querySelector('.give-designation-note');
- const available=[...purpose.options].map(o=>({id:o.value,cause:o.dataset.cause,label:o.textContent}));
+ const available=[...purpose.options].map(o=>({id:o.value,cause:o.dataset.cause,causeName:o.dataset.causeName,label:o.textContent}));
  function updateSummary(){
   const selected=root.querySelector('[name=give-cause]:checked').value;
   const general=selected==='general-support';
   const generalOption=available.find(o=>o.id===selected);
-  root.querySelector('#summary-cause').textContent=general?'Our Overall Mission':generalOption.label.replace('General support — ','');
+  root.querySelector('#summary-cause').textContent=general?'Our Overall Mission':generalOption.causeName;
   root.querySelector('#summary-purpose').textContent=general?'General mission support':purpose.selectedOptions[0].textContent;
   const amount=root.querySelector('[name=giving-amount]:checked').value,custom=root.querySelector('#giving-custom');
   root.querySelector('.give-custom-entry').hidden=amount!=='custom';
