@@ -327,3 +327,11 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 .give-central .central-payment-choice strong{color:#102b49;font-size:23px;opacity:1}
 .give-central .central-payment-choice small{background:transparent;color:#252525;padding:0;font-weight:400;font-size:18px;opacity:1}
 }
+
+/* Existing payment logos follow the summary within the desktop donation box. */
+@media (min-width:80rem){
+.give-central .give-accepted-methods{padding:10px 0 12px;text-align:center}
+.give-central .give-accepted-methods h3{margin:0 0 16px;font:400 17px/1.4 Georgia,serif;color:#303030}
+.give-central .give-accepted-methods .central-payment-branding{margin:0 auto;justify-content:center;gap:24px}
+.give-central .give-hope-action{margin-top:16px}
+}
