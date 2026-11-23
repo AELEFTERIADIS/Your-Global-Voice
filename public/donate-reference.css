@@ -335,3 +335,12 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 .give-central .give-accepted-methods .central-payment-branding{margin:0 auto;justify-content:center;gap:24px}
 .give-central .give-hope-action{margin-top:16px}
 }
+/* Desktop button and summary proportions only. */
+@media (min-width:80rem){
+.give-central .give-hope-action{width:375px;height:56px;min-height:56px;padding:7px 24px;font-size:32px}
+.give-central .give-hope-action>svg{width:34px;height:34px}
+.give-central .give-donation-summary{padding:6px 20px 10px}
+.give-central .give-donation-summary h3{font:italic 700 22px/1.2 'Give Serif',Georgia,serif;margin-bottom:6px}
+.give-central .give-donation-summary h3 svg{width:24px;height:26px}
+.give-central .give-donation-summary dt{margin-bottom:5px}
+}
