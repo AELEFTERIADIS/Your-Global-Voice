@@ -294,3 +294,14 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 .give-central #give-project option{background:#fff;color:#102b49}
 .give-central #give-project:focus-visible{outline:2px solid #102b49;outline-offset:3px}
 }
+/* Desktop border refinements; retain existing geometry and approved colors. */
+@media (min-width:80rem){
+.give-central .give-causes .give-cause{border-color:var(--selection-border)}
+.give-central .give-cause:has(:checked){box-shadow:inset 0 0 0 1.5px var(--selection-border)}
+.give-central #give-project{border-color:#61748e}
+.give-central .give-controls .donation-amounts .donation-choice span{border-color:#bd8c2e}
+.give-central .give-controls .donation-amounts .donation-choice:has(:checked) span{border-color:#ac791c;background:#fff2d2;box-shadow:inset 0 0 0 1px #bd8c2e}
+.give-central .central-payment-choice{border-color:#bc8c39;box-shadow:inset 0 0 0 .5px #bc8c39}
+.give-central .central-payment-choice:has(:checked){border-color:#a57522;box-shadow:inset 0 0 0 1px #a57522}
+.give-central .give-donation-summary{border-color:#bd8c2e;box-shadow:inset 0 0 0 .5px #bd8c2e}
+}
