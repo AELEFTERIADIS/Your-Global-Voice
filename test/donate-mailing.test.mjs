@@ -9,7 +9,7 @@ test('mailing dialog uses canonical organizational details and safe map/email li
  assert.equal(html.split(`href="${maps}" target="_blank" rel="noopener noreferrer"`).length-1,2);
  assert.ok(html.includes('href="mailto:'+contact.emails.find(e=>e.label==='Donations & Support').address+'"'));
  assert.match(html,/<dialog[^>]+aria-labelledby="mailing-instructions-title"/);
- assert.equal((html.match(/data-mailing-close/g)||[]).length,2);
+ assert.equal((html.match(/data-mailing-close/g)||[]).length,1);
  assert.match(html,/class="mailing-print"/);
  assert.doesNotMatch(html,/<img|<iframe|<form|disabled|Coming Soon/);
 });
