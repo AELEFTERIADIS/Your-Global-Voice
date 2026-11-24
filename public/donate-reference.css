@@ -395,3 +395,9 @@ body:has(.give-page)>.site-footer{display:none}
 @media (min-width:80rem){
 .give-platform.give-central{zoom:.9;width:calc(90% - 24px);margin-inline:auto;margin-top:calc(26px / .9);margin-bottom:calc(24px / .9)}
 }
+
+/* Subtle contrast only in the approved donation-panel margin area. */
+@media (min-width:80rem){
+.give-page .give-panel-surround{display:flow-root;background:#f7f1e5}
+body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
+}

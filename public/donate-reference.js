@@ -9,6 +9,7 @@
  const main=root.closest('main'),footer=main.nextElementSibling;
  if(footer?.classList.contains('desktop-home-footer')){const shell=document.createElement('div');shell.className='donate-content-shell';main.before(shell);shell.append(main,footer);}
 
+ const panel=root.querySelector('.give-central'),surround=document.createElement('div');surround.className='give-panel-surround';panel.before(surround);surround.append(panel);
  const action=root.querySelector('.give-hope-action');
  // Review-only desktop draft: no provider navigation or payment requests.
  const purpose=root.querySelector('#give-project'),purposeGroup=root.querySelector('.give-project-choice'),note=root.querySelector('.give-designation-note');
