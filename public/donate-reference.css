@@ -418,3 +418,13 @@ body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
 .give-hero-sharp-copy p>span{margin:0;color:inherit}
 .give-hero-sharp-copy p>span:last-child{font-size:2.29492cqw}
 }
+
+/* Icon clarity only; retain all approved SVG boxes and positions. */
+@media (min-width:80rem){
+.give-central .give-cause:has([value="general-support"])>svg{color:#c92343;stroke-width:2;opacity:1}
+.give-central .give-cause:has([value="human-rights-dignity"])>svg{color:#7834a6;stroke-width:2.5;opacity:1}
+.give-central .give-cause:has([value="humanitarian-assistance"])>svg{color:#c92343;opacity:1}
+.give-central .give-cause:has([value="environmental-conservation"])>svg{color:#238044;stroke-width:2.5;opacity:1}
+.give-central .central-payment-choice>svg{color:#102b49;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;opacity:1}
+.give-central .central-payment-choice>img{opacity:1;filter:none}
+}
