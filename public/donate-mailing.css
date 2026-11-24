@@ -31,7 +31,7 @@
 .mailing-support{display:flex;align-items:center;justify-content:center;gap:24px;margin:8px 0 22px}
 .mailing-support>svg{width:47px;height:40px;color:#bd8615;flex:none}
 .mailing-support p{font:italic 700 27px/1.1 Mailing Serif,Georgia,serif;margin:0;color:#171717}
-.mailing-support a{font-style:normal;font-size:33px;color:#102b49;text-decoration:underline;text-underline-offset:4px}
+.mailing-support a{font-style:normal;font-size:33px;color:#102b49;text-decoration:none;text-underline-offset:4px}
 .mailing-actions{display:flex;align-items:center;justify-content:center;gap:55px;margin:0 0 7px}
 .mailing-actions button{min-height:59px;border:2px solid #c08b19;border-radius:18px;cursor:pointer;color:#102b49;font:700 29px/1.1 Mailing Serif,Georgia,serif}
 .mailing-print{display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 25px;background:#fffefa}
