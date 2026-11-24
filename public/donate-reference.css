@@ -431,8 +431,8 @@ body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
 
 @font-face{font-family:Give Check Serif;src:url('giv-serif-italic.ttf');font-weight:400;font-style:italic}
 @media (min-width:80rem){
-.give-alternative .give-other-card:first-child p{font:italic 400 20px/1.18 'Give Check Serif',Georgia,serif;color:#303030;hyphens:none;overflow-wrap:normal;word-break:normal}
-.give-alternative .give-other-card:first-child p>span{display:block;white-space:nowrap}
+.give-alternative .give-other-card:is(:first-child,:nth-child(2)) p{font:italic 400 20px/1.18 'Give Check Serif',Georgia,serif;color:#303030;hyphens:none;overflow-wrap:normal;word-break:normal}
+.give-alternative .give-other-card:is(:first-child,:nth-child(2)) p>span{display:block;white-space:nowrap}
 }
 @media (min-width:80rem){
 .give-alternative .give-other-card:first-child{min-height:290.25px}
