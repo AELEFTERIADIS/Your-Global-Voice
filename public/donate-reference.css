@@ -401,3 +401,20 @@ body:has(.give-page)>.site-footer{display:none}
 .give-page .give-panel-surround{display:flow-root;background:#f7f1e5}
 body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
 }
+
+/* Native text replaces only the embedded hero lettering, at its original scale. */
+@media (min-width:80rem){
+.give-hero-faithful{container-type:inline-size}
+.give-hero-clean-patch{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none}
+.give-hero-sharp-copy{position:absolute;inset:0;pointer-events:none}
+.give-hero-sharp-copy h1{position:absolute;left:0;top:9.35%;width:52.4%;margin:0;text-align:center;font:italic 700 6.83594cqw/1.1 'Give Serif',Georgia,serif;color:#060c3e}
+.give-hero-sharp-copy p{position:absolute;left:0;top:39.2%;width:52.4%;margin:0;text-align:center;font:italic 700 2.44141cqw/1.24 'Give Serif',Georgia,serif;color:#060c3e;white-space:nowrap}
+.give-hero-sharp-copy p>span{display:block}
+.give-hero-sharp-copy b{font-style:normal;font-weight:400;color:#b67913;margin:0 .48cqw}
+}
+@media (min-width:80rem){
+.give-hero-sharp-copy h1{font-size:7.421875cqw;top:8.3%;color:#00063e}
+.give-hero-sharp-copy p{top:40%;color:#00063e}
+.give-hero-sharp-copy p>span{margin:0;color:inherit}
+.give-hero-sharp-copy p>span:last-child{font-size:2.29492cqw}
+}
