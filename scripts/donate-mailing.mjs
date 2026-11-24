@@ -1,9 +1,10 @@
+import {renderGoldModalDivider} from './donate-modal-divider.mjs';
 import contact from '../content/contact.json' with {type:'json'};
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
 const paths={mail:'<rect x="3" y="5" width="26" height="21" rx="2"/><path d="m4 6 12 10L28 6"/>',pin:'<path d="M16 29S5 18 5 12a11 11 0 0 1 22 0c0 6-11 17-11 17Z"/><circle cx="16" cy="12" r="4"/>',print:'<path d="M8 11V3h16v8M8 24H3V12h26v12h-5M8 19h16v10H8Z"/><path d="M23 15h2"/>',external:'<path d="M19 4h9v9M28 4 15 17M12 7H5v21h21v-8"/>',memo:'<path d="M23 15v12H3V8h12M8 16h6m-6 5h4M17 5l5 5m-8 8 3-9L25 1l6 6-9 8-8 3Z"/>',close:'<path d="m8 8 16 16M24 8 8 24"/>'};
 const svg=(name,cls='')=>`<svg class="${cls}" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]}</svg>`;
 const wave=()=>`<svg class="mailing-wave" viewBox="0 0 1000 62" preserveAspectRatio="none" aria-hidden="true"><path fill="#7807dc" d="M2 30C142-30 204 63 367 39C224 61 133 3 2 30Z"/><path fill="#ed0025" d="M166 40C331 78 371-4 551 20C410 19 383 74 166 40Z"/><path fill="#a05a0b" d="M442 53C572-12 669 59 827 39C655 79 574 4 442 53Z"/><path fill="#049b0c" d="M729 36C854 35 883-16 998 31C873 0 876 65 729 36Z"/></svg>`;
-const flourish=()=>`<svg class="mailing-flourish" viewBox="0 0 800 36" aria-hidden="true"><path d="M0 18h345m110 0h345" stroke="#c38b19" stroke-width="1.5"/><path d="M345 18c28-21 35 13 55 16 20-3 27-37 55-16M400 26c-41-25-15-39 0-17 15-22 41-8 0 17Z" fill="none" stroke="#bd8513" stroke-width="3"/><circle cx="345" cy="18" r="4" fill="#bd8513"/><circle cx="455" cy="18" r="4" fill="#bd8513"/></svg>`;
+const flourish=()=>renderGoldModalDivider('mailing-flourish');
 export function renderMailingInstructions(){
  const address=contact.mailingAddress;
  const maps='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(address.slice(1).join(', '));
