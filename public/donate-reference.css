@@ -348,3 +348,37 @@ body:has(.give-page){background:#fffaf1;color:#101b35}body:has(.give-page) main{
 @media (min-width:80rem){
 .give-platform.give-central{border-color:#102b49;outline:3px solid #102b49;outline-offset:-3px;box-shadow:0 3px 12px rgba(16,43,73,.08)}
 }
+/* Approved alternative giving and shared-hope closing; desktop scope only. */
+@media (min-width:80rem){
+.give-alternative-transition{margin:0 0 8px}
+.give-alternative-wave{display:block;width:100%;height:66px;pointer-events:none}
+.give-other.give-alternative{padding:0 28px 26px}
+.give-other.give-alternative>h2{font:italic 700 52px/1.15 'Give Serif',Georgia,serif;margin:0 0 26px}
+.give-alternative .give-method-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.give-alternative .give-other-card{display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0;min-height:270px;padding:12px 16px 16px;border:1px solid #b17b20;border-top:4px solid #b17b20;border-radius:21px;background:linear-gradient(135deg,#fffcf4,#fff8e6);box-shadow:0 3px 6px #8b691622;text-decoration:none;color:#101b35}
+.give-alternative .give-other-card>svg{width:66px;height:60px;color:#ae7915;stroke-width:2;margin:0 0 8px;flex:none}
+.give-alternative .give-other-card h3{font:700 24px/1.02 'Give Serif',Georgia,serif;margin:0 0 12px;min-height:52px;display:flex;align-items:center;justify-content:center;text-wrap:balance}
+.give-alternative .give-other-card p{font:700 22px/1.08 'Give Serif',Georgia,serif;margin:0 0 12px;max-width:100%;text-wrap:balance;color:#202020;flex:1}
+.give-alternative .give-other-action{display:flex;align-items:center;justify-content:center;width:100%;min-height:42px;padding:5px 8px;border:1px solid #d49a28;border-radius:17px;background:linear-gradient(#fff1c9,#ffe7a3);font:italic 700 22px/1.1 'Give Serif',Georgia,serif;text-decoration:none;color:#101b35}
+.give-alternative .give-other-action:hover{background:#ffe3a0}
+.give-alternative .give-other-action:focus-visible{outline:2px solid #102b49;outline-offset:3px}
+.give-alternative .give-other-contact{font:italic 700 22px/1.28 'Give Serif',Georgia,serif;text-align:center;margin:12px 0 0;color:#101b35;max-width:none}
+.give-alternative .give-other-contact a{color:#0647ae;text-decoration:underline}
+.give-closing.give-shared-hope{position:relative;display:grid;grid-template-columns:54% 46%;min-height:318px;height:auto;overflow:hidden;background:#fffaf1;margin:0 12px;padding:0 12px 48px}
+.give-shared-hope .give-shared-hope-photo{display:block;width:100%;height:auto;aspect-ratio:620/254;align-self:center;border-radius:18px 0 0 0}
+.give-shared-hope .give-closing-copy{position:relative;grid-column:2;width:100%;padding:8px 0 12px;text-align:center;align-self:center;min-width:0}
+.give-shared-hope h2{font:700 72px/1.04 'Give Serif',Georgia,serif;color:#101b35;margin:0;letter-spacing:-1px}
+.give-shared-hope h2>span{display:block}
+.give-shared-hope h2>span:last-child{font-size:58px;font-style:italic}
+.give-shared-hope-branch{display:block;width:100px;height:44px;margin:5px auto 6px}
+.give-shared-hope .give-closing-motto{display:flex;justify-content:center;align-items:center;flex-wrap:nowrap;gap:5px;margin:0;font:700 24px/1.4 Arial,sans-serif;white-space:nowrap}
+.give-shared-hope .give-alternative-wave{position:absolute;left:0;bottom:0;width:100%;height:66px}
+body:has(.give-page) .desktop-home-footer{border:1px solid #b98b36;border-radius:20px;overflow:hidden;box-sizing:border-box}
+}
+
+@media (min-width:80rem){
+.give-other.give-alternative>h2::before,.give-other.give-alternative>h2::after{display:none}
+.give-shared-hope .give-closing-motto>.give-motto-purple{color:#7511b8}
+.give-shared-hope .give-closing-motto>.give-motto-red{color:#e90b2c}
+.give-shared-hope .give-closing-motto>.give-motto-green{color:#14570c}
+}
