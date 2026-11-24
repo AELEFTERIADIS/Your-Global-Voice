@@ -6,6 +6,9 @@
  if(!desktopMedia.matches){desktopTemplate?.remove();return;}
  if(desktopTemplate)document.querySelector('#main').replaceChildren(desktopTemplate.content.cloneNode(true));
  const root=document.querySelector('.give-page');if(!root)return;
+ const main=root.closest('main'),footer=main.nextElementSibling;
+ if(footer?.classList.contains('desktop-home-footer')){const shell=document.createElement('div');shell.className='donate-content-shell';main.before(shell);shell.append(main,footer);}
+
  const action=root.querySelector('.give-hope-action');
  // Review-only desktop draft: no provider navigation or payment requests.
  const purpose=root.querySelector('#give-project'),purposeGroup=root.querySelector('.give-project-choice'),note=root.querySelector('.give-designation-note');
