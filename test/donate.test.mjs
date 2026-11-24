@@ -18,7 +18,7 @@ test('donation page delegates payment to the authorized hosted checkout without 
   assert.match(html, /class="donation-method-choice" href="https:\/\/buy.stripe.com\/fZu9ANdgj8484zp1lX3Je00" target="_blank" rel="noopener noreferrer"/);
   assert.doesNotMatch(html, /<form\b|<iframe\b|type="(?:email|password)"/);
   assert.match(html, /Your choices here are not carried over/);
-  assert.deepEqual([...new Set([...html.match(/<main[\s\S]*?<\/main>/)[0].matchAll(/href="(https:[^"]+)"/g)].map(match => match[1]))], ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00', 'https://www.paypal.com/ncp/payment/PVJ5JKDKZW8VQ']);
+  assert.deepEqual([...new Set([...html.match(/<main[\s\S]*?<\/main>/)[0].matchAll(/href="(https:[^"]+)"/g)].map(match => match[1]))], ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00', 'https://www.paypal.com/ncp/payment/PVJ5JKDKZW8VQ', 'https://www.google.com/maps/search/?api=1&amp;query=957%20Broadway%20Avenue%2C%20Holbrook%2C%20NY%2011741%2C%20United%20States%20of%20America']);
   assert.match(html, /name="giving-method" value="paypal"/);
   const presentation = await readFile(new URL('../public/donate-reference.js', import.meta.url),'utf8');
   for(const url of ['https://buy.stripe.com/fZu9ANdgj8484zp1lX3Je00','https://www.paypal.com/ncp/payment/PVJ5JKDKZW8VQ'])assert.ok(html.includes(url));

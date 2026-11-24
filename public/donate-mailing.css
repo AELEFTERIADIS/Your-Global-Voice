@@ -1,0 +1,54 @@
+@font-face{font-family:Mailing Serif;src:url('giv-serif-bold.ttf');font-weight:700}
+@font-face{font-family:Mailing Serif;src:url('giv-serif-bold-italic.ttf');font-weight:700;font-style:italic}
+@font-face{font-family:Mailing Serif;src:url('giv-serif-italic.ttf');font-weight:400;font-style:italic}
+.donate-mailing-dialog{box-sizing:border-box;width:min(900px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 32px);padding:0;border:3px solid #d6a12b;border-radius:34px;background:radial-gradient(ellipse at center,#fffefb,#fff8e9);color:#102b49;box-shadow:0 0 0 2px #f7df93 inset,0 18px 65px #0006;overflow:auto;font-family:Mailing Serif,Georgia,serif}
+.donate-mailing-dialog::backdrop{background:#17160e88;backdrop-filter:blur(4px)}
+.donate-mailing-dialog *{box-sizing:border-box}
+.mailing-sheet{position:relative;padding:15px 38px 14px;text-align:center}
+.mailing-x{position:absolute;right:20px;top:18px;width:43px;height:43px;border:2px solid #bb8519;border-radius:50%;background:#fffaf0;color:#171717;padding:5px;cursor:pointer;z-index:2}
+.mailing-x svg{display:block;width:100%;height:100%}
+.mailing-ornament{position:relative;height:88px}
+.mailing-top-waves{position:absolute;width:100%;height:75px;left:0;top:5px}
+.mailing-envelope{position:relative;width:190px;height:100px;display:block;margin:0 auto}
+.donate-mailing-dialog h2{font:700 54px/1.06 Mailing Serif,Georgia,serif;color:#102b49;margin:9px 0 5px}
+.mailing-flourish{display:block;width:100%;height:25px;margin:2px auto 8px}
+.mailing-payable{font:italic 700 29px/1.15 Mailing Serif,Georgia,serif;color:#171717;margin:9px 0 15px}
+.mailing-ribbon{position:relative;margin:0 auto 18px;width:87%;padding:9px 22px;border:2px solid #d59b22;border-radius:12px;background:#052b4b;color:#fff;clip-path:polygon(0 0,100% 0,96.5% 50%,100% 100%,0 100%,3.5% 50%)}
+.mailing-ribbon strong{font:italic 700 43px/1.15 Mailing Serif,Georgia,serif;white-space:nowrap}
+.mailing-address-panel{display:grid;grid-template-columns:26% 74%;align-items:center;border:1.5px solid #dfb653;border-radius:27px;background:linear-gradient(115deg,#fff5de,#fff9ec);padding:13px 20px;margin:0 22px}
+.mailing-map{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#102b49;text-decoration:none;font:italic 700 23px/1.2 Mailing Serif,Georgia,serif}
+.mailing-map>svg{width:43.5px;height:52.5px;fill:#c08a15;stroke:#c08a15}
+.mailing-map>svg circle{fill:#fffaf0;stroke:#fffaf0}
+.mailing-map span{border-bottom:1px solid #b47a14;padding-bottom:5px;white-space:nowrap}
+.mailing-map span svg{width:17px;height:17px;vertical-align:baseline;display:inline-block}
+.mailing-address-text{border-left:1px solid #d6ac4c;text-align:left;padding-left:30px}
+.mailing-address-text h3{font:700 30px/1.05 Mailing Serif,Georgia,serif;color:#102b49;margin:0 0 14px}
+.mailing-address-text address{font:normal 700 28px/1.08 Mailing Serif,Georgia,serif;color:#303030}
+.mailing-address-text address a{color:inherit;text-decoration:underline;text-decoration-color:#dec78a;text-decoration-thickness:1px;text-underline-offset:3px}
+.mailing-memo{display:flex;align-items:center;justify-content:center;gap:20px;margin:12px 20px 4px}
+.mailing-memo>svg{width:60px;height:52px;color:#bd8615;flex:none}
+.mailing-memo p{font:italic 700 25px/1.15 Mailing Serif,Georgia,serif;color:#171717;margin:0}
+.mailing-support{display:flex;align-items:center;justify-content:center;gap:24px;margin:8px 0 22px}
+.mailing-support>svg{width:47px;height:40px;color:#bd8615;flex:none}
+.mailing-support p{font:italic 700 27px/1.1 Mailing Serif,Georgia,serif;margin:0;color:#171717}
+.mailing-support a{font-style:normal;font-size:33px;color:#102b49;text-decoration:underline;text-underline-offset:4px}
+.mailing-actions{display:flex;align-items:center;justify-content:center;gap:55px;margin:0 0 7px}
+.mailing-actions button{min-height:59px;border:2px solid #c08b19;border-radius:18px;cursor:pointer;color:#102b49;font:700 29px/1.1 Mailing Serif,Georgia,serif}
+.mailing-print{display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 25px;background:#fffefa}
+.mailing-print svg{width:36px;height:36px}
+.mailing-actions .mailing-close{min-width:180px;padding:8px 24px;background:linear-gradient(120deg,#ffeaa2,#f7ce54);font-style:italic;font-size:34px}
+.mailing-wave{display:block;width:100%;height:40px;margin:0 auto}
+.donate-mailing-dialog a:hover{color:#80601b}
+.donate-mailing-dialog :focus-visible{outline:2px solid #102b49;outline-offset:4px}
+@media(max-width:700px){.donate-mailing-dialog{width:calc(100% - 20px);max-height:calc(100dvh - 20px);border-radius:24px}.mailing-sheet{padding:12px 18px}.mailing-x{width:36px;height:36px;right:12px;top:12px}.mailing-ornament{height:72px}.mailing-envelope{height:80px;width:150px}.mailing-top-waves{height:62px}.donate-mailing-dialog h2{font-size:clamp(30px,6vw,44px)}.mailing-payable{font-size:22px}.mailing-ribbon{width:100%;padding:10px 17px}.mailing-ribbon strong{font-size:clamp(24px,5.2vw,35px)}.mailing-address-panel{margin:0;padding:14px 10px;grid-template-columns:1fr;gap:14px}.mailing-map{font-size:20px;flex-direction:row;gap:12px}.mailing-map>svg{width:20.25px;height:25.5px}.mailing-address-text{border-left:0;border-top:1px solid #d6ac4c;padding:12px 0 0;text-align:center}.mailing-address-text h3{font-size:25px;margin-bottom:9px}.mailing-address-text address{font-size:24px}.mailing-memo{gap:10px;margin:14px 0}.mailing-memo>svg{width:38px}.mailing-memo p{font-size:21px}.mailing-desktop-break{display:none}.mailing-support{gap:12px;margin-bottom:18px}.mailing-support>svg{width:32px}.mailing-support p{font-size:22px}.mailing-support a{font-size:26px}.mailing-actions{gap:14px;flex-wrap:wrap}.mailing-actions button{min-height:48px;font-size:22px;padding:8px 14px}.mailing-print svg{width:28px;height:28px}.mailing-actions .mailing-close{min-width:130px;font-size:27px}.mailing-wave{height:30px}}
+.mailing-print-document{display:block;position:static;width:min(900px,100%);max-height:none;overflow:visible;margin:0 auto;box-shadow:none}
+@media print{
+@page{size:A4 portrait;margin:12mm}
+body:has(>.mailing-print-document)>*:not(.mailing-print-document){display:none!important}
+body:has(>.mailing-print-document){margin:0!important;background:#fff!important}
+.mailing-print-document{display:block!important;position:static!important;inset:auto!important;width:100%!important;max-width:none!important;max-height:none!important;overflow:visible!important;margin:0!important;box-shadow:none;border:1px solid #c08b19;border-radius:20px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.donate-mailing-dialog::backdrop{display:none;background:none}
+.mailing-x,.mailing-actions{display:none!important}
+.mailing-sheet{padding:10px 20px}
+.donate-mailing-dialog h2{font-size:40px}.mailing-ribbon strong{font-size:35px}.mailing-payable{font-size:25px}.mailing-address-panel{margin:0}.mailing-address-text{padding-left:18px}.mailing-address-text h3{font-size:25px}.mailing-address-text address{font-size:24px}.mailing-memo p{font-size:22px}.mailing-support p{font-size:24px}.mailing-support a{font-size:28px}
+}
