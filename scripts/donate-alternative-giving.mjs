@@ -4,7 +4,7 @@ const divider=(id,closing=false)=>`<svg class="give-alternative-wave" viewBox="0
 export function renderAlternativeGiving(icon){
  const cards=[
   ['mail','Donate by Check','<span>Mail your contribution</span><span>securely to our organization</span>','Mailing Instructions','contact.html'],
-  ['bank','Bank Transfer','Make a direct transfer to support our work','Transfer Details','mailto:support@ygvoice.org?subject=Bank%20Transfer%20Details'],
+  ['bank','Bank Transfer','<span>Make a direct transfer</span><span>to support our work</span>','Transfer Details','mailto:support@ygvoice.org?subject=Bank%20Transfer%20Details'],
   ['gift','In-Kind Contributions','Donate goods, supplies or needed resources','Contribute Resources','contact.html#message-heading'],
   ['users','Corporate &amp;<br>Institutional Giving','Partner with us to create a lasting impact','Partner With Us','contact.html#message-heading']
  ];
