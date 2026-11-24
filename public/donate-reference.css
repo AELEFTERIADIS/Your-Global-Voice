@@ -391,3 +391,7 @@ body:has(.give-page) .donate-content-shell>main{width:100%;max-width:none;margin
 body:has(.give-page) .donate-content-shell>.desktop-home-footer{width:100%;margin:0;background:#fffaf1}
 body:has(.give-page)>.site-footer{display:none}
 }
+/* Scale only the desktop donation panel in CSS; browser zoom stays at 100%. */
+@media (min-width:80rem){
+.give-platform.give-central{zoom:.9;width:calc(90% - 24px);margin-inline:auto;margin-top:calc(26px / .9);margin-bottom:calc(24px / .9)}
+}
