@@ -25,7 +25,7 @@
 @media(max-width:700px){.donate-bank-dialog{width:calc(100% - 20px);max-height:calc(100dvh - 20px);border-radius:24px}.bank-modal-sheet{padding:18px 18px 16px}.bank-modal-x{right:15px;top:15px;width:30px;height:30px}.bank-modal-ornament{height:95px}.bank-modal-icon{height:95px;width:100px}.bank-modal-top-waves{top:20px;height:74px}.donate-bank-dialog h2{font-size:clamp(30px,6vw,44px);margin-top:12px}.bank-modal-intro{font-size:24px;margin:10px 0 18px}.bank-modal-banner{font-size:clamp(24px,5.5vw,38px);padding:12px 14px;margin-bottom:18px}.bank-modal-request{padding:16px 14px 22px;border-radius:24px}.bank-modal-request h3{font-size:29px}.bank-modal-request p{font-size:23px;margin-bottom:20px}.bank-modal-desktop-break{display:none}.bank-modal-email{gap:12px}.bank-modal-email>svg{width:37px;height:30px}.bank-modal-email>span{font-size:clamp(22px,5.9vw,34px);padding-left:12px}.bank-modal-note{font-size:23px}.bank-modal-bottom-wave{height:42px}}
 @media print{.donate-bank-dialog{display:none!important}}
 /* In-kind information uses the approved modal pattern with flexible text flow. */
-.donate-inkind-dialog h2,.donate-inkind-dialog h3,.donate-inkind-dialog p{overflow-wrap:anywhere;hyphens:auto;text-wrap:pretty}
-.donate-inkind-dialog .bank-modal-email{width:fit-content;max-width:100%}
-.donate-inkind-dialog .bank-modal-email>span{min-width:0;white-space:normal;overflow-wrap:anywhere;text-decoration:none}
-.donate-inkind-dialog .bank-modal-bottom-wave{margin-top:18px}
+:is(.donate-inkind-dialog,.donate-corporate-dialog) h2,:is(.donate-inkind-dialog,.donate-corporate-dialog) h3,:is(.donate-inkind-dialog,.donate-corporate-dialog) p{overflow-wrap:anywhere;hyphens:auto;text-wrap:pretty}
+:is(.donate-inkind-dialog,.donate-corporate-dialog) .bank-modal-email{width:fit-content;max-width:100%}
+:is(.donate-inkind-dialog,.donate-corporate-dialog) .bank-modal-email>span{min-width:0;white-space:normal;overflow-wrap:anywhere;text-decoration:none}
+:is(.donate-inkind-dialog,.donate-corporate-dialog) .bank-modal-bottom-wave{margin-top:18px}

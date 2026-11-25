@@ -6,7 +6,7 @@ export function renderAlternativeGiving(icon){
   ['mail','Donate by Check','<span>Mail your contribution</span><span>securely to our organization</span>','Mailing Instructions','contact.html'],
   ['bank','Bank Transfer','<span>Make a direct transfer</span><span>to support our work</span>','Transfer Details','mailto:support@ygvoice.org?subject=Bank%20Transfer%20Details'],
   ['gift','In-Kind Contributions','Donate goods, supplies or needed resources','Contribute Resources','contact.html#message-heading'],
-  ['users','Corporate &amp;<br>Institutional Giving','Partner with us to create a lasting impact','Partner With Us','contact.html#message-heading']
+  ['users','Corporate Donations','Partner with us to create a lasting impact','Partner With Us','contact.html#message-heading']
  ];
  return `<div class="give-alternative-transition">${divider('give-alternative-top')}</div>
 <section class="give-other give-alternative" aria-labelledby="give-other-heading"><h2 id="give-other-heading">Other Ways to Give</h2><div class="give-method-grid">${cards.map(([i,title,description,action,url])=>`<article class="give-other-card">${icon(i)}<h3>${title}</h3><p>${description}</p><a class="give-other-action" href="${url}">${action}</a></article>`).join('')}</div><p class="give-other-contact">For assistance with alternative giving methods, contribution arrangements or institutional partnerships,<br> please contact our Donations &amp; Support team at <a href="mailto:support@ygvoice.org">support@ygvoice.org</a>.</p></section>
