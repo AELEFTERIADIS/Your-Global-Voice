@@ -150,7 +150,7 @@ test('complete draft links, mobile navigation, and donation guidance', async (t)
     }
     if (route === '/donate') {
       for (const text of ['Donate by Check', 'Bank Transfer', 'In-Kind', 'Institutional Giving', 'Your choices here are not carried over']) assert.ok(html.includes(text), text);
-      assert.match(html, /Other Ways to Give/);
+      assert.match(html, /Other Ways to Donate/);
       assert.doesNotMatch(html, /tel:|<form\b|<iframe\b/);
       assert.match(html, /mailto:support@ygvoice.org/);
     }

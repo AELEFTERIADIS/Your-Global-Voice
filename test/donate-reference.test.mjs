@@ -21,5 +21,5 @@ test('reference donation page retains hosted checkout safeguards and real design
  assert.match(html,/Hosted checkout does not receive your cause or project selection/);
  for(const id of ['human-rights-dignity','humanitarian-assistance','animal-welfare','environmental-conservation'])assert.ok(html.includes(`value="${id}"`));
  assert.doesNotMatch(html,/<form\b|<iframe\b/);
- for(const label of ['Give Hope','Your Generosity, Their Hope','Other Ways to Give','Your Generosity'])assert.ok(html.includes(label));
+ for(const label of ['Give Hope','Your Generosity, Their Hope','Other Ways to Donate','Your Generosity'])assert.ok(html.includes(label));
 });
