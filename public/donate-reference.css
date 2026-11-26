@@ -438,9 +438,9 @@ body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
 .give-alternative .give-other-card:first-child{min-height:290.25px}
 }
 
-/* Blend the closing artwork into its warm ivory background. */
+/* Let the existing Donate page ivory show through the closing artwork. */
 @media(min-width:80rem){
- .give-closing-transition,.give-closing.give-shared-hope{background:#f5eddf}
+ .give-closing-transition,.give-closing.give-shared-hope{background:transparent}
  .give-shared-hope .give-shared-hope-photo{mix-blend-mode:multiply}
  .give-shared-hope h2{font-family:'Give Serif',Georgia,serif;font-style:normal;color:#102b49;letter-spacing:-.5px;transform:translateY(-18px)}
  .give-shared-hope h2>span:last-child{font-style:italic}
