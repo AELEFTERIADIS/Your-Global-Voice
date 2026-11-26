@@ -71,7 +71,7 @@
  }
  root.querySelectorAll('[name=giving-amount],[name=giving-frequency]').forEach(input=>input.addEventListener('change',updateSummary));
  root.querySelector('#giving-custom').addEventListener('input',updateSummary);
- function selectCause(cause,project){const general=cause==='general-support';purposeGroup.hidden=general;note.hidden=general;purpose.replaceChildren();if(!general){available.filter(o=>o.cause===cause).forEach(o=>purpose.add(new Option(o.label,o.id)));if([...purpose.options].some(o=>o.value===project))purpose.value=project;}refreshProjects();updateSummary();}
+ function selectCause(cause,project){const general=cause==='general-support';const card=[...root.querySelectorAll('[name=give-cause]')].find(input=>input.value===cause)?.closest('.give-cause');if(card)purposeGroup.style.setProperty('--project-background',getComputedStyle(card).getPropertyValue('--card-tint'));purposeGroup.hidden=general;note.hidden=general;purpose.replaceChildren();if(!general){available.filter(o=>o.cause===cause).forEach(o=>purpose.add(new Option(o.label,o.id)));if([...purpose.options].some(o=>o.value===project))purpose.value=project;}refreshProjects();updateSummary();}
  root.querySelectorAll('[name=give-cause]').forEach(input=>input.addEventListener('change',()=>selectCause(input.value)));
  purpose.addEventListener('change',updateSummary);
  root.querySelectorAll('[name=giving-method]').forEach(input=>input.addEventListener('change',()=>{updateSummary();root.querySelector('#give-review-status').hidden=true;}));
