@@ -438,8 +438,10 @@ body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
 .give-alternative .give-other-card:first-child{min-height:290.25px}
 }
 
-/* Match the closing artwork's pale fade to the established site ivory. */
+/* Blend the closing artwork into its warm ivory background. */
 @media(min-width:80rem){
- .give-closing-transition,.give-closing.give-shared-hope{background:#faf8f3}
+ .give-closing-transition,.give-closing.give-shared-hope{background:#f5eddf}
  .give-shared-hope .give-shared-hope-photo{mix-blend-mode:multiply}
+ .give-shared-hope h2{font-family:'Give Serif',Georgia,serif;font-style:normal;color:#102b49;letter-spacing:-.5px;transform:translateY(-18px)}
+ .give-shared-hope h2>span:last-child{font-style:italic}
 }
