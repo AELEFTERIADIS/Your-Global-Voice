@@ -445,3 +445,9 @@ body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
  .give-shared-hope h2{font-family:'Give Serif',Georgia,serif;font-style:normal;color:#102b49;letter-spacing:-.5px;transform:translateY(-18px)}
  .give-shared-hope h2>span:last-child{font-style:italic}
 }
+
+/* Desktop donation-section contrast; keep the existing controls at their approved size. */
+@media(min-width:80rem){
+ .give-page .give-panel-surround{background:linear-gradient(to bottom,#fffaf1 0,#f0e8da 36px,#f0e8da calc(100% - 36px),#fffaf1 100%)}
+ .give-platform.give-central{width:calc(81.9% - 21.84px);background:#fffcf5}
+}
