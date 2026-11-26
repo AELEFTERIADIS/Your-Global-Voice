@@ -437,3 +437,9 @@ body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
 @media (min-width:80rem){
 .give-alternative .give-other-card:first-child{min-height:290.25px}
 }
+
+/* Match the closing artwork's pale fade to the established site ivory. */
+@media(min-width:80rem){
+ .give-closing-transition,.give-closing.give-shared-hope{background:#faf8f3}
+ .give-shared-hope .give-shared-hope-photo{mix-blend-mode:multiply}
+}
