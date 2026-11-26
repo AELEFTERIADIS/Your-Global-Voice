@@ -448,6 +448,6 @@ body:has(.give-page) .donate-content-shell::after{border-color:#c8a558}
 
 /* Desktop donation-section contrast; keep the existing controls at their approved size. */
 @media(min-width:80rem){
- .give-page .give-panel-surround{background:linear-gradient(to bottom,#fffaf1 0,#fff4e2 36px,#fff4e2 calc(100% - 36px),#fffaf1 100%)}
+ .give-page .give-panel-surround{background:linear-gradient(135deg,#fffcf4,#fff8e6)}
  .give-platform.give-central{width:calc(81.9% - 21.84px);background:#fffcf5}
 }
